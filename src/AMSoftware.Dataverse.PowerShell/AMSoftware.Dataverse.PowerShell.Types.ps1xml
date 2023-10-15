@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+  <!-- Microsoft.Xrm.Sdk.Entity -->
+  <Type>
+    <Name>Microsoft.Xrm.Sdk.Entity</Name>
+    <TypeAdapter>
+      <TypeName>AMSoftware.Dataverse.PowerShell.PropertyAdapters.TableRowPropertyAdapter</TypeName>
+    </TypeAdapter>
+  </Type>
+</Types>

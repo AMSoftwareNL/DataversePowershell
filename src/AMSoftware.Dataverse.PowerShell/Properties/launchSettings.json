@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "PowerShell": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "commandLineArgs": "-NoLogo -NoExit -Command \"Import-Module '.\\AMSoftware.Dataverse.PowerShell.psd1'\""
+    }
+  }
+}
