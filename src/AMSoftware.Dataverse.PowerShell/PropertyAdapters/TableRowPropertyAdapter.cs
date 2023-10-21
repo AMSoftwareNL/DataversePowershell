@@ -36,8 +36,6 @@ namespace AMSoftware.Dataverse.PowerShell.PropertyAdapters
 
         protected override Collection<PSAdaptedProperty> GetAdaptedProperties(Entity internalObject)
         {
-            var tableMetadata = Session.Current.Client.GetEntityMetadata(internalObject.LogicalName, EntityFilters.Entity | EntityFilters.Attributes);
-
             var resultCollection = new List<PSAdaptedProperty>();
             foreach (var propertyInfo in _typeProperties)
             {
@@ -48,6 +46,7 @@ namespace AMSoftware.Dataverse.PowerShell.PropertyAdapters
             resultCollection.Add(new PSAdaptedProperty("State", new ReadonlyCollectionPropertyHandler<Entity, string, string>(formattedValuesPropertyInfo, "statecode")));
             resultCollection.Add(new PSAdaptedProperty("Status", new ReadonlyCollectionPropertyHandler<Entity, string, string>(formattedValuesPropertyInfo, "statuscode")));
 
+            var tableMetadata = Session.Current.Client.GetEntityMetadata(internalObject.LogicalName, EntityFilters.Entity);
             string primaryNameLogicalName = tableMetadata.PrimaryNameAttribute;
             if (!string.IsNullOrWhiteSpace(primaryNameLogicalName))
             {
@@ -57,7 +56,9 @@ namespace AMSoftware.Dataverse.PowerShell.PropertyAdapters
 
             List<PSAdaptedProperty> properties = new List<PSAdaptedProperty>();
             #region Metadata Attributes
-            foreach (var attribute in tableMetadata.Attributes)
+            var columnMetadata = Session.Current.Client.GetAllAttributesForEntity(internalObject.LogicalName);
+
+            foreach (var attribute in columnMetadata)
             {
                 if (attribute.AttributeTypeName == AttributeTypeDisplayName.VirtualType) continue;
                 if (!string.IsNullOrWhiteSpace(attribute.AttributeOf)) continue;
