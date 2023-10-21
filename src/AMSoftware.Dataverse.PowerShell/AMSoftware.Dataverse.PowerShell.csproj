@@ -20,6 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="AMSoftware.Dataverse.PowerShell.Formats.ps1xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="AMSoftware.Dataverse.PowerShell.Types.ps1xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -23,16 +23,17 @@
     Copyright = '(c) AMSoftware. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description = ''
+    Description = 'PowerShell Module for Power Platform Dataverse'
 
     # Minimum version of the PowerShell engine required by this module
     PowerShellVersion = '5.1'
 
-    # Modules that must be imported into the global environment prior to importing this module
-    # RequiredModules = @()
-
     # Assemblies that must be loaded prior to importing this module
-    RequiredAssemblies = @('AMSoftware.Dataverse.PowerShell.dll')
+    RequiredAssemblies = @(
+        'AMSoftware.Dataverse.PowerShell.dll',
+        'Microsoft.Xrm.Sdk.dll',
+        'Microsoft.PowerPlatform.Dataverse.Client.dll',
+        'Microsoft.Crm.Sdk.Proxy.dll')
 
     # Script files (.ps1) that are run in the caller's environment prior to importing this module.
     # ScriptsToProcess = @()
@@ -41,7 +42,7 @@
     TypesToProcess = 'AMSoftware.Dataverse.PowerShell.Types.ps1xml'
 
     # Format files (.ps1xml) to be loaded when importing this module
-    # FormatsToProcess = @()
+    FormatsToProcess = 'AMSoftware.Dataverse.PowerShell.Formats.ps1xml'
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
     # NestedModules = @()
@@ -62,7 +63,13 @@
     # ModuleList = @()
 
     # List of all files packaged with this module
-    # FileList = @('AMSoftware.Dataverse.PowerShell.dll','AMSoftware.Dataverse.PowerShell.psd1')
+    FileList = @(
+        'AMSoftware.Dataverse.PowerShell.dll',
+        'AMSoftware.Dataverse.PowerShell.psd1',
+        'AMSoftware.Dataverse.PowerShell.Types.ps1xml',
+        'Microsoft.Xrm.Sdk.dll',
+        'Microsoft.PowerPlatform.Dataverse.Client.dll',
+        'Microsoft.Crm.Sdk.Proxy.dll')
 
     # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
     PrivateData = @{

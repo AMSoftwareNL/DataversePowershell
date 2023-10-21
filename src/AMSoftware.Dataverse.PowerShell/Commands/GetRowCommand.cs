@@ -1,29 +1,36 @@
-﻿using Microsoft.Xrm.Sdk;
+﻿using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
+using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands
 {
     [Cmdlet(VerbsCommon.Get, "DataverseRow")]
-    [OutputType(typeof(Session))]
+    [OutputType(typeof(Entity))]
     public sealed class GetRowCommand : CmdletBase
     {
-        [Parameter(Mandatory = true, Position = 1)]
+        private const string RetrieveWithIdParameterSet = "RetrieveWithId";
+        private const string RetrieveWithKeyParameterSet = "RetrieveWithKey";
+
+        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
         [ValidateNotNullOrEmpty]
+        [ArgumentCompleter(typeof(TableNameArgumentCompleter))]
+        [Alias("LogicalName")]
         public string Table { get; set; }
 
-        [Parameter(Mandatory = false, Position = 2, ValueFromPipeline = true)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true, ParameterSetName = RetrieveWithIdParameterSet)]
         [ValidateNotNullOrEmpty]
-        public Guid[] Id { get; set; }
+        public Guid Id { get; set; }
+
+        [Parameter(Mandatory = true, ParameterSetName = RetrieveWithKeyParameterSet)]
+        [ValidateNotNullOrEmpty]
+        public PSObject Key { get; set; }
 
         [Parameter(ValueFromRemainingArguments = true)]
         public string[] Columns { get; set; }
-
 
         private ColumnSet _columnset;
 
@@ -34,38 +41,43 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
 
         protected override void Execute()
         {
-            if (Id == null || Id.Length == 0)
+            OrganizationResponse response;
+
+            switch (ParameterSetName)
             {
-                QueryExpression query = new QueryExpression(Table)
-                {
-                    ColumnSet = _columnset
-                };
+                case RetrieveWithIdParameterSet:
+                    response = Session.Current.Client.ExecuteOrganizationRequest(
+                        RetrieveSingleRowRequest(new EntityReference(Table, Id), _columnset),
+                        "AMSoftware Dataverse PowerShell Get-DataverseRow");
 
-                query.PageInfo = new PagingInfo()
-                {
-                    Count = 1000,
-                    ReturnTotalRecordCount = true,
-                    PageNumber = 1
-                };
+                    WriteObject(response.Results["Entity"] as Entity);
 
-                var hasMoreRecords = false;
-                do
-                {
-                    EntityCollection result = Session.Current.Client.RetrieveMultiple(query);
-                    
-                    WriteObject(result.Entities, true);
+                    break;
+                case RetrieveWithKeyParameterSet:
+                    KeyAttributeCollection keysCollection = new KeyAttributeCollection();
+                    keysCollection.AddRange(from keyMember in Key.Properties
+                                            select new KeyValuePair<string, object>(keyMember.Name, keyMember.Value));
 
-                    query.PageInfo.PagingCookie = result.PagingCookie;
-                    hasMoreRecords = result.MoreRecords;
-                } while (hasMoreRecords);
+                    response = Session.Current.Client.ExecuteOrganizationRequest(
+                        RetrieveSingleRowRequest(new EntityReference(Table, keysCollection), _columnset),
+                        "AMSoftware Dataverse PowerShell Get-DataverseRow");
+
+                    WriteObject(response.Results["Entity"] as Entity);
+
+                    break;
             }
-            else
+        }
+
+        private static OrganizationRequest RetrieveSingleRowRequest(EntityReference reference, ColumnSet columns)
+        {
+            OrganizationRequest request = new OrganizationRequest("Retrieve")
             {
-                foreach (Guid id in Id)
-                {
-                    WriteObject(Session.Current.Client.Retrieve(Table, id, _columnset));
-                }
-            }
+                Parameters = new ParameterCollection()
+            };
+            request.Parameters.Add("Target", reference);
+            request.Parameters.Add("ColumnSet", columns);
+
+            return request;
         }
 
         private static ColumnSet BuildColumnSet(string[] columns)
@@ -73,6 +85,5 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
             if (columns == null || columns.Length == 0) return new ColumnSet(true);
             else return new ColumnSet(columns);
         }
-
     }
 }
