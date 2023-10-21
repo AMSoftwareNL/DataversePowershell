@@ -2,9 +2,10 @@
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 using System.Management.Automation;
+using System.Collections.Generic;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands
 {
@@ -27,7 +28,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
 
         [Parameter(Mandatory = true, ParameterSetName = RetrieveWithKeyParameterSet)]
         [ValidateNotNullOrEmpty]
-        public PSObject Key { get; set; }
+        public Hashtable Key { get; set; }
 
         [Parameter(ValueFromRemainingArguments = true)]
         public string[] Columns { get; set; }
@@ -55,8 +56,11 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
                     break;
                 case RetrieveWithKeyParameterSet:
                     KeyAttributeCollection keysCollection = new KeyAttributeCollection();
-                    keysCollection.AddRange(from keyMember in Key.Properties
-                                            select new KeyValuePair<string, object>(keyMember.Name, keyMember.Value));
+
+                    foreach (var keyName in Key.Keys)
+                    {
+                        keysCollection.Add((string)keyName, Key[keyName]);
+                    }
 
                     response = Session.Current.Client.ExecuteOrganizationRequest(
                         RetrieveSingleRowRequest(new EntityReference(Table, keysCollection), _columnset),
