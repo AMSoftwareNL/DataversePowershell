@@ -6,7 +6,7 @@ using System.Security;
 namespace AMSoftware.Dataverse.PowerShell.Commands
 {
     [Cmdlet(VerbsCommunications.Connect, "DataverseEnvironment", DefaultParameterSetName = InteractiveParameterSet)]
-    [OutputType(typeof(Session))]
+    [OutputType(typeof(ServiceClient))]
     public sealed class ConnectEnvironmentCommand : CmdletBase
     {
         private const string InteractiveParameterSet = "Interactive";
