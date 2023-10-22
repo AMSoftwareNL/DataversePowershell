@@ -193,14 +193,18 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
             {
                 XmlDocument localFetchXml = CreateFetchXmlWithPaging(fetchXml, pageNumber, pagingCookie);
 
-                EntityCollection pagedQueryResult = Session.Current.Client.RetrieveMultiple(
-                    new FetchExpression(localFetchXml.OuterXml));
+                var pagedQueryResponse = (RetrieveMultipleResponse)Session.Current.Client.ExecuteOrganizationRequest(
+                    new RetrieveMultipleRequest()
+                    {
+                        Query = new FetchExpression(localFetchXml.OuterXml)
+                    }, 
+                    MyInvocation.MyCommand.Name);
 
-                WriteObject(pagedQueryResult.Entities, true);
+                WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
 
                 pageNumber += 1;
-                pagingCookie = pagedQueryResult.PagingCookie;
-                moreRecords = pagedQueryResult.MoreRecords;
+                pagingCookie = pagedQueryResponse.EntityCollection.PagingCookie;
+                moreRecords = pagedQueryResponse.EntityCollection.MoreRecords;
             } while (moreRecords);
         }
 
@@ -215,14 +219,18 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
             bool moreRecords = false;
             do
             {
-                EntityCollection pagedQueryResult = Session.Current.Client.RetrieveMultiple(query);
+                var pagedQueryResponse = (RetrieveMultipleResponse)Session.Current.Client.ExecuteOrganizationRequest(
+                    new RetrieveMultipleRequest() {
+                        Query = query
+                    }, 
+                    MyInvocation.MyCommand.Name);
 
-                WriteObject(pagedQueryResult.Entities, true);
+                WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
 
                 query.PageInfo.PageNumber += 1;
-                query.PageInfo.PagingCookie = pagedQueryResult.PagingCookie;
+                query.PageInfo.PagingCookie = pagedQueryResponse.EntityCollection.PagingCookie;
 
-                moreRecords = pagedQueryResult.MoreRecords;
+                moreRecords = pagedQueryResponse.EntityCollection.MoreRecords;
             } while (moreRecords);
         }
 
@@ -237,14 +245,19 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
             bool moreRecords = false;
             do
             {
-                EntityCollection pagedQueryResult = Session.Current.Client.RetrieveMultiple(query);
+                var pagedQueryResponse = (RetrieveMultipleResponse)Session.Current.Client.ExecuteOrganizationRequest(
+                    new RetrieveMultipleRequest()
+                    {
+                        Query = query
+                    },
+                    MyInvocation.MyCommand.Name);
 
-                WriteObject(pagedQueryResult.Entities, true);
+                WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
 
                 query.PageInfo.PageNumber += 1;
-                query.PageInfo.PagingCookie = pagedQueryResult.PagingCookie;
+                query.PageInfo.PagingCookie = pagedQueryResponse.EntityCollection.PagingCookie;
 
-                moreRecords = pagedQueryResult.MoreRecords;
+                moreRecords = pagedQueryResponse.EntityCollection.MoreRecords;
             } while (moreRecords);
         }
 

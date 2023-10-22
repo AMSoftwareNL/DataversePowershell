@@ -2,10 +2,8 @@
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using System;
-using System.Linq;
 using System.Collections;
 using System.Management.Automation;
-using System.Collections.Generic;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands
 {
@@ -49,7 +47,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
                 case RetrieveWithIdParameterSet:
                     response = Session.Current.Client.ExecuteOrganizationRequest(
                         RetrieveSingleRowRequest(new EntityReference(Table, Id), _columnset),
-                        "AMSoftware Dataverse PowerShell Get-DataverseRow");
+                        MyInvocation.MyCommand.Name);
 
                     WriteObject(response.Results["Entity"] as Entity);
 
@@ -64,7 +62,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
 
                     response = Session.Current.Client.ExecuteOrganizationRequest(
                         RetrieveSingleRowRequest(new EntityReference(Table, keysCollection), _columnset),
-                        "AMSoftware Dataverse PowerShell Get-DataverseRow");
+                        MyInvocation.MyCommand.Name);
 
                     WriteObject(response.Results["Entity"] as Entity);
 
