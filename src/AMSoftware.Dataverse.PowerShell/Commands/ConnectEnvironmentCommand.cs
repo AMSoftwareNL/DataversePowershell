@@ -42,8 +42,10 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
         [Parameter(Mandatory = false, ParameterSetName = InteractiveParameterSet)]
         public SwitchParameter UseDeviceCode { get; set; }
 
-        protected override void BeginExecution()
+        protected override void BeginProcessing()
         {
+            base.BeginProcessing();
+
             ServiceClient client = null;
             switch (ParameterSetName)
             {
@@ -77,7 +79,13 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
 
         protected override void Execute()
         {
+        }
+
+        protected override void EndProcessing()
+        {
             WriteObject(Session.Current.Client);
+
+            base.EndProcessing();
         }
     }
 }

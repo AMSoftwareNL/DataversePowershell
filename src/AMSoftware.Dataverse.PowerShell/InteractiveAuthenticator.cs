@@ -8,7 +8,7 @@ using static System.Formats.Asn1.AsnWriter;
 
 namespace AMSoftware.Dataverse.PowerShell
 {
-    internal class InteractiveAuthenticator
+    internal sealed class InteractiveAuthenticator
     {
         private const string Scope = "user_impersonation";
         private const string ExampleClientId = "51f81489-12ee-4a9e-aaae-a2591f45987d";

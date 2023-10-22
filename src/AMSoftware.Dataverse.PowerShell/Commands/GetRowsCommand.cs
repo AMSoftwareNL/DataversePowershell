@@ -54,8 +54,10 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
 
         private ColumnSet _columnSet;
 
-        protected override void BeginExecution()
+        protected override void BeginProcessing()
         {
+            base.BeginProcessing();
+
             _columnSet = BuildColumnSet(Columns);
         }
 

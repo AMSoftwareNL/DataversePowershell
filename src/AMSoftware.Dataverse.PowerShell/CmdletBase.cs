@@ -9,17 +9,7 @@ namespace AMSoftware.Dataverse.PowerShell
 {
     public abstract class CmdletBase : PSCmdlet
     {
-        protected virtual void BeginExecution()
-        {
-        }
-
-        protected virtual void Execute()
-        {
-        }
-
-        protected virtual void EndExecution()
-        {
-        }
+        protected abstract void Execute();
 
         protected override void BeginProcessing()
         {
@@ -32,7 +22,6 @@ namespace AMSoftware.Dataverse.PowerShell
                 this.WriteVerboseWithTimestamp(string.Format("{0} begin processing with ParameterSet '{1}'.", base.GetType().Name, base.ParameterSetName));
             }
             base.BeginProcessing();
-            this.BeginExecution();
         }
 
         protected override void ProcessRecord()
@@ -56,7 +45,6 @@ namespace AMSoftware.Dataverse.PowerShell
         protected override void EndProcessing()
         {
             this.WriteVerboseWithTimestamp(string.Format("{0} end processing.", base.GetType().Name));
-            this.EndExecution();
             base.EndProcessing();
         }
 

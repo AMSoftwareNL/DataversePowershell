@@ -1,4 +1,5 @@
 ﻿using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
+using AMSoftware.Dataverse.PowerShell.DynamicParameters;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
@@ -8,7 +9,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
 {
     [Cmdlet(VerbsCommon.Remove, "DataverseRow")]
     [OutputType(typeof(EntityReference))]
-    public sealed class RemoveRowCommand : CmdletBase
+    public sealed class RemoveRowCommand : BatchCmdletBase, IDynamicParameters
     {
         [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
         [ValidateNotNullOrEmpty]
@@ -20,14 +21,31 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
         [ValidateNotNullOrEmpty]
         public Guid Id { get; set; }
 
+        private BypassLogicParameters _bypassContext;
+        public object GetDynamicParameters()
+        {
+            _bypassContext = new BypassLogicParameters();
+            return _bypassContext;
+        }
+
         protected override void Execute()
         {
             EntityReference rowReference = new EntityReference(Table, Id);
 
-            OrganizationRequest request = new DeleteRequest() { 
+            OrganizationRequest request = new DeleteRequest()
+            {
                 Target = rowReference
             };
-            var response = Session.Current.Client.ExecuteOrganizationRequest(request, MyInvocation.MyCommand.Name);
+            _bypassContext.ApplyBypass(request);
+
+            if (UseBatch)
+            {
+                AddOrganizationRequestToBatch(request);
+            }
+            else
+            {
+                var response = Session.Current.Client.ExecuteOrganizationRequest(request, MyInvocation.MyCommand.Name);
+            }
         }
     }
 }

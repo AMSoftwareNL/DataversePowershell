@@ -1,4 +1,5 @@
 ﻿using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
+using AMSoftware.Dataverse.PowerShell.DynamicParameters;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
@@ -9,7 +10,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
 {
     [Cmdlet(VerbsCommon.Set, "DataverseRow", DefaultParameterSetName = SetObjectParameterSet)]
     [OutputType(typeof(EntityReference))]
-    public sealed class SetRowCommand : CmdletBase
+    public sealed class SetRowCommand : BatchCmdletBase, IDynamicParameters
     {
         private const string SetObjectParameterSet = "SetObject";
         private const string SetValuesParameterSet = "SetValues";
@@ -33,17 +34,33 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
         [ValidateNotNullOrEmpty]
         public Hashtable Values { get; set; }
 
+        private BypassLogicParameters _bypassContext;
+        public object GetDynamicParameters()
+        {
+            _bypassContext = new BypassLogicParameters();
+            return _bypassContext;
+        }
+
         protected override void Execute()
         {
             Entity newEntity = InputObject;
             if (ParameterSetName == SetValuesParameterSet) newEntity = BuildEntityFromValues();
 
-            OrganizationRequest request = new UpdateRequest() { 
+            OrganizationRequest request = new UpdateRequest()
+            {
                 Target = newEntity
             };
-            var response = Session.Current.Client.ExecuteOrganizationRequest(request, MyInvocation.MyCommand.Name);
-            
-            WriteObject(newEntity.ToEntityReference());
+            _bypassContext.ApplyBypass(request);
+
+            if (UseBatch)
+            {
+                AddOrganizationRequestToBatch(request);
+            }
+            else
+            {
+                var response = Session.Current.Client.ExecuteOrganizationRequest(request, MyInvocation.MyCommand.Name);
+                WriteObject(newEntity.ToEntityReference());
+            }
         }
 
         private Entity BuildEntityFromValues()

@@ -4,7 +4,7 @@ using System.Security;
 
 namespace AMSoftware.Dataverse.PowerShell
 {
-    internal class Session
+    internal sealed class Session
     {
         private static Session _currentSession;
 
