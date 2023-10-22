@@ -1,6 +1,7 @@
 ﻿using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
+using System;
 using System.Collections;
 using System.Management.Automation;
 using System.Xml;
@@ -32,6 +33,10 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
         [Parameter(ValueFromRemainingArguments = true, ParameterSetName = RetrieveWithQueryParameterSet)]
         public string[] Columns { get; set; }
 
+        [Parameter(ParameterSetName = RetrieveWithAttributeQueryParameterSet)]
+        [Parameter(ParameterSetName = RetrieveWithQueryParameterSet)]
+        public Hashtable Sort { get; set; }
+
         [Parameter(Mandatory = true, ParameterSetName = RetrieveWithFetchXmlParameterSet, ValueFromPipeline = true)]
         [ValidateNotNullOrEmpty]
         public XmlDocument FetchXml { get; set; }
@@ -51,27 +56,36 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
                     ExecuteFetchXml(FetchXml);
                     break;
                 case RetrieveWithAttributeQueryParameterSet:
-                    QueryByAttribute aquery = new QueryByAttribute(Table)
+                    QueryByAttribute attributeQuery = new QueryByAttribute(Table)
                     {
                         ColumnSet = _columnSet
                     };
+
 
                     foreach (var attributeKey in Query.Keys)
                     {
-                        aquery.AddAttributeValue((string)attributeKey, Query[attributeKey]);
+                        attributeQuery.AddAttributeValue((string)attributeKey, Query[attributeKey]);
                     }
 
-                    ExecuteAttributeQuery(aquery);
+                    foreach (var sortKey in Sort.Keys)
+                    {
+                        attributeQuery.AddOrder((string)sortKey, (OrderType)Sort[sortKey]);
+                    }
 
+                    ExecuteAttributeQuery(attributeQuery);
                     break;
                 case RetrieveWithQueryParameterSet:
-                    QueryExpression tquery = new QueryExpression(Table)
+                    QueryExpression tableQuery = new QueryExpression(Table)
                     {
                         ColumnSet = _columnSet
                     };
 
-                    ExecuteQuery(tquery);
+                    foreach (var sortKey in Sort.Keys)
+                    {
+                        tableQuery.AddOrder((string)sortKey, (OrderType)Sort[sortKey]);
+                    }
 
+                    ExecuteQuery(tableQuery);
                     break;
             }
         }
