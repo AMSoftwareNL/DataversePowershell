@@ -259,6 +259,11 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
             XmlDocument pagedFetchXml = (XmlDocument)fetchXml.CloneNode(true);
             XmlAttributeCollection xmlAttributes = pagedFetchXml.DocumentElement.Attributes;
 
+            if (xmlAttributes["top"] != null)
+            {
+                return pagedFetchXml;
+            };
+
             if (cookie != null)
             {
                 XmlAttribute pagingAttr = pagedFetchXml.CreateAttribute("paging-cookie");
