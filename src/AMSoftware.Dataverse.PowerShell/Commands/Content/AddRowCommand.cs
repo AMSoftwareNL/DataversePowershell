@@ -7,7 +7,7 @@ using System;
 using System.Collections;
 using System.Management.Automation;
 
-namespace AMSoftware.Dataverse.PowerShell.Commands
+namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
     [Cmdlet(VerbsCommon.Add, "DataverseRow", DefaultParameterSetName = AddObjectParameterSet)]
     [OutputType(typeof(EntityReference))]
@@ -97,7 +97,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
         private OrganizationRequest BuildRequest(Entity source)
         {
             OrganizationRequest request;
-            if ((source.KeyAttributes != null && source.KeyAttributes.Count != 0) || source.Id != Guid.Empty)
+            if (source.KeyAttributes != null && source.KeyAttributes.Count != 0 || source.Id != Guid.Empty)
             {
                 WriteVerboseWithTimestamp("Using Upsert Request");
                 request = new UpsertRequest()

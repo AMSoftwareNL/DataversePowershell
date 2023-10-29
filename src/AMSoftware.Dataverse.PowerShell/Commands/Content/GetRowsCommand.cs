@@ -9,7 +9,7 @@ using System.Collections;
 using System.Management.Automation;
 using System.Xml;
 
-namespace AMSoftware.Dataverse.PowerShell.Commands
+namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
     [Cmdlet(VerbsCommon.Get, "DataverseRows", DefaultParameterSetName = RetrieveWithQueryParameterSet)]
     [OutputType(typeof(Entity))]
@@ -137,7 +137,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
                 }
 
                 WriteVerboseWithTimestamp("Add BatchItem: {0} ({1})", Table, Id[i]);
-                batch.BatchItems.Add(new Microsoft.PowerPlatform.Dataverse.Client.BatchItemOrganizationRequest()
+                batch.BatchItems.Add(new BatchItemOrganizationRequest()
                 {
                     Request = new RetrieveRequest()
                     {
@@ -199,7 +199,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
                     new RetrieveMultipleRequest()
                     {
                         Query = new FetchExpression(localFetchXml.OuterXml)
-                    }, 
+                    },
                     MyInvocation.MyCommand.Name);
 
                 WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
@@ -222,9 +222,10 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
             do
             {
                 var pagedQueryResponse = (RetrieveMultipleResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                    new RetrieveMultipleRequest() {
+                    new RetrieveMultipleRequest()
+                    {
                         Query = query
-                    }, 
+                    },
                     MyInvocation.MyCommand.Name);
 
                 WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
@@ -287,11 +288,11 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
             }
 
             XmlAttribute pageAttr = pagedFetchXml.CreateAttribute("page");
-            pageAttr.Value = System.Convert.ToString(pageNumber);
+            pageAttr.Value = Convert.ToString(pageNumber);
             xmlAttributes.Append(pageAttr);
 
             XmlAttribute countAttr = pagedFetchXml.CreateAttribute("count");
-            countAttr.Value = System.Convert.ToString(QueryPagesize);
+            countAttr.Value = Convert.ToString(QueryPagesize);
             xmlAttributes.Append(countAttr);
 
             return pagedFetchXml;

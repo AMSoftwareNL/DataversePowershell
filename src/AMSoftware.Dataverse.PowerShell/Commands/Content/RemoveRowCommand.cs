@@ -5,7 +5,7 @@ using Microsoft.Xrm.Sdk.Messages;
 using System;
 using System.Management.Automation;
 
-namespace AMSoftware.Dataverse.PowerShell.Commands
+namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
     [Cmdlet(VerbsCommon.Remove, "DataverseRow")]
     [OutputType(typeof(EntityReference))]

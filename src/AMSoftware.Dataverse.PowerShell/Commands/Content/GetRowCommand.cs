@@ -5,7 +5,7 @@ using System;
 using System.Collections;
 using System.Management.Automation;
 
-namespace AMSoftware.Dataverse.PowerShell.Commands
+namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
     [Cmdlet(VerbsCommon.Get, "DataverseRow")]
     [OutputType(typeof(Entity))]
