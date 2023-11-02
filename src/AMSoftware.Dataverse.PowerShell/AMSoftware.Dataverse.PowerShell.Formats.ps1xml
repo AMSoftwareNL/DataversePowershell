@@ -47,5 +47,57 @@
         </TableRowEntries>
       </TableControl>
     </View>
+    <View>
+      <Name>Microsoft.Xrm.Sdk.Metadata.EntityMetadata</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Xrm.Sdk.Metadata.EntityMetadata</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Width>20</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>20</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>20</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>20</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>10</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>10</Width>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>LogicalName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisplayName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PrimaryIdAttribute</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PrimaryNameAttribute</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>IsManaged</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>IsCustomEntity</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
   </ViewDefinitions>
 </Configuration>

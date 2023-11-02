@@ -7,4 +7,11 @@
       <TypeName>AMSoftware.Dataverse.PowerShell.PropertyAdapters.TableRowPropertyAdapter</TypeName>
     </TypeAdapter>
   </Type>
+  <!-- Microsoft.Xrm.Sdk.Metadata.EntityMetadata -->
+  <Type>
+    <Name>Microsoft.Xrm.Sdk.Metadata.EntityMetadata</Name>
+    <TypeAdapter>
+      <TypeName>AMSoftware.Dataverse.PowerShell.PropertyAdapters.MetadataBasePropertyAdapter</TypeName>
+    </TypeAdapter>
+  </Type>
 </Types>
