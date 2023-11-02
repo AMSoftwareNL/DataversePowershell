@@ -7,7 +7,7 @@ using System.Management.Automation;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
-    [Cmdlet(VerbsCommon.Remove, "DataverseRow")]
+    [Cmdlet(VerbsCommon.Remove, "DataverseRow", ConfirmImpact = ConfirmImpact.High, SupportsShouldProcess = true)]
     [OutputType(typeof(EntityReference))]
     public sealed class RemoveRowCommand : BatchCmdletBase, IDynamicParameters
     {
@@ -32,19 +32,22 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         {
             EntityReference rowReference = new EntityReference(Table, Id);
 
-            OrganizationRequest request = new DeleteRequest()
+            if (ShouldProcess($"{Table}: {Id}"))
             {
-                Target = rowReference
-            };
-            _bypassContext.ApplyBypass(request);
+                OrganizationRequest request = new DeleteRequest()
+                {
+                    Target = rowReference
+                };
+                _bypassContext.ApplyBypass(request);
 
-            if (UseBatch)
-            {
-                AddOrganizationRequestToBatch(request);
-            }
-            else
-            {
-                var response = Session.Current.Client.ExecuteOrganizationRequest(request, MyInvocation.MyCommand.Name);
+                if (UseBatch)
+                {
+                    AddOrganizationRequestToBatch(request);
+                }
+                else
+                {
+                    var response = Session.Current.Client.ExecuteOrganizationRequest(request, MyInvocation.MyCommand.Name);
+                }
             }
         }
     }
