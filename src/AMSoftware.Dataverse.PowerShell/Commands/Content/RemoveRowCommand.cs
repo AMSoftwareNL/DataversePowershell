@@ -21,11 +21,11 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [ValidateNotNullOrEmpty]
         public Guid Id { get; set; }
 
-        private BypassLogicParameters _bypassContext;
+        private OptionalRequestParameters _optionalRequestParameters;
         public object GetDynamicParameters()
         {
-            _bypassContext = new BypassLogicParameters();
-            return _bypassContext;
+            _optionalRequestParameters = new OptionalRequestParameters(this);
+            return _optionalRequestParameters;
         }
 
         protected override void Execute()
@@ -38,7 +38,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 {
                     Target = rowReference
                 };
-                _bypassContext.ApplyBypass(request);
+                _optionalRequestParameters.UseOptionalParameters(request);
 
                 if (UseBatch)
                 {

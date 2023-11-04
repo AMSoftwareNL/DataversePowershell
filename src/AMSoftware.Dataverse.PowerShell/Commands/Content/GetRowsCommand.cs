@@ -1,4 +1,5 @@
 ﻿using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
+using AMSoftware.Dataverse.PowerShell.DynamicParameters;
 using Microsoft.PowerPlatform.Dataverse.Client;
 using Microsoft.PowerPlatform.Dataverse.Client.Extensions;
 using Microsoft.Xrm.Sdk;
@@ -53,6 +54,12 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         public XmlDocument FetchXml { get; set; }
 
         private ColumnSet _columnSet;
+        private OptionalRequestParameters _optionalRequestParameters;
+        public object GetDynamicParameters()
+        {
+            _optionalRequestParameters = new OptionalRequestParameters(this);
+            return _optionalRequestParameters;
+        }
 
         protected override void BeginProcessing()
         {
@@ -195,12 +202,14 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             {
                 XmlDocument localFetchXml = CreateFetchXmlWithPaging(fetchXml, pageNumber, pagingCookie);
 
+                var pagedQueryRequest = new RetrieveMultipleRequest()
+                {
+                    Query = new FetchExpression(localFetchXml.OuterXml)
+                };
+                _optionalRequestParameters.UseOptionalParameters(pagedQueryRequest);
+
                 var pagedQueryResponse = (RetrieveMultipleResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                    new RetrieveMultipleRequest()
-                    {
-                        Query = new FetchExpression(localFetchXml.OuterXml)
-                    },
-                    MyInvocation.MyCommand.Name);
+                    pagedQueryRequest, MyInvocation.MyCommand.Name);
 
                 WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
 
@@ -221,12 +230,14 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             bool moreRecords = false;
             do
             {
+                var pagedQueryRequest = new RetrieveMultipleRequest()
+                {
+                    Query = query
+                };
+                _optionalRequestParameters.UseOptionalParameters(pagedQueryRequest);
+
                 var pagedQueryResponse = (RetrieveMultipleResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                    new RetrieveMultipleRequest()
-                    {
-                        Query = query
-                    },
-                    MyInvocation.MyCommand.Name);
+                    pagedQueryRequest, MyInvocation.MyCommand.Name);
 
                 WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
 
@@ -248,12 +259,14 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             bool moreRecords = false;
             do
             {
+                var pagedQueryRequest = new RetrieveMultipleRequest()
+                {
+                    Query = query
+                };
+                _optionalRequestParameters.UseOptionalParameters(pagedQueryRequest);
+
                 var pagedQueryResponse = (RetrieveMultipleResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                    new RetrieveMultipleRequest()
-                    {
-                        Query = query
-                    },
-                    MyInvocation.MyCommand.Name);
+                    pagedQueryRequest, MyInvocation.MyCommand.Name);
 
                 WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
 

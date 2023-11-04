@@ -1,5 +1,7 @@
 ﻿using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
+using AMSoftware.Dataverse.PowerShell.DynamicParameters;
 using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections;
@@ -9,7 +11,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
     [Cmdlet(VerbsCommon.Get, "DataverseRow")]
     [OutputType(typeof(Entity))]
-    public sealed class GetRowCommand : CmdletBase
+    public sealed class GetRowCommand : CmdletBase, IDynamicParameters
     {
         private const string RetrieveWithIdParameterSet = "RetrieveWithId";
         private const string RetrieveWithKeyParameterSet = "RetrieveWithKey";
@@ -32,6 +34,12 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         public string[] Columns { get; set; }
 
         private ColumnSet _columnset;
+        private OptionalRequestParameters _optionalRequestParameters;
+        public object GetDynamicParameters()
+        {
+            _optionalRequestParameters = new OptionalRequestParameters(this);
+            return _optionalRequestParameters;
+        }
 
         protected override void BeginProcessing()
         {
@@ -42,17 +50,13 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
         protected override void Execute()
         {
-            OrganizationResponse response;
+            RetrieveRequest request = null;
 
             switch (ParameterSetName)
             {
                 case RetrieveWithIdParameterSet:
-                    response = Session.Current.Client.ExecuteOrganizationRequest(
-                        RetrieveSingleRowRequest(new EntityReference(Table, Id), _columnset),
-                        MyInvocation.MyCommand.Name);
-
-                    WriteObject(response.Results["Entity"] as Entity);
-
+                    request = RetrieveSingleRowRequest(new EntityReference(Table, Id), _columnset);
+                    
                     break;
                 case RetrieveWithKeyParameterSet:
                     KeyAttributeCollection keysCollection = new KeyAttributeCollection();
@@ -62,24 +66,26 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                         keysCollection.Add((string)keyName, Key[keyName]);
                     }
 
-                    response = Session.Current.Client.ExecuteOrganizationRequest(
-                        RetrieveSingleRowRequest(new EntityReference(Table, keysCollection), _columnset),
-                        MyInvocation.MyCommand.Name);
-
-                    WriteObject(response.Results["Entity"] as Entity);
-
+                    request = RetrieveSingleRowRequest(new EntityReference(Table, keysCollection), _columnset);
+                    
                     break;
             }
+
+            _optionalRequestParameters.UseOptionalParameters(request);
+            RetrieveResponse response = (RetrieveResponse)Session.Current.Client.ExecuteOrganizationRequest(
+                        request, MyInvocation.MyCommand.Name);
+
+            WriteObject(response.Entity);
+
         }
 
-        private static OrganizationRequest RetrieveSingleRowRequest(EntityReference reference, ColumnSet columns)
+        private static RetrieveRequest RetrieveSingleRowRequest(EntityReference reference, ColumnSet columns)
         {
-            OrganizationRequest request = new OrganizationRequest("Retrieve")
+            RetrieveRequest request = new RetrieveRequest()
             {
-                Parameters = new ParameterCollection()
+                Target = reference,
+                ColumnSet = columns
             };
-            request.Parameters.Add("Target", reference);
-            request.Parameters.Add("ColumnSet", columns);
 
             return request;
         }
