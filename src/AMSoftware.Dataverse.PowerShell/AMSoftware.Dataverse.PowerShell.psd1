@@ -60,6 +60,7 @@
         'Set-DataverseRow',
         'Add-DataverseRelatedRow',
         'Remove-DataverseRelatedRow',
+        'Send-DataverseRequest',
         'Get-DataverseTable',
         'New-DataverseTable',   
         'Remove-DataverseTable',
