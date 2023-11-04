@@ -22,7 +22,20 @@ namespace AMSoftware.Dataverse.PowerShell.PropertyAdapters
             {
                 if (!excludedProperties.Contains(property.Name))
                 {
-                    typeProperties.Add(new PSAdaptedProperty(property.Name, new MemberTypePropertyHandler<MetadataBase>(property)));
+                    var propertyTypeMembers = property.PropertyType.FindMembers(
+                        MemberTypes.Method, BindingFlags.Public | BindingFlags.DeclaredOnly | BindingFlags.Instance,
+                        (f, g) => {
+                            return f.Name == "ToString";
+                        }, MethodAttributes.Public);
+
+                    if (propertyTypeMembers == null || propertyTypeMembers.Length == 0)
+                    {
+                        typeProperties.Add(new PSAdaptedProperty(property.Name, 
+                            new MetadataBaseValuePropertyHandler(property)));
+                    } else
+                    {
+                        typeProperties.Add(new PSAdaptedProperty(property.Name, new MemberTypePropertyHandler<MetadataBase>(property)));
+                    }
                 }
             }
             typeProperties = typeProperties.OrderBy(p => p.Name, StringComparer.OrdinalIgnoreCase).ToList();
