@@ -58,6 +58,8 @@
         'Get-DataverseRows',
         'Remove-DataverseRow',
         'Set-DataverseRow',
+        'Add-DataverseRelatedRow',
+        'Remove-DataverseRelatedRow',
         'Get-DataverseTable',
         'New-DataverseTable',   
         'Remove-DataverseTable',
