@@ -61,7 +61,10 @@
         'Get-DataverseTable',
         'New-DataverseTable',   
         'Remove-DataverseTable',
-        'Set-DataverseTable')
+        'Set-DataverseTable',
+        'Add-DataverseTableKey',
+        'Get-DataverseTableKey',
+        'Remove-DataverseTableKey')
 
     # Variables to export from this module
     VariablesToExport = @()

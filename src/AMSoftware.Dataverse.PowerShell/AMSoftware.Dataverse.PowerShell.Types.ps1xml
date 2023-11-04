@@ -14,4 +14,10 @@
       <TypeName>AMSoftware.Dataverse.PowerShell.PropertyAdapters.MetadataBasePropertyAdapter</TypeName>
     </TypeAdapter>
   </Type>
+  <Type>
+    <Name>Microsoft.Xrm.Sdk.Metadata.EntityKeyMetadata</Name>
+    <TypeAdapter>
+      <TypeName>AMSoftware.Dataverse.PowerShell.PropertyAdapters.MetadataBasePropertyAdapter</TypeName>
+    </TypeAdapter>
+  </Type>
 </Types>
