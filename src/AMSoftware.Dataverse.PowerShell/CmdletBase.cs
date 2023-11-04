@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.Xrm.Sdk;
+using System;
 using System.Management.Automation;
-using System.Text;
-using System.Threading.Tasks;
+using System.ServiceModel;
 
 namespace AMSoftware.Dataverse.PowerShell
 {
@@ -36,9 +34,22 @@ namespace AMSoftware.Dataverse.PowerShell
             catch (PipelineStoppedException)
             {
             }
+            catch (FaultException<OrganizationServiceFault> ex)
+            {
+                this.WriteExceptionError(ex);
+            }
             catch (Exception ex)
             {
                 this.WriteExceptionError(ex);
+                
+                if (ex.InnerException != null)
+                {
+                    FaultException<OrganizationServiceFault> fault = ex.InnerException as FaultException<OrganizationServiceFault>;
+                    if (fault != null)
+                    {
+                        this.WriteExceptionError(fault);
+                    }
+                }
             }
         }
 
@@ -83,4 +94,5 @@ namespace AMSoftware.Dataverse.PowerShell
             this.WriteError(new ErrorRecord(ex, string.Empty, ErrorCategory.CloseError, null));
         }
     }
+}
 }
