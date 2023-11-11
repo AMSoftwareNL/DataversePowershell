@@ -90,9 +90,12 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 ColumnSet = _columnSet
             };
 
-            foreach (var sortKey in Sort.Keys)
+            if (Sort != null)
             {
-                tableQuery.AddOrder((string)sortKey, (OrderType)Sort[sortKey]);
+                foreach (var sortKey in Sort.Keys)
+                {
+                    tableQuery.AddOrder((string)sortKey, (OrderType)Sort[sortKey]);
+                }
             }
 
             return tableQuery;
@@ -110,9 +113,12 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 attributeQuery.AddAttributeValue((string)attributeKey, Query[attributeKey]);
             }
 
-            foreach (var sortKey in Sort.Keys)
+            if (Sort != null)
             {
-                attributeQuery.AddOrder((string)sortKey, (OrderType)Sort[sortKey]);
+                foreach (var sortKey in Sort.Keys)
+                {
+                    attributeQuery.AddOrder((string)sortKey, (OrderType)Sort[sortKey]);
+                }
             }
 
             return attributeQuery;

@@ -85,6 +85,7 @@ namespace AMSoftware.Dataverse.PowerShell
         private void InitializeSession(ServiceClient client)
         {
             var whoAmIResponse = (WhoAmIResponse)client.ExecuteOrganizationRequest(new WhoAmIRequest(), "Initialize Session - WhoAmI");
+            UserId = whoAmIResponse.UserId;
             BusinessUnitId = whoAmIResponse.BusinessUnitId;
 
             var usersettingsResponse = (RetrieveResponse)client.ExecuteOrganizationRequest(new RetrieveRequest()
