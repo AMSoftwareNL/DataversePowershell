@@ -11,7 +11,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
     [Cmdlet(VerbsCommunications.Send, "DataverseRequest", DefaultParameterSetName = MessageParameterSet)]
     [OutputType(typeof(ParameterCollection))]
-    public sealed class SendRequestCommand : BatchCmdletBase, IDynamicParameters
+    public sealed class SendRequestCommand : BatchCmdletBase
     {
         private const string FunctionParameterSet = "Function";
         private const string MessageParameterSet = "Message";
@@ -36,13 +36,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [Alias("Id")]
         public Guid TargetRow { get; set; }
 
-        private OptionalRequestParameters _optionalRequestParameters;
-        public object GetDynamicParameters()
-        {
-            _optionalRequestParameters = new OptionalRequestParameters(this);
-            return _optionalRequestParameters;
-        }
-
         protected override void Execute()
         {
             var request = new OrganizationRequest(Name);
@@ -59,8 +52,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             {
                 request.Parameters.Add("Target", new EntityReference(TargetTable, TargetRow));
             }
-
-            _optionalRequestParameters.UseOptionalParameters(request);
+            RequestParameters.UseOptionalParameters(request);
 
             if (UseBatch)
             {

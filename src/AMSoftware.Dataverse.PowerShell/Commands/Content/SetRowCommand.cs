@@ -10,7 +10,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
     [Cmdlet(VerbsCommon.Set, "DataverseRow", DefaultParameterSetName = SetObjectParameterSet)]
     [OutputType(typeof(EntityReference))]
-    public sealed class SetRowCommand : BatchCmdletBase, IDynamicParameters
+    public sealed class SetRowCommand : BatchCmdletBase
     {
         private const string SetObjectParameterSet = "SetObject";
         private const string SetValuesParameterSet = "SetValues";
@@ -34,13 +34,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [ValidateNotNullOrEmpty]
         public Hashtable Values { get; set; }
 
-        private OptionalRequestParameters _optionalRequestParameters;
-        public object GetDynamicParameters()
-        {
-            _optionalRequestParameters = new OptionalRequestParameters(this);
-            return _optionalRequestParameters;
-        }
-
         protected override void Execute()
         {
             Entity newEntity = InputObject;
@@ -50,7 +43,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             {
                 Target = newEntity
             };
-            _optionalRequestParameters.UseOptionalParameters(request);
+            RequestParameters.UseOptionalParameters(request);
 
             if (UseBatch)
             {

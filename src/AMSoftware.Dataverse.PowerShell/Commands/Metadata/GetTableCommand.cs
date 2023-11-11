@@ -10,7 +10,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 {
     [Cmdlet(VerbsCommon.Get, "DataverseTable", DefaultParameterSetName = GetTablesByFilterParameterSet)]
     [OutputType(typeof(EntityMetadata))]
-    public sealed class GetTableCommand : CmdletBase
+    public sealed class GetTableCommand : RequestCmdletBase
     {
         private const string GetTableByIdParameterSet = "GetTableById";
         private const string GetTableByEtcParameterSet = "GetTableByEtc";
@@ -67,6 +67,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                         EntityFilters = EntityFilters.Entity,
                         RetrieveAsIfPublished = true
                     };
+                    RequestParameters.UseOptionalParameters(request);
+
                     var response = (RetrieveAllEntitiesResponse)Session.Current.Client.ExecuteOrganizationRequest(
                         request, MyInvocation.MyCommand.Name);
 
@@ -87,6 +89,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                         MetadataId = Id,
                         RetrieveAsIfPublished = true
                     };
+                    RequestParameters.UseOptionalParameters(getByIdRequest);
+
                     var getByIdResponse = (RetrieveEntityResponse)Session.Current.Client.ExecuteOrganizationRequest(
                         getByIdRequest, MyInvocation.MyCommand.Name);
 

@@ -23,7 +23,7 @@ namespace AMSoftware.Dataverse.PowerShell.PropertyAdapters
             switch (outputValue)
             {
                 case Label l:
-                    return l.LocalizedLabels.SingleOrDefault(i => i.LanguageCode == 1033)?.Label;
+                    return l.LocalizedLabels.SingleOrDefault(i => i.LanguageCode == Session.Current.LanguageId)?.Label;
                 case OptionSetMetadataBase osmb:
                     return osmb.Name;
                 case BooleanManagedProperty bmp:
@@ -45,11 +45,11 @@ namespace AMSoftware.Dataverse.PowerShell.PropertyAdapters
             {
                 case Type _ when propertyType == typeof(Label):
                     var l = (Label)base.GetValue(baseObject);
-                    var labelValue = l.LocalizedLabels.SingleOrDefault(i => i.LanguageCode == 1033);
+                    var labelValue = l.LocalizedLabels.SingleOrDefault(i => i.LanguageCode == Session.Current.LanguageId);
 
                     if (labelValue == null)
                     {
-                        l.LocalizedLabels.Add(new LocalizedLabel((string)value, 1033));
+                        l.LocalizedLabels.Add(new LocalizedLabel((string)value, Session.Current.LanguageId));
                     }
                     else
                     {

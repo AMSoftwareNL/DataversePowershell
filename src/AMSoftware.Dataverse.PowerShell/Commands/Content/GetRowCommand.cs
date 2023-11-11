@@ -11,7 +11,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
     [Cmdlet(VerbsCommon.Get, "DataverseRow")]
     [OutputType(typeof(Entity))]
-    public sealed class GetRowCommand : CmdletBase, IDynamicParameters
+    public sealed class GetRowCommand : RequestCmdletBase
     {
         private const string RetrieveWithIdParameterSet = "RetrieveWithId";
         private const string RetrieveWithKeyParameterSet = "RetrieveWithKey";
@@ -34,12 +34,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         public string[] Columns { get; set; }
 
         private ColumnSet _columnset;
-        private OptionalRequestParameters _optionalRequestParameters;
-        public object GetDynamicParameters()
-        {
-            _optionalRequestParameters = new OptionalRequestParameters(this);
-            return _optionalRequestParameters;
-        }
 
         protected override void BeginProcessing()
         {
@@ -71,7 +65,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                     break;
             }
 
-            _optionalRequestParameters.UseOptionalParameters(request);
+            RequestParameters.UseOptionalParameters(request);
             RetrieveResponse response = (RetrieveResponse)Session.Current.Client.ExecuteOrganizationRequest(
                         request, MyInvocation.MyCommand.Name);
 

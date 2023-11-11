@@ -5,7 +5,7 @@ using System.Management.Automation;
 namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 {
     [Cmdlet(VerbsCommon.Remove, "DataverseTableKey", ConfirmImpact = ConfirmImpact.High, SupportsShouldProcess = true)]
-    public sealed class RemoveTableKeyCommand : CmdletBase
+    public sealed class RemoveTableKeyCommand : RequestCmdletBase
     {
         [Parameter(Mandatory = true, Position = 1, ValueFromPipelineByPropertyName = true)]
         [Alias("EntityLogicalName")]
@@ -27,6 +27,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                     EntityLogicalName = Table,
                     Name = Name                    
                 };
+                RequestParameters.UseOptionalParameters(request);
 
                 var response = (DeleteEntityKeyResponse)Session.Current.Client.ExecuteOrganizationRequest(
                         request, MyInvocation.MyCommand.Name);

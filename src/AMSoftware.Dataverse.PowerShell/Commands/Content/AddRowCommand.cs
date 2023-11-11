@@ -11,7 +11,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
     [Cmdlet(VerbsCommon.Add, "DataverseRow", DefaultParameterSetName = AddObjectParameterSet)]
     [OutputType(typeof(EntityReference))]
-    public sealed class AddRowCommand : BatchCmdletBase, IDynamicParameters
+    public sealed class AddRowCommand : BatchCmdletBase
     {
         private const string AddObjectParameterSet = "AddObject";
         private const string AddValuesParameterSet = "AddValues";
@@ -39,20 +39,13 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [ValidateNotNullOrEmpty]
         public Hashtable Key { get; set; }
 
-        private OptionalRequestParameters _optionalRequestParameters;
-        public object GetDynamicParameters()
-        {
-            _optionalRequestParameters = new OptionalRequestParameters(this);
-            return _optionalRequestParameters;
-        }
-
         protected override void Execute()
         {
             Entity newEntity = InputObject;
             if (ParameterSetName == AddValuesParameterSet) newEntity = BuildEntityFromValues();
 
             OrganizationRequest request = BuildRequest(newEntity);
-            _optionalRequestParameters.UseOptionalParameters(request);
+            RequestParameters.UseOptionalParameters(request);
 
             if (UseBatch)
             {

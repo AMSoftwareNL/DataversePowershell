@@ -6,7 +6,7 @@ using System.Management.Automation;
 
 namespace AMSoftware.Dataverse.PowerShell
 {
-    public abstract class BatchCmdletBase : CmdletBase
+    public abstract class BatchCmdletBase : RequestCmdletBase
     {
         [Parameter]
         [ValidateNotNullOrEmpty]

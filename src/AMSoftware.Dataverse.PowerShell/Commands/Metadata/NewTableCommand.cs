@@ -8,7 +8,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 {
     [Cmdlet(VerbsCommon.New, "DataverseTable", DefaultParameterSetName = NewTableObjectParameterSet)]
     [OutputType(typeof(EntityMetadata))]
-    public sealed class NewTableCommand : CmdletBase
+    public sealed class NewTableCommand : RequestCmdletBase
     {
         private const string NewTableObjectParameterSet = "NewTableObject";
         private const string NewStandardTableParameterSet = "NewStandardTable";
@@ -173,9 +173,10 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 PrimaryAttribute = attributeMetadata,
                 HasActivities = IsActivityParty.ToBool(),
                 HasFeedback = false,
-                HasNotes = HasAttachments.ToBool() || Activity.ToBool(),
-                SolutionUniqueName = null
+                HasNotes = HasAttachments.ToBool() || Activity.ToBool()
             };
+            RequestParameters.UseOptionalParameters(createRequest);
+
             var createResponse = (CreateEntityResponse)Session.Current.Client.ExecuteOrganizationRequest(
                         createRequest, MyInvocation.MyCommand.Name);
 
@@ -211,7 +212,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 
             attributeMetadata.LogicalName = "subject";
             attributeMetadata.SchemaName = "subject";
-            attributeMetadata.DisplayName = new Label("Subject", 1033);
+            attributeMetadata.DisplayName = new Label("Subject", Session.Current.LanguageId);
             attributeMetadata.MaxLength = 400;
             attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty(AttributeRequiredLevel.SystemRequired);
         }
@@ -242,9 +243,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             {
                 LogicalName = Name,
                 SchemaName = Name,
-                DisplayName = new Label(DisplayName, 1033),
-                DisplayCollectionName = new Label(PluralName, 1033),
-                Description = Description == null ? null : new Label(Description, 1033),
+                DisplayName = new Label(DisplayName, Session.Current.LanguageId),
+                DisplayCollectionName = new Label(PluralName, Session.Current.LanguageId),
+                Description = Description == null ? null : new Label(Description, Session.Current.LanguageId),
                 TableType = "Standard"
             };
 
@@ -259,8 +260,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             {
                 LogicalName = ColumnName,
                 SchemaName = ColumnName,
-                DisplayName = new Label(ColumnDisplayName, 1033),
-                Description = Description == null ? null : new Label(ColumnDescription, 1033),
+                DisplayName = new Label(ColumnDisplayName, Session.Current.LanguageId),
+                Description = Description == null ? null : new Label(ColumnDescription, Session.Current.LanguageId),
                 MaxLength = 100,
                 RequiredLevel = new AttributeRequiredLevelManagedProperty(AttributeRequiredLevel.SystemRequired)
             };

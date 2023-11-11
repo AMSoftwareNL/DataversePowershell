@@ -14,7 +14,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
     [Cmdlet(VerbsCommon.Get, "DataverseRows", DefaultParameterSetName = RetrieveWithQueryParameterSet)]
     [OutputType(typeof(Entity))]
-    public sealed class GetRowsCommand : CmdletBase
+    public sealed class GetRowsCommand : RequestCmdletBase
     {
         private const string RetrieveWithFetchXmlParameterSet = "RetrieveWithFetchXml";
         private const string RetrieveWithAttributeQueryParameterSet = "RetrieveWithAttributeQuery";
@@ -54,13 +54,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         public XmlDocument FetchXml { get; set; }
 
         private ColumnSet _columnSet;
-        private OptionalRequestParameters _optionalRequestParameters;
-        public object GetDynamicParameters()
-        {
-            _optionalRequestParameters = new OptionalRequestParameters(this);
-            return _optionalRequestParameters;
-        }
-
+        
         protected override void BeginProcessing()
         {
             base.BeginProcessing();
@@ -144,13 +138,17 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 }
 
                 WriteVerboseWithTimestamp("Add BatchItem: {0} ({1})", Table, Id[i]);
+
+                var request = new RetrieveRequest()
+                {
+                    ColumnSet = _columnSet,
+                    Target = new EntityReference(Table, Id[i])
+                };
+                RequestParameters.UseOptionalParameters(request);
+
                 batch.BatchItems.Add(new BatchItemOrganizationRequest()
                 {
-                    Request = new RetrieveRequest()
-                    {
-                        ColumnSet = _columnSet,
-                        Target = new EntityReference(Table, Id[i])
-                    }
+                    Request = request
                 });
                 pageCount++;
 
@@ -206,7 +204,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 {
                     Query = new FetchExpression(localFetchXml.OuterXml)
                 };
-                _optionalRequestParameters.UseOptionalParameters(pagedQueryRequest);
+                RequestParameters.UseOptionalParameters(pagedQueryRequest);
 
                 var pagedQueryResponse = (RetrieveMultipleResponse)Session.Current.Client.ExecuteOrganizationRequest(
                     pagedQueryRequest, MyInvocation.MyCommand.Name);
@@ -234,7 +232,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 {
                     Query = query
                 };
-                _optionalRequestParameters.UseOptionalParameters(pagedQueryRequest);
+                RequestParameters.UseOptionalParameters(pagedQueryRequest);
 
                 var pagedQueryResponse = (RetrieveMultipleResponse)Session.Current.Client.ExecuteOrganizationRequest(
                     pagedQueryRequest, MyInvocation.MyCommand.Name);
@@ -263,7 +261,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 {
                     Query = query
                 };
-                _optionalRequestParameters.UseOptionalParameters(pagedQueryRequest);
+                RequestParameters.UseOptionalParameters(pagedQueryRequest);
 
                 var pagedQueryResponse = (RetrieveMultipleResponse)Session.Current.Client.ExecuteOrganizationRequest(
                     pagedQueryRequest, MyInvocation.MyCommand.Name);

@@ -9,7 +9,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 {
     [Cmdlet(VerbsCommon.Set, "DataverseTable")]
     [OutputType(typeof(EntityMetadata))]
-    public sealed class SetTableCommand : CmdletBase
+    public sealed class SetTableCommand : RequestCmdletBase
     {
         private const string SetTableObjectParameterSet = "SetTableObject";
         private const string SetTableParameterSet = "SetTable";
@@ -81,9 +81,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             var updateRequest = new UpdateEntityRequest()
             {
                 Entity = entityMetadata,
-                SolutionUniqueName = null,
                 MergeLabels = MergeLabels.ToBool()
             };
+            RequestParameters.UseOptionalParameters(updateRequest);
 
             if (MyInvocation.BoundParameters.ContainsKey(nameof(HasAttachments)))
                 updateRequest.HasNotes = HasAttachments.ToBool();
@@ -114,13 +114,13 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             };
 
             if (MyInvocation.BoundParameters.ContainsKey(nameof(DisplayName)))
-                result.DisplayName = new Label(DisplayName, 1033);
+                result.DisplayName = new Label(DisplayName, Session.Current.LanguageId);
 
             if (MyInvocation.BoundParameters.ContainsKey(nameof(PluralName)))
-                result.DisplayCollectionName = new Label(PluralName, 1033);
+                result.DisplayCollectionName = new Label(PluralName, Session.Current.LanguageId);
 
             if (MyInvocation.BoundParameters.ContainsKey(nameof(Description)))
-                result.Description = Description == null ? null : new Label(Description, 1033);
+                result.Description = Description == null ? null : new Label(Description, Session.Current.LanguageId);
 
             if (MyInvocation.BoundParameters.ContainsKey(nameof(ExternalName)))
                 result.ExternalName = ExternalName;

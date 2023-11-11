@@ -9,7 +9,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 {
     [Cmdlet(VerbsCommon.Get, "DataverseTableKey")]
     [OutputType(typeof(EntityKeyMetadata))]
-    public sealed class GetTableKeyCommand : CmdletBase
+    public sealed class GetTableKeyCommand : RequestCmdletBase
     {
         [Parameter(Position = 1, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
         [Alias("LogicalName", "EntityLogicalName")]
@@ -45,6 +45,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 LogicalName = Table,
                 RetrieveAsIfPublished = true
             };
+            RequestParameters.UseOptionalParameters(getByIdRequest);
+
             var getByIdResponse = (RetrieveEntityResponse)Session.Current.Client.ExecuteOrganizationRequest(
                 getByIdRequest, MyInvocation.MyCommand.Name);
 

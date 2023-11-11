@@ -8,7 +8,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 {
     [Cmdlet(VerbsCommon.Add, "DataverseTableKey")]
     [OutputType(typeof(EntityKeyMetadata))]
-    public sealed class AddTableKeyCommand : CmdletBase
+    public sealed class AddTableKeyCommand : RequestCmdletBase
     {
         [Parameter(Mandatory = true, Position = 1, ValueFromPipelineByPropertyName = true)]
         [Alias("EntityLogicalName", "LogicalName")]
@@ -36,16 +36,16 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             {
                 LogicalName = Name,
                 SchemaName = Name,
-                DisplayName = new Label(DisplayName, 1033),
+                DisplayName = new Label(DisplayName, Session.Current.LanguageId),
                 KeyAttributes = Columns
             };
 
             var createRequest = new CreateEntityKeyRequest
             {
                 EntityName = Table,
-                EntityKey = key,
-                SolutionUniqueName = null
+                EntityKey = key
             };
+            RequestParameters.UseOptionalParameters(createRequest);
 
             var createResponse = (CreateEntityKeyResponse)Session.Current.Client.ExecuteOrganizationRequest(
                 createRequest, MyInvocation.MyCommand.Name);

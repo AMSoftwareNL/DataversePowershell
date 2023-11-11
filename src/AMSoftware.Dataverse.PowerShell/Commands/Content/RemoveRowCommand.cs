@@ -9,7 +9,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
     [Cmdlet(VerbsCommon.Remove, "DataverseRow", ConfirmImpact = ConfirmImpact.High, SupportsShouldProcess = true)]
     [OutputType(typeof(EntityReference))]
-    public sealed class RemoveRowCommand : BatchCmdletBase, IDynamicParameters
+    public sealed class RemoveRowCommand : BatchCmdletBase
     {
         [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
         [ValidateNotNullOrEmpty]
@@ -21,13 +21,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [ValidateNotNullOrEmpty]
         public Guid Id { get; set; }
 
-        private OptionalRequestParameters _optionalRequestParameters;
-        public object GetDynamicParameters()
-        {
-            _optionalRequestParameters = new OptionalRequestParameters(this);
-            return _optionalRequestParameters;
-        }
-
         protected override void Execute()
         {
             EntityReference rowReference = new EntityReference(Table, Id);
@@ -38,7 +31,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 {
                     Target = rowReference
                 };
-                _optionalRequestParameters.UseOptionalParameters(request);
+                RequestParameters.UseOptionalParameters(request);
 
                 if (UseBatch)
                 {

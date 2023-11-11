@@ -44,7 +44,13 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
             if (request == null) return;
 
             if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(Solution)))
+            {
                 request.Parameters.Add("SolutionUniqueName", Solution);
+            }
+            else if (!string.IsNullOrEmpty(Session.Current.ActiveSolution))
+            {
+                request.Parameters.Add("SolutionUniqueName", Session.Current.ActiveSolution);
+            }
 
             if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(SharedTag)))
                 request.Parameters.Add("tag", SharedTag);

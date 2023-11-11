@@ -1,14 +1,12 @@
 ﻿using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
-using Microsoft.PowerPlatform.Dataverse.Client.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
-using System;
 using System.Management.Automation;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 {
     [Cmdlet(VerbsCommon.Remove, "DataverseTable", ConfirmImpact = ConfirmImpact.High, SupportsShouldProcess = true)]
-    public sealed class RemoveTableCommand : CmdletBase
+    public sealed class RemoveTableCommand : RequestCmdletBase
     {
         [Parameter(Position = 1, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
         [Alias("LogicalName", "TableName")]
@@ -26,6 +24,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 {
                     LogicalName = entityLogicalName
                 };
+                RequestParameters.UseOptionalParameters(request);
 
                 DeleteEntityResponse response = (DeleteEntityResponse)Session.Current.Client.ExecuteOrganizationRequest(
                     request, MyInvocation.MyCommand.Name);

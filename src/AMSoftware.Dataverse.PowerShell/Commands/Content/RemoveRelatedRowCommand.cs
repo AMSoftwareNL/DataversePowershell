@@ -8,7 +8,7 @@ using System.Management.Automation;
 namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
     [Cmdlet(VerbsCommon.Remove, "DataverseRelatedRow", DefaultParameterSetName = RemoveSingleRelatedRowParameterSet)]
-    public sealed class RemoveRelatedRowCommand : BatchCmdletBase, IDynamicParameters
+    public sealed class RemoveRelatedRowCommand : BatchCmdletBase
     {
         private const string RemoveSingleRelatedRowParameterSet = "RemoveSingleRelatedRow";
         private const string RemoveCollectionRelatedRowsParameterSet = "RemoveCollectionRelatedRows";
@@ -41,13 +41,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [ValidateNotNullOrEmpty]
         public string Relationship { get; set; }
 
-        private OptionalRequestParameters _optionalRequestParameters;
-        public object GetDynamicParameters()
-        {
-            _optionalRequestParameters = new OptionalRequestParameters(this);
-            return _optionalRequestParameters;
-        }
-
         protected override void Execute()
         {
             EntityReferenceCollection relatedRows = new EntityReferenceCollection();
@@ -69,7 +62,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 RelatedEntities = relatedRows,
                 Relationship = new Relationship(Relationship)
             };
-            _optionalRequestParameters.UseOptionalParameters(request);
+            RequestParameters.UseOptionalParameters(request);
 
             if (UseBatch)
             {
