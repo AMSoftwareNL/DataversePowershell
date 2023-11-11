@@ -150,7 +150,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                     ColumnSet = _columnSet,
                     Target = new EntityReference(Table, Id[i])
                 };
-                RequestParameters.UseOptionalParameters(request);
 
                 batch.BatchItems.Add(new BatchItemOrganizationRequest()
                 {
@@ -210,10 +209,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 {
                     Query = new FetchExpression(localFetchXml.OuterXml)
                 };
-                RequestParameters.UseOptionalParameters(pagedQueryRequest);
 
-                var pagedQueryResponse = (RetrieveMultipleResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                    pagedQueryRequest, MyInvocation.MyCommand.Name);
+                var pagedQueryResponse = ExecuteOrganizationRequest<RetrieveMultipleResponse>(pagedQueryRequest);
 
                 WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
 
@@ -238,10 +235,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 {
                     Query = query
                 };
-                RequestParameters.UseOptionalParameters(pagedQueryRequest);
 
-                var pagedQueryResponse = (RetrieveMultipleResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                    pagedQueryRequest, MyInvocation.MyCommand.Name);
+                var pagedQueryResponse = ExecuteOrganizationRequest<RetrieveMultipleResponse>(pagedQueryRequest);
 
                 WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
 
@@ -267,10 +262,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 {
                     Query = query
                 };
-                RequestParameters.UseOptionalParameters(pagedQueryRequest);
 
-                var pagedQueryResponse = (RetrieveMultipleResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                    pagedQueryRequest, MyInvocation.MyCommand.Name);
+                var pagedQueryResponse = ExecuteOrganizationRequest<RetrieveMultipleResponse>(pagedQueryRequest);
 
                 WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
 

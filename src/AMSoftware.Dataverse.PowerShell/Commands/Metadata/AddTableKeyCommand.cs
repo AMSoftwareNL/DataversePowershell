@@ -45,10 +45,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 EntityName = Table,
                 EntityKey = key
             };
-            RequestParameters.UseOptionalParameters(createRequest);
 
-            var createResponse = (CreateEntityKeyResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                createRequest, MyInvocation.MyCommand.Name);
+            var createResponse = ExecuteOrganizationRequest<CreateEntityKeyResponse>(createRequest);
 
             var keyMetadataId = createResponse.EntityKeyId;
 
@@ -57,8 +55,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 MetadataId = keyMetadataId,
                 RetrieveAsIfPublished = true
             };
-            var getByIdResponse = (RetrieveEntityKeyResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                getByIdRequest, MyInvocation.MyCommand.Name);
+            var getByIdResponse = ExecuteOrganizationRequest<RetrieveEntityKeyResponse>(getByIdRequest);
 
             WriteObject(getByIdResponse.EntityKeyMetadata);
         }

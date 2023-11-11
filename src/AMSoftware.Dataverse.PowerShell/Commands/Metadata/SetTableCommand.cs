@@ -83,7 +83,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 Entity = entityMetadata,
                 MergeLabels = MergeLabels.ToBool()
             };
-            RequestParameters.UseOptionalParameters(updateRequest);
 
             if (MyInvocation.BoundParameters.ContainsKey(nameof(HasAttachments)))
                 updateRequest.HasNotes = HasAttachments.ToBool();
@@ -91,8 +90,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             if (MyInvocation.BoundParameters.ContainsKey(nameof(IsActivityParty)))
                 updateRequest.HasActivities = IsActivityParty.ToBool();
 
-            var updateResponse = (UpdateEntityResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                updateRequest, MyInvocation.MyCommand.Name);
+            var updateResponse = ExecuteOrganizationRequest<UpdateEntityResponse>(updateRequest);
 
             var getByNameRequest = new RetrieveEntityRequest()
             {
@@ -100,8 +98,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 LogicalName = Name,
                 RetrieveAsIfPublished = true
             };
-            var getByNameResponse = (RetrieveEntityResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                getByNameRequest, MyInvocation.MyCommand.Name);
+            var getByNameResponse = ExecuteOrganizationRequest<RetrieveEntityResponse>(getByNameRequest);
 
             WriteObject(getByNameResponse.EntityMetadata);
         }

@@ -24,10 +24,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 {
                     LogicalName = entityLogicalName
                 };
-                RequestParameters.UseOptionalParameters(request);
 
-                DeleteEntityResponse response = (DeleteEntityResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                    request, MyInvocation.MyCommand.Name);
+                DeleteEntityResponse response = ExecuteOrganizationRequest<DeleteEntityResponse>(request);
             }
         }
     }

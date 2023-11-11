@@ -31,7 +31,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 {
                     Target = rowReference
                 };
-                RequestParameters.UseOptionalParameters(request);
 
                 if (UseBatch)
                 {
@@ -39,7 +38,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 }
                 else
                 {
-                    var response = Session.Current.Client.ExecuteOrganizationRequest(request, MyInvocation.MyCommand.Name);
+                    var response = ExecuteOrganizationRequest<DeleteResponse>(request);
                 }
             }
         }

@@ -45,7 +45,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         {
             EntityReferenceCollection relatedRows = new EntityReferenceCollection();
 
-            switch(ParameterSetName)
+            switch (ParameterSetName)
             {
                 case RemoveSingleRelatedRowParameterSet:
                     relatedRows.Add(new EntityReference(RelatedTable, RelatedRow));
@@ -54,7 +54,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 case RemoveCollectionRelatedRowsParameterSet:
                     relatedRows.AddRange(Rows);
                     break;
-            } 
+            }
 
             var request = new DisassociateRequest()
             {
@@ -62,7 +62,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 RelatedEntities = relatedRows,
                 Relationship = new Relationship(Relationship)
             };
-            RequestParameters.UseOptionalParameters(request);
 
             if (UseBatch)
             {
@@ -70,8 +69,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             }
             else
             {
-                var response = (DisassociateResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                    request, MyInvocation.MyCommand.Name);
+                var response = ExecuteOrganizationRequest<DisassociateResponse>(request);
             }
         }
     }

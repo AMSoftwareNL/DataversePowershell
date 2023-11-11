@@ -65,9 +65,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                     break;
             }
 
-            RequestParameters.UseOptionalParameters(request);
-            RetrieveResponse response = (RetrieveResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                        request, MyInvocation.MyCommand.Name);
+            RetrieveResponse response = ExecuteOrganizationRequest<RetrieveResponse>(request);
 
             WriteObject(response.Entity);
 

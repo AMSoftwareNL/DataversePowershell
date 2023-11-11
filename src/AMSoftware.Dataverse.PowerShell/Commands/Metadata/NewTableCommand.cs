@@ -175,10 +175,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 HasFeedback = false,
                 HasNotes = HasAttachments.ToBool() || Activity.ToBool()
             };
-            RequestParameters.UseOptionalParameters(createRequest);
 
-            var createResponse = (CreateEntityResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                        createRequest, MyInvocation.MyCommand.Name);
+            var createResponse = ExecuteOrganizationRequest<CreateEntityResponse>(createRequest);
 
             var getByIdRequest = new RetrieveEntityRequest()
             {
@@ -186,8 +184,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 MetadataId = createResponse.EntityId,
                 RetrieveAsIfPublished = true
             };
-            var getByIdResponse = (RetrieveEntityResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                getByIdRequest, MyInvocation.MyCommand.Name);
+            var getByIdResponse = ExecuteOrganizationRequest<RetrieveEntityResponse>(getByIdRequest);
 
             WriteObject(getByIdResponse.EntityMetadata);
         }

@@ -45,7 +45,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             if (ParameterSetName == AddValuesParameterSet) newEntity = BuildEntityFromValues();
 
             OrganizationRequest request = BuildRequest(newEntity);
-            RequestParameters.UseOptionalParameters(request);
 
             if (UseBatch)
             {
@@ -53,7 +52,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             }
             else
             {
-                var response = Session.Current.Client.ExecuteOrganizationRequest(request, MyInvocation.MyCommand.Name);
+                var response = ExecuteOrganizationRequest<OrganizationResponse>(request);
 
                 if (response is CreateResponse addObjectCreateResponse)
                     WriteObject(new EntityReference(newEntity.LogicalName, addObjectCreateResponse.id));

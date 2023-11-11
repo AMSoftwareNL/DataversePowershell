@@ -43,7 +43,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             {
                 Target = newEntity
             };
-            RequestParameters.UseOptionalParameters(request);
 
             if (UseBatch)
             {
@@ -51,7 +50,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             }
             else
             {
-                var response = Session.Current.Client.ExecuteOrganizationRequest(request, MyInvocation.MyCommand.Name);
+                var response = ExecuteOrganizationRequest<UpdateResponse>(request);
                 WriteObject(newEntity.ToEntityReference());
             }
         }

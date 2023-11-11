@@ -45,10 +45,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 LogicalName = Table,
                 RetrieveAsIfPublished = true
             };
-            RequestParameters.UseOptionalParameters(getByIdRequest);
 
-            var getByIdResponse = (RetrieveEntityResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                getByIdRequest, MyInvocation.MyCommand.Name);
+            var getByIdResponse = ExecuteOrganizationRequest<RetrieveEntityResponse>(getByIdRequest);
 
             var keys = getByIdResponse.EntityMetadata.Keys.AsEnumerable();
 

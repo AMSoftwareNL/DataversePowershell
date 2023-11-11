@@ -7,7 +7,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
 {
     [Cmdlet(VerbsOther.Use, "DataverseSolution")]
     [OutputType(typeof(Session))]
-    public sealed class UseSolutionCommand : CmdletBase
+    public sealed class UseSolutionCommand : RequestCmdletBase
     {
         [Parameter(Mandatory = true)]
         [ValidateNotNullOrEmpty]
@@ -45,11 +45,11 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
                 }
             };
 
-            var response = (RetrieveMultipleResponse)Session.Current.Client.ExecuteOrganizationRequest(
+            var response = ExecuteOrganizationRequest<RetrieveMultipleResponse>(
                 new RetrieveMultipleRequest()
                 {
                     Query = query
-                }, MyInvocation.MyCommand.Name);
+                });
 
             if (response.EntityCollection != null && response.EntityCollection.Entities != null && response.EntityCollection.Entities.Count == 1)
             {

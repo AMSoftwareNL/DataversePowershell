@@ -67,10 +67,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                         EntityFilters = EntityFilters.Entity,
                         RetrieveAsIfPublished = true
                     };
-                    RequestParameters.UseOptionalParameters(request);
 
-                    var response = (RetrieveAllEntitiesResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                        request, MyInvocation.MyCommand.Name);
+                    var response = ExecuteOrganizationRequest<RetrieveAllEntitiesResponse>(request);
 
                     _entitiesMetadata = response.EntityMetadata.AsEnumerable();
 
@@ -89,10 +87,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                         MetadataId = Id,
                         RetrieveAsIfPublished = true
                     };
-                    RequestParameters.UseOptionalParameters(getByIdRequest);
 
-                    var getByIdResponse = (RetrieveEntityResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                        getByIdRequest, MyInvocation.MyCommand.Name);
+                    var getByIdResponse = ExecuteOrganizationRequest<RetrieveEntityResponse>(getByIdRequest);
 
                     WriteObject(getByIdResponse.EntityMetadata);
 

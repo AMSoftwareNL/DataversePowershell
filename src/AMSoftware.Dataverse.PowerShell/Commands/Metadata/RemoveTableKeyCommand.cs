@@ -25,12 +25,10 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 var request = new DeleteEntityKeyRequest()
                 {
                     EntityLogicalName = Table,
-                    Name = Name                    
+                    Name = Name
                 };
-                RequestParameters.UseOptionalParameters(request);
 
-                var response = (DeleteEntityKeyResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                        request, MyInvocation.MyCommand.Name);
+                var response = ExecuteOrganizationRequest<DeleteEntityKeyResponse>(request);
             }
         }
     }

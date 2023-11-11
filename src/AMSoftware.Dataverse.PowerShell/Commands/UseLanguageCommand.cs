@@ -1,4 +1,5 @@
 ﻿using Microsoft.Crm.Sdk.Messages;
+using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
 {
     [Cmdlet(VerbsOther.Use, "DataverseLanguage")]
     [OutputType(typeof(Session))]
-    public sealed class UseLanguage : CmdletBase
+    public sealed class UseLanguage : RequestCmdletBase
     {
         [Parameter(Mandatory = true)]
         [ValidateNotNull]
@@ -16,8 +17,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
 
         protected override void Execute()
         {
-            var installedLanguagesResponse = (RetrieveAvailableLanguagesResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                new RetrieveAvailableLanguagesRequest(), MyInvocation.MyCommand.Name);
+            var installedLanguagesResponse = ExecuteOrganizationRequest<RetrieveAvailableLanguagesResponse>(
+                new RetrieveAvailableLanguagesRequest());
 
             if (installedLanguagesResponse.LocaleIds.Any(languagePack => languagePack == Language))
             {
@@ -31,11 +32,12 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
                     }
                 };
 
-                Session.Current.Client.ExecuteOrganizationRequest(request, MyInvocation.MyCommand.Name);
+                ExecuteOrganizationRequest<OrganizationResponse>(request);
                 Session.Current.Refresh();
 
                 WriteObject(Session.Current);
-            } else
+            }
+            else
             {
                 WriteError(new ErrorRecord(
                         new ArgumentException($"Language {Language} is not installed."),

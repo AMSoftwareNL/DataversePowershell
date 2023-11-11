@@ -62,7 +62,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 RelatedEntities = relatedRows,
                 Relationship = new Relationship(Relationship)
             };
-            RequestParameters.UseOptionalParameters(request);
 
             if (UseBatch)
             {
@@ -70,8 +69,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             }
             else
             {
-                var response = (AssociateResponse)Session.Current.Client.ExecuteOrganizationRequest(
-                    request, MyInvocation.MyCommand.Name);
+                var response = ExecuteOrganizationRequest<AssociateResponse>(request);
             }
         }
     }
