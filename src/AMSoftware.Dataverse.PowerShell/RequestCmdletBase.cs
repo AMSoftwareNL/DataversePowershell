@@ -12,7 +12,7 @@ namespace AMSoftware.Dataverse.PowerShell
     {
         protected OptionalRequestParameters RequestParameters { get; private set; }
 
-        public object GetDynamicParameters()
+        public virtual object GetDynamicParameters()
         {
             RequestParameters = new OptionalRequestParameters(this);
             return RequestParameters;

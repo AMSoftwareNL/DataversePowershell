@@ -9,9 +9,9 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
     /// https://learn.microsoft.com/en-us/power-apps/developer/data-platform/optional-parameters?tabs=sdk
     /// </summary>
 
-    public sealed class OptionalRequestParameters
+    public class OptionalRequestParameters
     {
-        private readonly PSCmdlet _cmdletContext;
+        protected readonly PSCmdlet _cmdletContext;
 
         internal OptionalRequestParameters(PSCmdlet cmdletContext)
         {

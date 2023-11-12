@@ -145,5 +145,51 @@
         </TableRowEntries>
       </TableControl>
     </View>
-  </ViewDefinitions>
+    <View>
+      <Name>Microsoft.Xrm.Sdk.Metadata.AttributeMetadata</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Xrm.Sdk.Metadata.AttributeMetadata</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Width>20</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>30</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>30</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>15</Width>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Width>10</Width>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>EntityLogicalName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>LogicalName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisplayName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>AttributeType</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>IsManaged</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+</ViewDefinitions>
 </Configuration>

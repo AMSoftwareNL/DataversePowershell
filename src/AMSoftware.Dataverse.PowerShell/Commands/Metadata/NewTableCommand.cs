@@ -116,7 +116,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [Parameter(Mandatory = false, ParameterSetName = NewVirtualTableParameterSet)]
         [PSDefaultValue(Value = ColumnRequiredLevel.Required)]
         [Alias("PrimaryAttributeRequirement")]
-        public ColumnRequiredLevel ColumnRequirement { get; set; }
+        public ColumnRequiredLevel ColumnRequired { get; set; }
 
         [Parameter(Mandatory = false, ParameterSetName = NewActivityTableParameterSet)]
         public SwitchParameter HideFromMenu { get; set; }
@@ -266,21 +266,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             if (MyInvocation.BoundParameters.ContainsKey(nameof(ColumnLength)))
                 attributeMetadata.MaxLength = (int)ColumnLength;
 
-            if (MyInvocation.BoundParameters.ContainsKey(nameof(ColumnRequirement)))
-                attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty((AttributeRequiredLevel)ColumnRequirement);
+            if (MyInvocation.BoundParameters.ContainsKey(nameof(ColumnRequired)))
+                attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty((AttributeRequiredLevel)ColumnRequired);
         }
-    }
-
-    public enum TableOwnershipType
-    {
-        User = 0x1,
-        Organization = 0x8
-    }
-
-    public enum ColumnRequiredLevel
-    {
-        Optional = 0,
-        Required = 1,
-        Recommended = 3
     }
 }
