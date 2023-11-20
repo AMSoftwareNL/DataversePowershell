@@ -10,7 +10,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 {
     [Cmdlet(VerbsCommon.Add, "DataverseColumn")]
     [OutputType(typeof(AttributeMetadata))]
-    public abstract class AddColumnCommand : RequestCmdletBase
+    public abstract class AddColumnCommand : RequestCmdletBase, IDynamicParameters
     {
         [Parameter(Mandatory = true)]
         public ColumnType Type { get; set; }
@@ -51,7 +51,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         public SwitchParameter ColumnSecurity { get; set; }
 
         private ColumnTypeParametersBase _dynamicContext;
-        public override object GetDynamicParameters()
+        public object GetDynamicParameters()
         {
             _dynamicContext = ColumnTypeParametersBase.Create(this);
 

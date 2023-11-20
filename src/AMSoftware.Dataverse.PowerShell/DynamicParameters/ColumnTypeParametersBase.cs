@@ -6,10 +6,13 @@ using System.Management.Automation;
 
 namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
 {
-    public abstract class ColumnTypeParametersBase : OptionalRequestParameters
+    public abstract class ColumnTypeParametersBase
     {
-        internal ColumnTypeParametersBase(PSCmdlet cmdletContext) : base(cmdletContext)
+        protected readonly PSCmdlet _cmdletContext;
+
+        protected ColumnTypeParametersBase(PSCmdlet cmdletContext)
         {
+            _cmdletContext = cmdletContext;
         }
 
         internal static ColumnTypeParametersBase Create(PSCmdlet cmdletContext)
