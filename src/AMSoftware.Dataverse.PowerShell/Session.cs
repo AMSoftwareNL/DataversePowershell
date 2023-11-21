@@ -56,7 +56,7 @@ namespace AMSoftware.Dataverse.PowerShell
 
         public int OrganizationLocaleId { get; internal set; }
 
-        public Guid SystemUserId { get; set; }
+        public Guid SystemUserId { get; internal set; }
         #endregion
 
         public int LanguageId

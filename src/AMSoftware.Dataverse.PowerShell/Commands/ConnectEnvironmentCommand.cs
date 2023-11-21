@@ -69,6 +69,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
             if (client != null && client.IsReady)
             {
                 Session.Create(client);
+
+                this.SessionState.PSVariable.Set(new PSVariable("DataverseSession", Session.Current));
+                this.SessionState.PSVariable.Set(new PSVariable("DataverseClient", Session.Current.Client));
             }
             else
             {

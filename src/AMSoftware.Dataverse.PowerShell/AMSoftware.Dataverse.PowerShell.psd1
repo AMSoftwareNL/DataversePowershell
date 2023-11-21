@@ -2,7 +2,7 @@
 
 @{
     # Script module or binary module file associated with this manifest.
-    RootModule = 'AMSoftware.Dataverse.PowerShell.dll'
+    RootModule = ''
 
     # Version number of this module.
     ModuleVersion = '0.0.1'
@@ -45,7 +45,7 @@
     FormatsToProcess = 'AMSoftware.Dataverse.PowerShell.Formats.ps1xml'
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-    # NestedModules = @()
+    NestedModules = @('AMSoftware.Dataverse.PowerShell.dll', 'AMSoftware.Dataverse.PowerShell.psm1')
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
     FunctionsToExport = @()
@@ -53,7 +53,6 @@
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
     CmdletsToExport = @(
         'Connect-DataverseEnvironment',
-        'Get-DataverseSession',
         'Use-DataverseLanguage',
         'Use-DataverseSolution',
         'Add-DataverseRow',
@@ -76,19 +75,21 @@
         'Remove-DataverseColumn')
 
     # Variables to export from this module
-    VariablesToExport = @()
+    VariablesToExport = @('DataverseSession','DataverseClient')
 
     # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
     AliasesToExport = @()
 
     # List of all modules packaged with this module
-    # ModuleList = @()
+    ModuleList = @('AMSoftware.Dataverse.PowerShell.dll', 'AMSoftware.Dataverse.PowerShell.psm1')
 
     # List of all files packaged with this module
     FileList = @(
         'AMSoftware.Dataverse.PowerShell.dll',
         'AMSoftware.Dataverse.PowerShell.psd1',
+        'AMSoftware.Dataverse.PowerShell.psm1',
         'AMSoftware.Dataverse.PowerShell.Types.ps1xml',
+        'AMSoftware.Dataverse.PowerShell.Formats.ps1xml',
         'Microsoft.Xrm.Sdk.dll',
         'Microsoft.PowerPlatform.Dataverse.Client.dll',
         'Microsoft.Crm.Sdk.Proxy.dll')
