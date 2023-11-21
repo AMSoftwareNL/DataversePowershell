@@ -5,10 +5,6 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
 {
     public sealed class IntegerColumnParameters : ColumnTypeParametersBase
     {
-        internal IntegerColumnParameters(PSCmdlet cmdletContext) : base(cmdletContext)
-        {
-        }
-
         [Parameter(Mandatory = false)]
         [PSDefaultValue(Value = IntegerFormat.None)]
         public IntegerFormat Format { get; set; }
@@ -23,7 +19,7 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
         [ValidateRange(IntegerAttributeMetadata.MinSupportedValue, IntegerAttributeMetadata.MaxSupportedValue)]
         public int MaxValue { get; set; }
 
-        internal override AttributeMetadata BuildAttributeMetadata()
+        internal override AttributeMetadata CreateAttributeMetadata()
         {
             var result = new IntegerAttributeMetadata()
             {
@@ -32,16 +28,21 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
                 MaxValue = IntegerAttributeMetadata.MaxSupportedValue
             };
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(Format)))
+            return result;
+        }
+
+        internal override void ApplyParameters(PSCmdlet context, ref AttributeMetadata attribute)
+        {
+            var result = attribute as IntegerAttributeMetadata;
+
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(Format)))
                 result.Format = Format;
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(MinValue)))
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(MinValue)))
                 result.MinValue = MinValue;
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(MaxValue)))
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(MaxValue)))
                 result.MaxValue = MaxValue;
-
-            return result;
         }
     }
 }

@@ -14,12 +14,12 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         private const string SetTableObjectParameterSet = "SetTableObject";
         private const string SetTableParameterSet = "SetTable";
 
-        [Parameter(Mandatory = true, Position = 1, ParameterSetName = SetTableObjectParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = SetTableObjectParameterSet)]
         [Alias("Entity")]
         [ValidateNotNullOrEmpty]
         public EntityMetadata InputObject { get; set; }
 
-        [Parameter(Mandatory = true, Position = 1, ParameterSetName = SetTableParameterSet, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
+        [Parameter(Mandatory = true, ParameterSetName = SetTableParameterSet, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
         [Alias("LogicalName")]
         [ValidateNotNullOrEmpty]
         [ArgumentCompleter(typeof(TableNameArgumentCompleter))]

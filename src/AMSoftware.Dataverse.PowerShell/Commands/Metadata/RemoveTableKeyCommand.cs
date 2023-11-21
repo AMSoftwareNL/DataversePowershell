@@ -7,7 +7,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
     [Cmdlet(VerbsCommon.Remove, "DataverseTableKey", ConfirmImpact = ConfirmImpact.High, SupportsShouldProcess = true)]
     public sealed class RemoveTableKeyCommand : RequestCmdletBase
     {
-        [Parameter(Mandatory = true, Position = 1, ValueFromPipelineByPropertyName = true)]
+        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
         [Alias("EntityLogicalName")]
         [ValidateNotNullOrEmpty]
         [ArgumentCompleter(typeof(TableNameArgumentCompleter))]

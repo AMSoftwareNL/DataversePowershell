@@ -13,7 +13,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
     [OutputType(typeof(EntityReference))]
     public sealed class SetRowsCommand : BatchCmdletBase
     {
-        [Parameter(Mandatory = true, Position = 1, ValueFromPipeline = true)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true)]
         [Alias("Rows", "Entities")]
         [ValidateNotNullOrEmpty]
         public Entity[] InputObject { get; set; }

@@ -3,77 +3,93 @@ using AMSoftware.Dataverse.PowerShell.DynamicParameters;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
-using System.Diagnostics;
 using System.Management.Automation;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 {
     [Cmdlet(VerbsCommon.Add, "DataverseColumn")]
     [OutputType(typeof(AttributeMetadata))]
-    public abstract class AddColumnCommand : RequestCmdletBase, IDynamicParameters
+    public sealed class AddColumnCommand : RequestCmdletBase, IDynamicParameters
     {
-        [Parameter(Mandatory = true)]
-        public ColumnType Type { get; set; }
+        private const string AddColumnByInputObjectParameterset = "AddColumnByInputObject";
+        private const string AddColumnByParametersParameterset = "AddColumnByParameters";
 
-        [Parameter(Mandatory = true, Position = 1, ValueFromPipelineByPropertyName = true)]
+        [Parameter(Mandatory = true)]
         [Alias("EntityLogicalName", "LogicalName")]
         [ValidateNotNullOrEmpty]
         [ArgumentCompleter(typeof(TableNameArgumentCompleter))]
         public string Table { get; set; }
 
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = AddColumnByInputObjectParameterset)]
+        [ValidateNotNullOrEmpty]
+        public AttributeMetadata InputObject { get; set; }
+
+        [Parameter(Mandatory = true, ParameterSetName = AddColumnByParametersParameterset)]
         [ValidateNotNullOrEmpty]
         public string Name { get; set; }
 
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = true, ParameterSetName = AddColumnByParametersParameterset)]
+        public ColumnType Type { get; set; }
+
+        [Parameter(Mandatory = true, ParameterSetName = AddColumnByParametersParameterset)]
         [ValidateNotNullOrEmpty]
         public string DisplayName { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [Parameter(Mandatory = false, ParameterSetName = AddColumnByParametersParameterset)]
         [ValidateNotNullOrEmpty]
         public string Description { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [Parameter(Mandatory = false, ParameterSetName = AddColumnByParametersParameterset)]
         [PSDefaultValue(Value = ColumnRequiredLevel.Required)]
         public ColumnRequiredLevel Required { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [Parameter(Mandatory = false, ParameterSetName = AddColumnByParametersParameterset)]
         [ValidateNotNullOrEmpty]
         public string ExternalName { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [Parameter(Mandatory = false, ParameterSetName = AddColumnByParametersParameterset)]
         public SwitchParameter Searchable { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [Parameter(Mandatory = false, ParameterSetName = AddColumnByParametersParameterset)]
         public SwitchParameter Auditing { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [Parameter(Mandatory = false, ParameterSetName = AddColumnByParametersParameterset)]
         public SwitchParameter ColumnSecurity { get; set; }
 
-        private ColumnTypeParametersBase _dynamicContext;
+        private ColumnTypeParametersBase _dynamicContext = null;
         public object GetDynamicParameters()
         {
-            _dynamicContext = ColumnTypeParametersBase.Create(this);
+            if (ParameterSetName == AddColumnByParametersParameterset)
+            {
+                _dynamicContext = ColumnTypeParametersBase.Create(Type);
+            }
 
             return _dynamicContext;
         }
 
         protected override void Execute()
         {
-            AttributeMetadata attributeMetadata = _dynamicContext.BuildAttributeMetadata();
+            AttributeMetadata attributeMetadata = InputObject;
 
-            attributeMetadata.LogicalName = Name;
-            attributeMetadata.SchemaName = Name;
-            attributeMetadata.DisplayName = new Label(DisplayName, Session.Current.LanguageId);
-            attributeMetadata.Description = Description == null ? null : new Label(Description, Session.Current.LanguageId);
-            attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty(AttributeRequiredLevel.SystemRequired);
-            attributeMetadata.ExternalName = ExternalName;
-            attributeMetadata.IsGlobalFilterEnabled = new BooleanManagedProperty(Searchable.ToBool());
-            attributeMetadata.IsAuditEnabled = new BooleanManagedProperty(Auditing.ToBool());
-            attributeMetadata.IsSecured = ColumnSecurity.ToBool();
+            if (ParameterSetName == AddColumnByParametersParameterset)
+            {
+                attributeMetadata = _dynamicContext.CreateAttributeMetadata();
 
-            if (MyInvocation.BoundParameters.ContainsKey(nameof(Required)))
-                attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty((AttributeRequiredLevel)Required);
+                attributeMetadata.LogicalName = Name;
+                attributeMetadata.SchemaName = Name;
+                attributeMetadata.DisplayName = new Label(DisplayName, Session.Current.LanguageId);
+                attributeMetadata.Description = Description == null ? null : new Label(Description, Session.Current.LanguageId);
+                attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty(AttributeRequiredLevel.SystemRequired);
+                attributeMetadata.ExternalName = ExternalName;
+                attributeMetadata.IsGlobalFilterEnabled = new BooleanManagedProperty(Searchable.ToBool());
+                attributeMetadata.IsAuditEnabled = new BooleanManagedProperty(Auditing.ToBool());
+                attributeMetadata.IsSecured = ColumnSecurity.ToBool();
+
+                if (MyInvocation.BoundParameters.ContainsKey(nameof(Required)))
+                    attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty((AttributeRequiredLevel)Required);
+
+                _dynamicContext.ApplyParameters(this, ref attributeMetadata);
+            }
 
             var createRequest = new CreateAttributeRequest()
             {

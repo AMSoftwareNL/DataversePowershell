@@ -7,10 +7,6 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
 {
     public sealed class MultiSelectPicklistColumnParameters : ColumnTypeParametersBase
     {
-        internal MultiSelectPicklistColumnParameters(PSCmdlet cmdletContext) : base(cmdletContext)
-        {
-        }
-
         [Parameter(Mandatory = false)]
         [ValidateNotNullOrEmpty]
         public OptionMetadata[] Options { get; set; }
@@ -19,7 +15,7 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
         [ValidateNotNullOrEmpty]
         public string GlobalOptionsetName { get; set; }
 
-        internal override AttributeMetadata BuildAttributeMetadata()
+        internal override AttributeMetadata CreateAttributeMetadata()
         {
             var result = new MultiSelectPicklistAttributeMetadata()
             {
@@ -30,17 +26,22 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
                 }
             };
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(Options)))
+            return result;
+        }
+
+        internal override void ApplyParameters(PSCmdlet context, ref AttributeMetadata attribute)
+        {
+            var result = attribute as MultiSelectPicklistAttributeMetadata;
+
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(Options)))
                 result.OptionSet.Options.AddRange(Options);
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(GlobalOptionsetName)))
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(GlobalOptionsetName)))
                 result.OptionSet = new OptionSetMetadata
                 {
                     IsGlobal = true,
                     Name = GlobalOptionsetName
                 };
-
-            return result;
         }
     }
 }

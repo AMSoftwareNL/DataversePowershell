@@ -15,7 +15,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         private const string SetObjectParameterSet = "SetObject";
         private const string SetValuesParameterSet = "SetValues";
 
-        [Parameter(Mandatory = true, Position = 1, ParameterSetName = SetObjectParameterSet, ValueFromPipeline = true)]
+        [Parameter(Mandatory = true, ParameterSetName = SetObjectParameterSet, ValueFromPipeline = true)]
         [Alias("Row", "Entity")]
         [ValidateNotNullOrEmpty]
         public Entity InputObject { get; set; }

@@ -5,10 +5,6 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
 {
     public sealed class ImageColumnParameters : ColumnTypeParametersBase
     {
-        internal ImageColumnParameters(PSCmdlet cmdletContext) : base(cmdletContext)
-        {
-        }
-
         [Parameter(Mandatory = false)]
         public SwitchParameter IsPrimaryImage { get; set; }
 
@@ -20,7 +16,7 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
         [Parameter(Mandatory = false)]
         public SwitchParameter CanStoreFullImage { get; set; }
 
-        internal override AttributeMetadata BuildAttributeMetadata()
+        internal override AttributeMetadata CreateAttributeMetadata()
         {
             var result = new ImageAttributeMetadata()
             {
@@ -29,10 +25,15 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
                 MaxSizeInKB = 10240
             };
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(MaxSizeInKB)))
-                result.MaxSizeInKB = MaxSizeInKB;
-
             return result;
+        }
+
+        internal override void ApplyParameters(PSCmdlet context, ref AttributeMetadata attribute)
+        {
+            var result = attribute as ImageAttributeMetadata;
+
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(MaxSizeInKB)))
+                result.MaxSizeInKB = MaxSizeInKB;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
     [Cmdlet(VerbsCommon.Remove, "DataverseTable", ConfirmImpact = ConfirmImpact.High, SupportsShouldProcess = true)]
     public sealed class RemoveTableCommand : RequestCmdletBase
     {
-        [Parameter(Position = 1, Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
         [Alias("LogicalName", "TableName")]
         [ValidateNotNullOrEmpty]
         [ArgumentCompleter(typeof(TableNameArgumentCompleter))]

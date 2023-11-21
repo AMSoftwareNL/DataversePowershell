@@ -6,10 +6,6 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
 {
     public sealed class MoneyColumnParameters : ColumnTypeParametersBase
     {
-        internal MoneyColumnParameters(PSCmdlet cmdletContext) : base(cmdletContext)
-        {
-        }
-
         [Parameter(Mandatory = false)]
         [PSDefaultValue(Value = MoneyAttributeMetadata.MinSupportedValue)]
         [ValidateRange(MoneyAttributeMetadata.MinSupportedValue, MoneyAttributeMetadata.MaxSupportedValue)]
@@ -33,7 +29,7 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
         [PSDefaultValue(Value = ImeMode.Auto)]
         public ImeMode ImeMode { get; set; }
 
-        internal override AttributeMetadata BuildAttributeMetadata()
+        internal override AttributeMetadata CreateAttributeMetadata()
         {
             var result = new MoneyAttributeMetadata()
             {
@@ -44,22 +40,27 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
                 ImeMode = ImeMode.Auto
             };
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(MinValue)))
+            return result;
+        }
+
+        internal override void ApplyParameters(PSCmdlet context, ref AttributeMetadata attribute)
+        {
+            var result = attribute as MoneyAttributeMetadata;
+
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(MinValue)))
                 result.MinValue = MinValue;
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(MaxValue)))
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(MaxValue)))
                 result.MaxValue = MaxValue;
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(Precision)))
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(Precision)))
                 result.Precision = Precision;
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(PrecisionSource)))
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(PrecisionSource)))
                 result.PrecisionSource = (int)PrecisionSource;
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(ImeMode)))
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(ImeMode)))
                 result.ImeMode = ImeMode;
-
-            return result;
         }
     }
 }

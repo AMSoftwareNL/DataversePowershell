@@ -22,8 +22,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
         [ValidateNotNullOrEmpty]
         public string Connectionstring { get; set; }
 
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = InteractiveParameterSet)]
-        [Parameter(Mandatory = true, Position = 0, ParameterSetName = ClientSecretParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = InteractiveParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = ClientSecretParameterSet)]
         public Uri EnvironmentUrl { get; set; }
 
         [Parameter(Mandatory = true, ParameterSetName = InteractiveParameterSet)]

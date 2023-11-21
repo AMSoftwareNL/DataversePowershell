@@ -10,7 +10,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
     [OutputType(typeof(EntityKeyMetadata))]
     public sealed class AddTableKeyCommand : RequestCmdletBase
     {
-        [Parameter(Mandatory = true, Position = 1, ValueFromPipelineByPropertyName = true)]
+        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
         [Alias("EntityLogicalName", "LogicalName")]
         [ValidateNotNullOrEmpty]
         [ArgumentCompleter(typeof(TableNameArgumentCompleter))]

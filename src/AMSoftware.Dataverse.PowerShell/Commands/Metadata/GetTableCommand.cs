@@ -16,17 +16,17 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         private const string GetTableByEtcParameterSet = "GetTableByEtc";
         private const string GetTablesByFilterParameterSet = "GetTablesByFilter";
 
-        [Parameter(Position = 1, Mandatory = true, ParameterSetName = GetTableByIdParameterSet, ValueFromPipeline = true)]
+        [Parameter(Mandatory = true, ParameterSetName = GetTableByIdParameterSet, ValueFromPipeline = true)]
         [Alias("MetadataId")]
         [ValidateNotNull]
         public Guid Id { get; set; }
 
-        [Parameter(Position = 1, Mandatory = true, ParameterSetName = GetTableByEtcParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = GetTableByEtcParameterSet)]
         [Alias("ObjectTypeCode", "EntityTypeCode")]
         [ValidateNotNull]
         public int TypeCode { get; set; }
 
-        [Parameter(Position = 1, ParameterSetName = GetTablesByFilterParameterSet)]
+        [Parameter(ParameterSetName = GetTablesByFilterParameterSet)]
         [Alias("Include", "LogicalName")]
         [ValidateNotNullOrEmpty]
         [SupportsWildcards]

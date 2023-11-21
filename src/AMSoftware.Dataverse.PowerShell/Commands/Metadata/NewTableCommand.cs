@@ -16,12 +16,12 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         private const string NewElasticTableParameterSet = "NewElasticTable";
         private const string NewVirtualTableParameterSet = "NewVirtualTable";
 
-        [Parameter(Mandatory = true, Position = 1, ParameterSetName = NewTableObjectParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = NewTableObjectParameterSet)]
         [Alias("Entity")]
         [ValidateNotNullOrEmpty]
         public EntityMetadata TableInputObject { get; set; }
 
-        [Parameter(Mandatory = true, Position = 2, ParameterSetName = NewTableObjectParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = NewTableObjectParameterSet)]
         [Alias("Attribute", "PrimaryAttribute")]
         [ValidateNotNullOrEmpty]
         public StringAttributeMetadata ColumnInputObject { get; set; }

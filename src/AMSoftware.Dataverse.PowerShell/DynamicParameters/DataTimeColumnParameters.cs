@@ -6,10 +6,6 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
 {
     public sealed class DateTimeColumnParameters : ColumnTypeParametersBase
     {
-        internal DateTimeColumnParameters(PSCmdlet cmdletContext) : base(cmdletContext)
-        {
-        }
-
         [Parameter(Mandatory = false)]
         [PSDefaultValue(Value = DateTimeFormat.DateAndTime)]
         public DateTimeFormat Format { get; set; }
@@ -22,7 +18,7 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
         [PSDefaultValue(Value = ImeMode.Auto)]
         public ImeMode ImeMode { get; set; }
 
-        internal override AttributeMetadata BuildAttributeMetadata()
+        internal override AttributeMetadata CreateAttributeMetadata()
         {
             var result = new DateTimeAttributeMetadata()
             {
@@ -31,16 +27,21 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
                 ImeMode = ImeMode.Auto
             };
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(Format)))
+            return result;
+        }
+
+        internal override void ApplyParameters(PSCmdlet context, ref AttributeMetadata attribute)
+        {
+            var result = attribute as DateTimeAttributeMetadata;
+
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(Format)))
                 result.Format = Format;
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(ImeMode)))
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(ImeMode)))
                 result.ImeMode = ImeMode;
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(DateTimeBehavior)))
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(DateTimeBehavior)))
                 result.DateTimeBehavior = DateTimeBehavior;
-
-            return result;
         }
     }
 }

@@ -5,10 +5,6 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
 {
     public sealed class CustomerColumnParameters : ColumnTypeParametersBase
     {
-        internal CustomerColumnParameters(PSCmdlet cmdletContext) : base(cmdletContext)
-        {
-        }
-
         [Parameter(Mandatory = true)]
         [ValidateNotNullOrEmpty]
         public string AccountRelationshipName { get; set; }
@@ -17,7 +13,7 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
         [ValidateNotNullOrEmpty]
         public string ContactRelationshipName { get; set; }
 
-        internal override AttributeMetadata BuildAttributeMetadata()
+        internal override AttributeMetadata CreateAttributeMetadata()
         {
             //TODO: Lookup is attribute with relationship(s). Not going to work like this.
 
@@ -26,6 +22,10 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
             };
 
             return result;
+        }
+
+        internal override void ApplyParameters(PSCmdlet context, ref AttributeMetadata attribute)
+        {
         }
     }
 }

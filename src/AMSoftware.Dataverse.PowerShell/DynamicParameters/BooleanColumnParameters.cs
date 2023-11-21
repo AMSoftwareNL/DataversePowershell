@@ -6,10 +6,6 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
 {
     public sealed class BooleanColumnParameters : ColumnTypeParametersBase
     {
-        internal BooleanColumnParameters(PSCmdlet cmdletContext) : base(cmdletContext)
-        {
-        }
-
         [Parameter(Mandatory = false)]
         [PSDefaultValue(Value = false)]
         public bool DefaultValue { get; set; }
@@ -22,27 +18,31 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
         [ValidateNotNullOrEmpty]
         public OptionMetadata TrueOption { get; set; }
 
-        internal override AttributeMetadata BuildAttributeMetadata()
+        internal override AttributeMetadata CreateAttributeMetadata()
         {
             var result = new BooleanAttributeMetadata()
             {
-               DefaultValue = false,
-               OptionSet = new BooleanOptionSetMetadata(
+                DefaultValue = false,
+                OptionSet = new BooleanOptionSetMetadata(
                    new OptionMetadata(new Label("Yes", Session.Current.LanguageId), 1),
                    new OptionMetadata(new Label("No", Session.Current.LanguageId), 0))
             };
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(DefaultValue)))
+            return result;
+        }
+
+        internal override void ApplyParameters(PSCmdlet context, ref AttributeMetadata attribute)
+        {
+            BooleanAttributeMetadata result = attribute as BooleanAttributeMetadata;
+
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(DefaultValue)))
                 result.DefaultValue = DefaultValue;
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(FalseOption)))
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(FalseOption)))
                 result.OptionSet.FalseOption = FalseOption;
-                
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(TrueOption)))
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(TrueOption)))
                 result.OptionSet.TrueOption = TrueOption;
-
-            return result;
         }
     }
 }

@@ -7,10 +7,6 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
 {
     public sealed class PicklistColumnParameters : ColumnTypeParametersBase
     {
-        internal PicklistColumnParameters(PSCmdlet cmdletContext) : base(cmdletContext)
-        {
-        }
-
         [Parameter(Mandatory = false)]
         public int DefaultValue { get; set; }
         
@@ -22,8 +18,7 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
         [ValidateNotNullOrEmpty]
         public string GlobalOptionsetName { get; set; }
 
-
-        internal override AttributeMetadata BuildAttributeMetadata()
+        internal override AttributeMetadata CreateAttributeMetadata()
         {
             var result = new PicklistAttributeMetadata()
             {
@@ -34,20 +29,25 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
                 }
             };
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(DefaultValue)))
+            return result;
+        }
+
+        internal override void ApplyParameters(PSCmdlet context, ref AttributeMetadata attribute)
+        {
+            var result = attribute as PicklistAttributeMetadata;
+
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(DefaultValue)))
                 result.DefaultFormValue = DefaultValue;
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(Options)))
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(Options)))
                 result.OptionSet.Options.AddRange(Options);
 
-            if (_cmdletContext.MyInvocation.BoundParameters.ContainsKey(nameof(GlobalOptionsetName)))
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(GlobalOptionsetName)))
                 result.OptionSet = new OptionSetMetadata
                 {
                     IsGlobal = true,
                     Name = GlobalOptionsetName
                 };
-
-            return result;
         }
     }
 }
