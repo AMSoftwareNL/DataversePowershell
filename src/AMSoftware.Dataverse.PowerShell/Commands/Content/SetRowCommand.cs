@@ -34,15 +34,24 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [ValidateNotNullOrEmpty]
         public Hashtable Values { get; set; }
 
+        [Parameter(Mandatory = false)]
+        [ValidateNotNullOrEmpty]
+        [PSDefaultValue(Value = ConcurrencyBehavior.Default)]
+        public ConcurrencyBehavior Behavior { get; set; }
+
         protected override void Execute()
         {
             Entity newEntity = InputObject;
             if (ParameterSetName == SetValuesParameterSet) newEntity = BuildEntityFromValues();
 
-            OrganizationRequest request = new UpdateRequest()
+            var request = new UpdateRequest()
             {
                 Target = newEntity
             };
+            if (MyInvocation.BoundParameters.ContainsKey(nameof(Behavior)))
+            {
+                request.ConcurrencyBehavior = Behavior;
+            }
 
             if (UseBatch)
             {
