@@ -142,13 +142,4 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             }
         }
     }
-
-    public enum TableType
-    {
-        Standard,
-        Activity,
-        Virtual,
-        Datasource,
-        Elastic,
-    }
 }

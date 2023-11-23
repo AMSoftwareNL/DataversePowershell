@@ -7,6 +7,15 @@ using System.Threading.Tasks;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands
 {
+    public enum TableType
+    {
+        Standard,
+        Activity,
+        Virtual,
+        Datasource,
+        Elastic,
+    }
+
     public enum TableOwnershipType
     {
         User = 0x1,

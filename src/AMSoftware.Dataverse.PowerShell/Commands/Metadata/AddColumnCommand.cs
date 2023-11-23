@@ -81,7 +81,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 attributeMetadata.Description = Description == null ? null : new Label(Description, Session.Current.LanguageId);
                 attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty(AttributeRequiredLevel.SystemRequired);
                 attributeMetadata.ExternalName = ExternalName;
-                attributeMetadata.IsGlobalFilterEnabled = new BooleanManagedProperty(Searchable.ToBool());
+                attributeMetadata.IsValidForAdvancedFind = new BooleanManagedProperty(Searchable.ToBool());
                 attributeMetadata.IsAuditEnabled = new BooleanManagedProperty(Auditing.ToBool());
                 attributeMetadata.IsSecured = ColumnSecurity.ToBool();
 

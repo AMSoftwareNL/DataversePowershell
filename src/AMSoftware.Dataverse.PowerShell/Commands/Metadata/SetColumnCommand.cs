@@ -81,7 +81,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                     attributeMetadata.ExternalName = ExternalName;
 
                 if (MyInvocation.BoundParameters.ContainsKey(nameof(Searchable)))
-                    attributeMetadata.IsGlobalFilterEnabled = new BooleanManagedProperty(Searchable.ToBool());
+                    attributeMetadata.IsValidForAdvancedFind = new BooleanManagedProperty(Searchable.ToBool());
 
                 if (MyInvocation.BoundParameters.ContainsKey(nameof(Auditing)))
                     attributeMetadata.IsAuditEnabled = new BooleanManagedProperty(Auditing.ToBool());

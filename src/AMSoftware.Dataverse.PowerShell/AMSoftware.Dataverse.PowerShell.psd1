@@ -2,6 +2,7 @@
 
 @{
     # Script module or binary module file associated with this manifest.
+    # NOTE: Using NestedModules instead of RootModule. This creates a "manifest module" containing Binary and PSM1 modules.
     RootModule = ''
 
     # Version number of this module.
@@ -31,8 +32,8 @@
     # Assemblies that must be loaded prior to importing this module
     RequiredAssemblies = @(
         'AMSoftware.Dataverse.PowerShell.dll',
-        'Microsoft.Xrm.Sdk.dll',
         'Microsoft.PowerPlatform.Dataverse.Client.dll',
+        'Microsoft.Xrm.Sdk.dll',
         'Microsoft.Crm.Sdk.Proxy.dll')
 
     # Script files (.ps1) that are run in the caller's environment prior to importing this module.
@@ -74,7 +75,9 @@
         'Remove-DataverseTableKey',
         'Add-DataverseColumn',
         'Get-DataverseColumn',
-        'Remove-DataverseColumn')
+        'Remove-DataverseColumn',
+        'Get-DataverseRelationship',
+        'Remove-DataverseRelationship')
 
     # Variables to export from this module
     VariablesToExport = @('DataverseSession','DataverseClient')
@@ -92,8 +95,8 @@
         'AMSoftware.Dataverse.PowerShell.psm1',
         'AMSoftware.Dataverse.PowerShell.Types.ps1xml',
         'AMSoftware.Dataverse.PowerShell.Formats.ps1xml',
-        'Microsoft.Xrm.Sdk.dll',
         'Microsoft.PowerPlatform.Dataverse.Client.dll',
+        'Microsoft.Xrm.Sdk.dll',
         'Microsoft.Crm.Sdk.Proxy.dll')
 
     # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
