@@ -66,8 +66,8 @@
         'Add-DataverseRelatedRow',
         'Remove-DataverseRelatedRow',
         'Send-DataverseRequest',
+        'Add-DataverseTable',   
         'Get-DataverseTable',
-        'New-DataverseTable',   
         'Remove-DataverseTable',
         'Set-DataverseTable',
         'Add-DataverseTableKey',
@@ -76,8 +76,14 @@
         'Add-DataverseColumn',
         'Get-DataverseColumn',
         'Remove-DataverseColumn',
+        'Set-DataverseColumn',
+        'Add-DataverseRelationship',
         'Get-DataverseRelationship',
-        'Remove-DataverseRelationship')
+        'Remove-DataverseRelationship',
+        'Add-DataverseChoice',
+        'Get-DataverseChoice',
+        'Remove-DataverseChoice',
+        'Set-DataverseChoice')
 
     # Variables to export from this module
     VariablesToExport = @('DataverseSession','DataverseClient')

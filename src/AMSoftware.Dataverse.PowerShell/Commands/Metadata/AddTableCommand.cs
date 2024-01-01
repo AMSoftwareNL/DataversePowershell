@@ -6,139 +6,139 @@ using System.Management.Automation;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 {
-    [Cmdlet(VerbsCommon.New, "DataverseTable", DefaultParameterSetName = NewTableObjectParameterSet)]
+    [Cmdlet(VerbsCommon.Add, "DataverseTable", DefaultParameterSetName = AddTableObjectParameterSet)]
     [OutputType(typeof(EntityMetadata))]
-    public sealed class NewTableCommand : RequestCmdletBase
+    public sealed class AddTableCommand : RequestCmdletBase
     {
-        private const string NewTableObjectParameterSet = "NewTableObject";
-        private const string NewStandardTableParameterSet = "NewStandardTable";
-        private const string NewActivityTableParameterSet = "NewActivityTable";
-        private const string NewElasticTableParameterSet = "NewElasticTable";
-        private const string NewVirtualTableParameterSet = "NewVirtualTable";
+        private const string AddTableObjectParameterSet = "AddTableObject";
+        private const string AddStandardTableParameterSet = "AddStandardTable";
+        private const string AddActivityTableParameterSet = "AddActivityTable";
+        private const string AddElasticTableParameterSet = "AddElasticTable";
+        private const string AddVirtualTableParameterSet = "AddVirtualTable";
 
-        [Parameter(Mandatory = true, ParameterSetName = NewTableObjectParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddTableObjectParameterSet)]
         [Alias("Entity")]
         [ValidateNotNullOrEmpty]
         public EntityMetadata TableInputObject { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = NewTableObjectParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddTableObjectParameterSet)]
         [Alias("Attribute", "PrimaryAttribute")]
         [ValidateNotNullOrEmpty]
         public StringAttributeMetadata ColumnInputObject { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = NewElasticTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddElasticTableParameterSet)]
         public SwitchParameter Elastic { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddVirtualTableParameterSet)]
         public SwitchParameter Virtual { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = NewActivityTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddActivityTableParameterSet)]
         public SwitchParameter Activity { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = NewStandardTableParameterSet)]
-        [Parameter(Mandatory = true, ParameterSetName = NewActivityTableParameterSet)]
-        [Parameter(Mandatory = true, ParameterSetName = NewElasticTableParameterSet)]
-        [Parameter(Mandatory = true, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddStandardTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddActivityTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddElasticTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddVirtualTableParameterSet)]
         [Alias("SchemaName", "LogicalName")]
         [ValidateNotNullOrEmpty]
         public string Name { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = NewStandardTableParameterSet)]
-        [Parameter(Mandatory = true, ParameterSetName = NewActivityTableParameterSet)]
-        [Parameter(Mandatory = true, ParameterSetName = NewElasticTableParameterSet)]
-        [Parameter(Mandatory = true, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddStandardTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddActivityTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddElasticTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddVirtualTableParameterSet)]
         [ValidateNotNullOrEmpty]
         public string DisplayName { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = NewStandardTableParameterSet)]
-        [Parameter(Mandatory = true, ParameterSetName = NewActivityTableParameterSet)]
-        [Parameter(Mandatory = true, ParameterSetName = NewElasticTableParameterSet)]
-        [Parameter(Mandatory = true, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddStandardTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddActivityTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddElasticTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddVirtualTableParameterSet)]
         [ValidateNotNullOrEmpty]
         public string PluralName { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = NewStandardTableParameterSet)]
-        [Parameter(Mandatory = false, ParameterSetName = NewActivityTableParameterSet)]
-        [Parameter(Mandatory = false, ParameterSetName = NewElasticTableParameterSet)]
-        [Parameter(Mandatory = false, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddStandardTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddActivityTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddElasticTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddVirtualTableParameterSet)]
         [ValidateNotNullOrEmpty]
         public string Description { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = NewStandardTableParameterSet)]
-        [Parameter(Mandatory = false, ParameterSetName = NewElasticTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddStandardTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddElasticTableParameterSet)]
         [PSDefaultValue(Value = TableOwnershipType.User)]
         public TableOwnershipType OwnershipType { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = NewStandardTableParameterSet)]
-        [Parameter(Mandatory = false, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddStandardTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddVirtualTableParameterSet)]
         public SwitchParameter HasAttachments { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = NewStandardTableParameterSet)]
-        [Parameter(Mandatory = false, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddStandardTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddVirtualTableParameterSet)]
         public SwitchParameter IsActivityParty { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = NewStandardTableParameterSet)]
-        [Parameter(Mandatory = false, ParameterSetName = NewActivityTableParameterSet)]
-        [Parameter(Mandatory = false, ParameterSetName = NewElasticTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddStandardTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddActivityTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddElasticTableParameterSet)]
         public SwitchParameter TrackChanges { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = NewStandardTableParameterSet)]
-        [Parameter(Mandatory = true, ParameterSetName = NewElasticTableParameterSet)]
-        [Parameter(Mandatory = true, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddStandardTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddElasticTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddVirtualTableParameterSet)]
         [Alias("PrimaryAttributeDisplayName")]
         [ValidateNotNullOrEmpty]
         public string ColumnDisplayName { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = NewStandardTableParameterSet)]
-        [Parameter(Mandatory = false, ParameterSetName = NewElasticTableParameterSet)]
-        [Parameter(Mandatory = false, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddStandardTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddElasticTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddVirtualTableParameterSet)]
         [Alias("PrimaryAttributeDescription")]
         [ValidateNotNullOrEmpty]
         public string ColumnDescription { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = NewStandardTableParameterSet)]
-        [Parameter(Mandatory = true, ParameterSetName = NewElasticTableParameterSet)]
-        [Parameter(Mandatory = true, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddStandardTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddElasticTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddVirtualTableParameterSet)]
         [Alias("PrimaryAttributeSchemaName", "PrimaryAttributeLogicalName")]
         [ValidateNotNullOrEmpty]
         public string ColumnName { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = NewStandardTableParameterSet)]
-        [Parameter(Mandatory = false, ParameterSetName = NewElasticTableParameterSet)]
-        [Parameter(Mandatory = false, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddStandardTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddElasticTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddVirtualTableParameterSet)]
         [PSDefaultValue(Value = 100)]
         [Alias("PrimaryAttributeLength")]
         [ValidateRange(1, 4000)]
         public uint ColumnLength { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = NewStandardTableParameterSet)]
-        [Parameter(Mandatory = false, ParameterSetName = NewElasticTableParameterSet)]
-        [Parameter(Mandatory = false, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddStandardTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddElasticTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddVirtualTableParameterSet)]
         [PSDefaultValue(Value = ColumnRequiredLevel.Required)]
         [Alias("PrimaryAttributeRequirement")]
         public ColumnRequiredLevel ColumnRequired { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = NewActivityTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddActivityTableParameterSet)]
         public SwitchParameter HideFromMenu { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddVirtualTableParameterSet)]
         [ValidateNotNullOrEmpty]
         public string ExternalName { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddVirtualTableParameterSet)]
         [ValidateNotNullOrEmpty]
         public string ExternalPluralName { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddVirtualTableParameterSet)]
         [Alias("PrimaryAttributeExternalName")]
         [ValidateNotNullOrEmpty]
         public string ColumnExternalName { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddVirtualTableParameterSet)]
         [ValidateNotNullOrEmpty]
         public Guid DataProviderId { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = NewVirtualTableParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddVirtualTableParameterSet)]
         [ValidateNotNullOrEmpty]
         public Guid DataSourceId { get; set; }
 
@@ -149,19 +149,19 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 
             switch (ParameterSetName)
             {
-                case NewStandardTableParameterSet:
+                case AddStandardTableParameterSet:
                     BuildStandardEntityMetadata(out entityMetadata, out attributeMetadata);
                     break;
-                case NewElasticTableParameterSet:
+                case AddElasticTableParameterSet:
                     BuildElasticEntityMetadata(out entityMetadata, out attributeMetadata);
                     break;
-                case NewVirtualTableParameterSet:
+                case AddVirtualTableParameterSet:
                     BuildVirtualEntityMetadata(out entityMetadata, out attributeMetadata);
                     break;
-                case NewActivityTableParameterSet:
+                case AddActivityTableParameterSet:
                     BuildActivityEntityMetadata(out entityMetadata, out attributeMetadata);
                     break;
-                case NewTableObjectParameterSet:
+                case AddTableObjectParameterSet:
                     entityMetadata = TableInputObject;
                     attributeMetadata = ColumnInputObject;
                     break;
