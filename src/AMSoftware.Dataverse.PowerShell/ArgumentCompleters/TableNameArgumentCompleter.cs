@@ -1,13 +1,11 @@
-﻿using Microsoft.Xrm.Sdk.Metadata;
+﻿using Microsoft.PowerPlatform.Dataverse.Client.Extensions;
+using Microsoft.Xrm.Sdk.Metadata;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Management.Automation.Language;
 using System.Management.Automation;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.PowerPlatform.Dataverse.Client.Extensions;
+using System.Management.Automation.Language;
 
 namespace AMSoftware.Dataverse.PowerShell.ArgumentCompleters
 {
