@@ -30,7 +30,7 @@
     PowerShellVersion = '5.1'
 
     # Assemblies that must be loaded prior to importing this module
-    RequiredAssemblies = @(
+     RequiredAssemblies = @(
         'AMSoftware.Dataverse.PowerShell.dll',
         'Microsoft.PowerPlatform.Dataverse.Client.dll',
         'Microsoft.Xrm.Sdk.dll',

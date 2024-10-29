@@ -24,7 +24,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
             {
                 var request = new UpsertRequest()
                 {
-                    Target = new Microsoft.Xrm.Sdk.Entity("usersettings", Session.Current.UserId)
+                    Target = new Entity("usersettings", Session.Current.UserId)
                     {
                         Attributes = {
                             {  "languageid", Language }

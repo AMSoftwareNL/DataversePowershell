@@ -1,0 +1,16 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "PowerShell: Binary Module Interactive",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "Import-Module -Force .\\src\\AMSoftware.Dataverse.PowerShell\\bin\\Debug\\AMSoftware.Dataverse.PowerShell.psd1",
+            "createTemporaryIntegratedConsole": true,
+            "attachDotnetDebugger": true
+        }
+    ]
+}
