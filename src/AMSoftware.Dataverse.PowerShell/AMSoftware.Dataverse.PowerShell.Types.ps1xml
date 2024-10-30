@@ -1,31 +1,62 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Types>
-  <!-- Microsoft.Xrm.Sdk.Entity -->
-  <Type>
-    <Name>Microsoft.Xrm.Sdk.Entity</Name>
-    <TypeAdapter>
-      <TypeName>AMSoftware.Dataverse.PowerShell.PropertyAdapters.TableRowPropertyAdapter</TypeName>
-    </TypeAdapter>
-  </Type>
-  <!-- Microsoft.Xrm.Sdk.Metadata.EntityMetadata -->
-  <Type>
-    <Name>Microsoft.Xrm.Sdk.Metadata.EntityMetadata</Name>
-    <TypeAdapter>
-      <TypeName>AMSoftware.Dataverse.PowerShell.PropertyAdapters.MetadataBasePropertyAdapter</TypeName>
-    </TypeAdapter>
-  </Type>
-  <!-- Microsoft.Xrm.Sdk.Metadata.EntityKeyMetadata -->
-  <Type>
-    <Name>Microsoft.Xrm.Sdk.Metadata.EntityKeyMetadata</Name>
-    <TypeAdapter>
-      <TypeName>AMSoftware.Dataverse.PowerShell.PropertyAdapters.MetadataBasePropertyAdapter</TypeName>
-    </TypeAdapter>
-  </Type>
-  <!-- Microsoft.Xrm.Sdk.OrganizationResponse -->
-  <Type>
-    <Name>Microsoft.Xrm.Sdk.OrganizationResponse</Name>
-    <TypeAdapter>
-      <TypeName>AMSoftware.Dataverse.PowerShell.PropertyAdapters.OrganizationResponsePropertyAdapter</TypeName>
-    </TypeAdapter>
-  </Type>
+	<!-- Microsoft.Xrm.Sdk.Entity -->
+	<Type>
+		<Name>Microsoft.Xrm.Sdk.Entity</Name>
+		<TypeAdapter>
+			<TypeName>AMSoftware.Dataverse.PowerShell.PropertyAdapters.TableRowPropertyAdapter</TypeName>
+		</TypeAdapter>
+		<TypeConverter>
+			<TypeName>AMSoftware.Dataverse.PowerShell.Converters.EntityConverter</TypeName>
+		</TypeConverter>
+	</Type>
+	<!-- Microsoft.Xrm.Sdk.EntityReference -->
+	<Type>
+		<Name>Microsoft.Xrm.Sdk.EntityReference</Name>
+		<TypeConverter>
+			<TypeName>AMSoftware.Dataverse.PowerShell.Converters.EntityConverter</TypeName>
+		</TypeConverter>
+	</Type>
+	<!-- Microsoft.Xrm.Sdk.Metadata.EntityMetadata -->
+	<Type>
+		<Name>Microsoft.Xrm.Sdk.Metadata.EntityMetadata</Name>
+		<TypeAdapter>
+			<TypeName>AMSoftware.Dataverse.PowerShell.PropertyAdapters.MetadataBasePropertyAdapter</TypeName>
+		</TypeAdapter>
+	</Type>
+	<!-- Microsoft.Xrm.Sdk.Metadata.EntityKeyMetadata -->
+	<Type>
+		<Name>Microsoft.Xrm.Sdk.Metadata.EntityKeyMetadata</Name>
+		<TypeAdapter>
+			<TypeName>AMSoftware.Dataverse.PowerShell.PropertyAdapters.MetadataBasePropertyAdapter</TypeName>
+		</TypeAdapter>
+	</Type>
+	<!-- Microsoft.Xrm.Sdk.OrganizationResponse -->
+	<Type>
+		<Name>Microsoft.Xrm.Sdk.OrganizationResponse</Name>
+		<TypeAdapter>
+			<TypeName>AMSoftware.Dataverse.PowerShell.PropertyAdapters.OrganizationResponsePropertyAdapter</TypeName>
+		</TypeAdapter>
+	</Type>
+	<!-- Microsoft.Xrm.Sdk.Money -->
+	<Type>
+		<Name>Microsoft.Xrm.Sdk.Money</Name>
+		<TypeConverter>
+			<TypeName>AMSoftware.Dataverse.PowerShell.Converters.MoneyConverter</TypeName>
+		</TypeConverter>
+	</Type>
+	<!-- Microsoft.Xrm.Sdk.OptionSetValue -->
+	<Type>
+		<Name>Microsoft.Xrm.Sdk.OptionSetValue</Name>
+		<TypeConverter>
+			<TypeName>AMSoftware.Dataverse.PowerShell.Converters.OptionSetValueConverter</TypeName>
+		</TypeConverter>
+	</Type>
+	<!-- Microsoft.Xrm.Sdk.Label -->
+	<Type>
+		<Name>Microsoft.Xrm.Sdk.Label</Name>
+		<TypeConverter>
+			<TypeName>AMSoftware.Dataverse.PowerShell.Converters.LabelConverter</TypeName>
+		</TypeConverter>
+	</Type>
 </Types>
