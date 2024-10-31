@@ -1,4 +1,5 @@
 # AMSoftware.Dataverse.PowerShell
+
 PowerShell Module for Power Platform Dataverse
 
 > **NOTE**
@@ -9,7 +10,7 @@ PowerShell Module for Power Platform Dataverse
 
 Complete rebuild of my previous PowerShell Module for CRM ([AMSoftware.Crm.PowerShell](https://github.com/AMSoftwareNL/crmpowershell)). Trying to take into account all my leassons learned.
 
- ## The main goals for this version
+## The main goals for this version
 
 * Compatible with Microsoft PowerShell (instead of Windows PowerShell) through the [Microsoft Power Platform Dataverse Client](https://github.com/microsoft/PowerPlatform-DataverseServiceClient)
 * Improved performance and stability
@@ -20,22 +21,17 @@ Complete rebuild of my previous PowerShell Module for CRM ([AMSoftware.Crm.Power
 * Authentication for terminal-only systems
 * Less complex PowerShell code and constructs
 
- ## Priorities / Deliverables
+## Priorities / Deliverables
 
  1. :white_check_mark: Authentication and basic session
- 2. :construction: Framework for handling SDK objects in PowerShell
+ 2. :white_check_mark: Framework for handling SDK objects in PowerShell
  3. :white_check_mark: Content/Row Commands (Get, Set, Add, Remove, ...)
  4. :white_check_mark: Table Metadata Commands
- 5. :bookmark: Column Metadata Commands
- 6. :bookmark: OptionSet Metadata Commands
+ 5. :white_check_mark: Column Metadata Commands
+ 6. :white_check_mark: OptionSet Metadata Commands
  7. :bookmark: Relationship Metadata Commands
- 8. :bookmark: Solution Component Commands and support
- 9. :bookmark: Custom Development Commands (Plugins, etc.)
- 10. :bookmark: Administration and Security Commands (Users, Teams, Roles, Privileges)
- 11. :bulb: ... :bulb:
+ 8. :bulb: ... :bulb:
 
 This is a "free time when I want to project", so it will take some time. 
 The goal is to have a first stable working version at years end. 
 When to framework for PowerShell (Types, Adapters, Converters, etc.) is done, it should be fairly quick and easy to add the different sets of Commands.
-
-
