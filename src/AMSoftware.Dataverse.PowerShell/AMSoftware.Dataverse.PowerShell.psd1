@@ -21,7 +21,7 @@
     CompanyName = 'AMSoftware'
 
     # Copyright statement for this module
-    Copyright = '(c) AMSoftware. All rights reserved.'
+    Copyright = 'Copyright(C) 2024 AMSoftwareNL. All rights reserved.'
 
     # Description of the functionality provided by this module
     Description = 'PowerShell Module for Power Platform Dataverse'
