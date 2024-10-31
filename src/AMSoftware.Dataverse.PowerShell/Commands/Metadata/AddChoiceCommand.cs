@@ -36,7 +36,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [Parameter(Mandatory = true, ParameterSetName = AddNewChoiceParameterSet, ValueFromRemainingArguments = true)]
         [ValidateNotNull]
         [ValidateCount(1, int.MaxValue)]
-        public OptionMetadata[] Values { get; set; }
+        public OptionMetadata[] Options { get; set; }
 
         protected override void Execute()
         {
@@ -79,7 +79,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 Description = Description == null ? null : new Label(Description, Session.Current.LanguageId),
                 ExternalTypeName = ExternalName
             };
-            choiceMetadata.Options.AddRange(Values);
+            choiceMetadata.Options.AddRange(Options);
 
             return choiceMetadata;
         }
