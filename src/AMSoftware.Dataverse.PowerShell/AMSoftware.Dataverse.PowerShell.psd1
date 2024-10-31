@@ -83,7 +83,9 @@
         'Add-DataverseChoice',
         'Get-DataverseChoice',
         'Remove-DataverseChoice',
-        'Set-DataverseChoice')
+        'Set-DataverseChoice',
+        'Set-DataverseChoiceOption',
+        'Remove-DataverseChoiceOption')
 
     # Variables to export from this module
     VariablesToExport = @('DataverseSession','DataverseClient')
