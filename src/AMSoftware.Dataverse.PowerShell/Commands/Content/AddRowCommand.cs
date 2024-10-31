@@ -1,6 +1,4 @@
 ﻿using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
-using AMSoftware.Dataverse.PowerShell.DynamicParameters;
-using Microsoft.PowerPlatform.Dataverse.Client;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
@@ -89,7 +87,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         private OrganizationRequest BuildRequest(Entity source)
         {
             OrganizationRequest request;
-            if (source.KeyAttributes != null && source.KeyAttributes.Count != 0 || source.Id != Guid.Empty)
+            if ((source.KeyAttributes != null && source.KeyAttributes.Count != 0) || source.Id != Guid.Empty)
             {
                 WriteVerboseWithTimestamp("Using Upsert Request");
                 request = new UpsertRequest()

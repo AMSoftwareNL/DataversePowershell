@@ -1,5 +1,4 @@
 ﻿using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
-using AMSoftware.Dataverse.PowerShell.DynamicParameters;
 using Microsoft.PowerPlatform.Dataverse.Client;
 using Microsoft.PowerPlatform.Dataverse.Client.Extensions;
 using Microsoft.Xrm.Sdk;
@@ -145,15 +144,13 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
                 WriteVerboseWithTimestamp("Add BatchItem: {0} ({1})", Table, Id[i]);
 
-                var request = new RetrieveRequest()
-                {
-                    ColumnSet = _columnSet,
-                    Target = new EntityReference(Table, Id[i])
-                };
-
                 batch.BatchItems.Add(new BatchItemOrganizationRequest()
                 {
-                    Request = request
+                    Request = new RetrieveRequest()
+                    {
+                        ColumnSet = _columnSet,
+                        Target = new EntityReference(Table, Id[i])
+                    }
                 });
                 pageCount++;
 

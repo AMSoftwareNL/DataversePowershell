@@ -19,24 +19,50 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [ValidateNotNullOrEmpty]
         public Entity[] InputObject { get; set; }
 
+        [Parameter(Mandatory = false)]
+        public SwitchParameter Upsert { get; set; }
+
         protected override void Execute()
         {
-            var request = new CreateMultipleRequest()
+            if (Upsert.ToBool())
             {
-                Targets = new EntityCollection(InputObject.ToList())
-            };
-
-            if (UseBatch)
-            {
-                AddOrganizationRequestToBatch(request);
-            }
-            else
-            {
-                var response = ExecuteOrganizationRequest<CreateMultipleResponse>(request);
-
-                for (int i = 0; i < response.Ids.Length; i++)
+                var request = new UpsertMultipleRequest()
                 {
-                    WriteObject(new EntityReference(InputObject[i].LogicalName, response.Ids[i]));
+                    Targets = new EntityCollection(InputObject.ToList())
+                };
+
+                if (UseBatch)
+                {
+                    AddOrganizationRequestToBatch(request);
+                }
+                else
+                {
+                    var response = ExecuteOrganizationRequest<UpsertMultipleResponse>(request);
+
+                    for (int i = 0; i < response.Results.Length; i++)
+                    {
+                        WriteObject(response.Results[i].Target);
+                    }
+                }
+            } else
+            {
+                var request = new CreateMultipleRequest()
+                {
+                    Targets = new EntityCollection(InputObject.ToList())
+                };
+
+                if (UseBatch)
+                {
+                    AddOrganizationRequestToBatch(request);
+                }
+                else
+                {
+                    var response = ExecuteOrganizationRequest<CreateMultipleResponse>(request);
+
+                    for (int i = 0; i < response.Ids.Length; i++)
+                    {
+                        WriteObject(new EntityReference(InputObject[i].LogicalName, response.Ids[i]));
+                    }
                 }
             }
         }

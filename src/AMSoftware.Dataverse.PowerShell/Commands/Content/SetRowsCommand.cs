@@ -40,11 +40,11 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             }
             else
             {
-                var response = ExecuteOrganizationRequest<CreateMultipleResponse>(request);
+                var response = ExecuteOrganizationRequest<UpdateMultipleResponse>(request);
 
-                for (int i = 0; i < response.Ids.Length; i++)
+                for (int i = 0; i < InputObject.Length; i++)
                 {
-                    WriteObject(new EntityReference(InputObject[i].LogicalName, response.Ids[i]));
+                    WriteObject(InputObject[i].ToEntityReference());
                 }
             }
         }
