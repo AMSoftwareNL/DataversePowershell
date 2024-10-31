@@ -56,6 +56,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [Parameter(Mandatory = false, ParameterSetName = AddColumnByParametersParameterset)]
         public SwitchParameter ColumnSecurity { get; set; }
 
+        [Parameter(Mandatory = false, ParameterSetName = AddColumnByParametersParameterset)]
+        public ColumnSourceType Source { get; set; }
+
         private ColumnTypeParametersBase _dynamicContext = null;
         public object GetDynamicParameters()
         {
@@ -87,6 +90,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 
                 if (MyInvocation.BoundParameters.ContainsKey(nameof(Required)))
                     attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty((AttributeRequiredLevel)Required);
+
+                if (MyInvocation.BoundParameters.ContainsKey(nameof(Source)))
+                    attributeMetadata.SourceType = (int)Source;
 
                 _dynamicContext.ApplyParameters(this, ref attributeMetadata);
             }

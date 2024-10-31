@@ -57,6 +57,13 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
         File
     }
 
+    public enum ColumnSourceType
+    {
+        Calculated = 1,
+        Rollup = 2,
+        Formula = 3
+    }
+
     public enum CurrencyPrecisionSource : int
     {
         PrecisionProperty = 0,
