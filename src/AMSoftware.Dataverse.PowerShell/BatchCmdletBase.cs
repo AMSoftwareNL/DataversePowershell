@@ -45,9 +45,16 @@ namespace AMSoftware.Dataverse.PowerShell
 
             if (UseBatch)
             {
-                // TODO: Use own implementation to support transactions
-                // TODO: Use own implementation to support batches with 1000+ requests (auto paging/chunking)
                 Batch = Session.Current.Client.GetBatchById(BatchId);
+
+                if (Batch == null)
+                {
+                    WriteError(new ErrorRecord(
+                        new ArgumentException($"No active Batch with id '{BatchId}'."),
+                        ErrorCode.InvalidBatchId,
+                        ErrorCategory.InvalidArgument,
+                        BatchId));
+                }
             }
         }
 

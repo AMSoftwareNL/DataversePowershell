@@ -28,5 +28,8 @@ namespace AMSoftware.Dataverse.PowerShell
         public const string BatchOperationResponseItemFaulted = "DVPS0001";
         public const string LanguageNotInstalled = "DVPS0002";
         public const string UnknownUnmanagedSolution = "DVPS0003";
+        public const string InvalidBatchId = "DVPS0004";
+        public const string FaultedBatchExecution = "DVPS0005";
+        public const string FaultedBatchInitialization = "DVPS0006";
     }
 }
