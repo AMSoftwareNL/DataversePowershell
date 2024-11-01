@@ -28,19 +28,14 @@ namespace AMSoftware.Dataverse.PowerShell
     internal sealed class InteractiveAuthenticator
     {
         private const string Scope = "user_impersonation";
-        private const string ExampleClientId = "51f81489-12ee-4a9e-aaae-a2591f45987d";
 
         private readonly IPublicClientApplication _publicClientApplication;
-        private readonly bool _useDeviceCode;
 
-        internal InteractiveAuthenticator(string tenantId, string publicClientId = null, bool useDeviceCode = false)
+        internal InteractiveAuthenticator(string publicClientId)
         {
-            _useDeviceCode = useDeviceCode;
-
             _publicClientApplication = PublicClientApplicationBuilder
-                .Create(publicClientId ?? ExampleClientId)
-                .WithAuthority(AadAuthorityAudience.AzureAdMyOrg)
-                .WithTenantId(tenantId)
+                .Create(publicClientId)
+                .WithAuthority(AadAuthorityAudience.AzureAdMultipleOrgs)
                 .WithDefaultRedirectUri()
                 .WithClientName("AMSoftware Dataverse PowerShell")
                 .Build();
@@ -66,29 +61,20 @@ namespace AMSoftware.Dataverse.PowerShell
             }
             catch (MsalUiRequiredException)
             {
-                if (_useDeviceCode)
-                {
-                    return await _publicClientApplication
-                        .AcquireTokenWithDeviceCode(authenticationScopes,
-                        deviceCodeResult =>
-                        {
-                            var defaultConsoleColor = Console.ForegroundColor;
+                return await _publicClientApplication
+                    .AcquireTokenWithDeviceCode(authenticationScopes,
+                    deviceCodeResult =>
+                    {
+                        var defaultConsoleColor = Console.ForegroundColor;
 
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine(deviceCodeResult.Message);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine(deviceCodeResult.Message);
 
-                            Console.ForegroundColor = defaultConsoleColor;
+                        Console.ForegroundColor = defaultConsoleColor;
 
-                            return Task.FromResult(0);
-                        })
-                        .ExecuteAsync();
-                }
-                else
-                {
-                    return await _publicClientApplication
-                        .AcquireTokenInteractive(authenticationScopes)
-                        .ExecuteAsync();
-                }
+                        return Task.FromResult(0);
+                    })
+                    .ExecuteAsync();
             }
         }
 

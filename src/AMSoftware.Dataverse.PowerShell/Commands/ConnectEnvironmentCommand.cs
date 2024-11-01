@@ -16,6 +16,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using Microsoft.PowerPlatform.Dataverse.Client;
+using Microsoft.PowerPlatform.Dataverse.Client.Auth;
+using Microsoft.PowerPlatform.Dataverse.Client.Model;
 using System;
 using System.Management.Automation;
 using System.Security;
@@ -31,6 +33,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
         private const string ClientSecretParameterSet = "ClientSecret";
         private const string ServiceClientParameterSet = "ServiceClient";
 
+        private const string ExampleClientId = "51f81489-12ee-4a9e-aaae-a2591f45987d";
+
         [Parameter(Mandatory = true, ParameterSetName = ServiceClientParameterSet)]
         [ValidateNotNullOrEmpty]
         public ServiceClient ServiceClient { get; set; }
@@ -43,14 +47,10 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
         [Parameter(Mandatory = true, ParameterSetName = ClientSecretParameterSet)]
         public Uri EnvironmentUrl { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = InteractiveParameterSet)]
-        [ValidateNotNullOrEmpty]
-        public string TenantId { get; set; }
-
         [Parameter(Mandatory = true, ParameterSetName = ClientSecretParameterSet)]
         [Parameter(Mandatory = false, ParameterSetName = InteractiveParameterSet)]
         [ValidateNotNullOrEmpty]
-        public string ClientId { get; set; }
+        public string ClientId { get; set; } = ExampleClientId;
 
         [Parameter(Mandatory = true, ParameterSetName = ClientSecretParameterSet)]
         [ValidateNotNull]
@@ -73,8 +73,22 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
                     client = new ServiceClient(EnvironmentUrl, ClientId, ClientSecret, true);
                     break;
                 case InteractiveParameterSet:
-                    InteractiveAuthenticator authenticator = new InteractiveAuthenticator(TenantId, ClientId, UseDeviceCode.ToBool());
-                    client = new ServiceClient(EnvironmentUrl, authenticator.AcquireEnvironmentTokenAsync, true);
+                    if (UseDeviceCode.ToBool())
+                    {
+                        InteractiveAuthenticator authenticator = new InteractiveAuthenticator(ClientId);
+                        client = new ServiceClient(EnvironmentUrl, authenticator.AcquireEnvironmentTokenAsync, true);
+                    }
+                    else
+                    {
+                        client = new ServiceClient(new ConnectionOptions()
+                        {
+                            AuthenticationType = AuthenticationType.OAuth,
+                            RequireNewInstance = true,
+                            RedirectUri = new Uri("http://localhost"),
+                            ClientId = ClientId,
+                            ServiceUri = EnvironmentUrl
+                        }, false);
+                    }
                     break;
                 case ServiceClientParameterSet:
                     client = ServiceClient;
