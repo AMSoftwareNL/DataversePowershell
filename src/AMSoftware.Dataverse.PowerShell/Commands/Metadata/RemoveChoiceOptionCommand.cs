@@ -20,10 +20,11 @@ using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
 using System.Linq;
 using System.Management.Automation;
+using System.Xml.Linq;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 {
-    [Cmdlet(VerbsCommon.Remove, "DataverseChoiceOption", DefaultParameterSetName = RemoveGlobalChoiceOptionParameterSet)]
+    [Cmdlet(VerbsCommon.Remove, "DataverseChoiceOption", DefaultParameterSetName = RemoveGlobalChoiceOptionParameterSet, ConfirmImpact = ConfirmImpact.High, SupportsShouldProcess = true)]
     public sealed class RemoveChoiceOptionCommand : RequestCmdletBase
     {
         private const string RemoveAttributeChoiceOptionParameterSet = "RemoveAttributeChoiceOption";
@@ -54,10 +55,17 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             switch (ParameterSetName)
             {
                 case RemoveGlobalChoiceOptionParameterSet:
-                    RemoveGlobalChoice();
+
+                    if (ShouldProcess($"{OptionSet} | Choice Value '{Value}'."))
+                    {
+                        RemoveGlobalChoice();
+                    }
                     break;
                 case RemoveAttributeChoiceOptionParameterSet:
-                    RemoveAttributeChoice();
+                    if (ShouldProcess($"{Table}: {Column} | Choice Value '{Value}'."))
+                    {
+                        RemoveAttributeChoice();
+                    }
                     break;
             }
         }

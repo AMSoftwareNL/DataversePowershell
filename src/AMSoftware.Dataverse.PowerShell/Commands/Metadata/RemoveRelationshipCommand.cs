@@ -20,7 +20,7 @@ using System.Management.Automation;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 {
-    [Cmdlet(VerbsCommon.Remove, "DataverseRelationship")]
+    [Cmdlet(VerbsCommon.Remove, "DataverseRelationship", ConfirmImpact = ConfirmImpact.High, SupportsShouldProcess = true)]
     public sealed class RemoveRelationshipCommand : RequestCmdletBase
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
@@ -30,11 +30,14 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 
         protected override void Execute()
         {
-            var request = new DeleteRelationshipRequest()
+            if (ShouldProcess(Name))
             {
-                Name = Name
-            };
-            var response = ExecuteOrganizationRequest<RetrieveRelationshipResponse>(request);
+                var request = new DeleteRelationshipRequest()
+                {
+                    Name = Name
+                };
+                var response = ExecuteOrganizationRequest<RetrieveRelationshipResponse>(request);
+            }
         }
     }
 }
