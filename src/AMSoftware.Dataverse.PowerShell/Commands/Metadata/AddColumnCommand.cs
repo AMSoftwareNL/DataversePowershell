@@ -94,22 +94,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             if (ParameterSetName == AddColumnByParametersParameterset)
             {
                 attributeMetadata = _dynamicContext.CreateAttributeMetadata();
-
-                attributeMetadata.LogicalName = Name;
-                attributeMetadata.SchemaName = Name;
-                attributeMetadata.DisplayName = new Label(DisplayName, Session.Current.LanguageId);
-                attributeMetadata.Description = Description == null ? null : new Label(Description, Session.Current.LanguageId);
-                attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty(AttributeRequiredLevel.SystemRequired);
-                attributeMetadata.ExternalName = ExternalName;
-                attributeMetadata.IsValidForAdvancedFind = new BooleanManagedProperty(Searchable.ToBool());
-                attributeMetadata.IsAuditEnabled = new BooleanManagedProperty(Auditing.ToBool());
-                attributeMetadata.IsSecured = ColumnSecurity.ToBool();
-
-                if (MyInvocation.BoundParameters.ContainsKey(nameof(Required)))
-                    attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty((AttributeRequiredLevel)Required);
-
-                if (MyInvocation.BoundParameters.ContainsKey(nameof(Source)))
-                    attributeMetadata.SourceType = (int)Source;
+                BuildAttribute(ref attributeMetadata);
 
                 _dynamicContext.ApplyParameters(this, ref attributeMetadata);
             }
@@ -131,6 +116,25 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             var getByIdResponse = ExecuteOrganizationRequest<RetrieveAttributeResponse>(getByIdRequest);
 
             WriteObject(getByIdResponse.AttributeMetadata);
+        }
+
+        private void BuildAttribute(ref AttributeMetadata attributeMetadata)
+        {
+            attributeMetadata.LogicalName = Name;
+            attributeMetadata.SchemaName = Name;
+            attributeMetadata.DisplayName = new Label(DisplayName, Session.Current.LanguageId);
+            attributeMetadata.Description = Description == null ? null : new Label(Description, Session.Current.LanguageId);
+            attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty(AttributeRequiredLevel.SystemRequired);
+            attributeMetadata.ExternalName = ExternalName;
+            attributeMetadata.IsValidForAdvancedFind = new BooleanManagedProperty(Searchable.ToBool());
+            attributeMetadata.IsAuditEnabled = new BooleanManagedProperty(Auditing.ToBool());
+            attributeMetadata.IsSecured = ColumnSecurity.ToBool();
+
+            if (MyInvocation.BoundParameters.ContainsKey(nameof(Required)))
+                attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty((AttributeRequiredLevel)Required);
+
+            if (MyInvocation.BoundParameters.ContainsKey(nameof(Source)))
+                attributeMetadata.SourceType = (int)Source;
         }
     }
 }

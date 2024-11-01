@@ -41,10 +41,6 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
                     return new DoubleColumnParameters();
                 case ColumnType.Integer:
                     return new IntegerColumnParameters();
-                case ColumnType.Customer:
-                    return new CustomerColumnParameters();
-                case ColumnType.Lookup:
-                    return new LookupColumnParameters();
                 case ColumnType.Memo:
                     return new MemoColumnParameters();
                 case ColumnType.Money:
@@ -78,10 +74,6 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
                 return new DoubleColumnParameters();
             if (attribute.AttributeTypeName == AttributeTypeDisplayName.IntegerType)
                 return new IntegerColumnParameters();
-            if (attribute.AttributeTypeName == AttributeTypeDisplayName.CustomerType)
-                return new CustomerColumnParameters();
-            if (attribute.AttributeTypeName == AttributeTypeDisplayName.LookupType)
-                return new LookupColumnParameters();
             if (attribute.AttributeTypeName == AttributeTypeDisplayName.MemoType)
                 return new MemoColumnParameters();
             if (attribute.AttributeTypeName == AttributeTypeDisplayName.MoneyType)
