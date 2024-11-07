@@ -46,10 +46,10 @@
     FormatsToProcess = 'AMSoftware.Dataverse.PowerShell.Formats.ps1xml'
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-    NestedModules = @('AMSoftware.Dataverse.PowerShell.dll', 'AMSoftware.Dataverse.PowerShell.psm1')
+    NestedModules = @('AMSoftware.Dataverse.PowerShell.dll', 'AMSoftware.Dataverse.PowerShell.psm1', 'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1')
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-    FunctionsToExport = @()
+    FunctionsToExport = @('Get-DataverseUser')
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
     CmdletsToExport = @(
@@ -96,13 +96,14 @@
     AliasesToExport = @()
 
     # List of all modules packaged with this module
-    ModuleList = @('AMSoftware.Dataverse.PowerShell.dll', 'AMSoftware.Dataverse.PowerShell.psm1')
+    ModuleList = @('AMSoftware.Dataverse.PowerShell.dll', 'AMSoftware.Dataverse.PowerShell.psm1', 'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1')
 
     # List of all files packaged with this module
     FileList = @(
         'AMSoftware.Dataverse.PowerShell.dll',
         'AMSoftware.Dataverse.PowerShell.psd1',
         'AMSoftware.Dataverse.PowerShell.psm1',
+        'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1'
         'AMSoftware.Dataverse.PowerShell.Types.ps1xml',
         'AMSoftware.Dataverse.PowerShell.Formats.ps1xml',
         'Microsoft.PowerPlatform.Dataverse.Client.dll',
