@@ -123,15 +123,20 @@
         'AMSoftware.Dataverse.PowerShell.dll',
         'AMSoftware.Dataverse.PowerShell.psd1',
         'AMSoftware.Dataverse.PowerShell.psm1',
-        'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1'
-        'AMSoftware.Dataverse.PowerShell.Administration.psm1'
-        'AMSoftware.Dataverse.PowerShell.Development.psm1'
+        'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1',
+        'AMSoftware.Dataverse.PowerShell.Administration.psm1',
+        'AMSoftware.Dataverse.PowerShell.Development.psm1',
         'AMSoftware.Dataverse.PowerShell.Types.ps1xml',
         'AMSoftware.Dataverse.PowerShell.Formats.ps1xml',
-        'AMSoftware.Dataverse.PowerShell.dll-help.xml',
-        'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1-help.xml'
-        'AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml'
-        'AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml'
+        'en-us\AMSoftware.Dataverse.PowerShell.dll-help.xml',
+        'en-us\AMSoftware.Dataverse.PowerShell.AccessManagement.psm1-help.xml',
+        'en-us\AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml',
+        'en-us\AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml',
+        'en-us\about_DataverseBatch.help.txt',
+        'en-us\about_DataverseRequestParameters.help.txt',
+        'en-us\about_DataverseTypeAccelerators.help.txt',
+        'en-us\about_DataverseVariables.help.txt',
+        'license.txt',
         'Microsoft.PowerPlatform.Dataverse.Client.dll',
         'Microsoft.Xrm.Sdk.dll',
         'Microsoft.Crm.Sdk.Proxy.dll')
