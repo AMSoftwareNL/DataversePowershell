@@ -46,10 +46,29 @@
     FormatsToProcess = 'AMSoftware.Dataverse.PowerShell.Formats.ps1xml'
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-    NestedModules = @('AMSoftware.Dataverse.PowerShell.dll', 'AMSoftware.Dataverse.PowerShell.psm1', 'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1')
+    NestedModules = @(
+        'AMSoftware.Dataverse.PowerShell.dll', 
+        'AMSoftware.Dataverse.PowerShell.psm1', 
+        'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1',
+        'AMSoftware.Dataverse.PowerShell.Administration.psm1'
+    )
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-    FunctionsToExport = @('Get-DataverseUser')
+    FunctionsToExport = @(
+        'Get-DataverseUser',
+        'Get-DataverseRole',
+        'Get-DataverseTeam',
+        'Get-DataverseRowAccess',
+        'Set-DataverseRowOwner',
+        'Add-DataverseLanguage',
+        'Get-DataverseLanguage',
+        'Remove-DataverseLanguage',
+        'Export-DataverseTranslation',
+        'Import-DataverseTranslation',
+        'Get-DataverseEnvironmentVariableValue',
+        'Get-DataverseSPDocumentLocation',
+        'Start-DataverseWorkflow'
+    )
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
     CmdletsToExport = @(
@@ -104,8 +123,12 @@
         'AMSoftware.Dataverse.PowerShell.psd1',
         'AMSoftware.Dataverse.PowerShell.psm1',
         'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1'
+        'AMSoftware.Dataverse.PowerShell.Administration.psm1'
         'AMSoftware.Dataverse.PowerShell.Types.ps1xml',
         'AMSoftware.Dataverse.PowerShell.Formats.ps1xml',
+        'AMSoftware.Dataverse.PowerShell.dll-help.xml',
+        'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1-help.xml'
+        'AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml'
         'Microsoft.PowerPlatform.Dataverse.Client.dll',
         'Microsoft.Xrm.Sdk.dll',
         'Microsoft.Crm.Sdk.Proxy.dll')
