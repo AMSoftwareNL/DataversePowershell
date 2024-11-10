@@ -25,6 +25,9 @@
 		<None Update="AMSoftware.Dataverse.PowerShell.AccessManagement.psm1">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="AMSoftware.Dataverse.PowerShell.Administration.psm1">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="AMSoftware.Dataverse.PowerShell.psm1">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>

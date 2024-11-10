@@ -15,23 +15,23 @@ schema: 2.0.0
 ### GetTablesByFilter (Default)
 ```
 Get-DataverseTable [-Name <String>] [-Exclude <String>] [-Type <TableType>] [-Custom] [-Unmanaged]
- [-Intersects] [-Solution <String>] [-SharedTag <String>] [-Partition <String>] [-FailOnDuplicateDetection]
- [-BypassSynchronousLogic] [-BypassPowerAutomateFlows] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+ [-Intersects]    
+   
+ [<RequestParameters>] [<CommonParameters>]
 ```
 
 ### GetTableById
 ```
-Get-DataverseTable -Id <Guid> [-Solution <String>] [-SharedTag <String>] [-Partition <String>]
- [-FailOnDuplicateDetection] [-BypassSynchronousLogic] [-BypassPowerAutomateFlows]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-DataverseTable -Id <Guid>   
+   
+  [<RequestParameters>] [<CommonParameters>]
 ```
 
 ### GetTableByEtc
 ```
-Get-DataverseTable -TypeCode <Int32> [-Solution <String>] [-SharedTag <String>] [-Partition <String>]
- [-FailOnDuplicateDetection] [-BypassSynchronousLogic] [-BypassPowerAutomateFlows]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-DataverseTable -TypeCode <Int32>   
+   
+  [<RequestParameters>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,43 +40,13 @@ Get-DataverseTable -TypeCode <Int32> [-Solution <String>] [-SharedTag <String>] 
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
 {{ Add example description here }}
 
 ## PARAMETERS
-
-### -BypassPowerAutomateFlows
-{{ Fill BypassPowerAutomateFlows Description }}
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -BypassSynchronousLogic
-{{ Fill BypassSynchronousLogic Description }}
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Custom
 {{ Fill Custom Description }}
@@ -88,7 +58,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -106,21 +76,6 @@ Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: True
-```
-
-### -FailOnDuplicateDetection
-{{ Fill FailOnDuplicateDetection Description }}
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Id
@@ -148,7 +103,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -166,66 +121,6 @@ Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: True
-```
-
-### -Partition
-{{ Fill Partition Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: System.Management.Automation.ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SharedTag
-{{ Fill SharedTag Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Solution
-{{ Fill Solution Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
 ```
 
 ### -Type
@@ -269,10 +164,13 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+
+### RequestParameters
+This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -280,11 +178,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.Guid
-
 ## OUTPUTS
 
 ### Microsoft.Xrm.Sdk.Metadata.EntityMetadata
-
 ## NOTES
 
 ## RELATED LINKS
+

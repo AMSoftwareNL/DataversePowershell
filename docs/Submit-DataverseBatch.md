@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Use-DataverseSolution
+# Submit-DataverseBatch
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,9 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Use-DataverseSolution -Name <String>   
-   
-  [<RequestParameters>] [<CommonParameters>]
+Submit-DataverseBatch -BatchId <Guid>  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,11 +30,11 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Name
-{{ Fill Name Description }}
+### -BatchId
+{{ Fill BatchId Description }}
 
 ```yaml
-Type: System.String
+Type: System.Guid
 Parameter Sets: (All)
 Aliases:
 
@@ -47,9 +45,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -58,7 +53,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### None
 ## OUTPUTS
 
-### AMSoftware.Dataverse.PowerShell.Session
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

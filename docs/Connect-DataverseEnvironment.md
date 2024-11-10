@@ -14,26 +14,26 @@ schema: 2.0.0
 
 ### Interactive (Default)
 ```
-Connect-DataverseEnvironment -EnvironmentUrl <Uri> -TenantId <String> [-ClientId <String>] [-UseDeviceCode]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Connect-DataverseEnvironment -EnvironmentUrl <Uri> [-ClientId <String>] [-UseDeviceCode]
+  [<CommonParameters>]
 ```
 
 ### ServiceClient
 ```
-Connect-DataverseEnvironment -ServiceClient <ServiceClient> [-ProgressAction <ActionPreference>]
+Connect-DataverseEnvironment -ServiceClient <ServiceClient> 
  [<CommonParameters>]
 ```
 
 ### Connectionstring
 ```
-Connect-DataverseEnvironment -Connectionstring <String> [-ProgressAction <ActionPreference>]
+Connect-DataverseEnvironment -Connectionstring <String> 
  [<CommonParameters>]
 ```
 
 ### ClientSecret
 ```
 Connect-DataverseEnvironment -EnvironmentUrl <Uri> -ClientId <String> -ClientSecret <SecureString>
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,7 +42,7 @@ Connect-DataverseEnvironment -EnvironmentUrl <Uri> -ClientId <String> -ClientSec
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
@@ -122,42 +122,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: System.Management.Automation.ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -ServiceClient
 {{ Fill ServiceClient Description }}
 
 ```yaml
 Type: Microsoft.PowerPlatform.Dataverse.Client.ServiceClient
 Parameter Sets: ServiceClient
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -TenantId
-{{ Fill TenantId Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: Interactive
 Aliases:
 
 Required: True
@@ -177,7 +147,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -188,11 +158,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### Microsoft.PowerPlatform.Dataverse.Client.ServiceClient
-
 ## NOTES
 
 ## RELATED LINKS
+

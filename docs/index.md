@@ -17,6 +17,9 @@ Locale: en-US
 ### [Add-DataverseColumn](Add-DataverseColumn.md)
 {{ Fill in the Synopsis }}
 
+### [Add-DataverseLanguage](Add-DataverseLanguage.md)
+{{ Fill in the Synopsis }}
+
 ### [Add-DataverseRelatedRow](Add-DataverseRelatedRow.md)
 {{ Fill in the Synopsis }}
 
@@ -35,25 +38,52 @@ Locale: en-US
 ### [Connect-DataverseEnvironment](Connect-DataverseEnvironment.md)
 {{ Fill in the Synopsis }}
 
+### [Export-DataverseTranslation](Export-DataverseTranslation.md)
+{{ Fill in the Synopsis }}
+
 ### [Get-DataverseChoice](Get-DataverseChoice.md)
 {{ Fill in the Synopsis }}
 
 ### [Get-DataverseColumn](Get-DataverseColumn.md)
 {{ Fill in the Synopsis }}
 
+### [Get-DataverseEnvironmentVariableValue](Get-DataverseEnvironmentVariableValue.md)
+{{ Fill in the Synopsis }}
+
+### [Get-DataverseLanguage](Get-DataverseLanguage.md)
+{{ Fill in the Synopsis }}
+
 ### [Get-DataverseRelationship](Get-DataverseRelationship.md)
+{{ Fill in the Synopsis }}
+
+### [Get-DataverseRole](Get-DataverseRole.md)
 {{ Fill in the Synopsis }}
 
 ### [Get-DataverseRow](Get-DataverseRow.md)
 {{ Fill in the Synopsis }}
 
+### [Get-DataverseRowAccess](Get-DataverseRowAccess.md)
+{{ Fill in the Synopsis }}
+
 ### [Get-DataverseRows](Get-DataverseRows.md)
+{{ Fill in the Synopsis }}
+
+### [Get-DataverseSPDocumentLocation](Get-DataverseSPDocumentLocation.md)
 {{ Fill in the Synopsis }}
 
 ### [Get-DataverseTable](Get-DataverseTable.md)
 {{ Fill in the Synopsis }}
 
 ### [Get-DataverseTableKey](Get-DataverseTableKey.md)
+{{ Fill in the Synopsis }}
+
+### [Get-DataverseTeam](Get-DataverseTeam.md)
+{{ Fill in the Synopsis }}
+
+### [Get-DataverseUser](Get-DataverseUser.md)
+{{ Fill in the Synopsis }}
+
+### [Import-DataverseTranslation](Import-DataverseTranslation.md)
 {{ Fill in the Synopsis }}
 
 ### [Remove-DataverseChoice](Remove-DataverseChoice.md)
@@ -63,6 +93,9 @@ Locale: en-US
 {{ Fill in the Synopsis }}
 
 ### [Remove-DataverseColumn](Remove-DataverseColumn.md)
+{{ Fill in the Synopsis }}
+
+### [Remove-DataverseLanguage](Remove-DataverseLanguage.md)
 {{ Fill in the Synopsis }}
 
 ### [Remove-DataverseRelatedRow](Remove-DataverseRelatedRow.md)
@@ -80,6 +113,9 @@ Locale: en-US
 ### [Remove-DataverseTableKey](Remove-DataverseTableKey.md)
 {{ Fill in the Synopsis }}
 
+### [Request-DataverseBatch](Request-DataverseBatch.md)
+{{ Fill in the Synopsis }}
+
 ### [Send-DataverseRequest](Send-DataverseRequest.md)
 {{ Fill in the Synopsis }}
 
@@ -95,10 +131,19 @@ Locale: en-US
 ### [Set-DataverseRow](Set-DataverseRow.md)
 {{ Fill in the Synopsis }}
 
+### [Set-DataverseRowOwner](Set-DataverseRowOwner.md)
+{{ Fill in the Synopsis }}
+
 ### [Set-DataverseRows](Set-DataverseRows.md)
 {{ Fill in the Synopsis }}
 
 ### [Set-DataverseTable](Set-DataverseTable.md)
+{{ Fill in the Synopsis }}
+
+### [Start-DataverseWorkflow](Start-DataverseWorkflow.md)
+{{ Fill in the Synopsis }}
+
+### [Submit-DataverseBatch](Submit-DataverseBatch.md)
 {{ Fill in the Synopsis }}
 
 ### [Use-DataverseLanguage](Use-DataverseLanguage.md)
@@ -106,4 +151,5 @@ Locale: en-US
 
 ### [Use-DataverseSolution](Use-DataverseSolution.md)
 {{ Fill in the Synopsis }}
+
 

@@ -14,31 +14,31 @@ schema: 2.0.0
 
 ### RetrieveWithQuery (Default)
 ```
-Get-DataverseRows -Table <String> [-Columns <String[]>] [-Sort <Hashtable>] [-Solution <String>]
- [-SharedTag <String>] [-Partition <String>] [-FailOnDuplicateDetection] [-BypassSynchronousLogic]
- [-BypassPowerAutomateFlows] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-DataverseRows -Table <String> [-Columns <String[]>] [-Sort <Hashtable>] 
+    
+   [<RequestParameters>] [<CommonParameters>]
 ```
 
 ### RetrieveWithAttributeQuery
 ```
 Get-DataverseRows -Table <String> -Query <Hashtable> [-Columns <String[]>] [-Sort <Hashtable>]
- [-Solution <String>] [-SharedTag <String>] [-Partition <String>] [-FailOnDuplicateDetection]
- [-BypassSynchronousLogic] [-BypassPowerAutomateFlows] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+    
+   
+ [<RequestParameters>] [<CommonParameters>]
 ```
 
 ### RetrieveWithBatch
 ```
-Get-DataverseRows -Table <String> -Id <Guid[]> [-Columns <String[]>] [-Solution <String>] [-SharedTag <String>]
- [-Partition <String>] [-FailOnDuplicateDetection] [-BypassSynchronousLogic] [-BypassPowerAutomateFlows]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-DataverseRows -Table <String> -Id <Guid[]> [-Columns <String[]>]  
+    
+  [<RequestParameters>] [<CommonParameters>]
 ```
 
 ### RetrieveWithFetchXml
 ```
-Get-DataverseRows -FetchXml <XmlDocument> [-Solution <String>] [-SharedTag <String>] [-Partition <String>]
- [-FailOnDuplicateDetection] [-BypassSynchronousLogic] [-BypassPowerAutomateFlows]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-DataverseRows -FetchXml <XmlDocument>   
+   
+  [<RequestParameters>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -47,7 +47,7 @@ Get-DataverseRows -FetchXml <XmlDocument> [-Solution <String>] [-SharedTag <Stri
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
@@ -55,57 +55,12 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -BypassPowerAutomateFlows
-{{ Fill BypassPowerAutomateFlows Description }}
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -BypassSynchronousLogic
-{{ Fill BypassSynchronousLogic Description }}
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Columns
 {{ Fill Columns Description }}
 
 ```yaml
 Type: System.String[]
 Parameter Sets: RetrieveWithQuery, RetrieveWithAttributeQuery, RetrieveWithBatch
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FailOnDuplicateDetection
-{{ Fill FailOnDuplicateDetection Description }}
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -145,36 +100,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Partition
-{{ Fill Partition Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: System.Management.Automation.ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Query
 {{ Fill Query Description }}
 
@@ -184,36 +109,6 @@ Parameter Sets: RetrieveWithAttributeQuery
 Aliases:
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SharedTag
-{{ Fill SharedTag Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Solution
-{{ Fill Solution Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -250,21 +145,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### RequestParameters
+This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### System.Guid[]
-
 ### System.String[]
-
 ### System.Xml.XmlDocument
-
 ## OUTPUTS
 
 ### Microsoft.Xrm.Sdk.Entity
-
 ## NOTES
 
 ## RELATED LINKS
+

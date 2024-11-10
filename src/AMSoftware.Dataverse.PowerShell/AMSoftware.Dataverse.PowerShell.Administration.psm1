@@ -35,7 +35,7 @@ function Get-DataverseLanguage {
     [CmdletBinding()]
     param (
         [Parameter()]
-        [SwitchParameter]$All
+        [switch]$All
     )
 
     process {

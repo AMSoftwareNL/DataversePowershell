@@ -15,9 +15,9 @@ schema: 2.0.0
 ### AddTableObject (Default)
 ```
 Add-DataverseTable -TableInputObject <EntityMetadata> -ColumnInputObject <StringAttributeMetadata>
- [-Solution <String>] [-SharedTag <String>] [-Partition <String>] [-FailOnDuplicateDetection]
- [-BypassSynchronousLogic] [-BypassPowerAutomateFlows] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+    
+   
+ [<RequestParameters>] [<CommonParameters>]
 ```
 
 ### AddElasticTable
@@ -25,9 +25,9 @@ Add-DataverseTable -TableInputObject <EntityMetadata> -ColumnInputObject <String
 Add-DataverseTable [-Elastic] -Name <String> -DisplayName <String> -PluralName <String> [-Description <String>]
  [-OwnershipType <TableOwnershipType>] [-TrackChanges] -ColumnDisplayName <String>
  [-ColumnDescription <String>] -ColumnName <String> [-ColumnLength <UInt32>]
- [-ColumnRequired <ColumnRequiredLevel>] [-Solution <String>] [-SharedTag <String>] [-Partition <String>]
- [-FailOnDuplicateDetection] [-BypassSynchronousLogic] [-BypassPowerAutomateFlows]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-ColumnRequired <ColumnRequiredLevel>]   
+   
+  [<RequestParameters>] [<CommonParameters>]
 ```
 
 ### AddVirtualTable
@@ -36,17 +36,17 @@ Add-DataverseTable [-Virtual] -Name <String> -DisplayName <String> -PluralName <
  [-HasAttachments] [-IsActivityParty] -ColumnDisplayName <String> [-ColumnDescription <String>]
  -ColumnName <String> [-ColumnLength <UInt32>] [-ColumnRequired <ColumnRequiredLevel>] -ExternalName <String>
  -ExternalPluralName <String> [-ColumnExternalName <String>] [-DataProviderId <Guid>] [-DataSourceId <Guid>]
- [-Solution <String>] [-SharedTag <String>] [-Partition <String>] [-FailOnDuplicateDetection]
- [-BypassSynchronousLogic] [-BypassPowerAutomateFlows] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+    
+   
+ [<RequestParameters>] [<CommonParameters>]
 ```
 
 ### AddActivityTable
 ```
 Add-DataverseTable [-Activity] -Name <String> -DisplayName <String> -PluralName <String>
- [-Description <String>] [-TrackChanges] [-HideFromMenu] [-Solution <String>] [-SharedTag <String>]
- [-Partition <String>] [-FailOnDuplicateDetection] [-BypassSynchronousLogic] [-BypassPowerAutomateFlows]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-Description <String>] [-TrackChanges] [-HideFromMenu]  
+    
+  [<RequestParameters>] [<CommonParameters>]
 ```
 
 ### AddStandardTable
@@ -54,9 +54,9 @@ Add-DataverseTable [-Activity] -Name <String> -DisplayName <String> -PluralName 
 Add-DataverseTable -Name <String> -DisplayName <String> -PluralName <String> [-Description <String>]
  [-OwnershipType <TableOwnershipType>] [-HasAttachments] [-IsActivityParty] [-TrackChanges]
  -ColumnDisplayName <String> [-ColumnDescription <String>] -ColumnName <String> [-ColumnLength <UInt32>]
- [-ColumnRequired <ColumnRequiredLevel>] [-Solution <String>] [-SharedTag <String>] [-Partition <String>]
- [-FailOnDuplicateDetection] [-BypassSynchronousLogic] [-BypassPowerAutomateFlows]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-ColumnRequired <ColumnRequiredLevel>]   
+   
+  [<RequestParameters>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -65,7 +65,7 @@ Add-DataverseTable -Name <String> -DisplayName <String> -PluralName <String> [-D
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> {{ Add example code here }}
 ```
 
@@ -83,37 +83,7 @@ Aliases:
 
 Required: True
 Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -BypassPowerAutomateFlows
-{{ Fill BypassPowerAutomateFlows Description }}
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -BypassSynchronousLogic
-{{ Fill BypassSynchronousLogic Description }}
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -294,7 +264,7 @@ Aliases:
 
 Required: True
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -329,21 +299,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -FailOnDuplicateDetection
-{{ Fill FailOnDuplicateDetection Description }}
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -HasAttachments
 {{ Fill HasAttachments Description }}
 
@@ -354,7 +309,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -369,7 +324,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -384,7 +339,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -420,21 +375,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Partition
-{{ Fill Partition Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -PluralName
 {{ Fill PluralName Description }}
 
@@ -444,51 +384,6 @@ Parameter Sets: AddElasticTable, AddVirtualTable, AddActivityTable, AddStandardT
 Aliases:
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: System.Management.Automation.ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SharedTag
-{{ Fill SharedTag Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Solution
-{{ Fill Solution Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -520,7 +415,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -535,10 +430,13 @@ Aliases:
 
 Required: True
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
+
+### RequestParameters
+This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -546,11 +444,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### Microsoft.Xrm.Sdk.Metadata.EntityMetadata
-
 ## NOTES
 
 ## RELATED LINKS
+

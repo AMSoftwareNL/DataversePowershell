@@ -1,21 +1,27 @@
 ---
-external help file: AMSoftware.Dataverse.PowerShell.dll-Help.xml
+external help file: AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml
 Module Name: AMSoftware.Dataverse.PowerShell
 online version:
 schema: 2.0.0
 ---
 
-# Use-DataverseSolution
+# Get-DataverseSPDocumentLocation
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
 
 ## SYNTAX
 
+### GetBySharePointDocumentLocation
 ```
-Use-DataverseSolution -Name <String>   
-   
-  [<RequestParameters>] [<CommonParameters>]
+Get-DataverseSPDocumentLocation -DocumentLocation <Guid> 
+ [<CommonParameters>]
+```
+
+### GetByRegardingObject
+```
+Get-DataverseSPDocumentLocation -RegardingObject <Guid> 
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,12 +38,12 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Name
-{{ Fill Name Description }}
+### -DocumentLocation
+{{ Fill DocumentLocation Description }}
 
 ```yaml
-Type: System.String
-Parameter Sets: (All)
+Type: System.Guid
+Parameter Sets: GetBySharePointDocumentLocation
 Aliases:
 
 Required: True
@@ -47,8 +53,20 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
+### -RegardingObject
+{{ Fill RegardingObject Description }}
+
+```yaml
+Type: System.Guid
+Parameter Sets: GetByRegardingObject
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -58,7 +76,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### None
 ## OUTPUTS
 
-### AMSoftware.Dataverse.PowerShell.Session
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

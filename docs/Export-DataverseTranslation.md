@@ -1,11 +1,11 @@
 ---
-external help file: AMSoftware.Dataverse.PowerShell.dll-Help.xml
+external help file: AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml
 Module Name: AMSoftware.Dataverse.PowerShell
 online version:
 schema: 2.0.0
 ---
 
-# Use-DataverseSolution
+# Export-DataverseTranslation
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,8 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Use-DataverseSolution -Name <String>   
-   
+Export-DataverseTranslation  <String> [-OutputPath] <String>
   [<RequestParameters>] [<CommonParameters>]
 ```
 
@@ -32,8 +31,8 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Name
-{{ Fill Name Description }}
+### -OutputPath
+{{ Fill OutputPath Description }}
 
 ```yaml
 Type: System.String
@@ -41,7 +40,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -55,10 +54,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+### System.String
 ## OUTPUTS
 
-### AMSoftware.Dataverse.PowerShell.Session
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

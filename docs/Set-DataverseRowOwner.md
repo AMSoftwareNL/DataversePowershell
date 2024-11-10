@@ -1,11 +1,11 @@
 ---
-external help file: AMSoftware.Dataverse.PowerShell.dll-Help.xml
+external help file: AMSoftware.Dataverse.PowerShell.AccessManagement.psm1-help.xml
 Module Name: AMSoftware.Dataverse.PowerShell
 online version:
 schema: 2.0.0
 ---
 
-# Remove-DataverseColumn
+# Set-DataverseRowOwner
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,9 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Remove-DataverseColumn -Table <String> -Name <String>  
-    
-    [<RequestParameters>] [<CommonParameters>]
+Set-DataverseRowOwner [-Table] <String> [-Id] <Guid> [-Owner] <EntityReference>
+  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,18 +31,33 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Name
-{{ Fill Name Description }}
+### -Id
+{{ Fill Id Description }}
 
 ```yaml
-Type: System.String
+Type: System.Guid
 Parameter Sets: (All)
-Aliases: LogicalName
+Aliases: Row, RowId
 
 Required: True
-Position: Named
+Position: 1
 Default value: None
-Accept pipeline input: True (ByPropertyName)
+Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -Owner
+{{ Fill Owner Description }}
+
+```yaml
+Type: Microsoft.Xrm.Sdk.EntityReference
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -53,17 +67,14 @@ Accept wildcard characters: False
 ```yaml
 Type: System.String
 Parameter Sets: (All)
-Aliases: EntityLogicalName
+Aliases: LogicalName, EntityLogicalName, Entity
 
 Required: True
-Position: Named
+Position: 0
 Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -71,6 +82,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String
+### System.Guid
 ## OUTPUTS
 
 ### System.Object

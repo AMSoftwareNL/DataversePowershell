@@ -1,29 +1,26 @@
 ---
-external help file: AMSoftware.Dataverse.PowerShell.dll-Help.xml
+external help file: AMSoftware.Dataverse.PowerShell.AccessManagement.psm1-help.xml
 Module Name: AMSoftware.Dataverse.PowerShell
 online version:
 schema: 2.0.0
 ---
 
-# Get-DataverseRow
+# Get-DataverseRole
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
 
 ## SYNTAX
 
-### RetrieveWithId
+### GetAllRoles (Default)
 ```
-Get-DataverseRow -Table <String> -Id <Guid> [-Columns <String[]>]  
-    
-  [<RequestParameters>] [<CommonParameters>]
+Get-DataverseRole [-Name <String>] [-Exclude <String>] [-Inheritance <RoleInheritance>]
+  [<CommonParameters>]
 ```
 
-### RetrieveWithKey
+### GetRoleById
 ```
-Get-DataverseRow -Table <String> -Key <Hashtable> [-Columns <String[]>] 
-    
-   [<RequestParameters>] [<CommonParameters>]
+Get-DataverseRole -Id <Guid>  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,13 +37,44 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Columns
-{{ Fill Columns Description }}
+### -Exclude
+{{ Fill Exclude Description }}
 
 ```yaml
-Type: System.String[]
-Parameter Sets: (All)
+Type: System.String
+Parameter Sets: GetAllRoles
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: True
+```
+
+### -Id
+{{ Fill Id Description }}
+
+```yaml
+Type: System.Guid
+Parameter Sets: GetRoleById
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Inheritance
+{{ Fill Inheritance Description }}
+
+```yaml
+Type: RoleInheritance
+Parameter Sets: GetAllRoles
+Aliases:
+Accepted values: TeamOnly, DirectAndTeam
 
 Required: False
 Position: Named
@@ -55,65 +83,30 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Id
-{{ Fill Id Description }}
-
-```yaml
-Type: System.Guid
-Parameter Sets: RetrieveWithId
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
-
-### -Key
-{{ Fill Key Description }}
-
-```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: RetrieveWithKey
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Table
-{{ Fill Table Description }}
+### -Name
+{{ Fill Name Description }}
 
 ```yaml
 Type: System.String
-Parameter Sets: (All)
-Aliases: LogicalName
+Parameter Sets: GetAllRoles
+Aliases: Include
 
-Required: True
+Required: False
 Position: Named
 Default value: None
-Accept pipeline input: True (ByPropertyName)
-Accept wildcard characters: False
+Accept pipeline input: False
+Accept wildcard characters: True
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### System.String
 ### System.Guid
-### System.String[]
 ## OUTPUTS
 
-### Microsoft.Xrm.Sdk.Entity
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

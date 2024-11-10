@@ -1,22 +1,26 @@
 ---
-external help file: AMSoftware.Dataverse.PowerShell.dll-Help.xml
+external help file: AMSoftware.Dataverse.PowerShell.AccessManagement.psm1-help.xml
 Module Name: AMSoftware.Dataverse.PowerShell
 online version:
 schema: 2.0.0
 ---
 
-# Get-DataverseTableKey
+# Get-DataverseTeam
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
 
 ## SYNTAX
 
+### GetAllTeams (Default)
 ```
-Get-DataverseTableKey -Table <String> [-Name <String>] [-Exclude <String>] [-ExcludeManaged]
- [-Columns <String[]>]   
-   
-  [<RequestParameters>] [<CommonParameters>]
+Get-DataverseTeam [-Name <String>] [-Exclude <String>] [-TeamType <TeamType>] [-BusinessUnit <Guid>]
+ [-Administrator <Guid>]  [<CommonParameters>]
+```
+
+### GetTeamById
+```
+Get-DataverseTeam -Id <Guid>  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -33,13 +37,28 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -Columns
-{{ Fill Columns Description }}
+### -Administrator
+{{ Fill Administrator Description }}
 
 ```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases: Attributes
+Type: System.Guid
+Parameter Sets: GetAllTeams
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -BusinessUnit
+{{ Fill BusinessUnit Description }}
+
+```yaml
+Type: System.Guid
+Parameter Sets: GetAllTeams
+Aliases:
 
 Required: False
 Position: Named
@@ -53,7 +72,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: (All)
+Parameter Sets: GetAllTeams
 Aliases:
 
 Required: False
@@ -63,18 +82,18 @@ Accept pipeline input: False
 Accept wildcard characters: True
 ```
 
-### -ExcludeManaged
-{{ Fill ExcludeManaged Description }}
+### -Id
+{{ Fill Id Description }}
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
+Type: System.Guid
+Parameter Sets: GetTeamById
 Aliases:
 
-Required: False
+Required: True
 Position: Named
-Default value: False
-Accept pipeline input: False
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -83,7 +102,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: (All)
+Parameter Sets: GetAllTeams
 Aliases: Include
 
 Required: False
@@ -93,34 +112,31 @@ Accept pipeline input: False
 Accept wildcard characters: True
 ```
 
-### -Table
-{{ Fill Table Description }}
+### -TeamType
+{{ Fill TeamType Description }}
 
 ```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases: LogicalName, EntityLogicalName
+Type: TeamType
+Parameter Sets: GetAllTeams
+Aliases:
+Accepted values: Owner, Access, AADSecurityGroup, AADOfficeGroup
 
-Required: True
+Required: False
 Position: Named
 Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### System.String
-### System.String[]
+### System.Guid
 ## OUTPUTS
 
-### Microsoft.Xrm.Sdk.Metadata.EntityKeyMetadata
+### System.Object
 ## NOTES
 
 ## RELATED LINKS
