@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<AssemblyName>AMSoftware.Dataverse.PowerShell</AssemblyName>
 		<OutputType>Library</OutputType>
 		<RootNamespace>AMSoftware.Dataverse.PowerShell</RootNamespace>
@@ -14,8 +14,19 @@
 		<GenerateDependencyFile>false</GenerateDependencyFile>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<Company>AMSoftware</Company>
+		<Copyright>Copyright(C) 2024 AMSoftwareNL. All rights reserved.</Copyright>
+		<Description>PowerShell Module for Power Platform Dataverse</Description>
+		<FileVersion>0.4.0</FileVersion>
+		<InformationalVersion>0.4.0</InformationalVersion>
+		<Product>AMSoftware.Dataverse.PowerShell</Product>
+		<AssemblyTitle>AMSoftware.Dataverse.PowerShell</AssemblyTitle>
+		<AssemblyVersion>0.4.0</AssemblyVersion>
+	</PropertyGroup>
+
 	<ItemGroup>
-		<PackageReference Include="Microsoft.PowerPlatform.Dataverse.Client" Version="1.1.*" />
+		<PackageReference Include="Microsoft.PowerPlatform.Dataverse.Client" Version="1.2.*" />
 		<PackageReference Include="PowerShellStandard.Library" Version="5.1.1">
 			<PrivateAssets>All</PrivateAssets>
 		</PackageReference>
@@ -23,10 +34,13 @@
 
 	<ItemGroup>
 		<None Update="AMSoftware.Dataverse.PowerShell.AccessManagement.psm1">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="AMSoftware.Dataverse.PowerShell.Administration.psm1">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="AMSoftware.Dataverse.PowerShell.Development.psm1">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Update="AMSoftware.Dataverse.PowerShell.psm1">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>

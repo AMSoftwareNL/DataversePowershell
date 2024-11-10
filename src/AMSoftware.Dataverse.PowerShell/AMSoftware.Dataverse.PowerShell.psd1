@@ -6,7 +6,7 @@
     RootModule = ''
 
     # Version number of this module.
-    ModuleVersion = '0.0.1'
+    ModuleVersion = '0.4.0'
 
     # Supported PSEditions
     CompatiblePSEditions = 'Core'
@@ -50,7 +50,8 @@
         'AMSoftware.Dataverse.PowerShell.dll', 
         'AMSoftware.Dataverse.PowerShell.psm1', 
         'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1',
-        'AMSoftware.Dataverse.PowerShell.Administration.psm1'
+        'AMSoftware.Dataverse.PowerShell.Administration.psm1',
+        'AMSoftware.Dataverse.PowerShell.Development.psm1'
     )
 
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
@@ -112,10 +113,10 @@
     VariablesToExport = @('DataverseSession','DataverseClient')
 
     # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-    AliasesToExport = @()
+    AliasesToExport = '*'
 
     # List of all modules packaged with this module
-    ModuleList = @('AMSoftware.Dataverse.PowerShell.dll', 'AMSoftware.Dataverse.PowerShell.psm1', 'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1')
+    ModuleList = @()
 
     # List of all files packaged with this module
     FileList = @(
@@ -124,11 +125,13 @@
         'AMSoftware.Dataverse.PowerShell.psm1',
         'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1'
         'AMSoftware.Dataverse.PowerShell.Administration.psm1'
+        'AMSoftware.Dataverse.PowerShell.Development.psm1'
         'AMSoftware.Dataverse.PowerShell.Types.ps1xml',
         'AMSoftware.Dataverse.PowerShell.Formats.ps1xml',
         'AMSoftware.Dataverse.PowerShell.dll-help.xml',
         'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1-help.xml'
         'AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml'
+        'AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml'
         'Microsoft.PowerPlatform.Dataverse.Client.dll',
         'Microsoft.Xrm.Sdk.dll',
         'Microsoft.Crm.Sdk.Proxy.dll')
@@ -145,11 +148,8 @@
             # A URL to the main website for this project.
             ProjectUri = 'https://github.com/AMSoftwareNL/DataversePowershell'
         
-            # A URL to an icon representing this module.
-            # IconUri = ''
-        
             # ReleaseNotes of this module
-            # ReleaseNotes = ''
+            ReleaseNotes = 'https://github.com/AMSoftwareNL/DataversePowershell/releases/tag/v0.4.0'
         
             # Flag to indicate whether the module requires explicit user acceptance for install/update/save
             RequireLicenseAcceptance = $true
@@ -157,6 +157,6 @@
     } # End of PrivateData hashtable
 
     # HelpInfo URI of this module
-    # HelpInfoURI = ''
+    HelpInfoURI = 'https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/AMSoftware.Dataverse.PowerShell.md'
 }
 
