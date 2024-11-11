@@ -43,7 +43,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         public AttributeMetadata InputObject { get; set; }
 
         [Parameter(Mandatory = true, ParameterSetName = SetColumnByParametersParameterset)]
+        [Alias("AttributeLogicalName", "ColumnName")]
         [ValidateNotNullOrEmpty]
+        [ArgumentCompleter(typeof(ColumnNameArgumentCompleter))]
         public string Name { get; set; }
 
         [Parameter(Mandatory = false, ParameterSetName = SetColumnByParametersParameterset)]
