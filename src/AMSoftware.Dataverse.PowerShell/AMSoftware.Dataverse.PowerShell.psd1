@@ -6,7 +6,7 @@
     RootModule = ''
 
     # Version number of this module.
-    ModuleVersion = '0.4.0'
+    ModuleVersion = '0.5.0'
 
     # Supported PSEditions
     CompatiblePSEditions = 'Core'
@@ -155,7 +155,7 @@
             ProjectUri = 'https://github.com/AMSoftwareNL/DataversePowershell'
         
             # ReleaseNotes of this module
-            ReleaseNotes = 'https://github.com/AMSoftwareNL/DataversePowershell/releases/tag/v0.4.0'
+            ReleaseNotes = 'https://github.com/AMSoftwareNL/DataversePowershell/releases/tag/v0.5.0'
         
             # Flag to indicate whether the module requires explicit user acceptance for install/update/save
             RequireLicenseAcceptance = $true
