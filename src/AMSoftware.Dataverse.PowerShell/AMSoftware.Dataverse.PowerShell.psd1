@@ -100,6 +100,7 @@
         'Add-DataverseRelationship',
         'Get-DataverseRelationship',
         'Remove-DataverseRelationship',
+        'Set-DataverseRelationship',
         'Add-DataverseChoice',
         'Get-DataverseChoice',
         'Remove-DataverseChoice',
