@@ -128,6 +128,9 @@ Locale: en-US
 ### [Set-DataverseColumn](Set-DataverseColumn.md)
 {{ Fill in the Synopsis }}
 
+### [Set-DataverseRelationship](Set-DataverseRelationship.md)
+{{ Fill in the Synopsis }}
+
 ### [Set-DataverseRow](Set-DataverseRow.md)
 {{ Fill in the Synopsis }}
 
