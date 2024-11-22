@@ -10,7 +10,7 @@ New-Variable -Name DataverseClient
 
 Export-ModuleMember -Function '*' -Variable 'DataverseSession','DataverseClient'
 
-Write-Host @'
+Write-Output @'
 PowerShell Module for Power Platform Dataverse
 Copyright (C) 2024 AMSoftwareNL
 

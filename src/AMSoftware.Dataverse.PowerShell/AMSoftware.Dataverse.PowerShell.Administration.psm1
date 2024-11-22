@@ -1,16 +1,16 @@
 # PowerShell Module for Power Platform Dataverse
 # Copyright(C) 2024  AMSoftwareNL
-# 
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
@@ -61,16 +61,23 @@ function Get-DataverseLanguage {
 
 # .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml
 function Remove-DataverseLanguage {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'High')]
     param (
         [Parameter(Mandatory = $true)]
         [Alias('Language', 'LCID')]
         [ValidateRange(1, 99999)]
-        [int]$Locale
+        [int]$Locale,
+        [switch]$Force
     )
 
     process {
-        Send-DataverseRequest -Name 'DeprovisionLanguage' -Parameters @{Language = $Locale }
+        if ($Force -and -not $PSBoundParameters.ContainsKey('Confirm')) {
+            $ConfirmPreference = 'None'
+        }
+
+        if ($PSCmdlet.ShouldProcess("Deprovision Language ($Locale)", $DataverseClient.ConnectedOrgFriendlyName)) {
+            Send-DataverseRequest -Name 'DeprovisionLanguage' -Parameters @{Language = $Locale }
+        }
     }
 }
 
@@ -161,17 +168,17 @@ function Get-DataverseSPDocumentLocation {
 }
 
 # .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml
-function Start-DataverseWorkflow {
+function Invoke-DataverseWorkflow {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('Id')]
-        [ValidateNotNullOrEmpty]
+        [ValidateNotNullOrEmpty()]
         [guid]$Row,
 
         [Parameter(Mandatory = $true)]
         [Alias('Process')]
-        [ValidateNotNullOrEmpty]
+        [ValidateNotNullOrEmpty()]
         [guid]$Workflow
     )
 

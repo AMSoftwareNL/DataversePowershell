@@ -47,8 +47,8 @@
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
     NestedModules = @(
-        'AMSoftware.Dataverse.PowerShell.dll', 
-        'AMSoftware.Dataverse.PowerShell.psm1', 
+        'AMSoftware.Dataverse.PowerShell.dll',
+        'AMSoftware.Dataverse.PowerShell.psm1',
         'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1',
         'AMSoftware.Dataverse.PowerShell.Administration.psm1',
         'AMSoftware.Dataverse.PowerShell.Development.psm1'
@@ -68,7 +68,7 @@
         'Import-DataverseTranslation',
         'Get-DataverseEnvironmentVariableValue',
         'Get-DataverseSPDocumentLocation',
-        'Start-DataverseWorkflow',
+        'Invoke-DataverseWorkflow',
         'Export-DataverseWebResource',
         'Export-DataversePluginAssembly',
         'Import-DataverseWebResource',
@@ -96,7 +96,7 @@
         'Use-DataverseSolution',
         'Add-DataverseRow',
         'Add-DataverseRows',
-        'Get-DataverseRow', 
+        'Get-DataverseRow',
         'Get-DataverseRows',
         'Remove-DataverseRow',
         'Set-DataverseRow',
@@ -104,7 +104,7 @@
         'Add-DataverseRelatedRow',
         'Remove-DataverseRelatedRow',
         'Send-DataverseRequest',
-        'Add-DataverseTable',   
+        'Add-DataverseTable',
         'Get-DataverseTable',
         'Remove-DataverseTable',
         'Set-DataverseTable',
@@ -168,13 +168,13 @@
 
             # A URL to the license for this module.
             LicenseUri = 'https://github.com/AMSoftwareNL/DataversePowershell/blob/main/LICENSE'
-        
+
             # A URL to the main website for this project.
             ProjectUri = 'https://github.com/AMSoftwareNL/DataversePowershell'
-        
+
             # ReleaseNotes of this module
             ReleaseNotes = 'https://github.com/AMSoftwareNL/DataversePowershell/releases/tag/v0.5.0'
-        
+
             # Flag to indicate whether the module requires explicit user acceptance for install/update/save
             RequireLicenseAcceptance = $true
         } # End of PSData hashtable
