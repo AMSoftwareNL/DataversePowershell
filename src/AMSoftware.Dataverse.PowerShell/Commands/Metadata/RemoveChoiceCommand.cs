@@ -27,20 +27,27 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
     {
         [Parameter(Mandatory = true, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
         [ValidateNotNullOrEmpty]
+        [ArgumentCompleter(typeof(ChoiceNameArgumentCompleter))]
         public string Name { get; set; }
+
+        [Parameter()]
+        public SwitchParameter Force { get; set; }
 
         protected override void Execute()
         {
             var choiceName = Name;
 
-            if (ShouldProcess(choiceName))
+            OrganizationRequest request = new DeleteOptionSetRequest()
             {
-                OrganizationRequest request = new DeleteOptionSetRequest()
-                {
-                    Name = choiceName
-                };
+                Name = choiceName
+            };
+            
+            if (Force.ToBool() && !MyInvocation.BoundParameters.ContainsKey("Confirm")) {
+                MyInvocation.BoundParameters["Confirm"] = "None";
+            }
 
-                var response = ExecuteOrganizationRequest<DeleteOptionSetResponse>(request);
+            if (ShouldProcess("DeleteOptionSet", Name)) {
+                var _ = ExecuteOrganizationRequest<DeleteOptionSetResponse>(request);
             }
         }
     }

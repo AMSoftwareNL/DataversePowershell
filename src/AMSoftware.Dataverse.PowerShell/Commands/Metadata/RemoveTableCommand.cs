@@ -31,17 +31,25 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [ArgumentCompleter(typeof(TableNameArgumentCompleter))]
         public string Name { get; set; }
 
+        [Parameter()]
+        public SwitchParameter Force {get; set; }
+
         protected override void Execute()
         {
             var entityLogicalName = Name;
 
-            if (ShouldProcess(entityLogicalName))
+            OrganizationRequest request = new DeleteEntityRequest()
             {
-                OrganizationRequest request = new DeleteEntityRequest()
-                {
-                    LogicalName = entityLogicalName
-                };
+                LogicalName = entityLogicalName
+            };
 
+            if (Force.ToBool() && !MyInvocation.BoundParameters.ContainsKey("Confirm"))
+            {
+                MyInvocation.BoundParameters["Confirm"] = "None";
+            }
+
+            if (ShouldProcess("DeleteEntity", entityLogicalName))
+            {
                 DeleteEntityResponse response = ExecuteOrganizationRequest<DeleteEntityResponse>(request);
             }
         }

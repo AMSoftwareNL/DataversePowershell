@@ -28,15 +28,23 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [Alias("SchemaName")]
         public string Name { get; set; }
 
+        [Parameter()]
+        public SwitchParameter Force { get; set; }
+
         protected override void Execute()
         {
-            if (ShouldProcess(Name))
+            var request = new DeleteRelationshipRequest()
             {
-                var request = new DeleteRelationshipRequest()
-                {
-                    Name = Name
-                };
-                var response = ExecuteOrganizationRequest<RetrieveRelationshipResponse>(request);
+                Name = Name
+            };
+            if (Force.ToBool() && !MyInvocation.BoundParameters.ContainsKey("Confirm"))
+            {
+                MyInvocation.BoundParameters["Confirm"] = "None";
+            }
+
+            if (ShouldProcess("DeleteRelationship", Name))
+            {
+                var _ = ExecuteOrganizationRequest<RetrieveRelationshipResponse>(request);
             }
         }
     }
