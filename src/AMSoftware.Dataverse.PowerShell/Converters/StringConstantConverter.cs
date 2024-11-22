@@ -16,52 +16,45 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Metadata;
 using System;
 using System.ComponentModel;
 using System.Management.Automation;
 
 namespace AMSoftware.Dataverse.PowerShell.Converters
 {
-    public sealed class MoneyConverter : PSTypeConverter
+    public sealed class StringConstantConverter : PSTypeConverter
     {
         public override bool CanConvertFrom(object sourceValue, Type destinationType)
         {
-            if (sourceValue == null) return true;
-            if (sourceValue.GetType() == typeof(decimal)) return true;
-
-            var dc = TypeDescriptor.GetConverter(destinationType);
-            return dc.CanConvertFrom(sourceValue.GetType());
+            return false;
         }
 
         public override bool CanConvertTo(object sourceValue, Type destinationType)
         {
-            if (sourceValue == null) return false;
-            if (destinationType == typeof(decimal)) return true;
+            if (sourceValue == null) return true;
+            if (destinationType == typeof(string) && sourceValue is ConstantsBase<string>) return true;
 
-            var dc = TypeDescriptor.GetConverter(destinationType);
+            var dc = TypeDescriptor.GetConverter(typeof(string));
             return dc.CanConvertTo(destinationType);
         }
 
         public override object ConvertFrom(object sourceValue, Type destinationType, IFormatProvider formatProvider, bool ignoreCase)
         {
-            if (sourceValue == null) return null;
-            if (sourceValue.GetType() == typeof(decimal)) return new Money((decimal)sourceValue);
-
-            var dc = TypeDescriptor.GetConverter(destinationType);
-            return new Money((decimal)dc.ConvertFrom(sourceValue));
+            throw new NotSupportedException();
         }
 
         public override object ConvertTo(object sourceValue, Type destinationType, IFormatProvider formatProvider, bool ignoreCase)
         {
-            if (sourceValue == null) throw new NotSupportedException();
+            if (sourceValue == null) return null;
 
-            if (sourceValue is Money moneyValue)
+            if (sourceValue is ConstantsBase<string> constantValue)
             {
-                if (destinationType == typeof(decimal)) return moneyValue.Value;
+                if (destinationType == typeof(string)) return constantValue.Value;
                 else
                 {
-                    var dc = TypeDescriptor.GetConverter(destinationType);
-                    return dc.ConvertTo(moneyValue.Value, destinationType);
+                    var converter = TypeDescriptor.GetConverter(typeof(string));
+                    return converter.ConvertTo(constantValue.Value, destinationType);
                 }
             }
 

@@ -30,7 +30,7 @@ namespace AMSoftware.Dataverse.PowerShell.Converters
             if (sourceValue == null) return true;
             if (sourceValue.GetType() == typeof(string)) return true;
 
-            StringConverter sc = new StringConverter();
+            var sc = TypeDescriptor.GetConverter(destinationType);
             return sc.CanConvertFrom(sourceValue.GetType());
         }
 
@@ -39,7 +39,7 @@ namespace AMSoftware.Dataverse.PowerShell.Converters
             if (sourceValue == null) return null;
             if (sourceValue.GetType() == typeof(string)) return new Label((string)sourceValue, Session.Current.LanguageId);
 
-            StringConverter sc = new StringConverter();
+            var sc = TypeDescriptor.GetConverter(destinationType);
             return new Label((string)sc.ConvertFrom(sourceValue), Session.Current.LanguageId);
         }
 
@@ -48,7 +48,7 @@ namespace AMSoftware.Dataverse.PowerShell.Converters
             if (sourceValue == null) return true;
             if (destinationType == typeof(string)) return true;
 
-            StringConverter sc = new StringConverter();
+            var sc = TypeDescriptor.GetConverter(destinationType);
             return sc.CanConvertTo(destinationType);
         }
 
@@ -64,7 +64,7 @@ namespace AMSoftware.Dataverse.PowerShell.Converters
                     if (destinationType == typeof(string)) return languageLabel.Label;
                     else
                     {
-                        StringConverter sc = new StringConverter();
+                        var sc = TypeDescriptor.GetConverter(destinationType);
                         return sc.ConvertTo(languageLabel.Label, destinationType);
                     }
                 }
