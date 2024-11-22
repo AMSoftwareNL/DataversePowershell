@@ -55,12 +55,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             }
             else
             {
-                if (Force.ToBool() && !MyInvocation.BoundParameters.ContainsKey("Confirm"))
-                {
-                    MyInvocation.BoundParameters["Confirm"] = "None";
-                }
-
-                if (ShouldProcess("Delete", $"{Table} {Id}"))
+                if (Force || ShouldProcess("Delete", $"{Table} {Id}"))
                 {
                     var _ = ExecuteOrganizationRequest<DeleteResponse>(request);
                 }

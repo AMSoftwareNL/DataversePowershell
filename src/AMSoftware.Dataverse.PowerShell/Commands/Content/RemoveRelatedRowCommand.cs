@@ -88,12 +88,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             }
             else
             {
-                if (Force.ToBool() && !MyInvocation.BoundParameters.ContainsKey("Confirm"))
-                {
-                    MyInvocation.BoundParameters["Confirm"] = "None";
-                }
-
-                if (ShouldProcess("Disassociate", $"{TargetTable} {TargetRow}"))
+                if (Force || ShouldProcess("Disassociate", $"{TargetTable} {TargetRow}"))
                 {
                     var _ = ExecuteOrganizationRequest<DisassociateResponse>(request);
                 }

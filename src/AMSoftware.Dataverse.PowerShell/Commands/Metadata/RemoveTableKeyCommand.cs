@@ -46,12 +46,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 Name = Name
             };
 
-            if (Force.ToBool() && !MyInvocation.BoundParameters.ContainsKey("Confirm"))
-            {
-                MyInvocation.BoundParameters["Confirm"] = "None";
-            }
-
-            if (ShouldProcess("DeleteEntityKey", $"{Table} {Name}"))
+            if (Force || ShouldProcess("DeleteEntityKey", $"{Table} {Name}"))
             {
                 var _ = ExecuteOrganizationRequest<DeleteEntityKeyResponse>(request);
             }

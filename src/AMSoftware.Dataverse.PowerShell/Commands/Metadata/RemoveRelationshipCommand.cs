@@ -37,12 +37,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             {
                 Name = Name
             };
-            if (Force.ToBool() && !MyInvocation.BoundParameters.ContainsKey("Confirm"))
-            {
-                MyInvocation.BoundParameters["Confirm"] = "None";
-            }
 
-            if (ShouldProcess("DeleteRelationship", Name))
+            if (Force || ShouldProcess("DeleteRelationship", Name))
             {
                 var _ = ExecuteOrganizationRequest<RetrieveRelationshipResponse>(request);
             }

@@ -43,12 +43,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 LogicalName = entityLogicalName
             };
 
-            if (Force.ToBool() && !MyInvocation.BoundParameters.ContainsKey("Confirm"))
-            {
-                MyInvocation.BoundParameters["Confirm"] = "None";
-            }
-
-            if (ShouldProcess("DeleteEntity", entityLogicalName))
+            if (Force || ShouldProcess("DeleteEntity", entityLogicalName))
             {
                 DeleteEntityResponse response = ExecuteOrganizationRequest<DeleteEntityResponse>(request);
             }

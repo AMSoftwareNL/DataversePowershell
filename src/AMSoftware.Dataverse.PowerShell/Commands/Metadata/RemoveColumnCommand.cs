@@ -46,12 +46,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 LogicalName = Name
             };
 
-            if (Force.ToBool() && !MyInvocation.BoundParameters.ContainsKey("Confirm"))
-            {
-                MyInvocation.BoundParameters["Confirm"] = "None";
-            }
-
-            if (ShouldProcess("DeleteAttribute", $"{Table} {Name}"))
+            if (Force || ShouldProcess("DeleteAttribute", $"{Table} {Name}"))
             {
                 var _ = ExecuteOrganizationRequest<DeleteAttributeResponse>(request);
             }

@@ -85,12 +85,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 MergeLabels = true
             };
 
-            if (Force.ToBool() && !MyInvocation.BoundParameters.ContainsKey("Confirm"))
-            {
-                MyInvocation.BoundParameters["Confirm"] = "None";
-            }
-
-            if (ShouldProcess("UpdateOptionSet", optionset.Name))
+            if (Force || ShouldProcess("UpdateOptionSet", optionset.Name))
             {
                 var _ = ExecuteOrganizationRequest<UpdateOptionSetResponse>(updateRequest);
             }
@@ -117,12 +112,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 MergeLabels = true,
             };
 
-            if (Force.ToBool() && !MyInvocation.BoundParameters.ContainsKey("Confirm"))
-            {
-                MyInvocation.BoundParameters["Confirm"] = "None";
-            }
-
-            if (ShouldProcess("UpdateAttribute", $"{attribute.EntityLogicalName} {attribute.LogicalName}"))
+            if (Force || ShouldProcess("UpdateAttribute", $"{attribute.EntityLogicalName} {attribute.LogicalName}"))
             {
                 var _ = ExecuteOrganizationRequest<UpdateAttributeResponse>(updateRequest);
             }

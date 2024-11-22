@@ -42,11 +42,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 Name = choiceName
             };
             
-            if (Force.ToBool() && !MyInvocation.BoundParameters.ContainsKey("Confirm")) {
-                MyInvocation.BoundParameters["Confirm"] = "None";
-            }
-
-            if (ShouldProcess("DeleteOptionSet", Name)) {
+            if (Force || ShouldProcess("DeleteOptionSet", Name)) {
                 var _ = ExecuteOrganizationRequest<DeleteOptionSetResponse>(request);
             }
         }
