@@ -1,3 +1,6 @@
+[System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '')]
+param()
+
 New-Variable -Name DataverseSession
 New-Variable -Name DataverseClient
 
@@ -10,7 +13,7 @@ New-Variable -Name DataverseClient
 
 Export-ModuleMember -Function '*' -Variable 'DataverseSession','DataverseClient'
 
-Write-Output @'
+Write-Host @'
 PowerShell Module for Power Platform Dataverse
 Copyright (C) 2024 AMSoftwareNL
 

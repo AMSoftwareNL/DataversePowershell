@@ -89,13 +89,23 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             {
                 foreach (var keyAttribute in Key.Keys)
                 {
-                    result.KeyAttributes.Add((string)keyAttribute, Key[keyAttribute]);
+                    var keyValue = Key[keyAttribute];
+
+                    if (keyValue is PSObject psValue)
+                        result.KeyAttributes.Add((string)keyAttribute, psValue.ImmediateBaseObject);
+                    else
+                        result.KeyAttributes.Add((string)keyAttribute, keyValue);
                 }
             }
 
             foreach (var attributeName in Values.Keys)
             {
-                result.Attributes.Add((string)attributeName, Values[attributeName]);
+                var attributeValue = Values[attributeName];
+
+                if (attributeValue is PSObject psValue)
+                    result.Attributes.Add((string)attributeName, psValue.ImmediateBaseObject);
+                else
+                    result.Attributes.Add((string)attributeName, attributeValue);
             }
 
             return result;
