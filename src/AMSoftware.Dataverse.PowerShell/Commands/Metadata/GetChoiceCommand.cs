@@ -35,7 +35,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [ValidateNotNull]
         public Guid Id { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = GetChoiceByNameParameterSet, ValueFromPipeline = true)]
+        [Parameter(Mandatory = false, ParameterSetName = GetChoiceByNameParameterSet, ValueFromPipeline = true)]
         [ValidateNotNullOrEmpty]
         [SupportsWildcards]
         [Alias("Include")]
