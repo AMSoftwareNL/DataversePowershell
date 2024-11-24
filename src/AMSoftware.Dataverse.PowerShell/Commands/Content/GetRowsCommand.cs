@@ -16,6 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
+using AMSoftware.Dataverse.PowerShell.Commands.Metadata;
 using Microsoft.PowerPlatform.Dataverse.Client;
 using Microsoft.PowerPlatform.Dataverse.Client.Extensions;
 using Microsoft.Xrm.Sdk;
@@ -23,12 +24,14 @@ using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections;
+using System.Linq;
 using System.Management.Automation;
+using System.Runtime.CompilerServices;
 using System.Xml;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
-    [Cmdlet(VerbsCommon.Get, "DataverseRows", DefaultParameterSetName = RetrieveWithQueryParameterSet)]
+    [Cmdlet(VerbsCommon.Get, "DataverseRows", DefaultParameterSetName = RetrieveWithQueryParameterSet, SupportsPaging = true)]
     [OutputType(typeof(Entity))]
     public sealed class GetRowsCommand : RequestCmdletBase
     {
@@ -39,6 +42,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
         private const int QueryPagesize = 5000;
         private const int QueryBatchsize = 1000;
+
+        private int _topCount = 0;
 
         [Parameter(Mandatory = true, ParameterSetName = RetrieveWithAttributeQueryParameterSet)]
         [Parameter(Mandatory = true, ParameterSetName = RetrieveWithQueryParameterSet)]
@@ -51,6 +56,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = RetrieveWithBatchParameterSet)]
         [ValidateNotNullOrEmpty]
         public Guid[] Id { get; set; }
+
+        [Parameter(Mandatory = false, ParameterSetName = RetrieveWithBatchParameterSet)]
+        public SwitchParameter AsBatch { get; set; }
 
         [Parameter(Mandatory = true, ParameterSetName = RetrieveWithAttributeQueryParameterSet)]
         [ValidateNotNullOrEmpty]
@@ -70,12 +78,49 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         public XmlDocument FetchXml { get; set; }
 
         private ColumnSet _columnSet;
-        
+
         protected override void BeginProcessing()
         {
             base.BeginProcessing();
 
+            if (PagingParameters.Skip != 0 || PagingParameters.First != ulong.MaxValue)
+            {
+                switch (ParameterSetName)
+                {
+                    case RetrieveWithFetchXmlParameterSet:
+                    case RetrieveWithAttributeQueryParameterSet:
+                    case RetrieveWithQueryParameterSet:
+                        if (PagingParameters.First == ulong.MaxValue) PagingParameters.First = QueryPagesize;
+
+                        if (PagingParameters.Skip + PagingParameters.First > QueryPagesize)
+                        {
+                            throw new PSArgumentOutOfRangeException(
+                                nameof(PagingParameters),
+                                PagingParameters.First + PagingParameters.Skip,
+                                $"Paging parameters only allowed when less than pagesize (={QueryPagesize})");
+                        }
+                        break;
+                    case RetrieveWithBatchParameterSet:
+                        if (PagingParameters.First == ulong.MaxValue) PagingParameters.First = QueryBatchsize;
+
+                        if (PagingParameters.Skip + PagingParameters.First > QueryBatchsize)
+                        {
+                            throw new PSArgumentOutOfRangeException(
+                                nameof(PagingParameters),
+                                PagingParameters.First + PagingParameters.Skip,
+                                $"Paging parameters only allowed when less than batchsize (={QueryBatchsize})");
+                        }
+                        break;
+                }
+
+                _topCount = (int)(PagingParameters.Skip + PagingParameters.First);
+            }
+
+            if (PagingParameters.IncludeTotalCount.ToBool() && _topCount == 0)
+                throw new PSArgumentException("Total Count only allow in combination with Skip and/or First.", nameof(PagingParameters.IncludeTotalCount));
+
             _columnSet = BuildColumnSet(Columns);
+
         }
 
         public override void Execute()
@@ -114,6 +159,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 }
             }
 
+            if (_topCount != 0) tableQuery.TopCount = _topCount;
+
             return tableQuery;
         }
 
@@ -137,6 +184,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 }
             }
 
+            if (_topCount != 0) attributeQuery.TopCount = _topCount;
+
             return attributeQuery;
         }
 
@@ -146,7 +195,16 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             Guid batchId = default;
             RequestBatch batch = default;
 
-            for (int i = 0; i < Id.Length; i++)
+            // Apply paging to the input array.
+            var pagedIds = Id.AsEnumerable();
+            if (PagingParameters.Skip != 0)
+                pagedIds = pagedIds.Skip((int)PagingParameters.Skip);
+
+            if (PagingParameters.First != ulong.MaxValue)
+                pagedIds = pagedIds.Take((int)PagingParameters.First);
+
+            var rowIds = pagedIds.ToArray();
+            for (int i = 0; i < rowIds.Length; i++)
             {
                 if (pageCount == 0)
                 {
@@ -159,19 +217,19 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                     batch = Session.Current.Client.GetBatchById(batchId);
                 }
 
-                WriteVerboseWithTimestamp("Add BatchItem: {0} ({1})", Table, Id[i]);
+                WriteVerboseWithTimestamp("Add BatchItem: {0} ({1})", Table, rowIds[i]);
 
                 batch.BatchItems.Add(new BatchItemOrganizationRequest()
                 {
                     Request = new RetrieveRequest()
                     {
                         ColumnSet = _columnSet,
-                        Target = new EntityReference(Table, Id[i])
+                        Target = new EntityReference(Table, rowIds[i])
                     }
                 });
                 pageCount++;
 
-                if (pageCount == QueryBatchsize || i == Id.Length - 1)
+                if (pageCount == QueryBatchsize || i == rowIds.Length - 1)
                 {
                     try
                     {
@@ -191,6 +249,10 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         private void ExecuteBatch(Guid batchId)
         {
             var batchResponse = Session.Current.Client.ExecuteBatch(batchId);
+
+            if (PagingParameters.IncludeTotalCount.ToBool())
+                WriteObject(PagingParameters.NewTotalCount((ulong)batchResponse.Responses.Where(r => r.Fault == null).Count(), 1.0));
+
             foreach (var responseItem in batchResponse.Responses)
             {
                 if (responseItem.Fault == null)
@@ -226,7 +288,14 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
                 var pagedQueryResponse = ExecuteOrganizationRequest<RetrieveMultipleResponse>(pagedQueryRequest);
 
-                WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
+                var output = pagedQueryResponse.EntityCollection.Entities.AsEnumerable();
+                if (PagingParameters.Skip != 0)
+                    output = output.Skip((int)PagingParameters.Skip);
+
+                if (PagingParameters.IncludeTotalCount.ToBool())
+                    WriteObject(PagingParameters.NewTotalCount((ulong)output.Count(), 1.0));
+
+                WriteObject(output, true);
 
                 pageNumber += 1;
                 pagingCookie = pagedQueryResponse.EntityCollection.PagingCookie;
@@ -236,11 +305,14 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
         private void ExecuteAttributeQuery(QueryByAttribute query)
         {
-            query.PageInfo = new PagingInfo()
+            if (_topCount == 0)
             {
-                PageNumber = 1,
-                Count = QueryPagesize
-            };
+                query.PageInfo = new PagingInfo()
+                {
+                    PageNumber = 1,
+                    Count = QueryPagesize
+                };
+            }
 
             bool moreRecords = false;
             do
@@ -252,7 +324,14 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
                 var pagedQueryResponse = ExecuteOrganizationRequest<RetrieveMultipleResponse>(pagedQueryRequest);
 
-                WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
+                var output = pagedQueryResponse.EntityCollection.Entities.AsEnumerable();
+                if (PagingParameters.Skip != 0)
+                    output = output.Skip((int)PagingParameters.Skip);
+
+                if (PagingParameters.IncludeTotalCount.ToBool())
+                    WriteObject(PagingParameters.NewTotalCount((ulong)output.Count(), 1.0));
+
+                WriteObject(output, true);
 
                 query.PageInfo.PageNumber += 1;
                 query.PageInfo.PagingCookie = pagedQueryResponse.EntityCollection.PagingCookie;
@@ -263,11 +342,14 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
         private void ExecuteQuery(QueryExpression query)
         {
-            query.PageInfo = new PagingInfo()
+            if (_topCount == 0)
             {
-                PageNumber = 1,
-                Count = QueryPagesize
-            };
+                query.PageInfo = new PagingInfo()
+                {
+                    PageNumber = 1,
+                    Count = QueryPagesize
+                };
+            }
 
             bool moreRecords = false;
             do
@@ -279,7 +361,14 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
                 var pagedQueryResponse = ExecuteOrganizationRequest<RetrieveMultipleResponse>(pagedQueryRequest);
 
-                WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
+                var output = pagedQueryResponse.EntityCollection.Entities.AsEnumerable();
+                if (PagingParameters.Skip != 0)
+                    output = output.Skip((int)PagingParameters.Skip);
+
+                if (PagingParameters.IncludeTotalCount.ToBool())
+                    WriteObject(PagingParameters.NewTotalCount((ulong)output.Count(), 1.0));
+
+                WriteObject(output, true);
 
                 query.PageInfo.PageNumber += 1;
                 query.PageInfo.PagingCookie = pagedQueryResponse.EntityCollection.PagingCookie;
@@ -294,15 +383,21 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             else return new ColumnSet(columns);
         }
 
-        private static XmlDocument CreateFetchXmlWithPaging(in XmlDocument fetchXml, int pageNumber, string cookie = null)
+        private XmlDocument CreateFetchXmlWithPaging(in XmlDocument fetchXml, int pageNumber, string cookie = null)
         {
             XmlDocument pagedFetchXml = (XmlDocument)fetchXml.CloneNode(true);
             XmlAttributeCollection xmlAttributes = pagedFetchXml.DocumentElement.Attributes;
 
-            if (xmlAttributes["top"] != null)
+            if (xmlAttributes["top"] != null) return pagedFetchXml;
+
+            if (_topCount != 0)
             {
+                XmlAttribute topAttribute = pagedFetchXml.CreateAttribute("top");
+                topAttribute.Value = _topCount.ToString();
+                pagedFetchXml.DocumentElement.Attributes.Append(topAttribute);
+
                 return pagedFetchXml;
-            };
+            }
 
             if (cookie != null)
             {
