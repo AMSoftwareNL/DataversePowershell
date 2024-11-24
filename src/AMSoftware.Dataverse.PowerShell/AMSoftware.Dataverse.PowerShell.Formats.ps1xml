@@ -18,78 +18,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 <Configuration>
   <ViewDefinitions>
-    <View>
-      <Name>Microsoft.Xrm.Sdk.Entity</Name>
-      <ViewSelectedBy>
-        <TypeName>Microsoft.Xrm.Sdk.Entity</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Width>20</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>36</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>40</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>10</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>10</Width>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>LogicalName</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Id</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Name</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>State</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Status</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
+    <!-- Microsoft.Xrm.Sdk.Metadata.EntityMetadata -->
     <View>
       <Name>Microsoft.Xrm.Sdk.Metadata.EntityMetadata</Name>
       <ViewSelectedBy>
         <TypeName>Microsoft.Xrm.Sdk.Metadata.EntityMetadata</TypeName>
       </ViewSelectedBy>
       <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Width>20</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>20</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>20</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>20</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>10</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>10</Width>
-          </TableColumnHeader>
-        </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
@@ -105,86 +40,18 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
               <TableColumnItem>
                 <PropertyName>PrimaryNameAttribute</PropertyName>
               </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>IsManaged</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>IsCustomEntity</PropertyName>
-              </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
         </TableRowEntries>
       </TableControl>
     </View>
-    <View>
-      <Name>Microsoft.Xrm.Sdk.Metadata.EntityKeyMetadata</Name>
-      <ViewSelectedBy>
-        <TypeName>Microsoft.Xrm.Sdk.Metadata.EntityKeyMetadata</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Width>20</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>30</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>30</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>10</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>10</Width>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>EntityLogicalName</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>LogicalName</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>DisplayName</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>IsManaged</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>EntityKeyIndexStatus</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
+    <!-- Microsoft.Xrm.Sdk.Metadata.AttributeMetadata -->
     <View>
       <Name>Microsoft.Xrm.Sdk.Metadata.AttributeMetadata</Name>
       <ViewSelectedBy>
         <TypeName>Microsoft.Xrm.Sdk.Metadata.AttributeMetadata</TypeName>
       </ViewSelectedBy>
       <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Width>20</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>30</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>30</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>15</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Width>10</Width>
-          </TableColumnHeader>
-        </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
@@ -200,13 +67,148 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
               <TableColumnItem>
                 <PropertyName>AttributeType</PropertyName>
               </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <!-- Microsoft.Xrm.Sdk.Metadata.EntityKeyMetadata -->
+    <View>
+      <Name>Microsoft.Xrm.Sdk.Metadata.EntityKeyMetadata</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Xrm.Sdk.Metadata.EntityKeyMetadata</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
               <TableColumnItem>
-                <PropertyName>IsManaged</PropertyName>
+                <PropertyName>EntityLogicalName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>LogicalName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisplayName</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
         </TableRowEntries>
       </TableControl>
     </View>
-</ViewDefinitions>
+    <!-- Microsoft.Xrm.Sdk.Metadata.OptionSetMetadataBase -->
+    <View>
+      <Name>Microsoft.Xrm.Sdk.Metadata.OptionSetMetadataBase</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Xrm.Sdk.Metadata.OptionSetMetadataBase</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisplayName</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <!-- Microsoft.Xrm.Sdk.Metadata.RelationshipMetadataBase -->
+    <View>
+      <Name>Microsoft.Xrm.Sdk.Metadata.RelationshipMetadataBase</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Xrm.Sdk.Metadata.RelationshipMetadataBase</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>SchemaName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RelationshipType</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <!-- Microsoft.Xrm.Sdk.Entity -->
+    <View>
+      <Name>Microsoft.Xrm.Sdk.Entity</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Xrm.Sdk.Entity</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>LogicalName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>State</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <!-- Microsoft.Xrm.Sdk.EntityReference -->
+    <View>
+      <Name>Microsoft.Xrm.Sdk.EntityReference</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Xrm.Sdk.EntityReference</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>LogicalName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <!-- Microsoft.Xrm.Sdk.Metadata.EntityKeyMetadata -->
+    <View>
+      <Name>Microsoft.Xrm.Sdk.Metadata.EntityKeyMetadata</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Xrm.Sdk.Metadata.EntityKeyMetadata</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>EntityLogicalName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>LogicalName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisplayName</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+  </ViewDefinitions>
 </Configuration>

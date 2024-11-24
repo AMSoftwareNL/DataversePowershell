@@ -70,7 +70,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
             }
         }
 
-        protected override void Execute()
+        public override void Execute()
         {
         }
     }

@@ -39,7 +39,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [Parameter(Mandatory = false)]
         public SwitchParameter Upsert { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             if (Upsert.ToBool())
             {

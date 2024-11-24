@@ -8,7 +8,7 @@ schema: 2.0.0
 # Connect-DataverseEnvironment
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Connect to a specific Dataverse Environment.
 
 ## SYNTAX
 
@@ -37,21 +37,14 @@ Connect-DataverseEnvironment -EnvironmentUrl <Uri> -ClientId <String> -ClientSec
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Connect to a specific Dataverse Environment. This connects the PowerShell session with the Dataverse Environment. Non of cmdlets or functions in this module work without a connected session.
 
 ## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -ClientId
-{{ Fill ClientId Description }}
+The ClientId / AppId of a registered application in Azure Entra ID as context for this module. If non provided the module will uses the Microsoft provided Client ID for development and prototyping purposes.
 
 ```yaml
 Type: System.String
@@ -78,7 +71,7 @@ Accept wildcard characters: False
 ```
 
 ### -ClientSecret
-{{ Fill ClientSecret Description }}
+The client secret to use for authentication.
 
 ```yaml
 Type: System.Security.SecureString
@@ -93,7 +86,7 @@ Accept wildcard characters: False
 ```
 
 ### -Connectionstring
-{{ Fill Connectionstring Description }}
+A connectionstring to Dataverse including authentication information in the format of Connectionstring for XRM Tooling.
 
 ```yaml
 Type: System.String
@@ -108,7 +101,7 @@ Accept wildcard characters: False
 ```
 
 ### -EnvironmentUrl
-{{ Fill EnvironmentUrl Description }}
+The URL of the Dataverse Environment to connect to.
 
 ```yaml
 Type: System.Uri
@@ -123,7 +116,7 @@ Accept wildcard characters: False
 ```
 
 ### -ServiceClient
-{{ Fill ServiceClient Description }}
+An external authenticated Dataverse ServiceClient instance.
 
 ```yaml
 Type: Microsoft.PowerPlatform.Dataverse.Client.ServiceClient
@@ -138,7 +131,7 @@ Accept wildcard characters: False
 ```
 
 ### -UseDeviceCode
-{{ Fill UseDeviceCode Description }}
+Include switch to use DeviceCode for terminal-only systems. Login with DeviceCode uses a custom authenticator. As a result the AuthenticationToken in the Dataverse ServiceClient is NOT populated.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -164,4 +157,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Connect-DataverseEnvironment.md)
+[Connectionstring for XRM Tooling](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/xrm-tooling/use-connection-strings-xrm-tooling-connect)
+[Microsoft.PowerPlatform.Dataverse.Client.ServiceClient](https://learn.microsoft.com/en-us/dotnet/api/microsoft.powerplatform.dataverse.client.serviceclient?view=dataverse-sdk-latest)
+
 

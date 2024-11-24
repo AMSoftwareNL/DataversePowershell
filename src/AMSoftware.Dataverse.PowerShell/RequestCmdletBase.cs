@@ -25,25 +25,25 @@ namespace AMSoftware.Dataverse.PowerShell
         /// Use optional parameters
         /// https://learn.microsoft.com/en-us/power-apps/developer/data-platform/optional-parameters?tabs=sdk
 
-        [Parameter]
+        [Parameter(DontShow = true)]
         [ValidateNotNullOrEmpty]
         public string Solution { get; set; }
 
-        [Parameter]
+        [Parameter(DontShow = true)]
         [ValidateNotNullOrEmpty]
         public string SharedTag { get; set; }
 
-        [Parameter]
+        [Parameter(DontShow = true)]
         [ValidateNotNullOrEmpty]
         public string Partition { get; set; }
 
-        [Parameter]
+        [Parameter(DontShow = true)]
         public SwitchParameter FailOnDuplicateDetection { get; set; }
 
-        [Parameter]
+        [Parameter(DontShow = true)]
         public SwitchParameter BypassSynchronousLogic { get; set; }
 
-        [Parameter]
+        [Parameter(DontShow = true)]
         public SwitchParameter BypassPowerAutomateFlows { get; set; }
 
         protected virtual TResponse ExecuteOrganizationRequest<TResponse>(OrganizationRequest request) where TResponse : OrganizationResponse

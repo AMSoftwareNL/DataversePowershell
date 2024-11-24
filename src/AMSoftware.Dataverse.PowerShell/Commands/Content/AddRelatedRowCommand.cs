@@ -58,7 +58,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [ValidateNotNullOrEmpty]
         public string Relationship { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             EntityReferenceCollection relatedRows = new EntityReferenceCollection();
 

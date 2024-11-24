@@ -159,7 +159,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [ValidateNotNullOrEmpty]
         public Guid DataSourceId { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             EntityMetadata entityMetadata = null;
             StringAttributeMetadata attributeMetadata = null;

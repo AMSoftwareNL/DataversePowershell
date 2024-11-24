@@ -29,7 +29,7 @@ namespace AMSoftware.Dataverse.PowerShell.Converters
             if (sourceValue == null) return true;
             if (sourceValue.GetType() == typeof(int)) return true;
 
-            Int32Converter dc = new Int32Converter();
+            var dc = TypeDescriptor.GetConverter(destinationType);
             return dc.CanConvertFrom(sourceValue.GetType());
         }
 
@@ -38,7 +38,7 @@ namespace AMSoftware.Dataverse.PowerShell.Converters
             if (sourceValue == null) return false;
             if (destinationType == typeof(int)) return true;
 
-            Int32Converter dc = new Int32Converter();
+            var dc = TypeDescriptor.GetConverter(destinationType);
             return dc.CanConvertTo(destinationType);
         }
 
@@ -47,7 +47,7 @@ namespace AMSoftware.Dataverse.PowerShell.Converters
             if (sourceValue == null) return null;
             if (sourceValue.GetType() == typeof(int)) return new OptionSetValue((int)sourceValue);
 
-            Int32Converter dc = new Int32Converter();
+            var dc = TypeDescriptor.GetConverter(destinationType);
             return new OptionSetValue((int)dc.ConvertFrom(sourceValue));
         }
 
@@ -60,7 +60,7 @@ namespace AMSoftware.Dataverse.PowerShell.Converters
                 if (destinationType == typeof(int)) return optionsetValue.Value;
                 else
                 {
-                    Int32Converter dc = new Int32Converter();
+                    var dc = TypeDescriptor.GetConverter(destinationType);
                     return dc.ConvertTo(optionsetValue.Value, destinationType);
                 }
             }

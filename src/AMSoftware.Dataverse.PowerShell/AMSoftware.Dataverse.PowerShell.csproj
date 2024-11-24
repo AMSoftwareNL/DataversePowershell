@@ -18,11 +18,11 @@
 		<Company>AMSoftware</Company>
 		<Copyright>Copyright(C) 2024 AMSoftwareNL. All rights reserved.</Copyright>
 		<Description>PowerShell Module for Power Platform Dataverse</Description>
-		<FileVersion>0.4.0</FileVersion>
-		<InformationalVersion>0.4.0</InformationalVersion>
+		<FileVersion>0.5.0</FileVersion>
+		<InformationalVersion>0.5.0</InformationalVersion>
 		<Product>AMSoftware.Dataverse.PowerShell</Product>
 		<AssemblyTitle>AMSoftware.Dataverse.PowerShell</AssemblyTitle>
-		<AssemblyVersion>0.4.0</AssemblyVersion>
+		<AssemblyVersion>0.5.0</AssemblyVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

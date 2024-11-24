@@ -35,17 +35,20 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [ValidateNotNullOrEmpty]
         public string Name { get; set; }
 
-        protected override void Execute()
-        {
-            if (ShouldProcess($"{Table}: {Name}"))
-            {
-                var request = new DeleteEntityKeyRequest()
-                {
-                    EntityLogicalName = Table,
-                    Name = Name
-                };
+        [Parameter()]
+        public SwitchParameter Force { get; set; }
 
-                var response = ExecuteOrganizationRequest<DeleteEntityKeyResponse>(request);
+        public override void Execute()
+        {
+            var request = new DeleteEntityKeyRequest()
+            {
+                EntityLogicalName = Table,
+                Name = Name
+            };
+
+            if (Force || ShouldProcess("DeleteEntityKey", $"{Table} {Name}"))
+            {
+                var _ = ExecuteOrganizationRequest<DeleteEntityKeyResponse>(request);
             }
         }
     }

@@ -29,7 +29,7 @@ namespace AMSoftware.Dataverse.PowerShell.Converters
             if (sourceValue == null) return true;
             if (sourceValue.GetType() == typeof(decimal)) return true;
 
-            DecimalConverter dc = new DecimalConverter();
+            var dc = TypeDescriptor.GetConverter(destinationType);
             return dc.CanConvertFrom(sourceValue.GetType());
         }
 
@@ -38,7 +38,7 @@ namespace AMSoftware.Dataverse.PowerShell.Converters
             if (sourceValue == null) return false;
             if (destinationType == typeof(decimal)) return true;
 
-            DecimalConverter dc = new DecimalConverter();
+            var dc = TypeDescriptor.GetConverter(destinationType);
             return dc.CanConvertTo(destinationType);
         }
 
@@ -47,7 +47,7 @@ namespace AMSoftware.Dataverse.PowerShell.Converters
             if (sourceValue == null) return null;
             if (sourceValue.GetType() == typeof(decimal)) return new Money((decimal)sourceValue);
 
-            DecimalConverter dc = new DecimalConverter();
+            var dc = TypeDescriptor.GetConverter(destinationType);
             return new Money((decimal)dc.ConvertFrom(sourceValue));
         }
 
@@ -60,7 +60,7 @@ namespace AMSoftware.Dataverse.PowerShell.Converters
                 if (destinationType == typeof(decimal)) return moneyValue.Value;
                 else
                 {
-                    DecimalConverter dc = new DecimalConverter();
+                    var dc = TypeDescriptor.GetConverter(destinationType);
                     return dc.ConvertTo(moneyValue.Value, destinationType);
                 }
             }

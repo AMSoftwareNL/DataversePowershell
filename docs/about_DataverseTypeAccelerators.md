@@ -17,3 +17,6 @@ Type accelerators are aliases for Microsoft.Xrm.Sdk classes. They allow you to a
 | dvreference | Microsoft.Xrm.Sdk.EntityReference |
 | dvlabel | Microsoft.Xrm.Sdk.Label |
 | dvchoiceoption | Microsoft.Xrm.Sdk.Metadata.OptionMetadata |
+
+# SEE ALSO
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/about_DataverseTypeAccelerators.md)

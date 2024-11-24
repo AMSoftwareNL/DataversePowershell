@@ -16,7 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
-using AMSoftware.Dataverse.PowerShell.DynamicParameters;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
@@ -24,7 +23,7 @@ using System.Management.Automation;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
-    [Cmdlet(VerbsCommon.Remove, "DataverseRelatedRow", DefaultParameterSetName = RemoveSingleRelatedRowParameterSet)]
+    [Cmdlet(VerbsCommon.Remove, "DataverseRelatedRow", DefaultParameterSetName = RemoveSingleRelatedRowParameterSet, SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
     public sealed class RemoveRelatedRowCommand : BatchCmdletBase
     {
         private const string RemoveSingleRelatedRowParameterSet = "RemoveSingleRelatedRow";
@@ -58,9 +57,12 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [ValidateNotNullOrEmpty]
         public string Relationship { get; set; }
 
-        protected override void Execute()
+        [Parameter()]
+        public SwitchParameter Force { get; set; }
+
+        public override void Execute()
         {
-            EntityReferenceCollection relatedRows = new EntityReferenceCollection();
+            var relatedRows = new EntityReferenceCollection();
 
             switch (ParameterSetName)
             {
@@ -86,7 +88,10 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             }
             else
             {
-                var response = ExecuteOrganizationRequest<DisassociateResponse>(request);
+                if (Force || ShouldProcess("Disassociate", $"{TargetTable} {TargetRow}"))
+                {
+                    var _ = ExecuteOrganizationRequest<DisassociateResponse>(request);
+                }
             }
         }
     }

@@ -40,7 +40,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [PSDefaultValue(Value = ConcurrencyBehavior.Default)]
         public ConcurrencyBehavior Behavior { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             var request = new UpdateMultipleRequest()
             {

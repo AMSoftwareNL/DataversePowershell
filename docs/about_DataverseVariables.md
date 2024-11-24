@@ -26,3 +26,6 @@ When you connect to Dataverse with `Connect-DataverseEnvironment` a session obje
 
 ## DataverseClient
 Stores the active `Microsoft.PowerPlatform.Dataverse.Client.ServiceClient` used with `Connect-DataverseEnvironment`.
+
+# SEE ALSO
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/about_DataverseVariables.md)

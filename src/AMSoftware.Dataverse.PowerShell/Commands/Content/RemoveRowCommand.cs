@@ -16,7 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
-using AMSoftware.Dataverse.PowerShell.DynamicParameters;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
@@ -38,24 +37,27 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [ValidateNotNullOrEmpty]
         public Guid Id { get; set; }
 
-        protected override void Execute()
+        [Parameter()]
+        public SwitchParameter Force { get; set; }
+
+        public override void Execute()
         {
             EntityReference rowReference = new EntityReference(Table, Id);
 
-            if (ShouldProcess($"{Table}: {Id}"))
+            OrganizationRequest request = new DeleteRequest()
             {
-                OrganizationRequest request = new DeleteRequest()
-                {
-                    Target = rowReference
-                };
+                Target = rowReference
+            };
 
-                if (UseBatch)
+            if (UseBatch)
+            {
+                AddOrganizationRequestToBatch(request);
+            }
+            else
+            {
+                if (Force || ShouldProcess("Delete", $"{Table} {Id}"))
                 {
-                    AddOrganizationRequestToBatch(request);
-                }
-                else
-                {
-                    var response = ExecuteOrganizationRequest<DeleteResponse>(request);
+                    var _ = ExecuteOrganizationRequest<DeleteResponse>(request);
                 }
             }
         }

@@ -20,7 +20,6 @@ using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
 using System.Linq;
 using System.Management.Automation;
-using System.Xml.Linq;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 {
@@ -50,22 +49,18 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [ValidateRange(1, int.MaxValue)]
         public int Value { get; set; }
 
-        protected override void Execute()
+        [Parameter()]
+        public SwitchParameter Force { get; set; }
+
+        public override void Execute()
         {
             switch (ParameterSetName)
             {
                 case RemoveGlobalChoiceOptionParameterSet:
-
-                    if (ShouldProcess($"{OptionSet} | Choice Value '{Value}'."))
-                    {
-                        RemoveGlobalChoice();
-                    }
+                    RemoveGlobalChoice();
                     break;
                 case RemoveAttributeChoiceOptionParameterSet:
-                    if (ShouldProcess($"{Table}: {Column} | Choice Value '{Value}'."))
-                    {
-                        RemoveAttributeChoice();
-                    }
+                    RemoveAttributeChoice();
                     break;
             }
         }
@@ -77,6 +72,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 Name = OptionSet,
                 RetrieveAsIfPublished = true
             };
+
             var retrieveResponse = ExecuteOrganizationRequest<RetrieveOptionSetResponse>(retrieveRequest);
 
             var optionset = retrieveResponse.OptionSetMetadata as OptionSetMetadata;
@@ -89,7 +85,10 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 MergeLabels = true
             };
 
-            var updateResponse = ExecuteOrganizationRequest<UpdateOptionSetResponse>(updateRequest);
+            if (Force || ShouldProcess("UpdateOptionSet", optionset.Name))
+            {
+                var _ = ExecuteOrganizationRequest<UpdateOptionSetResponse>(updateRequest);
+            }
         }
 
         private void RemoveAttributeChoice()
@@ -113,11 +112,15 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 MergeLabels = true,
             };
 
-            var updateResponse = ExecuteOrganizationRequest<UpdateAttributeResponse>(updateRequest);
+            if (Force || ShouldProcess("UpdateAttribute", $"{attribute.EntityLogicalName} {attribute.LogicalName}"))
+            {
+                var _ = ExecuteOrganizationRequest<UpdateAttributeResponse>(updateRequest);
+            }
         }
 
         private void RemoveChoiceOption(OptionSetMetadata optionSet)
         {
+
             var option = optionSet.Options.Single(o => o.Value == Value);
             optionSet.Options.Remove(option);
         }

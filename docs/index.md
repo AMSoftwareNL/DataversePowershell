@@ -12,13 +12,13 @@ Locale: en-US
 
 ## AMSoftware.Dataverse.PowerShell Cmdlets
 ### [Add-DataverseChoice](Add-DataverseChoice.md)
-{{ Fill in the Synopsis }}
+Add a global Choice (OptionSet)
 
 ### [Add-DataverseColumn](Add-DataverseColumn.md)
-{{ Fill in the Synopsis }}
+Add a Column to a Dataverse Table
 
 ### [Add-DataverseLanguage](Add-DataverseLanguage.md)
-{{ Fill in the Synopsis }}
+Provision a new language
 
 ### [Add-DataverseRelatedRow](Add-DataverseRelatedRow.md)
 {{ Fill in the Synopsis }}
@@ -36,9 +36,15 @@ Locale: en-US
 {{ Fill in the Synopsis }}
 
 ### [Connect-DataverseEnvironment](Connect-DataverseEnvironment.md)
+Connect to a specific Dataverse Environment.
+
+### [Export-DataversePluginAssembly](Export-DataversePluginAssembly.md)
 {{ Fill in the Synopsis }}
 
 ### [Export-DataverseTranslation](Export-DataverseTranslation.md)
+{{ Fill in the Synopsis }}
+
+### [Export-DataverseWebResource](Export-DataverseWebResource.md)
 {{ Fill in the Synopsis }}
 
 ### [Get-DataverseChoice](Get-DataverseChoice.md)
@@ -86,6 +92,33 @@ Locale: en-US
 ### [Import-DataverseTranslation](Import-DataverseTranslation.md)
 {{ Fill in the Synopsis }}
 
+### [Import-DataverseWebResource](Import-DataverseWebResource.md)
+{{ Fill in the Synopsis }}
+
+### [Invoke-DataverseWorkflow](Invoke-DataverseWorkflow.md)
+
+
+### [Publish-DataverseComponent](Publish-DataverseComponent.md)
+{{ Fill in the Synopsis }}
+
+### [Register-DataverseDataProvider](Register-DataverseDataProvider.md)
+{{ Fill in the Synopsis }}
+
+### [Register-DataversePlugin](Register-DataversePlugin.md)
+{{ Fill in the Synopsis }}
+
+### [Register-DataversePluginStep](Register-DataversePluginStep.md)
+{{ Fill in the Synopsis }}
+
+### [Register-DataversePluginStepImage](Register-DataversePluginStepImage.md)
+{{ Fill in the Synopsis }}
+
+### [Register-DataverseServiceEndpoint](Register-DataverseServiceEndpoint.md)
+{{ Fill in the Synopsis }}
+
+### [Register-DataverseWebhook](Register-DataverseWebhook.md)
+{{ Fill in the Synopsis }}
+
 ### [Remove-DataverseChoice](Remove-DataverseChoice.md)
 {{ Fill in the Synopsis }}
 
@@ -128,6 +161,9 @@ Locale: en-US
 ### [Set-DataverseColumn](Set-DataverseColumn.md)
 {{ Fill in the Synopsis }}
 
+### [Set-DataverseRelationship](Set-DataverseRelationship.md)
+{{ Fill in the Synopsis }}
+
 ### [Set-DataverseRow](Set-DataverseRow.md)
 {{ Fill in the Synopsis }}
 
@@ -140,16 +176,37 @@ Locale: en-US
 ### [Set-DataverseTable](Set-DataverseTable.md)
 {{ Fill in the Synopsis }}
 
-### [Start-DataverseWorkflow](Start-DataverseWorkflow.md)
-{{ Fill in the Synopsis }}
-
 ### [Submit-DataverseBatch](Submit-DataverseBatch.md)
 {{ Fill in the Synopsis }}
 
-### [Use-DataverseLanguage](Use-DataverseLanguage.md)
+### [Test-DataverseSolution](Test-DataverseSolution.md)
 {{ Fill in the Synopsis }}
 
-### [Use-DataverseSolution](Use-DataverseSolution.md)
+### [Test-DataverseSolutionComponent](Test-DataverseSolutionComponent.md)
 {{ Fill in the Synopsis }}
+
+### [Unregister-DataverseDataProvider](Unregister-DataverseDataProvider.md)
+{{ Fill in the Synopsis }}
+
+### [Unregister-DataversePlugin](Unregister-DataversePlugin.md)
+{{ Fill in the Synopsis }}
+
+### [Unregister-DataversePluginAssembly](Unregister-DataversePluginAssembly.md)
+{{ Fill in the Synopsis }}
+
+### [Unregister-DataversePluginStep](Unregister-DataversePluginStep.md)
+{{ Fill in the Synopsis }}
+
+### [Unregister-DataversePluginStepImage](Unregister-DataversePluginStepImage.md)
+{{ Fill in the Synopsis }}
+
+### [Unregister-DataverseServiceEndpoint](Unregister-DataverseServiceEndpoint.md)
+{{ Fill in the Synopsis }}
+
+### [Use-DataverseLanguage](Use-DataverseLanguage.md)
+Set the language for the current user
+
+### [Use-DataverseSolution](Use-DataverseSolution.md)
+Sets the active solution for the current session.
 
 

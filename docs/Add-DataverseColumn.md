@@ -8,28 +8,25 @@ schema: 2.0.0
 # Add-DataverseColumn
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Add a Column to a Dataverse Table
 
 ## SYNTAX
 
 ### AddColumnByInputObject
 ```
-Add-DataverseColumn -Table <String> -InputObject <AttributeMetadata>  
-    
-  [<RequestParameters>] [<CommonParameters>]
+Add-DataverseColumn -Table <String> -InputObject <AttributeMetadata> 
+ [<CommonParameters>]
 ```
 
 ### AddColumnByParameters
 ```
 Add-DataverseColumn -Table <String> -Name <String> -Type <ColumnType> -DisplayName <String>
  [-Description <String>] [-Required <ColumnRequiredLevel>] [-ExternalName <String>] [-Searchable] [-Auditing]
- [-ColumnSecurity] [-Source <ColumnSourceType>]  
-    
-  [<RequestParameters>] [<CommonParameters>]
+ [-ColumnSecurity] [-Source <ColumnSourceType>]  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Add a Column to a Dataverse Table. Based on the Type additional dynamic properties become available. Do not use for columns with a relationship like Customer or Lookups. In this case use Add-DataverseRelationship.
 
 ## EXAMPLES
 
@@ -43,7 +40,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -Auditing
-{{ Fill Auditing Description }}
+Is auditing enabled for the new Column
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -58,7 +55,7 @@ Accept wildcard characters: False
 ```
 
 ### -ColumnSecurity
-{{ Fill ColumnSecurity Description }}
+Available for Column Security Profile
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -73,7 +70,7 @@ Accept wildcard characters: False
 ```
 
 ### -Description
-{{ Fill Description Description }}
+The description of the Column
 
 ```yaml
 Type: System.String
@@ -88,7 +85,7 @@ Accept wildcard characters: False
 ```
 
 ### -DisplayName
-{{ Fill DisplayName Description }}
+The display name of the Column
 
 ```yaml
 Type: System.String
@@ -103,7 +100,7 @@ Accept wildcard characters: False
 ```
 
 ### -ExternalName
-{{ Fill ExternalName Description }}
+The external name of the Column
 
 ```yaml
 Type: System.String
@@ -118,7 +115,7 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-{{ Fill InputObject Description }}
+An AttributeMetadata object with the information for the Column
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.Metadata.AttributeMetadata
@@ -133,12 +130,12 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+The logicalname of the Column
 
 ```yaml
 Type: System.String
 Parameter Sets: AddColumnByParameters
-Aliases:
+Aliases: AttributeLogicalName, ColumnName
 
 Required: True
 Position: Named
@@ -148,7 +145,7 @@ Accept wildcard characters: False
 ```
 
 ### -Required
-{{ Fill Required Description }}
+The requirment level of the Column. Default is 'Optional'. 
 
 ```yaml
 Type: AMSoftware.Dataverse.PowerShell.Commands.ColumnRequiredLevel
@@ -158,13 +155,13 @@ Accepted values: Optional, Required, Recommended
 
 Required: False
 Position: Named
-Default value: None
+Default value: Optional
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Searchable
-{{ Fill Searchable Description }}
+Is the column Searchable
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -179,7 +176,7 @@ Accept wildcard characters: False
 ```
 
 ### -Source
-{{ Fill Source Description }}
+Set for Calculated, Rollup, Formula columns. When not provided a standard column is created.
 
 ```yaml
 Type: AMSoftware.Dataverse.PowerShell.Commands.ColumnSourceType
@@ -195,7 +192,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+The logicalname of the Table to add the column to
 
 ```yaml
 Type: System.String
@@ -210,7 +207,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-{{ Fill Type Description }}
+The type of Column to add. Depending on the type additional dynamic parameters become available.
 
 ```yaml
 Type: AMSoftware.Dataverse.PowerShell.Commands.ColumnType
@@ -225,9 +222,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -240,4 +234,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Add-DataverseColumn.md)
+
 

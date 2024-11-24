@@ -8,7 +8,7 @@ schema: 2.0.0
 # Add-DataverseLanguage
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Provision a new language
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Add-DataverseLanguage [-Locale] <Int32>  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Provision a new language
 
 ## EXAMPLES
 
@@ -31,7 +31,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -Locale
-{{ Fill Locale Description }}
+The LCID of the language
 
 ```yaml
 Type: System.Int32
@@ -57,4 +57,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Add-DataverseLanguage.md)
+
 

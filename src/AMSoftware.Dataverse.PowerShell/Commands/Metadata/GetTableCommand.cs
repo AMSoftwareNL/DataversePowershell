@@ -93,7 +93,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             }
         }
 
-        protected override void Execute()
+        public override void Execute()
         {
             switch (ParameterSetName)
             {

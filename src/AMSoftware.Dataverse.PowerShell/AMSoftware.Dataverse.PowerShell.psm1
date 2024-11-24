@@ -1,3 +1,6 @@
+[System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingWriteHost', '')]
+param()
+
 New-Variable -Name DataverseSession
 New-Variable -Name DataverseClient
 

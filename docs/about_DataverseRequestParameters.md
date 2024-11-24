@@ -109,4 +109,5 @@ Accept wildcard characters: False
 ```
 
 # SEE ALSO
-(Use optional parameters)[https://learn.microsoft.com/en-us/power-apps/developer/data-platform/optional-parameters]
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/about_DataverseRequestParameters.md)
+[Use optional parameters](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/optional-parameters)

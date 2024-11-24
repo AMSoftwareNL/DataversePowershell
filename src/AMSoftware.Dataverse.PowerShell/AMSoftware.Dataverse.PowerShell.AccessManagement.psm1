@@ -1,16 +1,16 @@
 # PowerShell Module for Power Platform Dataverse
 # Copyright(C) 2024  AMSoftwareNL
-# 
+#
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
@@ -47,8 +47,8 @@ function Get-DataverseUser {
     process {
 
         switch ($PSCmdlet.ParameterSetName) {
-            'GetAllUsers' { 
-                $nameFilterAttributes = @('fullname','domainname','internalemailaddress')
+            'GetAllUsers' {
+                $nameFilterAttributes = @('fullname', 'domainname', 'internalemailaddress')
 
                 if ($PSCmdlet.MyInvocation.BoundParameters.ContainsKey('Name')) {
                     if ([WildcardPattern]::ContainsWildcardCharacters($Name)) {
@@ -61,11 +61,11 @@ function Get-DataverseUser {
                         $filterValue = $Name
                     }
 
-                    $includeFilter += "<filter type=""or"">"
-                    $includeFilter +=  $nameFilterAttributes |ForEach-Object { 
-                        "<condition attribute=""{0}"" operator=""{1}"" value=""{2}"" />" -f $_, $filterOperator,$filterValue 
+                    $includeFilter += '<filter type="or">'
+                    $includeFilter += $nameFilterAttributes | ForEach-Object {
+                        '<condition attribute="{0}" operator="{1}" value="{2}" />' -f $_, $filterOperator, $filterValue
                     } | Join-String
-                    $includeFilter += "</filter>"
+                    $includeFilter += '</filter>'
                 }
 
                 if ($PSCmdlet.MyInvocation.BoundParameters.ContainsKey('Exclude')) {
@@ -79,31 +79,31 @@ function Get-DataverseUser {
                         $filterOperator = 'ne'
                     }
 
-                    $excludeFilter += "<filter type=""and"">"
-                    $excludeFilter +=  $nameFilterAttributes |ForEach-Object { 
-                        "<condition attribute=""{0}"" operator=""{1}"" value=""{2}"" />" -f $_, $filterOperator,$filterValue 
+                    $excludeFilter += '<filter type="and">'
+                    $excludeFilter += $nameFilterAttributes | ForEach-Object {
+                        '<condition attribute="{0}" operator="{1}" value="{2}" />' -f $_, $filterOperator, $filterValue
                     } | Join-String
-                    $excludeFilter += "</filter>"
+                    $excludeFilter += '</filter>'
                 }
 
                 if ($Application) {
-                    $mainConditions += "<condition attribute=""applicationid"" operator=""not-null"" value="""" />"
+                    $mainConditions += '<condition attribute="applicationid" operator="not-null" value="" />'
                 }
                 else {
-                    $mainConditions += "<condition attribute=""applicationid"" operator=""null"" value="""" />"
+                    $mainConditions += '<condition attribute="applicationid" operator="null" value="" />'
                 }
                 if ($Disabled) {
-                    $mainConditions += "<condition attribute=""isdisabled"" operator=""eq"" value=""1"" />"
+                    $mainConditions += '<condition attribute="isdisabled" operator="eq" value="1" />'
                 }
                 else {
-                    $mainConditions += "<condition attribute=""isdisabled"" operator=""eq"" value=""0"" />"
+                    $mainConditions += '<condition attribute="isdisabled" operator="eq" value="0" />'
                 }
 
                 if ($Licensed) {
-                    $mainConditions += "<condition attribute=""islicensed"" operator=""eq"" value=""1"" />"
+                    $mainConditions += '<condition attribute="islicensed" operator="eq" value="1" />'
                 }
 
-                [xml]$fetchxml = 
+                [xml]$fetchxml =
                 @"
                         <fetch>
                             <entity name="systemuser">
@@ -158,7 +158,7 @@ function Get-DataverseRole {
     process {
 
         switch ($PSCmdlet.ParameterSetName) {
-            'GetAllRoles' { 
+            'GetAllRoles' {
                 if ($PSCmdlet.MyInvocation.BoundParameters.ContainsKey('Name')) {
                     if ([WildcardPattern]::ContainsWildcardCharacters($Name)) {
                         $pattern = [WildcardPattern]::new($Name);
@@ -170,7 +170,7 @@ function Get-DataverseRole {
                         $filterValue = $Name
                     }
 
-                    $includeFilter +=  "<condition attribute=""name"" operator=""{1}"" value=""{2}"" />" -f $filterOperator,$filterValue 
+                    $includeFilter += '<condition attribute="name" operator="{1}" value="{2}" />' -f $filterOperator, $filterValue
                 }
 
                 if ($PSCmdlet.MyInvocation.BoundParameters.ContainsKey('Exclude')) {
@@ -184,14 +184,14 @@ function Get-DataverseRole {
                         $filterOperator = 'ne'
                     }
 
-                    $excludeFilter +=  "<condition attribute=""name"" operator=""{1}"" value=""{2}"" />" -f $filterOperator,$filterValue 
+                    $excludeFilter += '<condition attribute="name" operator="{1}" value="{2}" />' -f $filterOperator, $filterValue
                 }
 
                 if ($PSCmdlet.MyInvocation.BoundParameters.ContainsKey('Inheritance')) {
                     $mainConditions += "<condition attribute=""isinherited"" operator=""eq"" value=""$($Inheritance)"" />"
                 }
 
-                [xml]$fetchxml = 
+                [xml]$fetchxml =
                 @"
                         <fetch>
                             <entity name="role">
@@ -216,9 +216,9 @@ function Get-DataverseRole {
 }
 
 enum TeamType {
-    Owner = 0; 
-    Access = 1; 
-    AADSecurityGroup = 2; 
+    Owner = 0;
+    Access = 1;
+    AADSecurityGroup = 2;
     AADOfficeGroup = 3;
 }
 
@@ -256,7 +256,7 @@ function Get-DataverseTeam {
     process {
 
         switch ($PSCmdlet.ParameterSetName) {
-            'GetAllTeams' { 
+            'GetAllTeams' {
                 if ($PSCmdlet.MyInvocation.BoundParameters.ContainsKey('Name')) {
                     if ([WildcardPattern]::ContainsWildcardCharacters($Name)) {
                         $pattern = [WildcardPattern]::new($Name);
@@ -268,7 +268,7 @@ function Get-DataverseTeam {
                         $filterValue = $Name
                     }
 
-                    $includeFilter +=  "<condition attribute=""name"" operator=""{1}"" value=""{2}"" />" -f $filterOperator,$filterValue 
+                    $includeFilter += '<condition attribute="name" operator="{1}" value="{2}" />' -f $filterOperator, $filterValue
                 }
 
                 if ($PSCmdlet.MyInvocation.BoundParameters.ContainsKey('Exclude')) {
@@ -282,7 +282,7 @@ function Get-DataverseTeam {
                         $filterOperator = 'ne'
                     }
 
-                    $excludeFilter +=  "<condition attribute=""name"" operator=""{1}"" value=""{2}"" />" -f $filterOperator,$filterValue 
+                    $excludeFilter += '<condition attribute="name" operator="{1}" value="{2}" />' -f $filterOperator, $filterValue
                 }
 
                 if ($PSCmdlet.MyInvocation.BoundParameters.ContainsKey('TeamType')) {
@@ -296,7 +296,7 @@ function Get-DataverseTeam {
                     $mainConditions += "<condition attribute=""administratorid"" operator=""eq"" value=""$($Administrator)"" />"
                 }
 
-                [xml]$fetchxml = 
+                [xml]$fetchxml =
                 @"
                         <fetch>
                             <entity name="team">
@@ -341,7 +341,7 @@ function Get-DataverseRowAccess {
 
 # .EXTERNALHELP AMSoftware.Dataverse.PowerShell.AccessManagement.psm1-help.xml
 function Set-DataverseRowOwner {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Low')]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('LogicalName', 'EntityLogicalName', 'Entity')]
@@ -356,11 +356,19 @@ function Set-DataverseRowOwner {
 
         [Parameter(Mandatory = $true)]
         [ValidateNotNull()]
-        [Microsoft.Xrm.Sdk.EntityReference]$Owner
+        [Microsoft.Xrm.Sdk.EntityReference]$Owner,
+
+        [switch]$Force
     )
 
     process {
-        Send-DataverseRequest -Name 'Assign' -TargetTable $Table -TargetRow $Id -Parameters @{'Assignee'=$Owner}
+        if ($Force -and -not $PSBoundParameters.ContainsKey('Confirm')) {
+            $ConfirmPreference = 'None'
+        }
+
+        if ($PSCmdlet.ShouldProcess("Assign $($Owner.LogicalName) $($Owner.Id)", "$Table $Id")) {
+            Send-DataverseRequest -Name 'Assign' -TargetTable $Table -TargetRow $Id -Parameters @{'Assignee' = $Owner }
+        }
     }
 }
 

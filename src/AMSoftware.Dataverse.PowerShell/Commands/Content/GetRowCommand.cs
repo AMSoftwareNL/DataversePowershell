@@ -59,7 +59,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             _columnset = BuildColumnSet(Columns);
         }
 
-        protected override void Execute()
+        public override void Execute()
         {
             RetrieveRequest request = null;
 

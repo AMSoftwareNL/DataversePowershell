@@ -42,6 +42,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         public AttributeMetadata InputObject { get; set; }
 
         [Parameter(Mandatory = true, ParameterSetName = AddColumnByParametersParameterset)]
+        [Alias("AttributeLogicalName", "ColumnName")]
         [ValidateNotNullOrEmpty]
         public string Name { get; set; }
 
@@ -87,7 +88,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             return _dynamicContext;
         }
 
-        protected override void Execute()
+        public override void Execute()
         {
             AttributeMetadata attributeMetadata = InputObject;
 

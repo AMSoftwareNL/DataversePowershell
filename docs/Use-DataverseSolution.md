@@ -8,32 +8,32 @@ schema: 2.0.0
 # Use-DataverseSolution
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Sets the active solution for the current session.
 
 ## SYNTAX
 
 ```
-Use-DataverseSolution -Name <String>   
-   
-  [<RequestParameters>] [<CommonParameters>]
+Use-DataverseSolution -Name <String>  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Sets the active unmanaged solution for the current session. Solution aware customization are added to this solution.
+Is combined with the Optional Request Parameter 'Solution'.
+If solution is set in the session and provided as a request parameter, the request parameter is used.
 
 ## EXAMPLES
 
 ### Example 1
 ```
-PS C:\> {{ Add example code here }}
+PS C:\> Use-DataverseSolution -Name 'myunmanagedsolution'
 ```
 
-{{ Add example description here }}
+Sets 'myunmanagedsolution' as the solution for solution-aware customizations.
 
 ## PARAMETERS
 
 ### -Name
-{{ Fill Name Description }}
+Uniquename of the Unmanaged Solution
 
 ```yaml
 Type: System.String
@@ -47,9 +47,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -62,4 +59,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Use-DataverseSolution.md)
 

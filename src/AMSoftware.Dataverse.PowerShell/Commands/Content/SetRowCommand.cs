@@ -56,7 +56,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [PSDefaultValue(Value = ConcurrencyBehavior.Default)]
         public ConcurrencyBehavior Behavior { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             Entity newEntity = InputObject;
             if (ParameterSetName == SetValuesParameterSet) newEntity = BuildEntityFromValues();
@@ -87,7 +87,11 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
             foreach (var attributeName in Values.Keys)
             {
-                result.Attributes.Add((string)attributeName, Values[attributeName]);
+                var attributeValue = Values[attributeName];
+                if (attributeValue is PSObject psValue)
+                    result.Attributes.Add((string)attributeName, psValue.ImmediateBaseObject);
+                else
+                    result.Attributes.Add((string)attributeName, attributeValue);
             }
 
             return result;

@@ -55,13 +55,13 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
                     ErrorCategory.InvalidResult,
                     BatchId));
             }
-
-            Session.Current.Client.ReleaseBatchInfoById(BatchId);
         }
 
-        protected override void Execute()
+        protected override void EndProcessing()
         {
-
+            Session.Current.Client.ReleaseBatchInfoById(BatchId);
+            
+            base.EndProcessing();
         }
     }
 }

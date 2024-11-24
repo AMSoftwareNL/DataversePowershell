@@ -101,18 +101,14 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
             {
                 Session.Create(client);
 
-                this.SessionState.PSVariable.Set(new PSVariable("DataverseSession", Session.Current));
-                this.SessionState.PSVariable.Set(new PSVariable("DataverseClient", Session.Current.Client));
+                SessionState.PSVariable.Set(new PSVariable("DataverseSession", Session.Current));
+                SessionState.PSVariable.Set(new PSVariable("DataverseClient", Session.Current.Client));
             }
             else
             {
                 if (client?.LastException == null) throw new Exception();
                 else throw client.LastException;
             }
-        }
-
-        protected override void Execute()
-        {
         }
 
         protected override void EndProcessing()

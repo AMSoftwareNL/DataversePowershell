@@ -6,7 +6,7 @@
     RootModule = ''
 
     # Version number of this module.
-    ModuleVersion = '0.4.0'
+    ModuleVersion = '0.5.0'
 
     # Supported PSEditions
     CompatiblePSEditions = 'Core'
@@ -47,8 +47,8 @@
 
     # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
     NestedModules = @(
-        'AMSoftware.Dataverse.PowerShell.dll', 
-        'AMSoftware.Dataverse.PowerShell.psm1', 
+        'AMSoftware.Dataverse.PowerShell.dll',
+        'AMSoftware.Dataverse.PowerShell.psm1',
         'AMSoftware.Dataverse.PowerShell.AccessManagement.psm1',
         'AMSoftware.Dataverse.PowerShell.Administration.psm1',
         'AMSoftware.Dataverse.PowerShell.Development.psm1'
@@ -68,7 +68,25 @@
         'Import-DataverseTranslation',
         'Get-DataverseEnvironmentVariableValue',
         'Get-DataverseSPDocumentLocation',
-        'Start-DataverseWorkflow'
+        'Invoke-DataverseWorkflow',
+        'Export-DataverseWebResource',
+        'Export-DataversePluginAssembly',
+        'Import-DataverseWebResource',
+        'Publish-DataverseComponent',
+        'Register-DataverseDataProvider',
+        'Register-DataversePlugin',
+        'Register-DataversePluginStep',
+        'Register-DataversePluginStepImage',
+        'Register-DataverseServiceEndpoint',
+        'Register-DataverseWebhook',
+        'Test-DataverseSolution',
+        'Test-DataverseSolutionComponent',
+        'Unregister-DataverseDataProvider',
+        'Unregister-DataversePlugin',
+        'Unregister-DataversePluginAssembly',
+        'Unregister-DataversePluginStep',
+        'Unregister-DataversePluginStepImage',
+        'Unregister-DataverseServiceEndpoint'
     )
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -78,7 +96,7 @@
         'Use-DataverseSolution',
         'Add-DataverseRow',
         'Add-DataverseRows',
-        'Get-DataverseRow', 
+        'Get-DataverseRow',
         'Get-DataverseRows',
         'Remove-DataverseRow',
         'Set-DataverseRow',
@@ -86,7 +104,7 @@
         'Add-DataverseRelatedRow',
         'Remove-DataverseRelatedRow',
         'Send-DataverseRequest',
-        'Add-DataverseTable',   
+        'Add-DataverseTable',
         'Get-DataverseTable',
         'Remove-DataverseTable',
         'Set-DataverseTable',
@@ -100,6 +118,7 @@
         'Add-DataverseRelationship',
         'Get-DataverseRelationship',
         'Remove-DataverseRelationship',
+        'Set-DataverseRelationship',
         'Add-DataverseChoice',
         'Get-DataverseChoice',
         'Remove-DataverseChoice',
@@ -107,13 +126,14 @@
         'Set-DataverseChoiceOption',
         'Remove-DataverseChoiceOption',
         'Request-DataverseBatch',
-        'Submit-DataverseBatch')
+        'Submit-DataverseBatch'
+    )
 
     # Variables to export from this module
     VariablesToExport = @('DataverseSession','DataverseClient')
 
     # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-    AliasesToExport = '*'
+    AliasesToExport = @()
 
     # List of all modules packaged with this module
     ModuleList = @()
@@ -149,13 +169,13 @@
 
             # A URL to the license for this module.
             LicenseUri = 'https://github.com/AMSoftwareNL/DataversePowershell/blob/main/LICENSE'
-        
+
             # A URL to the main website for this project.
             ProjectUri = 'https://github.com/AMSoftwareNL/DataversePowershell'
-        
+
             # ReleaseNotes of this module
-            ReleaseNotes = 'https://github.com/AMSoftwareNL/DataversePowershell/releases/tag/v0.4.0'
-        
+            ReleaseNotes = 'https://github.com/AMSoftwareNL/DataversePowershell/releases/tag/v0.5.0'
+
             # Flag to indicate whether the module requires explicit user acceptance for install/update/save
             RequireLicenseAcceptance = $true
         } # End of PSData hashtable
