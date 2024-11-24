@@ -26,9 +26,7 @@ namespace AMSoftware.Dataverse.PowerShell
     {
         public virtual void Execute()
         {
-            WriteVerboseWithTimestamp("Invoked CmdletBase Execute");
-
-            WriteObject("WriteObject From Base");
+            // Do nothing
         }
 
         protected override void BeginProcessing()
@@ -79,14 +77,12 @@ namespace AMSoftware.Dataverse.PowerShell
         protected new void WriteObject(object sendToPipeline)
         {
             //FlushDebugMessages();
-            //SanitizeOutput(sendToPipeline);
             base.WriteObject(sendToPipeline);
         }
 
         protected new void WriteObject(object sendToPipeline, bool enumerateCollection)
         {
             //FlushDebugMessages();
-            //SanitizeOutput(sendToPipeline);
             base.WriteObject(sendToPipeline, enumerateCollection);
         }
 
