@@ -61,7 +61,12 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             {
                 foreach (var parameterName in Parameters.Keys)
                 {
-                    request.Parameters.Add((string)parameterName, Parameters[parameterName]);
+                    var parameterValue = Parameters[parameterName];
+
+                    if (parameterValue is PSObject psValue)
+                        request.Parameters.Add((string)parameterName, psValue.ImmediateBaseObject);
+                    else
+                        request.Parameters.Add((string)parameterName, parameterValue);
                 }
             }
 
@@ -78,7 +83,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             {
                 var response = ExecuteOrganizationRequest<OrganizationResponse>(request);
 
-                WriteObject(response);
+                WriteObject(response, true);
             }
         }
     }
