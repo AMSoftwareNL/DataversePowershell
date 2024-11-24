@@ -8,41 +8,42 @@ schema: 2.0.0
 # Add-DataverseChoice
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Add a global Choice (OptionSet)
 
 ## SYNTAX
 
 ### AddChoiceObject (Default)
 ```
-Add-DataverseChoice -InputObject <OptionSetMetadata>  
-    
-  [<RequestParameters>] [<CommonParameters>]
+Add-DataverseChoice -InputObject <OptionSetMetadata>  [<CommonParameters>]
 ```
 
 ### AddNewChoice
 ```
 Add-DataverseChoice -Name <String> -DisplayName <String> [-Description <String>] [-ExternalName <String>]
- -Options <OptionMetadata[]>   
-   
-  [<RequestParameters>] [<CommonParameters>]
+ -Options <OptionMetadata[]>  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Add a Global Choice (OptionSet) to Dataverse. Options are provided as an array of OptionMetadata objects.
 
 ## EXAMPLES
 
 ### Example 1
 ```
-PS C:\> {{ Add example code here }}
+PS C:\> $options = @(
+  [dvchoiceoption]::new([dvlabel]'Label 1', 876999001)
+  [dvchoiceoption]::new([dvlabel]'Label 2', 876999002)
+)
+
+PS C:\> Add-DataverseChoice -Name 'globaloption' -DisplayName 'Global Option' -Options $options
 ```
 
-{{ Add example description here }}
+NOTE: The prefix for the choice options isn't set automatically based on the solution, but has to be provided and is used as-is.
 
 ## PARAMETERS
 
 ### -Description
-{{ Fill Description Description }}
+The description for the global Choice
 
 ```yaml
 Type: System.String
@@ -57,7 +58,7 @@ Accept wildcard characters: False
 ```
 
 ### -DisplayName
-{{ Fill DisplayName Description }}
+The display name for the global Choice
 
 ```yaml
 Type: System.String
@@ -72,7 +73,7 @@ Accept wildcard characters: False
 ```
 
 ### -ExternalName
-{{ Fill ExternalName Description }}
+The external name for the global Choice
 
 ```yaml
 Type: System.String
@@ -87,7 +88,7 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-{{ Fill InputObject Description }}
+A OptionSetMetadata object containing all information for the global Choice.
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.Metadata.OptionSetMetadata
@@ -102,7 +103,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+The logicalname for the Choice
 
 ```yaml
 Type: System.String
@@ -117,7 +118,7 @@ Accept wildcard characters: False
 ```
 
 ### -Options
-{{ Fill Options Description }}
+Array of OptionMetadata objects containing the Choices values
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.Metadata.OptionMetadata[]
@@ -131,9 +132,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -146,4 +144,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Add-DataverseChoice.md)
 

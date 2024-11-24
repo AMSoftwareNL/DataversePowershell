@@ -15,5 +15,6 @@ The BatchId can be provide to other requests through the `-Batch` parameter. Whe
 To execute the request collected in a batch call `Submit-DataverseBatch` and provide the BatchId. This executes all requests in the Batch, returns the results (Response or Fault), and cleans up the Batch. After submitting a batch the batch is no longer available.
 
 # SEE ALSO
-Request-DataverseBatch
-Submit-DataverseBatch
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/about_DataverseBatch.md)
+[Request-DataverseBatch](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Request-DataverseBatch.md)
+[Submit-DataverseBatch](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Submit-DataverseBatch.md)
