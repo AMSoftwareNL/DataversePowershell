@@ -106,7 +106,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [Parameter(Mandatory = false, ParameterSetName = AddCustomerRelationshipParameterSet)]
         public SwitchParameter Customer { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             switch (ParameterSetName)
             {

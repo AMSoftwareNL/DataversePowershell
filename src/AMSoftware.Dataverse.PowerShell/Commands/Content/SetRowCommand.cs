@@ -56,7 +56,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [PSDefaultValue(Value = ConcurrencyBehavior.Default)]
         public ConcurrencyBehavior Behavior { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             Entity newEntity = InputObject;
             if (ParameterSetName == SetValuesParameterSet) newEntity = BuildEntityFromValues();

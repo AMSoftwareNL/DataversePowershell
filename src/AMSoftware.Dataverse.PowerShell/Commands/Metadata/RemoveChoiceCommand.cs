@@ -33,7 +33,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [Parameter()]
         public SwitchParameter Force { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             var choiceName = Name;
 

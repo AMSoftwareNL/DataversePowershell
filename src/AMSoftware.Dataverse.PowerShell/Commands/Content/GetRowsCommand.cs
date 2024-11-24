@@ -78,7 +78,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             _columnSet = BuildColumnSet(Columns);
         }
 
-        protected override void Execute()
+        public override void Execute()
         {
             switch (ParameterSetName)
             {

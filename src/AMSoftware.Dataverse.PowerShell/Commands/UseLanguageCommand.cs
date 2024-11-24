@@ -32,7 +32,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
         [ValidateNotNull]
         public int Language { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             var installedLanguagesResponse = ExecuteOrganizationRequest<RetrieveAvailableLanguagesResponse>(
                 new RetrieveAvailableLanguagesRequest());

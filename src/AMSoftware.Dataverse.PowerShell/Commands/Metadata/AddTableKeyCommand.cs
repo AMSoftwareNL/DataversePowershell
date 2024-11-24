@@ -47,7 +47,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [ValidateCount(1, int.MaxValue)]
         public string[] Columns { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             EntityKeyMetadata key = new EntityKeyMetadata()
             {

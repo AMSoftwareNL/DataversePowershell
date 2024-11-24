@@ -60,7 +60,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [Parameter()]
         public SwitchParameter Force { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             var relatedRows = new EntityReferenceCollection();
 

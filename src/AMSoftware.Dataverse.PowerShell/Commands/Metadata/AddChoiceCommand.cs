@@ -55,7 +55,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [ValidateCount(1, int.MaxValue)]
         public OptionMetadata[] Options { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             OptionSetMetadata choiceMetadata = null;
 

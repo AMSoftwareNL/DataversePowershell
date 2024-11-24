@@ -60,7 +60,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [Parameter(ParameterSetName = GetColumnsByFilterParameterSet)]
         public SwitchParameter Unmanaged { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             switch (ParameterSetName)
             {

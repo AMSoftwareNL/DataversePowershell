@@ -53,7 +53,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [Parameter(Mandatory = false)]
         public SwitchParameter MergeLabels { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             OptionSetMetadata choiceMetadata = null;
 

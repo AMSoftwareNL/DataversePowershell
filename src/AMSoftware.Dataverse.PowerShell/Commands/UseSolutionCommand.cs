@@ -30,7 +30,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
         [ValidateNotNullOrEmpty]
         public string Name { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             if (TryGetValidSolutionName(Name, out string solutionUniqueName))
             {

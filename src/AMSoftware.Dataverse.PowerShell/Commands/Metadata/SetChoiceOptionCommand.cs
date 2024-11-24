@@ -62,7 +62,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [Parameter(Mandatory = false)]
         public string Color { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             switch (ParameterSetName)
             {

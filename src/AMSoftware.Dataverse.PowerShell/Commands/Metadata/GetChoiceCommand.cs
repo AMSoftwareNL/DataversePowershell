@@ -52,7 +52,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [Parameter(Mandatory = false, ParameterSetName = GetChoiceByNameParameterSet)]
         public SwitchParameter Unmanaged { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             switch (ParameterSetName)
             {

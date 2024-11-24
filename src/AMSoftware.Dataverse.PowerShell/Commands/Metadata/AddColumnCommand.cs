@@ -88,7 +88,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             return _dynamicContext;
         }
 
-        protected override void Execute()
+        public override void Execute()
         {
             AttributeMetadata attributeMetadata = InputObject;
 

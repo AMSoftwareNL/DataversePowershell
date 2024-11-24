@@ -24,17 +24,22 @@ namespace AMSoftware.Dataverse.PowerShell
 {
     public abstract class CmdletBase : PSCmdlet
     {
-        protected abstract void Execute();
+        public virtual void Execute()
+        {
+            WriteVerboseWithTimestamp("Invoked CmdletBase Execute");
+
+            WriteObject("WriteObject From Base");
+        }
 
         protected override void BeginProcessing()
         {
-            if (string.IsNullOrEmpty(base.ParameterSetName))
+            if (string.IsNullOrEmpty(ParameterSetName))
             {
-                this.WriteVerboseWithTimestamp(string.Format("{0} begin processing without ParameterSet.", base.GetType().Name));
+                WriteVerboseWithTimestamp(string.Format("{0} begin processing without ParameterSet.", GetType().Name));
             }
             else
             {
-                this.WriteVerboseWithTimestamp(string.Format("{0} begin processing with ParameterSet '{1}'.", base.GetType().Name, base.ParameterSetName));
+                WriteVerboseWithTimestamp(string.Format("{0} begin processing with ParameterSet '{1}'.", GetType().Name, ParameterSetName));
             }
             base.BeginProcessing();
         }
@@ -43,72 +48,92 @@ namespace AMSoftware.Dataverse.PowerShell
         {
             try
             {
-                this.WriteVerboseWithTimestamp(string.Format("{0} process record.", base.GetType().Name));
+                WriteVerboseWithTimestamp(string.Format("{0} process record.", GetType().Name));
 
                 base.ProcessRecord();
-                this.Execute();
+
+                Execute();
             }
-            catch (PipelineStoppedException)
+            catch (FaultException<OrganizationServiceFault> ex) when (!IsTerminatingError(ex))
             {
+                WriteExceptionError(ex);
             }
-            catch (FaultException<OrganizationServiceFault> ex)
+            catch (Exception ex) when (!IsTerminatingError(ex))
             {
-                this.WriteExceptionError(ex);
-            }
-            catch (Exception ex)
-            {
-                this.WriteExceptionError(ex);
-                
-                if (ex.InnerException != null)
+                WriteExceptionError(ex);
+
+                if (ex.InnerException != null && ex.InnerException is FaultException<OrganizationServiceFault> fault)
                 {
-                    FaultException<OrganizationServiceFault> fault = ex.InnerException as FaultException<OrganizationServiceFault>;
-                    if (fault != null)
-                    {
-                        this.WriteExceptionError(fault);
-                    }
+                    WriteExceptionError(fault);
                 }
             }
         }
 
         protected override void EndProcessing()
         {
-            this.WriteVerboseWithTimestamp(string.Format("{0} end processing.", base.GetType().Name));
+            WriteVerboseWithTimestamp(string.Format("{0} end processing.", GetType().Name));
+
             base.EndProcessing();
+        }
+
+        protected new void WriteObject(object sendToPipeline)
+        {
+            //FlushDebugMessages();
+            //SanitizeOutput(sendToPipeline);
+            base.WriteObject(sendToPipeline);
+        }
+
+        protected new void WriteObject(object sendToPipeline, bool enumerateCollection)
+        {
+            //FlushDebugMessages();
+            //SanitizeOutput(sendToPipeline);
+            base.WriteObject(sendToPipeline, enumerateCollection);
+        }
+
+        protected bool IsTerminatingError(Exception ex)
+        {
+            var pipelineStoppedEx = ex as PipelineStoppedException;
+            if (pipelineStoppedEx != null && pipelineStoppedEx.InnerException == null)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         protected void WriteDebugWithTimestamp(string message)
         {
-            this.WriteDebug(string.Format("{0:T} - {1}", DateTime.Now, message));
+            WriteDebug(string.Format("{0:T} - {1}", DateTime.Now, message));
         }
 
         protected void WriteDebugWithTimestamp(string message, params object[] args)
         {
-            this.WriteDebug(string.Format("{0:T} - {1}", DateTime.Now, string.Format(message, args)));
+            WriteDebug(string.Format("{0:T} - {1}", DateTime.Now, string.Format(message, args)));
         }
 
         protected void WriteErrorWithTimestamp(string message)
         {
-            this.WriteError(new ErrorRecord(new Exception(string.Format("{0:T} - {1}", DateTime.Now, message)), string.Empty, ErrorCategory.NotSpecified, null));
+            WriteError(new ErrorRecord(new Exception(string.Format("{0:T} - {1}", DateTime.Now, message)), string.Empty, ErrorCategory.NotSpecified, null));
         }
 
         protected void WriteVerboseWithTimestamp(string message)
         {
-            this.WriteVerbose(string.Format("{0:T} - {1}", DateTime.Now, message));
+            WriteVerbose(string.Format("{0:T} - {1}", DateTime.Now, message));
         }
 
         protected void WriteVerboseWithTimestamp(string message, params object[] args)
         {
-            this.WriteVerbose(string.Format("{0:T} - {1}", DateTime.Now, string.Format(message, args)));
+            WriteVerbose(string.Format("{0:T} - {1}", DateTime.Now, string.Format(message, args)));
         }
 
         protected void WriteWarningWithTimestamp(string message)
         {
-            this.WriteWarning(string.Format("{0:T} - {1}", DateTime.Now, message));
+            WriteWarning(string.Format("{0:T} - {1}", DateTime.Now, message));
         }
 
         protected virtual void WriteExceptionError(Exception ex)
         {
-            this.WriteError(new ErrorRecord(ex, string.Empty, ErrorCategory.CloseError, null));
+            WriteError(new ErrorRecord(ex, string.Empty, ErrorCategory.CloseError, null));
         }
     }
 }

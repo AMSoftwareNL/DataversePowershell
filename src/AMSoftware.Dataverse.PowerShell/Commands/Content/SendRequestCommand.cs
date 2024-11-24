@@ -53,7 +53,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [Alias("Id")]
         public Guid TargetRow { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             var request = new OrganizationRequest(Name);
 

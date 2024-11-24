@@ -54,7 +54,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [ValidateNotNullOrEmpty]
         public Hashtable Key { get; set; }
 
-        protected override void Execute()
+        public override void Execute()
         {
             Entity newEntity = InputObject;
             if (ParameterSetName == AddValuesParameterSet) newEntity = BuildEntityFromValues();
