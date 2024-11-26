@@ -8,7 +8,7 @@
             "name": "PowerShell: Binary Module Interactive",
             "type": "PowerShell",
             "request": "launch",
-            "script": "Import-Module -Force .\\src\\AMSoftware.Dataverse.PowerShell\\bin\\Debug\\AMSoftware.Dataverse.PowerShell.psd1",
+            "script": "Import-Module -Scope Local -Force .\\src\\AMSoftware.Dataverse.PowerShell\\bin\\Debug\\AMSoftware.Dataverse.PowerShell.psd1",
             "createTemporaryIntegratedConsole": true,
             "attachDotnetDebugger": true
         }

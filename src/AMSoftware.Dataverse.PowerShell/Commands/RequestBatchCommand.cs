@@ -55,7 +55,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
             if (MyInvocation.BoundParameters.ContainsKey(nameof(ContinueOnError)))
                 continueOnError = ContinueOnError.ToBool();
 
-            Guid batchId = Session.Current.Client.CreateBatchOperationRequest(Name, ReturnResults, ContinueOnError);
+            Guid batchId = Session.Current.Client.CreateBatchOperationRequest(Name, returnResults, continueOnError);
 
             if (batchId == Guid.Empty)
             {
