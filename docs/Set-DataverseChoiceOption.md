@@ -8,42 +8,30 @@ schema: 2.0.0
 # Set-DataverseChoiceOption
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Add or Update an option in a choice
 
 ## SYNTAX
 
 ### SetGlobalChoiceOption (Default)
 ```
 Set-DataverseChoiceOption -OptionSet <String> [-Value <Int32>] [-Label <String>] [-Description <String>]
- [-ExternalValue <String>] [-Color <String>]   
-   
-  [<RequestParameters>] [<CommonParameters>]
+ [-ExternalValue <String>] [-Color <String>]  [<CommonParameters>]
 ```
 
 ### SetAttributeChoiceOption
 ```
 Set-DataverseChoiceOption -Table <String> -Column <String> [-Value <Int32>] [-Label <String>]
- [-Description <String>] [-ExternalValue <String>] [-Color <String>]  
-    
-  [<RequestParameters>] [<CommonParameters>]
+ [-Description <String>] [-ExternalValue <String>] [-Color <String>] 
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
-
-## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
+Update an option in a global or column choice
 
 ## PARAMETERS
 
 ### -Color
-{{ Fill Color Description }}
+The new color for the choice option
 
 ```yaml
 Type: System.String
@@ -58,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Column
-{{ Fill Column Description }}
+The logicalname of the choice column to update
 
 ```yaml
 Type: System.String
@@ -73,7 +61,7 @@ Accept wildcard characters: False
 ```
 
 ### -Description
-{{ Fill Description Description }}
+The new description for the choice option
 
 ```yaml
 Type: System.String
@@ -88,7 +76,7 @@ Accept wildcard characters: False
 ```
 
 ### -ExternalValue
-{{ Fill ExternalValue Description }}
+The new external value for the choice option
 
 ```yaml
 Type: System.String
@@ -103,7 +91,7 @@ Accept wildcard characters: False
 ```
 
 ### -Label
-{{ Fill Label Description }}
+The new label for the choice option
 
 ```yaml
 Type: System.String
@@ -118,7 +106,7 @@ Accept wildcard characters: False
 ```
 
 ### -OptionSet
-{{ Fill OptionSet Description }}
+The logicalname of the global choice to update
 
 ```yaml
 Type: System.String
@@ -133,7 +121,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+THe logicalname of the table containing the choice column to update
 
 ```yaml
 Type: System.String
@@ -148,7 +136,7 @@ Accept wildcard characters: False
 ```
 
 ### -Value
-{{ Fill Value Description }}
+The value of the choice option to update. If the value doesn't exist a new choice option is added.
 
 ```yaml
 Type: System.Int32
@@ -161,9 +149,6 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -178,3 +163,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Set-DataverseChoiceOption.md)

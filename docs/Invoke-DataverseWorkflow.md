@@ -5,15 +5,15 @@ online version:
 schema: 2.0.0
 ---
 
-# Import-DataverseTranslation
+# Invoke-DataverseWorkflow
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Import-DataverseTranslation [-LiteralPath] <String>  [<CommonParameters>]
+Invoke-DataverseWorkflow [-Row] <Guid> [-Workflow] <Guid> 
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -22,7 +22,7 @@ Import-DataverseTranslation [-LiteralPath] <String>  [<CommonParameters>]
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -30,16 +30,31 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -LiteralPath
-{{ Fill LiteralPath Description }}
+### -Row
+{{ Fill Row Description }}
 
 ```yaml
-Type: System.String
+Type: System.Guid
 Parameter Sets: (All)
-Aliases: PSPath
+Aliases: Id
 
 Required: True
-Position: 0
+Position: 1
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -Workflow
+{{ Fill Workflow Description }}
+
+```yaml
+Type: System.Guid
+Parameter Sets: (All)
+Aliases: Process
+
+Required: True
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -50,12 +65,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
 
-[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Import-DataverseTranslation.md)
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Invoke-DataverseWorkflow.md)

@@ -8,27 +8,17 @@ schema: 2.0.0
 # Add-DataverseRows
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Add new rows to a table
 
 ## SYNTAX
 
 ```
 Add-DataverseRows -InputObject <Entity[]> [-Upsert] [-BatchId <Guid>] 
-    
-   [<RequestParameters>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
-
-## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
+Add new rows to a table using CreateMultiple or UpsertMultiple
 
 ## PARAMETERS
 
@@ -48,7 +38,7 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-{{ Fill InputObject Description }}
+Entity instance containing the row to add. When Upsert make sure the instance contains all the information.
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.Entity[]
@@ -63,7 +53,7 @@ Accept wildcard characters: False
 ```
 
 ### -Upsert
-{{ Fill Upsert Description }}
+Try UpsertMultiple instead of CreateMultiple.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -76,9 +66,6 @@ Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -93,3 +80,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Add-DataverseRows.md)

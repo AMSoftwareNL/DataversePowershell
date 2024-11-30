@@ -14,17 +14,14 @@ schema: 2.0.0
 
 ### SetObject (Default)
 ```
-Set-DataverseRow -InputObject <Entity> [-Behavior <ConcurrencyBehavior>] [-BatchId <Guid>] 
-    
-   [<RequestParameters>] [<CommonParameters>]
+Set-DataverseRow -InputObject <Entity> [-Behavior <ConcurrencyBehavior>] [-BatchId <Guid>]
+  [<CommonParameters>]
 ```
 
 ### SetValues
 ```
 Set-DataverseRow -Table <String> -Id <Guid> -Values <Hashtable> [-Behavior <ConcurrencyBehavior>]
- [-BatchId <Guid>]    
-   
- [<RequestParameters>] [<CommonParameters>]
+ [-BatchId <Guid>]  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -83,7 +80,7 @@ Aliases:
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -113,7 +110,7 @@ Aliases: LogicalName
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -132,9 +129,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -148,3 +142,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Set-DataverseRow.md)

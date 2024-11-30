@@ -12,13 +12,13 @@ Locale: en-US
 
 ## AMSoftware.Dataverse.PowerShell Cmdlets
 ### [Add-DataverseChoice](Add-DataverseChoice.md)
-Add a global Choice (OptionSet)
+{{ Fill in the Synopsis }}
 
 ### [Add-DataverseColumn](Add-DataverseColumn.md)
-Add a Column to a Dataverse Table
+{{ Fill in the Synopsis }}
 
 ### [Add-DataverseLanguage](Add-DataverseLanguage.md)
-Provision a new language
+{{ Fill in the Synopsis }}
 
 ### [Add-DataverseRelatedRow](Add-DataverseRelatedRow.md)
 {{ Fill in the Synopsis }}
@@ -36,7 +36,7 @@ Provision a new language
 {{ Fill in the Synopsis }}
 
 ### [Connect-DataverseEnvironment](Connect-DataverseEnvironment.md)
-Connect to a specific Dataverse Environment.
+{{ Fill in the Synopsis }}
 
 ### [Export-DataversePluginAssembly](Export-DataversePluginAssembly.md)
 {{ Fill in the Synopsis }}
@@ -204,9 +204,9 @@ Connect to a specific Dataverse Environment.
 {{ Fill in the Synopsis }}
 
 ### [Use-DataverseLanguage](Use-DataverseLanguage.md)
-Set the language for the current user
+{{ Fill in the Synopsis }}
 
 ### [Use-DataverseSolution](Use-DataverseSolution.md)
-Sets the active solution for the current session.
+{{ Fill in the Synopsis }}
 
 

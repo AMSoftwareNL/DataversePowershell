@@ -8,26 +8,24 @@ schema: 2.0.0
 # Get-DataverseRow
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get a single Dataverse Row
 
 ## SYNTAX
 
 ### RetrieveWithId
 ```
-Get-DataverseRow -Table <String> -Id <Guid> [-Columns <String[]>]  
-    
-  [<RequestParameters>] [<CommonParameters>]
+Get-DataverseRow -Table <String> -Id <Guid> [-Columns <String[]>] 
+ [<CommonParameters>]
 ```
 
 ### RetrieveWithKey
 ```
 Get-DataverseRow -Table <String> -Key <Hashtable> [-Columns <String[]>] 
-    
-   [<RequestParameters>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieve a single Dataverse Row
 
 ## EXAMPLES
 
@@ -41,7 +39,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -Columns
-{{ Fill Columns Description }}
+The columns to include in the result
 
 ```yaml
 Type: System.String[]
@@ -56,7 +54,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-{{ Fill Id Description }}
+The Id of the row
 
 ```yaml
 Type: System.Guid
@@ -71,7 +69,7 @@ Accept wildcard characters: False
 ```
 
 ### -Key
-{{ Fill Key Description }}
+The columns and values for a row based on Table Keys
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -86,7 +84,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+The table to retrieve from
 
 ```yaml
 Type: System.String
@@ -99,9 +97,6 @@ Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -118,3 +113,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseRow.md)

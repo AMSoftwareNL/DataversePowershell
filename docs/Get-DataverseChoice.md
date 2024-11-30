@@ -8,40 +8,28 @@ schema: 2.0.0
 # Get-DataverseChoice
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Retrieve the metadata of global choices
 
 ## SYNTAX
 
 ### GetChoiceByName (Default)
 ```
-Get-DataverseChoice -Name <String> [-Exclude <String>] [-Custom] [-Unmanaged] 
-    
-   [<RequestParameters>] [<CommonParameters>]
+Get-DataverseChoice [-Name <String>] [-Exclude <String>] [-Custom] [-Unmanaged]
+  [<CommonParameters>]
 ```
 
 ### GetChoiceById
 ```
-Get-DataverseChoice -Id <Guid>   
-   
-  [<RequestParameters>] [<CommonParameters>]
+Get-DataverseChoice -Id <Guid>  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
-
-## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
+Retrieve the metadata of global choices (OptionSet)
 
 ## PARAMETERS
 
 ### -Custom
-{{ Fill Custom Description }}
+Retrieve only custom Choices
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -56,7 +44,7 @@ Accept wildcard characters: False
 ```
 
 ### -Exclude
-{{ Fill Exclude Description }}
+Filter of choices to exclude based on the logicalname. Can contain wildcards.
 
 ```yaml
 Type: System.String
@@ -71,7 +59,7 @@ Accept wildcard characters: True
 ```
 
 ### -Id
-{{ Fill Id Description }}
+MetadataId of the choice to retrieve
 
 ```yaml
 Type: System.Guid
@@ -86,14 +74,14 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+The logicalname of the choice to retrieve. Can contain wildcards.
 
 ```yaml
 Type: System.String
 Parameter Sets: GetChoiceByName
 Aliases: Include
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
@@ -101,7 +89,7 @@ Accept wildcard characters: True
 ```
 
 ### -Unmanaged
-{{ Fill Unmanaged Description }}
+Only retrieve unmanaged globl choices
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -114,9 +102,6 @@ Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -132,3 +117,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseChoice.md)

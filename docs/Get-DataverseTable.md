@@ -8,48 +8,33 @@ schema: 2.0.0
 # Get-DataverseTable
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Retrieve table metadata
 
 ## SYNTAX
 
 ### GetTablesByFilter (Default)
 ```
 Get-DataverseTable [-Name <String>] [-Exclude <String>] [-Type <TableType>] [-Custom] [-Unmanaged]
- [-Intersects]    
-   
- [<RequestParameters>] [<CommonParameters>]
+ [-Intersects]  [<CommonParameters>]
 ```
 
 ### GetTableById
 ```
-Get-DataverseTable -Id <Guid>   
-   
-  [<RequestParameters>] [<CommonParameters>]
+Get-DataverseTable -Id <Guid>  [<CommonParameters>]
 ```
 
 ### GetTableByEtc
 ```
-Get-DataverseTable -TypeCode <Int32>   
-   
-  [<RequestParameters>] [<CommonParameters>]
+Get-DataverseTable -TypeCode <Int32>  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
-
-## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
+Retrieve table metadata
 
 ## PARAMETERS
 
 ### -Custom
-{{ Fill Custom Description }}
+Only retrieve custom tables
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -64,7 +49,7 @@ Accept wildcard characters: False
 ```
 
 ### -Exclude
-{{ Fill Exclude Description }}
+Filter of tables to exclude based on the logicalname. Can contain wildcards.
 
 ```yaml
 Type: System.String
@@ -79,7 +64,7 @@ Accept wildcard characters: True
 ```
 
 ### -Id
-{{ Fill Id Description }}
+MetadataId of the table to retrieve
 
 ```yaml
 Type: System.Guid
@@ -94,7 +79,7 @@ Accept wildcard characters: False
 ```
 
 ### -Intersects
-{{ Fill Intersects Description }}
+Include intersect tables from many-to-many relationships
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -109,7 +94,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+The logicalname of the table to retrieve. Can contain wildcards.
 
 ```yaml
 Type: System.String
@@ -124,7 +109,7 @@ Accept wildcard characters: True
 ```
 
 ### -Type
-{{ Fill Type Description }}
+The type of table to retrieve
 
 ```yaml
 Type: AMSoftware.Dataverse.PowerShell.Commands.TableType
@@ -140,7 +125,7 @@ Accept wildcard characters: False
 ```
 
 ### -TypeCode
-{{ Fill TypeCode Description }}
+The Entity Type Code (etc) of the table to retrieve. Also known as the Object Type Code.
 
 ```yaml
 Type: System.Int32
@@ -155,7 +140,7 @@ Accept wildcard characters: False
 ```
 
 ### -Unmanaged
-{{ Fill Unmanaged Description }}
+Only retrieve unmanaged tables
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -168,9 +153,6 @@ Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -185,3 +167,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseTable.md)

@@ -8,41 +8,31 @@ schema: 2.0.0
 # Set-DataverseColumn
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Update a column
 
 ## SYNTAX
 
 ### SetColumnByInputObject
 ```
-Set-DataverseColumn -Table <String> -InputObject <AttributeMetadata> [-MergeLabels] 
-    
-   [<RequestParameters>] [<CommonParameters>]
+Set-DataverseColumn -Table <String> -InputObject <AttributeMetadata> [-MergeLabels]
+  [<CommonParameters>]
 ```
 
 ### SetColumnByParameters
 ```
 Set-DataverseColumn -Table <String> -Name <String> [-DisplayName <String>] [-Description <String>]
- [-ExternalName <String>] [-Searchable] [-Auditing] [-MergeLabels]  
-    
-  [<RequestParameters>] [<CommonParameters>]
+ [-ExternalName <String>] [-Searchable] [-Auditing] [-MergeLabels] 
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
-
-## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
+Update a column.
+Additional dynamic parameters are available depending on the type of column. These come available when Table and Name are provided.
 
 ## PARAMETERS
 
 ### -Auditing
-{{ Fill Auditing Description }}
+Is auditing enabled for the Column
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -57,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -Description
-{{ Fill Description Description }}
+The description of the Column
 
 ```yaml
 Type: System.String
@@ -72,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -DisplayName
-{{ Fill DisplayName Description }}
+The displayname of the Column
 
 ```yaml
 Type: System.String
@@ -87,7 +77,7 @@ Accept wildcard characters: False
 ```
 
 ### -ExternalName
-{{ Fill ExternalName Description }}
+The external name of the Column
 
 ```yaml
 Type: System.String
@@ -102,7 +92,7 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-{{ Fill InputObject Description }}
+Attribute Metadata object describing the updated column
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.Metadata.AttributeMetadata
@@ -117,7 +107,7 @@ Accept wildcard characters: False
 ```
 
 ### -MergeLabels
-{{ Fill MergeLabels Description }}
+Keep other language labels for DisplayName and Description
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -132,12 +122,12 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Logicalname of the column to update
 
 ```yaml
 Type: System.String
 Parameter Sets: SetColumnByParameters
-Aliases:
+Aliases: AttributeLogicalName, ColumnName
 
 Required: True
 Position: Named
@@ -147,7 +137,7 @@ Accept wildcard characters: False
 ```
 
 ### -Searchable
-{{ Fill Searchable Description }}
+Is the column Searchable
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -162,7 +152,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+The logicalname of the Table containing the column to update
 
 ```yaml
 Type: System.String
@@ -175,9 +165,6 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -192,3 +179,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Set-DataverseColumn.md)

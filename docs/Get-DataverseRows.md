@@ -8,39 +8,38 @@ schema: 2.0.0
 # Get-DataverseRows
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get multiple rows from a Dataverse Table
 
 ## SYNTAX
 
 ### RetrieveWithQuery (Default)
 ```
-Get-DataverseRows -Table <String> [-Columns <String[]>] [-Sort <Hashtable>]
-  [-IncludeTotalCount] [-Skip <UInt64>] [-First <UInt64>]
- [<CommonParameters>]
+Get-DataverseRows -Table <String> [-Columns <String[]>] [-Sort <Hashtable>] [-Top <Int32>]
+  [<CommonParameters>]
 ```
 
 ### RetrieveWithAttributeQuery
 ```
-Get-DataverseRows -Table <String> -Query <Hashtable> [-Columns <String[]>] [-Sort <Hashtable>]
-  [-IncludeTotalCount] [-Skip <UInt64>] [-First <UInt64>]
- [<CommonParameters>]
+Get-DataverseRows -Table <String> -Query <Hashtable> [-Columns <String[]>] [-Sort <Hashtable>] [-Top <Int32>]
+  [<CommonParameters>]
 ```
 
 ### RetrieveWithBatch
 ```
-Get-DataverseRows -Table <String> -Id <Guid[]> [-AsBatch] [-Columns <String[]>]
-  [-IncludeTotalCount] [-Skip <UInt64>] [-First <UInt64>]
+Get-DataverseRows -Table <String> -Id <Guid[]> [-Columns <String[]>] 
  [<CommonParameters>]
 ```
 
 ### RetrieveWithFetchXml
 ```
-Get-DataverseRows -FetchXml <XmlDocument>  [-IncludeTotalCount]
- [-Skip <UInt64>] [-First <UInt64>] [<CommonParameters>]
+Get-DataverseRows -FetchXml <XmlDocument> [-Top <Int32>] 
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get multiple rows from a Dataverse Table based in queries or a list of Ids.
+
+Paging is applied in case of queries. In case of Ids batching is used to improve performance.
 
 ## EXAMPLES
 
@@ -53,23 +52,8 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -AsBatch
-{{ Fill AsBatch Description }}
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: RetrieveWithBatch
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Columns
-{{ Fill Columns Description }}
+The columns to retrieve
 
 ```yaml
 Type: System.String[]
@@ -84,7 +68,7 @@ Accept wildcard characters: False
 ```
 
 ### -FetchXml
-{{ Fill FetchXml Description }}
+The FetchXML query
 
 ```yaml
 Type: System.Xml.XmlDocument
@@ -99,7 +83,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-{{ Fill Id Description }}
+Ids of rows to retrieve. Can come from the pipeline.
 
 ```yaml
 Type: System.Guid[]
@@ -109,12 +93,12 @@ Aliases:
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
 ### -Query
-{{ Fill Query Description }}
+Columnnames and Values to filter on. Multiple are combined with AND.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -129,7 +113,7 @@ Accept wildcard characters: False
 ```
 
 ### -Sort
-{{ Fill Sort Description }}
+Columnnames and OrderType (Microsoft.Xrm.Sdk.Query.OrderType)
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -144,7 +128,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+Table to get the rows from
 
 ```yaml
 Type: System.String
@@ -158,42 +142,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -IncludeTotalCount
-Reports the total number of objects in the data set (an integer) followed by the selected objects. If the cmdlet cannot determine the total count, it displays "Unknown total count." The integer has an Accuracy property that indicates the reliability of the total count value. The value of Accuracy ranges from 0.0 to 1.0 where 0.0 means that the cmdlet could not count the objects, 1.0 means that the count is exact, and a value between 0.0 and 1.0 indicates an increasingly reliable estimate.
+### -Top
+Top number of rows to retrieve. Must be less then max pagesize (=5000).
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-Ignores the specified number of objects and then gets the remaining objects. Enter the number of objects to skip.
-
-```yaml
-Type: System.UInt64
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -First
-Gets only the specified number of objects. Enter the number of objects to get.
-
-```yaml
-Type: System.UInt64
-Parameter Sets: (All)
+Type: System.Int32
+Parameter Sets: RetrieveWithQuery, RetrieveWithAttributeQuery, RetrieveWithFetchXml
 Aliases:
 
 Required: False
@@ -217,5 +171,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
 [Online Versions](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseRows.md)
+
+
 

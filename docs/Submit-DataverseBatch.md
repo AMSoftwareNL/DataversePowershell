@@ -8,7 +8,7 @@ schema: 2.0.0
 # Submit-DataverseBatch
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Submit and execute a batch of requests
 
 ## SYNTAX
 
@@ -17,21 +17,12 @@ Submit-DataverseBatch -BatchId <Guid>  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
-
-## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
+Submit and execute a batch of requests
 
 ## PARAMETERS
 
 ### -BatchId
-{{ Fill BatchId Description }}
+Id of the Batch to submit and execute
 
 ```yaml
 Type: System.Guid
@@ -58,3 +49,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Submit-DataverseBatch.md)

@@ -8,52 +8,39 @@ schema: 2.0.0
 # Set-DataverseRelationship
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Update a relationship
 
 ## SYNTAX
 
 ### SetManyToOneRelationship (Default)
 ```
 Set-DataverseRelationship -Relationship <String> [-MenuConfiguration <AssociatedMenuConfiguration>]
- [-Behavior <CascadeConfiguration>] [-MergeLabels]  
-    
-  [<RequestParameters>] [<CommonParameters>]
+ [-Behavior <CascadeConfiguration>] [-MergeLabels]  [<CommonParameters>]
 ```
 
 ### SetRelationshipByInputObject
 ```
-Set-DataverseRelationship -InputObject <RelationshipMetadataBase> [-MergeLabels] 
-    
-   [<RequestParameters>] [<CommonParameters>]
+Set-DataverseRelationship -InputObject <RelationshipMetadataBase> [-MergeLabels]
+  [<CommonParameters>]
 ```
 
 ### SetManyToManyRelationship
 ```
 Set-DataverseRelationship -Relationship <String> [-MenuConfiguration <AssociatedMenuConfiguration>]
  [-RelatedMenuConfiguration <AssociatedMenuConfiguration>] [-MergeLabels] 
-    
-   [<RequestParameters>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
-
-## EXAMPLES
-
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
+Update a relationship
 
 ## PARAMETERS
 
 ### -Behavior
-{{ Fill Behavior Description }}
+New cascade configuration for the relationship
 
 ```yaml
-Type: CascadeConfiguration
+Type: Microsoft.Xrm.Sdk.Metadata.CascadeConfiguration
 Parameter Sets: SetManyToOneRelationship
 Aliases:
 
@@ -65,10 +52,10 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-{{ Fill InputObject Description }}
+Relationship Metadata object describing the updated relationship
 
 ```yaml
-Type: RelationshipMetadataBase
+Type: Microsoft.Xrm.Sdk.Metadata.RelationshipMetadataBase
 Parameter Sets: SetRelationshipByInputObject
 Aliases:
 
@@ -80,10 +67,10 @@ Accept wildcard characters: False
 ```
 
 ### -MenuConfiguration
-{{ Fill MenuConfiguration Description }}
+New menu configuration for the relationship
 
 ```yaml
-Type: AssociatedMenuConfiguration
+Type: Microsoft.Xrm.Sdk.Metadata.AssociatedMenuConfiguration
 Parameter Sets: SetManyToOneRelationship, SetManyToManyRelationship
 Aliases:
 
@@ -95,10 +82,10 @@ Accept wildcard characters: False
 ```
 
 ### -MergeLabels
-{{ Fill MergeLabels Description }}
+Keep other language labels for DisplayName and Description
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -110,10 +97,10 @@ Accept wildcard characters: False
 ```
 
 ### -RelatedMenuConfiguration
-{{ Fill RelatedMenuConfiguration Description }}
+New menu configuration for the relationship
 
 ```yaml
-Type: AssociatedMenuConfiguration
+Type: Microsoft.Xrm.Sdk.Metadata.AssociatedMenuConfiguration
 Parameter Sets: SetManyToManyRelationship
 Aliases:
 
@@ -125,10 +112,10 @@ Accept wildcard characters: False
 ```
 
 ### -Relationship
-{{ Fill Relationship Description }}
+Schemaname of the relationship to update
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: SetManyToOneRelationship, SetManyToManyRelationship
 Aliases: SchemaName, Name
 
@@ -138,9 +125,6 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -157,3 +141,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Set-DataverseRelationship.md)

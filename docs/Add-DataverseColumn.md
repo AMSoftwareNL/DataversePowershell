@@ -145,7 +145,7 @@ Accept wildcard characters: False
 ```
 
 ### -Required
-The requirment level of the Column. Default is 'Optional'. 
+The requirement level of the Column
 
 ```yaml
 Type: AMSoftware.Dataverse.PowerShell.Commands.ColumnRequiredLevel
@@ -236,5 +236,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Add-DataverseColumn.md)
+
+
 
 

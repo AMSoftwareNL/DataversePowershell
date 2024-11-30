@@ -8,36 +8,24 @@ schema: 2.0.0
 # Send-DataverseRequest
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Execute a request
 
 ## SYNTAX
 
 ### Message (Default)
 ```
-Send-DataverseRequest -Name <String> [-Parameters <Hashtable>] [-BatchId <Guid>] 
-    
-   [<RequestParameters>] [<CommonParameters>]
+Send-DataverseRequest -Name <String> [-Parameters <Hashtable>] [-BatchId <Guid>]
+  [<CommonParameters>]
 ```
 
 ### Function
 ```
 Send-DataverseRequest -Name <String> [-Parameters <Hashtable>] -TargetTable <String> -TargetRow <Guid>
- [-BatchId <Guid>]    
-   
- [<RequestParameters>] [<CommonParameters>]
+ [-BatchId <Guid>]  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
-
-## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
+Execute a request, such as an action, function, or custom API.
 
 ## PARAMETERS
 
@@ -57,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Name of the request to execute
 
 ```yaml
 Type: System.String
@@ -72,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -Parameters
-{{ Fill Parameters Description }}
+Input parameters to provide with the request
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -87,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetRow
-{{ Fill TargetRow Description }}
+For bound actions the Id of the table row to invoke the action on
 
 ```yaml
 Type: System.Guid
@@ -102,7 +90,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetTable
-{{ Fill TargetTable Description }}
+For bound actions the logicalname of the table to invoke the action on
 
 ```yaml
 Type: System.String
@@ -115,9 +103,6 @@ Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -133,3 +118,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Send-DataverseRequest.md)

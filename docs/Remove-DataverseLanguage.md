@@ -8,30 +8,37 @@ schema: 2.0.0
 # Remove-DataverseLanguage
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Unprovision a Dataverse language
 
 ## SYNTAX
 
 ```
-Remove-DataverseLanguage [-Locale] <Int32>  [<CommonParameters>]
+Remove-DataverseLanguage [-Locale] <Int32> [-Force]  [-WhatIf] [-Confirm]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
-
-## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
+Unprovision a Dataverse language
 
 ## PARAMETERS
 
+### -Force
+Unprovision without confirm
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Locale
-{{ Fill Locale Description }}
+ID of the Locale (LCID) of the language to unprovision
 
 ```yaml
 Type: System.Int32
@@ -40,6 +47,36 @@ Aliases: Language, LCID
 
 Required: True
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs. The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -58,3 +95,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Remove-DataverseLanguage.md)

@@ -8,42 +8,31 @@ schema: 2.0.0
 # Set-DataverseTable
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Update a table
 
 ## SYNTAX
 
 ### SetTableObject
 ```
-Set-DataverseTable -InputObject <EntityMetadata> [-MergeLabels]  
-    
-  [<RequestParameters>] [<CommonParameters>]
+Set-DataverseTable -InputObject <EntityMetadata> [-MergeLabels] 
+ [<CommonParameters>]
 ```
 
 ### SetTable
 ```
 Set-DataverseTable -Name <String> [-DisplayName <String>] [-PluralName <String>] [-Description <String>]
  [-ExternalName <String>] [-ExternalPluralName <String>] [-HasAttachments] [-IsActivityParty] [-TrackChanges]
- [-DataProviderId <Guid>] [-DataSourceId <Guid>] [-MergeLabels]  
-    
-  [<RequestParameters>] [<CommonParameters>]
+ [-DataProviderId <Guid>] [-DataSourceId <Guid>] [-MergeLabels] 
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
-
-## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
+Update a table
 
 ## PARAMETERS
 
 ### -DataProviderId
-{{ Fill DataProviderId Description }}
+The Id that identifies the associated virtual table data provider
 
 ```yaml
 Type: System.Guid
@@ -58,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -DataSourceId
-{{ Fill DataSourceId Description }}
+The Id that identifies the associated virtual table data source
 
 ```yaml
 Type: System.Guid
@@ -73,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -Description
-{{ Fill Description Description }}
+New description for the table
 
 ```yaml
 Type: System.String
@@ -88,7 +77,7 @@ Accept wildcard characters: False
 ```
 
 ### -DisplayName
-{{ Fill DisplayName Description }}
+New displayname for the table
 
 ```yaml
 Type: System.String
@@ -103,7 +92,7 @@ Accept wildcard characters: False
 ```
 
 ### -ExternalName
-{{ Fill ExternalName Description }}
+New external name for the table
 
 ```yaml
 Type: System.String
@@ -118,7 +107,7 @@ Accept wildcard characters: False
 ```
 
 ### -ExternalPluralName
-{{ Fill ExternalPluralName Description }}
+New plural external name for the table
 
 ```yaml
 Type: System.String
@@ -133,7 +122,7 @@ Accept wildcard characters: False
 ```
 
 ### -HasAttachments
-{{ Fill HasAttachments Description }}
+Can the table have attachments
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -148,7 +137,7 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-{{ Fill InputObject Description }}
+Entity Metadata object describing the updated table
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.Metadata.EntityMetadata
@@ -163,7 +152,7 @@ Accept wildcard characters: False
 ```
 
 ### -IsActivityParty
-{{ Fill IsActivityParty Description }}
+Table can be used as party in an activity
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -178,7 +167,7 @@ Accept wildcard characters: False
 ```
 
 ### -MergeLabels
-{{ Fill MergeLabels Description }}
+Keep other language labels for DisplayName and Description
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -193,7 +182,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+The logicalname of the table to update
 
 ```yaml
 Type: System.String
@@ -208,7 +197,7 @@ Accept wildcard characters: False
 ```
 
 ### -PluralName
-{{ Fill PluralName Description }}
+The new plural name for the table
 
 ```yaml
 Type: System.String
@@ -223,7 +212,7 @@ Accept wildcard characters: False
 ```
 
 ### -TrackChanges
-{{ Fill TrackChanges Description }}
+Track change is enabled
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -236,9 +225,6 @@ Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -253,3 +239,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Set-DataverseTable.md)

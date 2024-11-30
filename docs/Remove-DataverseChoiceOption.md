@@ -8,40 +8,29 @@ schema: 2.0.0
 # Remove-DataverseChoiceOption
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Remove an option from a global choice or choice column
 
 ## SYNTAX
 
 ### RemoveGlobalChoiceOption (Default)
 ```
-Remove-DataverseChoiceOption -OptionSet <String> -Value <Int32>  
-    
-    [<RequestParameters>] [<CommonParameters>]
+Remove-DataverseChoiceOption -OptionSet <String> -Value <Int32> [-Force] 
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ### RemoveAttributeChoiceOption
 ```
-Remove-DataverseChoiceOption -Table <String> -Column <String> -Value <Int32> 
-    
-     [<RequestParameters>] [<CommonParameters>]
+Remove-DataverseChoiceOption -Table <String> -Column <String> -Value <Int32> [-Force]
+  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
-
-## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
+Remove an option from a global choice or choice column
 
 ## PARAMETERS
 
 ### -Column
-{{ Fill Column Description }}
+Logicalname of the choice column
 
 ```yaml
 Type: System.String
@@ -55,8 +44,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Force
+Remove without confirm
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -OptionSet
-{{ Fill OptionSet Description }}
+Logicalname of the choice to remove the option from
 
 ```yaml
 Type: System.String
@@ -71,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+Logicalname of the table containing the choice column
 
 ```yaml
 Type: System.String
@@ -86,7 +90,7 @@ Accept wildcard characters: False
 ```
 
 ### -Value
-{{ Fill Value Description }}
+The numeric value of the choice option to remove
 
 ```yaml
 Type: System.Int32
@@ -100,8 +104,35 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs. The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -116,3 +147,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Remove-DataverseChoiceOption.md)
