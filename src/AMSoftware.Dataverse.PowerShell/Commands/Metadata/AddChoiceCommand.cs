@@ -29,7 +29,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         private const string AddChoiceObjectParameterSet = "AddChoiceObject";
         private const string AddNewChoiceParameterSet = "AddNewChoice";
 
-        [Parameter(Mandatory = true, ParameterSetName = AddChoiceObjectParameterSet)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = AddChoiceObjectParameterSet)]
         [Alias("Choice", "OptionSet")]
         [ValidateNotNullOrEmpty]
         public OptionSetMetadata InputObject { get; set; }

@@ -40,10 +40,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
         [PSDefaultValue(Value = false)]
         public SwitchParameter ContinueOnError { get; set; }
 
-        protected override void BeginProcessing()
+        protected override void EndProcessing()
         {
-            base.BeginProcessing();
-
             if (string.IsNullOrWhiteSpace(Name))
                 Name = $"Request-DataverseBatch {Session.Current.UserId} {DateTime.UtcNow:s}";
 
@@ -68,10 +66,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
             {
                 WriteObject(batchId);
             }
-        }
 
-        public override void Execute()
-        {
+            base.EndProcessing();
         }
     }
 }

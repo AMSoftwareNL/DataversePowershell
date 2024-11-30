@@ -46,7 +46,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [ValidateNotNullOrEmpty]
         public string OptionSet { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [Parameter(Mandatory = true)]
         [ValidateRange(1, int.MaxValue)]
         public int Value { get; set; }
 
@@ -94,7 +94,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 MergeLabels = true
             };
 
-            var updateResponse = ExecuteOrganizationRequest<UpdateOptionSetResponse>(updateRequest);
+            var _ = ExecuteOrganizationRequest<UpdateOptionSetResponse>(updateRequest);
         }
 
         private void UpdateAttributeChoice()
@@ -118,7 +118,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 MergeLabels = true,
             };
 
-            var updateResponse = ExecuteOrganizationRequest<UpdateAttributeResponse>(updateRequest);
+            var _ = ExecuteOrganizationRequest<UpdateAttributeResponse>(updateRequest);
         }
 
         private void ApplyChoiceOption(OptionSetMetadata optionSet)
