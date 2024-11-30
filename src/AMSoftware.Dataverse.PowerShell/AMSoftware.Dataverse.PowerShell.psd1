@@ -99,6 +99,7 @@
         'Get-DataverseRow',
         'Get-DataverseRows',
         'Remove-DataverseRow',
+        'Remove-DataverseRows',        
         'Set-DataverseRow',
         'Set-DataverseRows',
         'Add-DataverseRelatedRow',
