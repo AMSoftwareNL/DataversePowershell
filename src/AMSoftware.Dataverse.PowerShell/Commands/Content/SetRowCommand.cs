@@ -37,13 +37,13 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [ValidateNotNullOrEmpty]
         public Entity InputObject { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = SetValuesParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = SetValuesParameterSet, ValueFromPipelineByPropertyName = true)]
         [ValidateNotNullOrEmpty]
         [ArgumentCompleter(typeof(TableNameArgumentCompleter))]
         [Alias("LogicalName")]
         public string Table { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = SetValuesParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = SetValuesParameterSet, ValueFromPipelineByPropertyName = true)]
         [ValidateNotNullOrEmpty]
         public Guid Id { get; set; }
 
@@ -76,7 +76,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             }
             else
             {
-                var response = ExecuteOrganizationRequest<UpdateResponse>(request);
+                var _ = ExecuteOrganizationRequest<UpdateResponse>(request);
                 WriteObject(newEntity.ToEntityReference());
             }
         }

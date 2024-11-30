@@ -19,15 +19,15 @@ using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
-    [Cmdlet(VerbsCommon.Remove, "DataverseRelatedRow", DefaultParameterSetName = RemoveSingleRelatedRowParameterSet, SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.High)]
+    [Cmdlet(VerbsCommon.Remove, "DataverseRelatedRow", SupportsShouldProcess = true, ConfirmImpact = ConfirmImpact.Low)]
     public sealed class RemoveRelatedRowCommand : BatchCmdletBase
     {
-        private const string RemoveSingleRelatedRowParameterSet = "RemoveSingleRelatedRow";
-        private const string RemoveCollectionRelatedRowsParameterSet = "RemoveCollectionRelatedRows";
+        private readonly List<EntityReference> _relatedRows = [];
 
         [Parameter(Mandatory = true)]
         [ValidateNotNullOrEmpty]
@@ -38,20 +38,16 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [ValidateNotNullOrEmpty]
         public Guid TargetRow { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true, ParameterSetName = RemoveSingleRelatedRowParameterSet)]
+        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
         [Alias("LogicalName")]
         [ValidateNotNullOrEmpty]
         [ArgumentCompleter(typeof(TableNameArgumentCompleter))]
         public string RelatedTable { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true, ParameterSetName = RemoveSingleRelatedRowParameterSet)]
+        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
         [Alias("Id")]
         [ValidateNotNullOrEmpty]
         public Guid RelatedRow { get; set; }
-
-        [Parameter(Mandatory = true, ParameterSetName = RemoveCollectionRelatedRowsParameterSet)]
-        [ValidateNotNullOrEmpty]
-        public EntityReference[] Rows { get; set; }
 
         [Parameter(Mandatory = true)]
         [ValidateNotNullOrEmpty]
@@ -62,23 +58,18 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
         public override void Execute()
         {
-            var relatedRows = new EntityReferenceCollection();
-
-            switch (ParameterSetName)
+            if (Force || ShouldProcess("Disassociate", $"{TargetTable} {TargetRow} < - > {RelatedTable} {RelatedRow}"))
             {
-                case RemoveSingleRelatedRowParameterSet:
-                    relatedRows.Add(new EntityReference(RelatedTable, RelatedRow));
-                    break;
-
-                case RemoveCollectionRelatedRowsParameterSet:
-                    relatedRows.AddRange(Rows);
-                    break;
+                _relatedRows.Add(new EntityReference(RelatedTable, RelatedRow));
             }
+        }
 
+        protected override void EndProcessing()
+        {
             var request = new DisassociateRequest()
             {
                 Target = new EntityReference(TargetTable, TargetRow),
-                RelatedEntities = relatedRows,
+                RelatedEntities = new EntityReferenceCollection(_relatedRows),
                 Relationship = new Relationship(Relationship)
             };
 
@@ -88,11 +79,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             }
             else
             {
-                if (Force || ShouldProcess("Disassociate", $"{TargetTable} {TargetRow}"))
-                {
-                    var _ = ExecuteOrganizationRequest<DisassociateResponse>(request);
-                }
+                var _ = ExecuteOrganizationRequest<DisassociateResponse>(request);
             }
+            base.EndProcessing();
         }
     }
 }

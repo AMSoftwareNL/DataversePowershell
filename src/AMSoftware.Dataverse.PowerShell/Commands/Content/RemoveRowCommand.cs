@@ -24,7 +24,6 @@ using System.Management.Automation;
 namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
     [Cmdlet(VerbsCommon.Remove, "DataverseRow", ConfirmImpact = ConfirmImpact.High, SupportsShouldProcess = true)]
-    [OutputType(typeof(EntityReference))]
     public sealed class RemoveRowCommand : BatchCmdletBase
     {
         [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]

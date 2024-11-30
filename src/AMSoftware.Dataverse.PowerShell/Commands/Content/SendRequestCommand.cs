@@ -83,7 +83,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             {
                 var response = ExecuteOrganizationRequest<OrganizationResponse>(request);
 
-                WriteObject(response, true);
+                WriteObject(response);
             }
         }
     }

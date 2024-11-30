@@ -67,30 +67,33 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             {
                 case RetrieveWithIdParameterSet:
                     request = RetrieveSingleRowRequest(new EntityReference(Table, Id), _columnset);
-                    
                     break;
                 case RetrieveWithKeyParameterSet:
-                    KeyAttributeCollection keysCollection = new KeyAttributeCollection();
+                    var keysCollection = new KeyAttributeCollection();
 
                     foreach (var keyName in Key.Keys)
                     {
-                        keysCollection.Add((string)keyName, Key[keyName]);
+                        var keyValue = Key[keyName];
+
+                        if (keyValue is PSObject psValue)
+                            keysCollection.Add((string)keyName, psValue.ImmediateBaseObject);
+                        else
+                            keysCollection.Add((string)keyName, keyValue);
                     }
 
                     request = RetrieveSingleRowRequest(new EntityReference(Table, keysCollection), _columnset);
-                    
+
                     break;
             }
 
             RetrieveResponse response = ExecuteOrganizationRequest<RetrieveResponse>(request);
 
             WriteObject(response.Entity);
-
         }
 
         private static RetrieveRequest RetrieveSingleRowRequest(EntityReference reference, ColumnSet columns)
         {
-            RetrieveRequest request = new RetrieveRequest()
+            var request = new RetrieveRequest()
             {
                 Target = reference,
                 ColumnSet = columns

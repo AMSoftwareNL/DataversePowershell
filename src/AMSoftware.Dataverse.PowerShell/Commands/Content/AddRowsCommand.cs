@@ -15,13 +15,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
-using AMSoftware.Dataverse.PowerShell.DynamicParameters;
-using Microsoft.PowerPlatform.Dataverse.Client;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
-using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 
@@ -31,6 +27,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
     [OutputType(typeof(EntityReference))]
     public sealed class AddRowsCommand : BatchCmdletBase
     {
+        private readonly List<Entity> _rowsToProcess = [];
+
         [Parameter(Mandatory = true, ValueFromPipeline = true)]
         [Alias("Rows", "Entities")]
         [ValidateNotNullOrEmpty]
@@ -41,47 +39,37 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
         public override void Execute()
         {
-            if (Upsert.ToBool())
+            _rowsToProcess.AddRange(InputObject);
+        }
+
+        protected override void EndProcessing()
+        {
+            var request = new OrganizationRequest(Upsert.ToBool() ? "UpsertMultiple" : "CreateMultiple");
+            request.Parameters.Add("Targets", new EntityCollection(_rowsToProcess));
+
+            if (UseBatch)
             {
-                var request = new UpsertMultipleRequest()
-                {
-                    Targets = new EntityCollection(InputObject.ToList())
-                };
-
-                if (UseBatch)
-                {
-                    AddOrganizationRequestToBatch(request);
-                }
-                else
-                {
-                    var response = ExecuteOrganizationRequest<UpsertMultipleResponse>(request);
-
-                    for (int i = 0; i < response.Results.Length; i++)
-                    {
-                        WriteObject(response.Results[i].Target);
-                    }
-                }
-            } else
+                AddOrganizationRequestToBatch(request);
+            }
+            else
             {
-                var request = new CreateMultipleRequest()
-                {
-                    Targets = new EntityCollection(InputObject.ToList())
-                };
+                var response = ExecuteOrganizationRequest<OrganizationResponse>(request);
 
-                if (UseBatch)
+                if (response is UpsertMultipleResponse upsertMultipleResponse)
                 {
-                    AddOrganizationRequestToBatch(request);
+                    WriteObject(upsertMultipleResponse.Results.Select(r => r.Target), true);
                 }
-                else
-                {
-                    var response = ExecuteOrganizationRequest<CreateMultipleResponse>(request);
 
-                    for (int i = 0; i < response.Ids.Length; i++)
+                if (response is CreateMultipleResponse createMultipleResponse)
+                {
+                    for (int i = 0; i < createMultipleResponse.Ids.Length; i++)
                     {
-                        WriteObject(new EntityReference(InputObject[i].LogicalName, response.Ids[i]));
+                        WriteObject(new EntityReference(_rowsToProcess[i].LogicalName, createMultipleResponse.Ids[i]));
                     }
                 }
             }
+
+            base.EndProcessing();
         }
     }
 }
