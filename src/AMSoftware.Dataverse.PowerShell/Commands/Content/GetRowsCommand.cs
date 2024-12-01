@@ -269,7 +269,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 };
             }
 
-            bool moreRecords;
+            bool moreRecords = false;
             do
             {
                 var pagedQueryRequest = new RetrieveMultipleRequest()
@@ -279,9 +279,12 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
                 var pagedQueryResponse = ExecuteOrganizationRequest<RetrieveMultipleResponse>(pagedQueryRequest);
 
-                query.PageInfo.PageNumber += 1;
-                query.PageInfo.PagingCookie = pagedQueryResponse.EntityCollection.PagingCookie;
-                moreRecords = pagedQueryResponse.EntityCollection.MoreRecords;
+                if (query.PageInfo != null)
+                {
+                    query.PageInfo.PageNumber += 1;
+                    query.PageInfo.PagingCookie = pagedQueryResponse.EntityCollection.PagingCookie;
+                    moreRecords = pagedQueryResponse.EntityCollection.MoreRecords;
+                }
 
                 WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
             } while (moreRecords);
@@ -298,7 +301,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
                 };
             }
 
-            bool moreRecords;
+            bool moreRecords = false;
             do
             {
                 var pagedQueryRequest = new RetrieveMultipleRequest()
@@ -308,9 +311,12 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
                 var pagedQueryResponse = ExecuteOrganizationRequest<RetrieveMultipleResponse>(pagedQueryRequest);
 
-                query.PageInfo.PageNumber += 1;
-                query.PageInfo.PagingCookie = pagedQueryResponse.EntityCollection.PagingCookie;
-                moreRecords = pagedQueryResponse.EntityCollection.MoreRecords;
+                if (query.PageInfo != null)
+                {
+                    query.PageInfo.PageNumber += 1;
+                    query.PageInfo.PagingCookie = pagedQueryResponse.EntityCollection.PagingCookie;
+                    moreRecords = pagedQueryResponse.EntityCollection.MoreRecords;
+                }
 
                 WriteObject(pagedQueryResponse.EntityCollection.Entities, true);
             } while (moreRecords);

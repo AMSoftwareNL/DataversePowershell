@@ -16,7 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
-using AMSoftware.Dataverse.PowerShell.DynamicParameters;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
@@ -77,7 +76,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         {
             var request = new UpdateMultipleRequest()
             {
-                Targets = new EntityCollection(_rowsToProcess)
+                Targets = new EntityCollection(_rowsToProcess) {
+                    EntityName = _rowsToProcess.FirstOrDefault()?.LogicalName ?? Table
+                }
             };
             if (MyInvocation.BoundParameters.ContainsKey(nameof(Behavior)))
             {
