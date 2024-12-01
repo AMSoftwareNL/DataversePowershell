@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-DataverseRows
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Update rows in table
 
 ## SYNTAX
 
@@ -25,16 +25,15 @@ Set-DataverseRows -Table <String> -Id <Guid> -Values <Hashtable> [-Behavior <Con
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Update rows in table using UpdateMultiple request
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
+### Example 1: Bulk update
 
-{{ Add example description here }}
+```powershell
+$rows | Set-DataverseRow -Values @{name='Account Updated'}
+```
 
 ## PARAMETERS
 
@@ -54,7 +53,7 @@ Accept wildcard characters: False
 ```
 
 ### -Behavior
-{{ Fill Behavior Description }}
+Concurrency behavior of the update
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.ConcurrencyBehavior
@@ -70,7 +69,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-{{ Fill Id Description }}
+Id of the row the update
 
 ```yaml
 Type: System.Guid
@@ -85,7 +84,7 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-{{ Fill InputObject Description }}
+Entity object with Attributes with updated values
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.Entity[]
@@ -100,7 +99,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+Logicalname of the table containing the rows to update
 
 ```yaml
 Type: System.String
@@ -115,7 +114,7 @@ Accept wildcard characters: False
 ```
 
 ### -Values
-{{ Fill Values Description }}
+Updated values for the rows
 
 ```yaml
 Type: System.Collections.Hashtable

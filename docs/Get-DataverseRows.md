@@ -43,12 +43,40 @@ Paging is applied in case of queries. In case of Ids batching is used to improve
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
+### Example 1: Retrieve With FetchXml
+
+```powershell
+[xml]$fetchxml = 
+@"
+<fetch>
+  <entity name='account'>
+    <attribute name='name' />
+  </entity>
+</fetch>
+"@
+
+Get-DataverseRows -FetchXML $fetchxml -Top 50
 ```
 
-{{ Add example description here }}
+### Example 2: Retrieve With Attribute Query
+
+```powershell
+Get-DataverseRows -Table 'account' -Columns 'name' -Sort @{name=[Microsoft.Xrm.Sdk.Query.OrderType]::Ascending} -Query @{name='Account 1'}
+```
+
+### Example 3: Retrieve from table
+
+```powershell
+Get-DataverseRows -Table 'account' -Columns 'name' -Sort @{name=[Microsoft.Xrm.Sdk.Query.OrderType]::Ascending} -Top 50
+```
+
+### Example 4: Retrieve batched
+
+```powershell
+$ids = Get-DataverseRows -Table 'contact' -Columns 'parentcustomerid' | Select-Object -ExpandProperty 'parentcustomerid' -Unique
+
+$ids | Get-DataverseRows -Table 'account' | Format-List
+```
 
 ## PARAMETERS
 

@@ -20,6 +20,27 @@ Add-DataverseRows -InputObject <Entity[]> [-Upsert] [-BatchId <Guid>]
 ## DESCRIPTION
 Add new rows to a table using CreateMultiple or UpsertMultiple
 
+## EXAMPLES
+
+### Example 1: Add rows from InputObject
+
+```powershell
+1..500 | ForEach-Object { 
+    $row = [dvrow]::new('account'); 
+    $row.name = "Multiple Account $_"; 
+    $row 
+} | Add-DataverseRows
+```
+
+### Example 2: Add rows from Values
+
+```powershell
+1..500 | ForEach-Object { 
+    $row = @{ name = "Multiple Account $_" }; 
+    $row 
+} | Add-DataverseRows -Table 'account'
+```
+
 ## PARAMETERS
 
 ### -BatchId

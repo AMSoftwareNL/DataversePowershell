@@ -27,6 +27,27 @@ Send-DataverseRequest -Name <String> [-Parameters <Hashtable>] -TargetTable <Str
 ## DESCRIPTION
 Execute a request, such as an action, function, or custom API.
 
+## EXAMPLES
+
+### Example 1: Simple request
+
+```powershell
+Send-DataverseRequest -Name 'WhoAmI'
+```
+
+### Example 2: Request with parameters
+
+```powershell
+Send-DataverseRequest -Name 'CopySystemForm' -Parameters @{SourceId=$randomform.Id}
+```
+
+### Example 3: Request bound to Target
+
+```powershell
+$row = Get-DataverseRows -Table 'account' -Top 1
+$row | Send-DataverseRequest -Name 'GenerateSharedLink' -Parameters @{SharedRights=[Microsoft.Crm.Sdk.Messages.AccessRights]::ReadAccess}
+```
+
 ## PARAMETERS
 
 ### -BatchId

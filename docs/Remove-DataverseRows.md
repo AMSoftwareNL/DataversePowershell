@@ -8,7 +8,7 @@ schema: 2.0.0
 # Remove-DataverseRows
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Remove row from a table
 
 ## SYNTAX
 
@@ -18,16 +18,15 @@ Remove-DataverseRows -Table <String> -Id <Guid[]> [-Force] [-BatchId <Guid>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Remove row from an elastic table using DeleteMultiple
 
 ## EXAMPLES
 
 ### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
-```
 
-{{ Add example description here }}
+```powershell
+$inputs | Remove-DataverseRows -Table 'ams_elastic' -Force
+```
 
 ## PARAMETERS
 
@@ -47,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Force
-{{ Fill Force Description }}
+Remove without confirm
 
 ```yaml
 Type: SwitchParameter
@@ -62,7 +61,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-{{ Fill Id Description }}
+Id of the row to remove
 
 ```yaml
 Type: Guid[]
@@ -77,7 +76,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+Logicalname of the table to remove the row from
 
 ```yaml
 Type: String
@@ -135,6 +134,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Object
 ## NOTES
+
+DeleteMultiple is currently in preview and only works on Elastic tables
+
 
 ## RELATED LINKS
 

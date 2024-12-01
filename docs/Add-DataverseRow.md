@@ -27,6 +27,33 @@ Add-DataverseRow -Table <String> -Values <Hashtable> [-Id <Guid>] [-Key <Hashtab
 ## DESCRIPTION
 Add a new row to a table using Create or Upsert message.
 
+## EXAMPLES
+
+### Example 1: Add row with values
+
+```powershell
+$values = @{
+  'name' = 'Test Account'
+}
+
+Add-DataverseRow -Table 'account' -Values $values
+```
+
+### Example 2: Add row with InputObject
+
+```powershell
+$inputobject = [dvrow]::new('account')
+$inputobject.name = 'Test Account'
+
+$inputobject | Add-DataverseRow
+```
+
+### Example 3: Upsert row with InputObject
+
+```powershell
+Add-DataverseRow -Table 'account' -Id $rowid -Values @{ name = 'Account (Updated)' }
+```
+
 ## PARAMETERS
 
 ### -BatchId

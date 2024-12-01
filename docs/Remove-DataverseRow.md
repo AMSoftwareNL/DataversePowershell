@@ -8,7 +8,7 @@ schema: 2.0.0
 # Remove-DataverseRow
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Remove row from a table
 
 ## SYNTAX
 
@@ -18,16 +18,21 @@ Remove-DataverseRow -Table <String> -Id <Guid> [-Force] [-BatchId <Guid>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Remove row from a table
 
 ## EXAMPLES
 
 ### Example 1
-```
-PS C:\> {{ Add example code here }}
+
+```powershell
+$inputs | Remove-DataverseRow -Table 'account' -Force
 ```
 
-{{ Add example description here }}
+### Example 2
+
+```powershell
+Remove-DataverseRow -Table 'account' -Id $rowid -Force
+```
 
 ## PARAMETERS
 
@@ -47,7 +52,7 @@ Accept wildcard characters: False
 ```
 
 ### -Force
-{{ Fill Force Description }}
+Remove without confirm
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -62,7 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-{{ Fill Id Description }}
+Id of the row to remove
 
 ```yaml
 Type: System.Guid
@@ -77,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+Logicalname of the table to remove the row from
 
 ```yaml
 Type: System.String

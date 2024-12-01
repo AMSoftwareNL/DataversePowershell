@@ -176,7 +176,7 @@ Describe 'Commands.Content' -Tag 'Integration' {
 		It "Retrieve With Id" {
 			$inputs = Get-DataverseRows -Table 'account' -Columns 'accountid' -Top 50
 
-			$output = $inputs | Get-DataverseRows -Table 'account' -Columns 'name'
+			$output = $inputs | Get-DataverseRow -Table 'account' -Columns 'name'
 
 			$output | Should -BeOfType 'Microsoft.Xrm.Sdk.Entity'
 			$output | Should -HaveCount 50

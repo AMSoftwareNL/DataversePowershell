@@ -30,11 +30,16 @@ Retrieve a single Dataverse Row
 ## EXAMPLES
 
 ### Example 1
-```
-PS C:\> {{ Add example code here }}
+
+```powershell
+$ids | Get-DataverseRow -Table 'account' -Columns 'name'
 ```
 
-{{ Add example description here }}
+### Example 2
+
+```powershell
+Get-DataverseRows -Table 'account' -Id $rowid -Columns 'name'
+```
 
 ## PARAMETERS
 
