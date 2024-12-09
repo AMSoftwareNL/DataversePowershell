@@ -197,7 +197,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 
             var getByIdRequest = new RetrieveEntityRequest()
             {
-                EntityFilters = EntityFilters.Entity,
+                EntityFilters = EntityFilters.Attributes,
                 MetadataId = createResponse.EntityId,
                 RetrieveAsIfPublished = true
             };
@@ -211,6 +211,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             BuildStandardEntityMetadata(out entityMetadata, out attributeMetadata);
 
             entityMetadata.TableType = "Elastic";
+            entityMetadata.CanCreateCharts = new BooleanManagedProperty(false);
         }
 
         private void BuildActivityEntityMetadata(out EntityMetadata entityMetadata, out StringAttributeMetadata attributeMetadata)
@@ -220,15 +221,17 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             entityMetadata.TableType = "Activity";
             entityMetadata.IsActivity = true;
             entityMetadata.OwnershipType = OwnershipTypes.UserOwned;
-
+            entityMetadata.IsAvailableOffline = true;
+            entityMetadata.IsMailMergeEnabled = new BooleanManagedProperty(false);
+            
             if (HideFromMenu.ToBool())
                 entityMetadata.ActivityTypeMask = 0;
 
             attributeMetadata.LogicalName = "subject";
-            attributeMetadata.SchemaName = "subject";
+            attributeMetadata.SchemaName = "Subject";
             attributeMetadata.DisplayName = new Label("Subject", Session.Current.LanguageId);
             attributeMetadata.MaxLength = 400;
-            attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty(AttributeRequiredLevel.SystemRequired);
+            attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty(AttributeRequiredLevel.ApplicationRequired);
         }
 
         private void BuildVirtualEntityMetadata(out EntityMetadata entityMetadata, out StringAttributeMetadata attributeMetadata)
@@ -240,6 +243,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             entityMetadata.ExternalCollectionName = ExternalPluralName;
             entityMetadata.OwnershipType = OwnershipTypes.OrganizationOwned;
             entityMetadata.DataProviderId = new Guid("7015A531-CC0D-4537-B5F2-C882A1EB65AD");  // Default for DataProvider = None
+            entityMetadata.CanChangeTrackingBeEnabled = new BooleanManagedProperty(false);
+            entityMetadata.CanCreateCharts = new BooleanManagedProperty(false);
 
             if (MyInvocation.BoundParameters.ContainsKey(nameof(DataProviderId)))
                 entityMetadata.DataProviderId = DataProviderId;
@@ -277,7 +282,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 DisplayName = new Label(ColumnDisplayName, Session.Current.LanguageId),
                 Description = Description == null ? null : new Label(ColumnDescription, Session.Current.LanguageId),
                 MaxLength = 100,
-                RequiredLevel = new AttributeRequiredLevelManagedProperty(AttributeRequiredLevel.SystemRequired)
+                RequiredLevel = new AttributeRequiredLevelManagedProperty(AttributeRequiredLevel.ApplicationRequired)
             };
 
             if (MyInvocation.BoundParameters.ContainsKey(nameof(ColumnLength)))

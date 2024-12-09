@@ -27,7 +27,7 @@ using System.Management.Automation;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 {
-    [Cmdlet(VerbsCommon.Add, "DataverseRelationhip", DefaultParameterSetName = AddManyToOneRelationshipParameterSet)]
+    [Cmdlet(VerbsCommon.Add, "DataverseRelationship", DefaultParameterSetName = AddManyToOneRelationshipParameterSet)]
     [OutputType(typeof(RelationshipMetadataBase))]
     public sealed class AddRelationshipCommand : RequestCmdletBase
     {
@@ -88,6 +88,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 
         [Parameter(Mandatory = false, ParameterSetName = AddManyToManyRelationshipParameterSet)]
         [Parameter(Mandatory = false, ParameterSetName = AddManyToOneRelationshipParameterSet)]
+        [Parameter(Mandatory = false, ParameterSetName = AddCustomerRelationshipParameterSet)]
         public SwitchParameter Searchable { get; set; }
 
         [Parameter(Mandatory = false, ParameterSetName = AddManyToManyRelationshipParameterSet)]
@@ -210,7 +211,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 // Defines the lookup to create on the Referencing table
                 Lookup = existingLookupAttribute ?? BuildLookupAttribute(),
                 // Defines the relationship to create to support the lookup
-                OneToManyRelationship = BuildOneToManyRelationship()
+                OneToManyRelationship = BuildOneToManyRelationship(),
             };
 
             return request;
@@ -239,12 +240,14 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                           ReferencedEntity = "account",
                           ReferencingEntity = Table,
                           SchemaName = AccountName,
+                          IsValidForAdvancedFind = Searchable.ToBool()
                     },
                     new OneToManyRelationshipMetadata()
                     {
                           ReferencedEntity = "contact",
                           ReferencingEntity = Table,
-                          SchemaName = ContactName
+                          SchemaName = ContactName,
+                          IsValidForAdvancedFind = Searchable.ToBool()
                     }
                 }
             };
@@ -257,8 +260,10 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             var attribute = new LookupAttributeMetadata
             {
                 LogicalName = ColumnName,
+                SchemaName = ColumnName,
                 DisplayName = new Label(ColumnDisplayName, Session.Current.LanguageId),
-                RequiredLevel = new AttributeRequiredLevelManagedProperty(AttributeRequiredLevel.None)
+                RequiredLevel = new AttributeRequiredLevelManagedProperty(AttributeRequiredLevel.None),
+                IsValidForAdvancedFind = new BooleanManagedProperty(Searchable.ToBool())
             };
 
             if (MyInvocation.BoundParameters.ContainsKey(nameof(ColumnRequired)))
@@ -276,7 +281,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             {
                 ReferencedEntity = RelatedTable,
                 ReferencingEntity = Table,
-                SchemaName = Name
+                SchemaName = Name,
+                IsValidForAdvancedFind = Searchable.ToBool()
             };
 
             if (MyInvocation.BoundParameters.ContainsKey(nameof(MenuConfiguration)))

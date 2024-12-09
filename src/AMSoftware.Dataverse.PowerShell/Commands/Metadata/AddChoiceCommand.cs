@@ -93,8 +93,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 Name = Name,
                 OptionSetType = OptionSetType.Picklist,
                 IsGlobal = true,
+                DisplayName = new Label(DisplayName, Session.Current.LanguageId),
                 Description = Description == null ? null : new Label(Description, Session.Current.LanguageId),
-                ExternalTypeName = ExternalName
+                ExternalTypeName = ExternalName,
             };
             choiceMetadata.Options.AddRange(Options);
 
