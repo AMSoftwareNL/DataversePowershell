@@ -84,7 +84,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Schemaname of the relationship to update
 
 ```yaml
 Type: System.String

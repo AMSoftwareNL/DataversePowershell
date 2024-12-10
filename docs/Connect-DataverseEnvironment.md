@@ -44,7 +44,7 @@ Connect to a specific Dataverse Environment. This connects the PowerShell sessio
 ## PARAMETERS
 
 ### -ClientId
-The ClientId / AppId of a registered application in Azure Entra ID as context for this module. If non provided the module will uses the Microsoft provided Client ID for development and prototyping purposes.
+The ClientId / AppId of a registered application in Azure Entra ID as context for this module. If not provided the module will uses the Microsoft provided Client ID for development and prototyping purposes.
 
 ```yaml
 Type: System.String
