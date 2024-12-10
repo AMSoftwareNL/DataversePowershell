@@ -796,27 +796,168 @@ Describe 'Commands.Metadata' -Tag 'Integration' {
 		}
 	}
 
-	Context 'Remove-DataverseChoice' {
+	Context 'Set-DataverseChoice' {
+		It 'Set Choice from values' {
+			$choicename = Get-DataverseChoice -Name 'ams_test*' | Select-Object -ExpandProperty 'Name' -First 1
 
+			$output = Set-DataverseChoice `
+				-Name $choicename `
+				-DisplayName 'Test Option (Updated)' `
+				-Description 'Test Option Description (Updated)' `
+				-ExternalName "ams_testoption$($postfix)_updated" `
+
+			$output | Should -BeOfType 'Microsoft.Xrm.Sdk.Metadata.OptionSetMetadata'
+			$output.Name | Should -Be $choicename
+			$output.DisplayName.ToString() | Should -Be 'Test Option (Updated)'
+			$output.Description.ToString() | Should -Be 'Test Option Description (Updated)'
+			$output.ExternalTypeName | Should -Be "ams_testoption$($postfix)_updated"
+		}
 	}
 
-	Context 'Remove-DataverseChoiceOption' {
+	Context 'Set-DataverseChoiceOption' {
+		It 'Set Global Choice' {
+			$choicename = Get-DataverseChoice -Name 'ams_test*' | Select-Object -ExpandProperty 'Name' -First 1
+			$value = [System.Random]::new().Next(1, 9999)
+
+			Set-DataverseChoiceOption `
+				-Name $choicename `
+				-Value $value `
+				-Label "Test Option $($postfix)" `
+				-Description "Test Option Description $($postfix)"
+
+			$result = Get-DataverseChoice -Name $choicename
+			$result | Should -BeOfType 'Microsoft.Xrm.Sdk.Metadata.OptionSetMetadata'
+
+			$option = $result.Options | Where-Object { $_.Value -eq $value }
+			$option | Should -Not -BeNullOrEmpty
+			$option.Label.ToString() | Should -Be "Test Option $($postfix)"
+			$option.Description.ToString() | Should -Be "Test Option Description $($postfix)"
+		}
+
+		It 'Set Column Choice' {
+			$columnname = Get-DataverseColumn -Table 'account' -Name 'ams_testlocalpicklist*' | Select-Object -ExpandProperty 'LogicalName' -First 1
+			$value = [System.Random]::new().Next(1, 9999)
+
+			Set-DataverseChoiceOption `
+				-Table 'account' `
+				-Column $columnname `
+				-Value $value `
+				-Label "Test Option $($postfix)" `
+				-Description "Test Option Description $($postfix)"
+
+			$result = Get-DataverseColumn -Table 'account' -Name $columnname
+			$result | Should -BeOfType 'Microsoft.Xrm.Sdk.Metadata.PicklistAttributeMetadata'
+
+			$option = $result.OptionSet.Options | Where-Object { $_.Value -eq $value }
+			$option | Should -Not -BeNullOrEmpty
+			$option.Label.ToString() | Should -Be "Test Option $($postfix)"
+			$option.Description.ToString() | Should -Be "Test Option Description $($postfix)"
+		}
+	}
+
+	Context 'Set-DataverseTable' {
+		It 'Set Table with Values' {
+			$tablename = Get-DataverseTable -Name 'ams_testdefault*' | Select-Object -ExpandProperty 'LogicalName' -First 1
+
+			$output = Set-DataverseTable `
+				-Name $tablename `
+				-DisplayName 'Test Table Updated' `
+				-PluralName 'Test Tables Updated' `
+				-Description 'Test Table Description Updated' `
+				-HasAttachments `
+				-IsActivityParty `
+				-TrackChanges
+
+			$output | Should -BeOfType 'Microsoft.Xrm.Sdk.Metadata.EntityMetadata'
+			$output.LogicalName | Should -Be $tablename
+			$output.DisplayName.ToString() | Should -Be 'Test Table Updated'
+			$output.DisplayCollectionName.ToString() | Should -Be 'Test Tables Updated'
+			$output.Description.ToString() | Should -Be 'Test Table Description Updated'
+			$output.HasNotes | Should -BeTrue
+			$output.HasActivities | Should -BeTrue
+			$output.ChangeTrackingEnabled | Should -BeTrue
+		}
+	}
+
+	Context 'Set-DataverseColumn' {
+		It 'Set Column with Values' {
+			$columnname = Get-DataverseColumn -Table 'account' -Name 'ams_teststring*' -Type String | Select-Object -ExpandProperty LogicalName -First 1
+
+			$output = Set-DataverseColumn `
+				-Table 'account' `
+				-Name $columnname `
+				-DisplayName 'Test Updated' `
+				-Description 'Test Description Updated' `
+				-ExternalName 'testexternal_updated' `
+				-Searchable `
+				-Auditing
 		
+			$output | Should -BeOfType 'Microsoft.Xrm.Sdk.Metadata.StringAttributeMetadata'
+			$output.LogicalName | Should -Be $columnname
+			$output.DisplayName.ToString() | Should -Be 'Test Updated'
+			$output.Description.ToString() | Should -Be 'Test Description Updated'
+			$output.ExternalName | Should -Be 'testexternal_updated'
+			$output.IsValidForAdvancedFind.Value | Should -BeTrue 
+			$output.IsAuditEnabled.Value | Should -BeTrue
+		}
+	}
+
+	Context 'Remove-DataverseChoice' {
+		It 'Remove Test Choices' {
+
+			{ Get-DataverseChoice -Name 'ams_test*' | Remove-DataverseChoice -Force -ErrorAction Stop } | Should -Not -Throw
+	
+			$result = Get-DataverseChoice -Name 'ams_test*'
+			$result | Should -BeNullOrEmpty
+		}
 	}
 
 	Context 'Remove-DataverseColumn' {
-		
+		It 'Remove Test Columns' {
+			{ 
+				Get-DataverseColumn -Table 'account' -Name 'ams_test*' | `
+					Where-Object { [string]::IsNullOrWhiteSpace($_.AttributeOf) } | `
+					Remove-DataverseColumn -Force -ErrorAction Stop `
+			} | Should -Not -Throw
+	
+			$result = Get-DataverseColumn -Table 'account' -Name 'ams_test*'
+			$result | Should -BeNullOrEmpty
+		}
 	}
 
 	Context 'Remove-DataverseRelationship' {
-		
+		It 'Remove Test Relationships' {
+			{ 
+				Get-DataverseRelationship -Table 'account' -RelatedTable 'contact' -Include 'ams_test*' | `
+					Remove-DataverseRelationship -Force -ErrorAction Stop 
+			} | Should -Not -Throw
+	
+			$result = Get-DataverseRelationship -Table 'account' -RelatedTable 'contact' -Include 'ams_test*'
+			$result | Should -BeNullOrEmpty
+		}		
 	}
 
 	Context 'Remove-DataverseTableKey' {
-		
+		It 'Remove Test Keys' {
+			{
+				Get-DataverseTableKey -Table 'account' -Name 'ams_accountnumber*' | `
+					Remove-DataverseTableKey -Force -ErrorAction Stop
+			} | Should -Not -Throw
+
+			$result = Get-DataverseTableKey -Table 'account' -Name 'ams_accountnumber*'
+			$result | Should -BeNullOrEmpty
+		}
 	}
 
 	Context 'Remove-DataverseTable' {
-		
+		It 'Remove Test Table' {
+			{ 
+				Get-DataverseTable -Name 'ams_test*' | `
+					Remove-DataverseTable -Force -ErrorAction Stop 
+			} | Should -Not -Throw
+	
+			$result = Get-DataverseTable -Name 'ams_test*'
+			$result | Should -BeNullOrEmpty
+		}
 	}
 }

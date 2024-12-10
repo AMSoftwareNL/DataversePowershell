@@ -41,9 +41,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         public string Column { get; set; }
 
         [Parameter(Mandatory = true, ParameterSetName = RemoveGlobalChoiceOptionParameterSet)]
-        [Alias("Name", "OptionSetLogicalName")]
+        [Alias("OptionSet", "OptionSetLogicalName")]
         [ValidateNotNullOrEmpty]
-        public string OptionSet { get; set; }
+        public string Name { get; set; }
 
         [Parameter(Mandatory = true)]
         [ValidateRange(1, int.MaxValue)]
@@ -67,62 +67,31 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 
         private void RemoveGlobalChoice()
         {
-            var retrieveRequest = new RetrieveOptionSetRequest()
+            var request = new DeleteOptionValueRequest()
             {
-                Name = OptionSet,
-                RetrieveAsIfPublished = true
+                OptionSetName = Name,
+                Value = Value
             };
 
-            var retrieveResponse = ExecuteOrganizationRequest<RetrieveOptionSetResponse>(retrieveRequest);
-
-            var optionset = retrieveResponse.OptionSetMetadata as OptionSetMetadata;
-
-            RemoveChoiceOption(optionset);
-
-            var updateRequest = new UpdateOptionSetRequest()
+            if (Force || ShouldProcess("DeleteOptionValue", $"{Name} ({Value})"))
             {
-                OptionSet = optionset,
-                MergeLabels = true
-            };
-
-            if (Force || ShouldProcess("UpdateOptionSet", optionset.Name))
-            {
-                var _ = ExecuteOrganizationRequest<UpdateOptionSetResponse>(updateRequest);
+                var _ = ExecuteOrganizationRequest<DeleteOptionValueResponse>(request);
             }
         }
 
         private void RemoveAttributeChoice()
         {
-            var retrieveRequest = new RetrieveAttributeRequest()
+            var request = new DeleteOptionValueRequest()
             {
                 EntityLogicalName = Table,
-                LogicalName = Column,
-                RetrieveAsIfPublished = true
-            };
-            var retrieveResponse = ExecuteOrganizationRequest<RetrieveAttributeResponse>(retrieveRequest);
-
-            var attribute = retrieveResponse.AttributeMetadata as EnumAttributeMetadata;
-
-            RemoveChoiceOption(attribute.OptionSet);
-
-            var updateRequest = new UpdateAttributeRequest()
-            {
-                EntityName = Table,
-                Attribute = attribute,
-                MergeLabels = true,
+                AttributeLogicalName = Column,
+                Value = Value
             };
 
-            if (Force || ShouldProcess("UpdateAttribute", $"{attribute.EntityLogicalName} {attribute.LogicalName}"))
+            if (Force || ShouldProcess("DeleteOptionValue", $"{Table} {Column} ({Value})"))
             {
-                var _ = ExecuteOrganizationRequest<UpdateAttributeResponse>(updateRequest);
+                var _ = ExecuteOrganizationRequest<DeleteOptionValueResponse>(request);
             }
-        }
-
-        private void RemoveChoiceOption(OptionSetMetadata optionSet)
-        {
-
-            var option = optionSet.Options.Single(o => o.Value == Value);
-            optionSet.Options.Remove(option);
         }
     }
 }

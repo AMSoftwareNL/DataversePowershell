@@ -40,7 +40,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 
             if (Force || ShouldProcess("DeleteRelationship", Name))
             {
-                var _ = ExecuteOrganizationRequest<RetrieveRelationshipResponse>(request);
+                var _ = ExecuteOrganizationRequest<DeleteRelationshipResponse>(request);
             }
         }
     }

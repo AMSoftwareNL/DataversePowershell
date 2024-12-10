@@ -35,9 +35,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 
         [Parameter(Mandatory = true, ParameterSetName = SetManyToManyRelationshipParameterSet)]
         [Parameter(Mandatory = true, ParameterSetName = SetManyToOneRelationshipParameterSet)]
-        [Alias("SchemaName", "Name")]
+        [Alias("SchemaName", "Relationship")]
         [ValidateNotNullOrEmpty]
-        public string Relationship { get; set; }
+        public string Name { get; set; }
 
         [Parameter(Mandatory = false, ParameterSetName = SetManyToManyRelationshipParameterSet)]
         [Parameter(Mandatory = false, ParameterSetName = SetManyToOneRelationshipParameterSet)]
@@ -49,9 +49,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [Parameter(Mandatory = false, ParameterSetName = SetManyToOneRelationshipParameterSet)]
         public CascadeConfiguration Behavior { get; set; }
 
-        [Parameter(Mandatory = false)]
-        public SwitchParameter MergeLabels { get; set; }
-
         public override void Execute()
         {
             RelationshipMetadataBase relationshipMetadata = InputObject;
@@ -61,7 +58,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             {
                 var retrieveByNameRequest = new RetrieveRelationshipRequest()
                 {
-                    Name = Relationship
+                    Name = Name
                 };
                 var retrieveByNameResponse = ExecuteOrganizationRequest<RetrieveRelationshipResponse>(retrieveByNameRequest);
                 relationshipMetadata = retrieveByNameResponse.RelationshipMetadata;
@@ -94,9 +91,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             var updateRequest = new UpdateRelationshipRequest()
             {
                 Relationship = relationshipMetadata,
-                MergeLabels = MergeLabels.ToBool()
+                MergeLabels = true
             };
-            var updateResponse = ExecuteOrganizationRequest<UpdateRelationshipResponse>(updateRequest);
+            var _ = ExecuteOrganizationRequest<UpdateRelationshipResponse>(updateRequest);
 
             var getMetadataRequest = new RetrieveRelationshipRequest()
             {

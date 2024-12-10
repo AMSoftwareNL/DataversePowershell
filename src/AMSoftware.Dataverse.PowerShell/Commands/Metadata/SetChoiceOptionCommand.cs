@@ -42,9 +42,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         public string Column { get; set; }
 
         [Parameter(Mandatory = true, ParameterSetName = SetGlobalChoiceOptionParameterSet)]
-        [Alias("Name", "OptionSetLogicalName")]
+        [Alias("OptionSet", "OptionSetLogicalName")]
         [ValidateNotNullOrEmpty]
-        public string OptionSet { get; set; }
+        public string Name { get; set; }
 
         [Parameter(Mandatory = true)]
         [ValidateRange(1, int.MaxValue)]
@@ -55,12 +55,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
 
         [Parameter(Mandatory = false)]
         public string Description { get; set; }
-
-        [Parameter(Mandatory = false)]
-        public string ExternalValue { get; set; }
-
-        [Parameter(Mandatory = false)]
-        public string Color { get; set; }
 
         public override void Execute()
         {
@@ -79,22 +73,46 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         {
             var retrieveRequest = new RetrieveOptionSetRequest()
             {
-                Name = OptionSet,
+                Name = Name,
                 RetrieveAsIfPublished = true
             };
             var retrieveResponse = ExecuteOrganizationRequest<RetrieveOptionSetResponse>(retrieveRequest);
 
             var optionset = retrieveResponse.OptionSetMetadata as OptionSetMetadata;
+            var option = optionset.Options.SingleOrDefault(o => o.Value == Value);
 
-            ApplyChoiceOption(optionset);
+            if (option == null) {
+                var request = new InsertOptionValueRequest()
+                {
+                    OptionSetName = Name,
+                    Value = Value
+                };
 
-            var updateRequest = new UpdateOptionSetRequest()
+                if (MyInvocation.BoundParameters.ContainsKey(nameof(Label)))
+                    request.Label = string.IsNullOrWhiteSpace(Label) ? null : new Label(Label, Session.Current.LanguageId);
+
+                if (MyInvocation.BoundParameters.ContainsKey(nameof(Description)))
+                    request.Description = string.IsNullOrWhiteSpace(Description) ? null : new Label(Description, Session.Current.LanguageId);
+
+                var _ = ExecuteOrganizationRequest<InsertOptionValueResponse>(request);
+             }
+            else
             {
-                OptionSet = optionset,
-                MergeLabels = true
-            };
+                var request = new UpdateOptionValueRequest()
+                {
+                    OptionSetName = Name,
+                    Value = Value,
+                    MergeLabels = true
+                };
 
-            var _ = ExecuteOrganizationRequest<UpdateOptionSetResponse>(updateRequest);
+                if (MyInvocation.BoundParameters.ContainsKey(nameof(Label)))
+                    request.Label = string.IsNullOrWhiteSpace(Label) ? null : new Label(Label, Session.Current.LanguageId);
+
+                if (MyInvocation.BoundParameters.ContainsKey(nameof(Description)))
+                    request.Description = string.IsNullOrWhiteSpace(Description) ? null : new Label(Description, Session.Current.LanguageId);
+
+                var _ = ExecuteOrganizationRequest<UpdateOptionValueResponse>(request);
+            }
         }
 
         private void UpdateAttributeChoice()
@@ -108,43 +126,42 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             var retrieveResponse = ExecuteOrganizationRequest<RetrieveAttributeResponse>(retrieveRequest);
 
             var attribute = retrieveResponse.AttributeMetadata as EnumAttributeMetadata;
+            var option = attribute.OptionSet.Options.SingleOrDefault(o => o.Value == Value);
 
-            ApplyChoiceOption(attribute.OptionSet);
+            if (option == null) {
+                var request = new InsertOptionValueRequest()
+                {
+                    EntityLogicalName = Table,
+                    AttributeLogicalName = Column,
+                    Value = Value,
+                };
 
-            var updateRequest = new UpdateAttributeRequest()
+                if (MyInvocation.BoundParameters.ContainsKey(nameof(Label)))
+                    request.Label = string.IsNullOrWhiteSpace(Label) ? null : new Label(Label, Session.Current.LanguageId);
+
+                if (MyInvocation.BoundParameters.ContainsKey(nameof(Description)))
+                    request.Description = string.IsNullOrWhiteSpace(Description) ? null : new Label(Description, Session.Current.LanguageId);
+
+                var _ = ExecuteOrganizationRequest<InsertOptionValueResponse>(request);
+             }
+            else
             {
-                EntityName = Table,
-                Attribute = attribute,
-                MergeLabels = true,
-            };
+                var request = new UpdateOptionValueRequest()
+                {
+                    EntityLogicalName = Table,
+                    AttributeLogicalName = Column,
+                    Value = Value,
+                    MergeLabels = true
+                };
 
-            var _ = ExecuteOrganizationRequest<UpdateAttributeResponse>(updateRequest);
-        }
+                if (MyInvocation.BoundParameters.ContainsKey(nameof(Label)))
+                    request.Label = string.IsNullOrWhiteSpace(Label) ? null : new Label(Label, Session.Current.LanguageId);
 
-        private void ApplyChoiceOption(OptionSetMetadata optionSet)
-        {
-            OptionMetadata option = default;
+                if (MyInvocation.BoundParameters.ContainsKey(nameof(Description)))
+                    request.Description = string.IsNullOrWhiteSpace(Description) ? null : new Label(Description, Session.Current.LanguageId);
 
-            if (MyInvocation.BoundParameters.ContainsKey(nameof(Value)))
-                option = optionSet.Options.SingleOrDefault(o => o.Value == Value);
-
-            if (option == null)
-                option = new OptionMetadata();
-
-            if (MyInvocation.BoundParameters.ContainsKey(nameof(Value)))
-                option.Value = Value;
-
-            if (MyInvocation.BoundParameters.ContainsKey(nameof(Label)))
-                option.Label = string.IsNullOrWhiteSpace(Label) ? null : new Label(Label, Session.Current.LanguageId);
-
-            if (MyInvocation.BoundParameters.ContainsKey(nameof(Description)))
-                option.Description = string.IsNullOrWhiteSpace(Description) ? null : new Label(Description, Session.Current.LanguageId);
-
-            if (MyInvocation.BoundParameters.ContainsKey(nameof(ExternalValue)))
-                option.ExternalValue = ExternalValue;
-
-            if (MyInvocation.BoundParameters.ContainsKey(nameof(Color)))
-                option.Color = Color;
+                var _ = ExecuteOrganizationRequest<UpdateOptionValueResponse>(request);
+            }
         }
     }
 }
