@@ -16,7 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using Microsoft.PowerPlatform.Dataverse.Client;
-using Microsoft.PowerPlatform.Dataverse.Client.Auth;
 using Microsoft.PowerPlatform.Dataverse.Client.Model;
 using System;
 using System.Management.Automation;
@@ -67,27 +66,29 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
             switch (ParameterSetName)
             {
                 case ConnectionstringParameterSet:
-                    client = new ServiceClient(Connectionstring);
+                    client = new ServiceClient(Connectionstring, ServiceClientLogger.Instance);
                     break;
                 case ClientSecretParameterSet:
-                    client = new ServiceClient(EnvironmentUrl, ClientId, ClientSecret, true);
+                    client = new ServiceClient(EnvironmentUrl, ClientId, ClientSecret, true, ServiceClientLogger.Instance);
                     break;
                 case InteractiveParameterSet:
                     if (UseDeviceCode.ToBool())
                     {
-                        InteractiveAuthenticator authenticator = new InteractiveAuthenticator(ClientId);
+                        var authenticator = new InteractiveAuthenticator(ClientId);
                         client = new ServiceClient(EnvironmentUrl, authenticator.AcquireEnvironmentTokenAsync, true);
                     }
                     else
                     {
-                        client = new ServiceClient(new ConnectionOptions()
-                        {
-                            AuthenticationType = AuthenticationType.OAuth,
-                            RequireNewInstance = true,
-                            RedirectUri = new Uri("http://localhost"),
-                            ClientId = ClientId,
-                            ServiceUri = EnvironmentUrl
-                        }, false);
+                        client = new ServiceClient(
+                            new ConnectionOptions()
+                            {
+                                AuthenticationType = AuthenticationType.OAuth,
+                                RequireNewInstance = true,
+                                RedirectUri = new Uri("http://localhost"),
+                                ClientId = ClientId,
+                                ServiceUri = EnvironmentUrl,
+                                Logger = ServiceClientLogger.Instance
+                            }, false);
                     }
                     break;
                 case ServiceClientParameterSet:

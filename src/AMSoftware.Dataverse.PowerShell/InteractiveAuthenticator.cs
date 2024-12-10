@@ -17,11 +17,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using Microsoft.Identity.Client;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace AMSoftware.Dataverse.PowerShell
 {
@@ -38,12 +35,14 @@ namespace AMSoftware.Dataverse.PowerShell
                 .WithAuthority(AadAuthorityAudience.AzureAdMultipleOrgs)
                 .WithDefaultRedirectUri()
                 .WithClientName("AMSoftware Dataverse PowerShell")
+                .WithClientVersion("0.6.0")
+                .WithLogging(MSALIdentityLogger.Instance.Log, LogLevel.Always, false, false)
                 .Build();
         }
 
         public Task<string> AcquireEnvironmentTokenAsync(string environmentUrl)
         {
-            string[] authenticationScopes = InteractiveAuthenticator.BuildScopeFromUrl(environmentUrl);
+            string[] authenticationScopes = BuildScopeFromUrl(environmentUrl);
             var authresult = AcquireEnvironmentTokenAsync(authenticationScopes).GetAwaiter().GetResult();
 
             return Task.FromResult(authresult.AccessToken);

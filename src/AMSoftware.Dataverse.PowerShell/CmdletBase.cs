@@ -15,8 +15,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+using Microsoft.Extensions.Logging;
 using Microsoft.Xrm.Sdk;
 using System;
+using System.Collections.Concurrent;
 using System.Management.Automation;
 using System.ServiceModel;
 
@@ -24,6 +26,8 @@ namespace AMSoftware.Dataverse.PowerShell
 {
     public abstract class CmdletBase : PSCmdlet
     {
+        private ConcurrentQueue<PSLogEntry> LogMessages { get; set; } = new ConcurrentQueue<PSLogEntry>();
+
         public virtual void Execute()
         {
             // Do nothing
@@ -39,6 +43,16 @@ namespace AMSoftware.Dataverse.PowerShell
             {
                 WriteVerboseWithTimestamp(string.Format("{0} begin processing with ParameterSet '{1}'.", GetType().Name, ParameterSetName));
             }
+
+            MSALIdentityLogger.Instance.AddContext((entry) =>
+            {
+                LogMessages.Enqueue(entry);
+            });
+            ServiceClientLogger.Instance.AddContext((entry) =>
+            {
+                LogMessages.Enqueue(entry);
+            });
+
             base.BeginProcessing();
         }
 
@@ -69,21 +83,99 @@ namespace AMSoftware.Dataverse.PowerShell
 
         protected override void EndProcessing()
         {
+            MSALIdentityLogger.Instance.RemoveContext();
+            ServiceClientLogger.Instance.RemoveContext();
+
+            FlushLogMessages();
+
             WriteVerboseWithTimestamp(string.Format("{0} end processing.", GetType().Name));
 
             base.EndProcessing();
         }
 
-        protected new void WriteObject(object sendToPipeline)
+        private void FlushLogMessages()
         {
-            //FlushDebugMessages();
-            base.WriteObject(sendToPipeline);
+            while (LogMessages.TryDequeue(out PSLogEntry entry))
+            {
+                switch (entry.LogLevel)
+                {
+                    case LogLevel.Warning:
+                        base.WriteWarning(entry.Message);
+                        break;
+                    case LogLevel.Debug:
+                        base.WriteDebug(entry.Message);
+                        break;
+                    case LogLevel.Trace:
+                        base.WriteVerbose(entry.Message);
+                        break;
+                }
+            }
+        }
+
+        protected new void ThrowTerminatingError(ErrorRecord errorRecord)
+        {
+            FlushLogMessages();
+            base.ThrowTerminatingError(errorRecord);
+        }
+
+        protected new void WriteCommandDetail(string text)
+        {
+            FlushLogMessages();
+            base.WriteCommandDetail(text);
+        }
+
+        protected new void WriteDebug(string text)
+        {
+            FlushLogMessages();
+            base.WriteDebug(text);
+        }
+
+        protected new void WriteError(ErrorRecord errorRecord)
+        {
+            FlushLogMessages();
+            base.WriteError(errorRecord);
+        }
+
+        protected new void WriteInformation(object messageData, string[] tags)
+        {
+            FlushLogMessages();
+            base.WriteInformation(messageData, tags);
+        }
+
+        protected new void WriteInformation(InformationRecord informationRecord)
+        {
+            FlushLogMessages();
+            base.WriteInformation(informationRecord);
         }
 
         protected new void WriteObject(object sendToPipeline, bool enumerateCollection)
         {
-            //FlushDebugMessages();
+            FlushLogMessages();
             base.WriteObject(sendToPipeline, enumerateCollection);
+        }
+
+        protected new void WriteObject(object sendToPipeline)
+        {
+            FlushLogMessages();
+            base.WriteObject(sendToPipeline);
+        }
+
+        protected new void WriteProgress(ProgressRecord progressRecord)
+        {
+            FlushLogMessages();
+            base.WriteProgress(progressRecord);
+        }
+
+        protected new void WriteVerbose(string text)
+        {
+            FlushLogMessages();
+            base.WriteVerbose(text);
+        }
+
+        protected new void WriteWarning(string text)
+        {
+            FlushLogMessages();
+            base.WriteWarning(text);
         }
 
         protected bool IsTerminatingError(Exception ex)
