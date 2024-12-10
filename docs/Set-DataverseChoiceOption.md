@@ -25,7 +25,8 @@ Set-DataverseChoiceOption -Table <String> -Column <String> -Value <Int32> [-Labe
 ```
 
 ## DESCRIPTION
-Update an option in a global or column choice
+Update an option in a global or column choice. Update is done based on the Value. If value doesn't already exist the Value is added to the choice.
+
 
 ## EXAMPLES
 
@@ -77,7 +78,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Logical Name of the global Choice to update
 
 ```yaml
 Type: System.String
@@ -92,7 +93,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-THe logicalname of the table containing the choice column to update
+The logicalname of the table containing the choice column to update
 
 ```yaml
 Type: System.String

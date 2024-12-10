@@ -40,7 +40,7 @@ Accept wildcard characters: False
 ```
 
 ### -Transactional
-{{ Fill Transactional Description }}
+Execute as Transaction instead of as Batch. This means all succeed or non.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter

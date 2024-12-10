@@ -62,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Name of the global Choice to remove the value from
 
 ```yaml
 Type: System.String
