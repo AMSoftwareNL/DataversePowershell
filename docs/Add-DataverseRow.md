@@ -8,36 +8,49 @@ schema: 2.0.0
 # Add-DataverseRow
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Add a new row to a table
 
 ## SYNTAX
 
 ### AddObject (Default)
 ```
-Add-DataverseRow -InputObject <Entity> [-BatchId <Guid>]  
-    
-  [<RequestParameters>] [<CommonParameters>]
+Add-DataverseRow -InputObject <Entity> [-BatchId <Guid>] 
+ [<CommonParameters>]
 ```
 
 ### AddValues
 ```
 Add-DataverseRow -Table <String> -Values <Hashtable> [-Id <Guid>] [-Key <Hashtable>] [-BatchId <Guid>]
-    
-   
- [<RequestParameters>] [<CommonParameters>]
+  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Add a new row to a table using Create or Upsert message.
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
+### Example 1: Add row with values
+
+```powershell
+PS C:\> $values = @{ 'name' = 'Test Account' }
+
+PS C:\> Add-DataverseRow -Table 'account' -Values $values
 ```
 
-{{ Add example description here }}
+### Example 2: Add row with InputObject
+
+```powershell
+PS C:\> $inputobject = [dvrow]::new('account')
+PS C:\> $inputobject.name = 'Test Account'
+
+PS C:\> $inputobject | Add-DataverseRow
+```
+
+### Example 3: Upsert row with InputObject
+
+```powershell
+PS C:\> Add-DataverseRow -Table 'account' -Id $rowid -Values @{ name = 'Account (Updated)' }
+```
 
 ## PARAMETERS
 
@@ -57,7 +70,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-{{ Fill Id Description }}
+Id of the row to add. If provided an Upsert is tried instead of a Create.
 
 ```yaml
 Type: System.Guid
@@ -72,7 +85,7 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-{{ Fill InputObject Description }}
+The object of the row to add. If the object contains a value for Id or values in the KeyAttributes an Upsert is used instead of Create.
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.Entity
@@ -87,7 +100,7 @@ Accept wildcard characters: False
 ```
 
 ### -Key
-{{ Fill Key Description }}
+Name and Value for a Key on the Table. If provided an Upsert is tried instead of Create.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -102,7 +115,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+The table to add the row to
 
 ```yaml
 Type: System.String
@@ -117,7 +130,7 @@ Accept wildcard characters: False
 ```
 
 ### -Values
-{{ Fill Values Description }}
+Columnnames and Values for the row
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -127,12 +140,9 @@ Aliases:
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -146,4 +156,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Add-DataverseRow.md)
+
 

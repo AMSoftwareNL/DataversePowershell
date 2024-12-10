@@ -125,7 +125,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             attributeMetadata.SchemaName = Name;
             attributeMetadata.DisplayName = new Label(DisplayName, Session.Current.LanguageId);
             attributeMetadata.Description = Description == null ? null : new Label(Description, Session.Current.LanguageId);
-            attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty(AttributeRequiredLevel.SystemRequired);
+            attributeMetadata.RequiredLevel = new AttributeRequiredLevelManagedProperty(AttributeRequiredLevel.ApplicationRequired);
             attributeMetadata.ExternalName = ExternalName;
             attributeMetadata.IsValidForAdvancedFind = new BooleanManagedProperty(Searchable.ToBool());
             attributeMetadata.IsAuditEnabled = new BooleanManagedProperty(Auditing.ToBool());

@@ -25,6 +25,8 @@ namespace AMSoftware.Dataverse.PowerShell.Converters
 {
     public sealed class LabelConverter : PSTypeConverter
     {
+        private const int FallbackLanguageId = 1033; //English
+
         public override bool CanConvertFrom(object sourceValue, Type destinationType)
         {
             if (sourceValue == null) return true;
@@ -36,11 +38,18 @@ namespace AMSoftware.Dataverse.PowerShell.Converters
 
         public override object ConvertFrom(object sourceValue, Type destinationType, IFormatProvider formatProvider, bool ignoreCase)
         {
+            int language = FallbackLanguageId;
+            try
+            {
+                language = Session.Current.LanguageId;
+            }
+            catch { }
+
             if (sourceValue == null) return null;
-            if (sourceValue.GetType() == typeof(string)) return new Label((string)sourceValue, Session.Current.LanguageId);
+            if (sourceValue.GetType() == typeof(string)) return new Label((string)sourceValue, language);
 
             var sc = TypeDescriptor.GetConverter(destinationType);
-            return new Label((string)sc.ConvertFrom(sourceValue), Session.Current.LanguageId);
+            return new Label((string)sc.ConvertFrom(sourceValue), language);
         }
 
         public override bool CanConvertTo(object sourceValue, Type destinationType)
@@ -58,7 +67,18 @@ namespace AMSoftware.Dataverse.PowerShell.Converters
 
             if (sourceValue is Label labelValue)
             {
-                LocalizedLabel languageLabel = labelValue.LocalizedLabels.SingleOrDefault(l => l.LanguageCode == Session.Current.LanguageId);
+                int language = FallbackLanguageId;
+                try
+                {
+                    language = Session.Current.LanguageId;
+                }
+                catch { }
+
+
+                LocalizedLabel languageLabel = 
+                    labelValue.UserLocalizedLabel ??
+                    labelValue.LocalizedLabels.SingleOrDefault(l => l.LanguageCode == language);
+                    
                 if (languageLabel != null)
                 {
                     if (destinationType == typeof(string)) return languageLabel.Label;

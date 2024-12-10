@@ -8,27 +8,31 @@ schema: 2.0.0
 # Remove-DataverseRow
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Remove row from a table
 
 ## SYNTAX
 
 ```
-Remove-DataverseRow -Table <String> -Id <Guid> [-BatchId <Guid>]  
-    
-    [<RequestParameters>] [<CommonParameters>]
+Remove-DataverseRow -Table <String> -Id <Guid> [-Force] [-BatchId <Guid>] 
+ [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Remove row from a table
 
 ## EXAMPLES
 
 ### Example 1
-```
-PS C:\> {{ Add example code here }}
+
+```powershell
+$inputs | Remove-DataverseRow -Table 'account' -Force
 ```
 
-{{ Add example description here }}
+### Example 2
+
+```powershell
+Remove-DataverseRow -Table 'account' -Id $rowid -Force
+```
 
 ## PARAMETERS
 
@@ -47,8 +51,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Force
+Remove without confirm
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Id
-{{ Fill Id Description }}
+Id of the row to remove
 
 ```yaml
 Type: System.Guid
@@ -63,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+Logicalname of the table to remove the row from
 
 ```yaml
 Type: System.String
@@ -77,8 +96,35 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs. The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -93,4 +139,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Remove-DataverseRow.md)
+
 

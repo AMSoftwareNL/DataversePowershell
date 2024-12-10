@@ -26,34 +26,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     <TypeConverter>
       <TypeName>AMSoftware.Dataverse.PowerShell.Converters.EntityConverter</TypeName>
     </TypeConverter>
-    <Members>
-      <MemberSet>
-        <Name>PSStandardMembers</Name>
-        <Members>
-          <PropertySet>
-            <Name>DefaultDisplayPropertySet</Name>
-            <ReferencedProperties>
-              <Name>LogicalName</Name>
-              <Name>Id</Name>
-              <Name>Name</Name>
-              <Name>State</Name>
-              <Name>Status</Name>
-            </ReferencedProperties>
-          </PropertySet>
-          <NoteProperty>
-            <Name>DefaultDisplayProperty</Name>
-            <Value>Name</Value>
-          </NoteProperty>
-          <PropertySet>
-            <Name>DefaultKeyPropertySet</Name>
-            <ReferencedProperties>
-              <Name>LogicalName</Name>
-              <Name>Id</Name>
-            </ReferencedProperties>
-          </PropertySet>
-        </Members>
-      </MemberSet>
-    </Members>
   </Type>
   <!-- Microsoft.Xrm.Sdk.EntityReference -->
   <Type>
@@ -61,27 +33,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
     <TypeConverter>
       <TypeName>AMSoftware.Dataverse.PowerShell.Converters.EntityConverter</TypeName>
     </TypeConverter>
-    <Members>
-      <MemberSet>
-        <Name>PSStandardMembers</Name>
-        <Members>
-          <PropertySet>
-            <Name>DefaultDisplayPropertySet</Name>
-            <ReferencedProperties>
-              <Name>LogicalName</Name>
-              <Name>Id</Name>
-            </ReferencedProperties>
-          </PropertySet>
-          <PropertySet>
-            <Name>DefaultKeyPropertySet</Name>
-            <ReferencedProperties>
-              <Name>LogicalName</Name>
-              <Name>Id</Name>
-            </ReferencedProperties>
-          </PropertySet>
-        </Members>
-      </MemberSet>
-    </Members>
   </Type>
   <!-- Microsoft.Xrm.Sdk.OrganizationResponse -->
   <Type>

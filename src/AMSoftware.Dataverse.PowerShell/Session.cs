@@ -113,6 +113,9 @@ namespace AMSoftware.Dataverse.PowerShell
             UserLanguageId = usersettingsResponse.Entity.GetAttributeValue<int?>("uilanguageid");
             UserLocaleId = usersettingsResponse.Entity.GetAttributeValue<int?>("localeid");
 
+            if (UserLanguageId == 0) UserLanguageId = null;
+            if (UserLocaleId == 0) UserLocaleId = null;
+
             var organizationResponse = (RetrieveResponse)client.ExecuteOrganizationRequest(new RetrieveRequest()
             {
                 Target = new EntityReference("organization", whoAmIResponse.OrganizationId),

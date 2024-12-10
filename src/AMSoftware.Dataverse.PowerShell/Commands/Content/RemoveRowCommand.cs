@@ -24,7 +24,6 @@ using System.Management.Automation;
 namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
     [Cmdlet(VerbsCommon.Remove, "DataverseRow", ConfirmImpact = ConfirmImpact.High, SupportsShouldProcess = true)]
-    [OutputType(typeof(EntityReference))]
     public sealed class RemoveRowCommand : BatchCmdletBase
     {
         [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
@@ -42,9 +41,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
         public override void Execute()
         {
-            EntityReference rowReference = new EntityReference(Table, Id);
+            var rowReference = new EntityReference(Table, Id);
 
-            OrganizationRequest request = new DeleteRequest()
+            var request = new DeleteRequest()
             {
                 Target = rowReference
             };

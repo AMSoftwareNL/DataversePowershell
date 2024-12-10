@@ -32,12 +32,12 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         private const string GetColumnByIdParameterSet = "GetColumnById";
         private const string GetColumnsByFilterParameterSet = "GetColumnsByFilter";
 
-        [Parameter(Mandatory = true, ParameterSetName = GetColumnByIdParameterSet, ValueFromPipeline = true)]
+        [Parameter(Mandatory = true, ParameterSetName = GetColumnByIdParameterSet, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
         [Alias("MetadataId")]
         [ValidateNotNull]
         public Guid Id { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = GetColumnsByFilterParameterSet, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
+        [Parameter(Mandatory = true, ParameterSetName = GetColumnsByFilterParameterSet)]
         [Alias("LogicalName")]
         [ValidateNotNullOrEmpty]
         [ArgumentCompleter(typeof(TableNameArgumentCompleter))]

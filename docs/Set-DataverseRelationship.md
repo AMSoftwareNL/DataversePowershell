@@ -8,52 +8,41 @@ schema: 2.0.0
 # Set-DataverseRelationship
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Update a relationship
 
 ## SYNTAX
 
 ### SetManyToOneRelationship (Default)
 ```
-Set-DataverseRelationship -Relationship <String> [-MenuConfiguration <AssociatedMenuConfiguration>]
- [-Behavior <CascadeConfiguration>] [-MergeLabels]  
-    
-  [<RequestParameters>] [<CommonParameters>]
+Set-DataverseRelationship -Name <String> [-MenuConfiguration <AssociatedMenuConfiguration>]
+ [-Behavior <CascadeConfiguration>]  [<CommonParameters>]
 ```
 
 ### SetRelationshipByInputObject
 ```
-Set-DataverseRelationship -InputObject <RelationshipMetadataBase> [-MergeLabels] 
-    
-   [<RequestParameters>] [<CommonParameters>]
+Set-DataverseRelationship -InputObject <RelationshipMetadataBase> 
+ [<CommonParameters>]
 ```
 
 ### SetManyToManyRelationship
 ```
-Set-DataverseRelationship -Relationship <String> [-MenuConfiguration <AssociatedMenuConfiguration>]
- [-RelatedMenuConfiguration <AssociatedMenuConfiguration>] [-MergeLabels] 
-    
-   [<RequestParameters>] [<CommonParameters>]
+Set-DataverseRelationship -Name <String> [-MenuConfiguration <AssociatedMenuConfiguration>]
+ [-RelatedMenuConfiguration <AssociatedMenuConfiguration>] 
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Update a relationship
 
 ## EXAMPLES
-
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Behavior
-{{ Fill Behavior Description }}
+New cascade configuration for the relationship
 
 ```yaml
-Type: CascadeConfiguration
+Type: Microsoft.Xrm.Sdk.Metadata.CascadeConfiguration
 Parameter Sets: SetManyToOneRelationship
 Aliases:
 
@@ -65,10 +54,10 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-{{ Fill InputObject Description }}
+Relationship Metadata object describing the updated relationship
 
 ```yaml
-Type: RelationshipMetadataBase
+Type: Microsoft.Xrm.Sdk.Metadata.RelationshipMetadataBase
 Parameter Sets: SetRelationshipByInputObject
 Aliases:
 
@@ -80,10 +69,10 @@ Accept wildcard characters: False
 ```
 
 ### -MenuConfiguration
-{{ Fill MenuConfiguration Description }}
+New menu configuration for the relationship
 
 ```yaml
-Type: AssociatedMenuConfiguration
+Type: Microsoft.Xrm.Sdk.Metadata.AssociatedMenuConfiguration
 Parameter Sets: SetManyToOneRelationship, SetManyToManyRelationship
 Aliases:
 
@@ -94,15 +83,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MergeLabels
-{{ Fill MergeLabels Description }}
+### -Name
+Schemaname of the relationship to update
 
 ```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
+Type: System.String
+Parameter Sets: SetManyToOneRelationship, SetManyToManyRelationship
+Aliases: SchemaName, Relationship
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -110,10 +99,10 @@ Accept wildcard characters: False
 ```
 
 ### -RelatedMenuConfiguration
-{{ Fill RelatedMenuConfiguration Description }}
+New menu configuration for the relationship
 
 ```yaml
-Type: AssociatedMenuConfiguration
+Type: Microsoft.Xrm.Sdk.Metadata.AssociatedMenuConfiguration
 Parameter Sets: SetManyToManyRelationship
 Aliases:
 
@@ -123,24 +112,6 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### -Relationship
-{{ Fill Relationship Description }}
-
-```yaml
-Type: String
-Parameter Sets: SetManyToOneRelationship, SetManyToManyRelationship
-Aliases: SchemaName, Name
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -156,4 +127,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Set-DataverseRelationship.md)
+
 

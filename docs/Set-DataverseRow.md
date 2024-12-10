@@ -8,36 +8,41 @@ schema: 2.0.0
 # Set-DataverseRow
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Update row in table
 
 ## SYNTAX
 
 ### SetObject (Default)
 ```
-Set-DataverseRow -InputObject <Entity> [-Behavior <ConcurrencyBehavior>] [-BatchId <Guid>] 
-    
-   [<RequestParameters>] [<CommonParameters>]
+Set-DataverseRow -InputObject <Entity> [-Behavior <ConcurrencyBehavior>] [-BatchId <Guid>]
+  [<CommonParameters>]
 ```
 
 ### SetValues
 ```
 Set-DataverseRow -Table <String> -Id <Guid> -Values <Hashtable> [-Behavior <ConcurrencyBehavior>]
- [-BatchId <Guid>]    
-   
- [<RequestParameters>] [<CommonParameters>]
+ [-BatchId <Guid>]  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Update row in table
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
+### Example 1: Update with Object
+
+```powershell
+$row = Get-DataverseRows -Table 'account' -Top 1
+$row.name='Account Updated'
+
+$row | Set-DataverseRow
 ```
 
-{{ Add example description here }}
+### Example 2: Update with Values
+
+```powershell
+Set-DataverseRow -Table $row.LogicalName -Id $row.Id -Values @{name='Account Updated'}
+```
 
 ## PARAMETERS
 
@@ -57,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -Behavior
-{{ Fill Behavior Description }}
+Concurrency behavior of the update
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.ConcurrencyBehavior
@@ -73,7 +78,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-{{ Fill Id Description }}
+Id of the row the update
 
 ```yaml
 Type: System.Guid
@@ -83,12 +88,12 @@ Aliases:
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
 ### -InputObject
-{{ Fill InputObject Description }}
+Entity object with Attributes with updated values
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.Entity
@@ -103,7 +108,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+Logicalname of the table containing the row to updateLogicalname of the table containing the row to update
 
 ```yaml
 Type: System.String
@@ -113,12 +118,12 @@ Aliases: LogicalName
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
 ### -Values
-{{ Fill Values Description }}
+Updated values for the row
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -132,9 +137,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -147,4 +149,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Set-DataverseRow.md)
+
 

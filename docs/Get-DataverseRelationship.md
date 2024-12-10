@@ -8,48 +8,51 @@ schema: 2.0.0
 # Get-DataverseRelationship
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Retrieve Relationship Metadata
 
 ## SYNTAX
 
 ### GetRelationshipForTable (Default)
 ```
 Get-DataverseRelationship -Table <String> [-RelatedTable <String>] [-Type <RelationshipType>]
- [-Include <String>] [-Exclude <String>] [-Custom] [-Unmanaged]  
-    
-  [<RequestParameters>] [<CommonParameters>]
+ [-Include <String>] [-Exclude <String>] [-Custom] [-Unmanaged] 
+ [<CommonParameters>]
 ```
 
 ### GetRelationshipById
 ```
-Get-DataverseRelationship -Id <Guid>   
-   
-  [<RequestParameters>] [<CommonParameters>]
+Get-DataverseRelationship -Id <Guid>  [<CommonParameters>]
 ```
 
 ### GetRelationshipByName
 ```
-Get-DataverseRelationship -Name <String>   
-   
-  [<RequestParameters>] [<CommonParameters>]
+Get-DataverseRelationship -Name <String>  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieve Relationship Metadata
 
 ## EXAMPLES
 
 ### Example 1
-```
-PS C:\> {{ Add example code here }}
+```powershell
+PS C:\>  Get-DataverseRelationship -Table 'account'
 ```
 
-{{ Add example description here }}
+### Example 2
+```powershell
+PS C:\> Get-DataverseRelationship -Name 'ams_account_contact'
+```
+
+### Example 3
+```powershell
+PS C:\>  Get-DataverseRelationship -Table 'account' -RelatedTable 'contact'
+```
 
 ## PARAMETERS
 
 ### -Custom
-{{ Fill Custom Description }}
+Only retrieve custom relationships
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -64,7 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -Exclude
-{{ Fill Exclude Description }}
+Filter of relationships to exclude based on the schemaname. Can contain wildcards.
 
 ```yaml
 Type: System.String
@@ -79,7 +82,7 @@ Accept wildcard characters: True
 ```
 
 ### -Id
-{{ Fill Id Description }}
+MetadataId of the relationship to retrieve
 
 ```yaml
 Type: System.Guid
@@ -89,12 +92,12 @@ Aliases: MetadataId
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
 ### -Include
-{{ Fill Include Description }}
+The schemaname of the relationship to retrieve. Can contain wildcards.
 
 ```yaml
 Type: System.String
@@ -109,7 +112,7 @@ Accept wildcard characters: True
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Schemaname of the relationship to retrieve
 
 ```yaml
 Type: System.String
@@ -119,12 +122,12 @@ Aliases: SchemaName
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -RelatedTable
-{{ Fill RelatedTable Description }}
+Logicalname of the table on the other side of the relationship
 
 ```yaml
 Type: System.String
@@ -139,7 +142,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+Logicalname of the table to retrieve the relationship for
 
 ```yaml
 Type: System.String
@@ -154,7 +157,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-{{ Fill Type Description }}
+The type of relationship to retrieve
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.Metadata.RelationshipType
@@ -170,7 +173,7 @@ Accept wildcard characters: False
 ```
 
 ### -Unmanaged
-{{ Fill Unmanaged Description }}
+Only retrieve unmanaged relationships
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -183,9 +186,6 @@ Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -200,4 +200,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseRelationship.md)
+
 

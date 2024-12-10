@@ -16,72 +16,115 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
-using AMSoftware.Dataverse.PowerShell.DynamicParameters;
-using Microsoft.PowerPlatform.Dataverse.Client;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
-    [Cmdlet(VerbsCommon.Add, "DataverseRows")]
+    [Cmdlet(VerbsCommon.Add, "DataverseRows", DefaultParameterSetName = AddObjectParameterSet)]
     [OutputType(typeof(EntityReference))]
     public sealed class AddRowsCommand : BatchCmdletBase
     {
-        [Parameter(Mandatory = true, ValueFromPipeline = true)]
+        private const string AddObjectParameterSet = "AddObject";
+        private const string AddValuesParameterSet = "AddValues";
+
+        private readonly List<Entity> _rowsToProcess = [];
+
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = AddObjectParameterSet)]
         [Alias("Rows", "Entities")]
         [ValidateNotNullOrEmpty]
         public Entity[] InputObject { get; set; }
 
-        [Parameter(Mandatory = false)]
+        [Parameter(Mandatory = false, ParameterSetName = AddObjectParameterSet)]
         public SwitchParameter Upsert { get; set; }
+
+        [Parameter(Mandatory = true, ParameterSetName = AddValuesParameterSet)]
+        [ValidateNotNullOrEmpty]
+        [ArgumentCompleter(typeof(TableNameArgumentCompleter))]
+        [Alias("LogicalName")]
+        public string Table { get; set; }
+
+        [Parameter(Mandatory = true, ParameterSetName = AddValuesParameterSet, ValueFromPipeline = true)]
+        [ValidateNotNullOrEmpty]
+        public Hashtable Values { get; set; }
 
         public override void Execute()
         {
+            switch (ParameterSetName)
+            {
+                case AddObjectParameterSet:
+                    _rowsToProcess.AddRange(InputObject);
+                    break;
+                case AddValuesParameterSet:
+                    _rowsToProcess.Add(BuildEntityFromValues());
+                    break;
+            }
+        }
+
+        protected override void EndProcessing()
+        {
+            var entityName = _rowsToProcess.FirstOrDefault()?.LogicalName ?? Table;
+            var targetCollection = new EntityCollection(_rowsToProcess)
+            {
+                EntityName = entityName
+            };
+
+            OrganizationRequest request;
             if (Upsert.ToBool())
             {
-                var request = new UpsertMultipleRequest()
+                request = new UpsertMultipleRequest()
                 {
-                    Targets = new EntityCollection(InputObject.ToList())
+                    Targets = targetCollection
                 };
-
-                if (UseBatch)
+            }
+            else
+            {
+                request = new CreateMultipleRequest()
                 {
-                    AddOrganizationRequestToBatch(request);
-                }
-                else
+                    Targets = targetCollection
+                };
+            }
+
+            if (UseBatch)
+            {
+                AddOrganizationRequestToBatch(request);
+            }
+            else
+            {
+                if (Upsert.ToBool())
                 {
                     var response = ExecuteOrganizationRequest<UpsertMultipleResponse>(request);
-
-                    for (int i = 0; i < response.Results.Length; i++)
-                    {
-                        WriteObject(response.Results[i].Target);
-                    }
-                }
-            } else
-            {
-                var request = new CreateMultipleRequest()
-                {
-                    Targets = new EntityCollection(InputObject.ToList())
-                };
-
-                if (UseBatch)
-                {
-                    AddOrganizationRequestToBatch(request);
+                    WriteObject(response.Results.Select(r => r.Target), true);
                 }
                 else
                 {
                     var response = ExecuteOrganizationRequest<CreateMultipleResponse>(request);
-
-                    for (int i = 0; i < response.Ids.Length; i++)
-                    {
-                        WriteObject(new EntityReference(InputObject[i].LogicalName, response.Ids[i]));
-                    }
+                    WriteObject(response.Ids.Select(id => new EntityReference(entityName, id)), true);
                 }
             }
+
+            base.EndProcessing();
+        }
+
+        private Entity BuildEntityFromValues()
+        {
+            var result = new Entity(Table);
+
+            foreach (var attributeName in Values.Keys)
+            {
+                var attributeValue = Values[attributeName];
+
+                if (attributeValue is PSObject psValue)
+                    result.Attributes.Add((string)attributeName, psValue.ImmediateBaseObject);
+                else
+                    result.Attributes.Add((string)attributeName, attributeValue);
+            }
+
+            return result;
         }
     }
 }

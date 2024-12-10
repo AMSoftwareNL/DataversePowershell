@@ -8,41 +8,40 @@ schema: 2.0.0
 # Get-DataverseColumn
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Retrieve table column metadata
 
 ## SYNTAX
 
 ### GetColumnsByFilter (Default)
 ```
 Get-DataverseColumn -Table <String> [-Name <String>] [-Exclude <String>] [-Type <ColumnType>] [-Unmanaged]
-    
-   
- [<RequestParameters>] [<CommonParameters>]
+  [<CommonParameters>]
 ```
 
 ### GetColumnById
 ```
-Get-DataverseColumn -Id <Guid>   
-   
-  [<RequestParameters>] [<CommonParameters>]
+Get-DataverseColumn -Id <Guid>  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieve table column metadata
 
 ## EXAMPLES
 
 ### Example 1
-```
-PS C:\> {{ Add example code here }}
+```powershell
+PS C:/> Get-DataverseColumn -Table 'account' -Name 'accountnumber'
 ```
 
-{{ Add example description here }}
+### Example 2
+```powershell
+PS C:/>  Get-DataverseColumn -Table 'account' -Type Lookup
+```
 
 ## PARAMETERS
 
 ### -Exclude
-{{ Fill Exclude Description }}
+Filter of columns to exclude based on the logicalname. Can contain wildcards.
 
 ```yaml
 Type: System.String
@@ -57,7 +56,7 @@ Accept wildcard characters: True
 ```
 
 ### -Id
-{{ Fill Id Description }}
+MetadataId of the column to retrieve
 
 ```yaml
 Type: System.Guid
@@ -67,12 +66,12 @@ Aliases: MetadataId
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+The logicalname of the column to retrieve. Can contain wildcards.
 
 ```yaml
 Type: System.String
@@ -87,7 +86,7 @@ Accept wildcard characters: True
 ```
 
 ### -Table
-{{ Fill Table Description }}
+Logicalname of the table containing the column
 
 ```yaml
 Type: System.String
@@ -97,12 +96,12 @@ Aliases: LogicalName
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Type
-{{ Fill Type Description }}
+The type of column to retrieve
 
 ```yaml
 Type: AMSoftware.Dataverse.PowerShell.Commands.ColumnType
@@ -118,7 +117,7 @@ Accept wildcard characters: False
 ```
 
 ### -Unmanaged
-{{ Fill Unmanaged Description }}
+Only retrieve unmanaged columns
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -131,9 +130,6 @@ Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -148,4 +144,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseColumn.md)
+
 

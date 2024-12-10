@@ -23,10 +23,8 @@ Provision a new language
 
 ### Example 1
 ```
-PS C:\> {{ Add example code here }}
+PS C:\> Add-DataverseLanguage -Locale 1033
 ```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
@@ -59,5 +57,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Add-DataverseLanguage.md)
+
+
 
 

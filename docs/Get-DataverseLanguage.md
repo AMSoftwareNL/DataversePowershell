@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DataverseLanguage
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Retrieve languages
 
 ## SYNTAX
 
@@ -17,21 +17,19 @@ Get-DataverseLanguage [-All]  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieve languages for Dataverse. Provision or all available.
 
 ## EXAMPLES
 
 ### Example 1
+```powershell
+PS C:\> Get-DataverseLanguage -All
 ```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -All
-{{ Fill All Description }}
+Retrieve all available languages instead of only the provisioned
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -57,4 +55,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseLanguage.md)
+
 

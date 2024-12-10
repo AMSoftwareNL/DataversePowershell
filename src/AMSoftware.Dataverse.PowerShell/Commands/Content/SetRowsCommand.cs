@@ -16,24 +16,43 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
-using AMSoftware.Dataverse.PowerShell.DynamicParameters;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Management.Automation;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
-    [Cmdlet(VerbsCommon.Set, "DataverseRows")]
+    [Cmdlet(VerbsCommon.Set, "DataverseRows", DefaultParameterSetName = SetObjectParameterSet)]
     [OutputType(typeof(EntityReference))]
     public sealed class SetRowsCommand : BatchCmdletBase
     {
-        [Parameter(Mandatory = true, ValueFromPipeline = true)]
+        private const string SetObjectParameterSet = "SetObject";
+        private const string SetValuesParameterSet = "SetValues";
+
+        private List<Entity> _rowsToProcess = [];
+
+        [Parameter(Mandatory = true, ParameterSetName = SetObjectParameterSet, ValueFromPipeline = true)]
         [Alias("Rows", "Entities")]
         [ValidateNotNullOrEmpty]
         public Entity[] InputObject { get; set; }
+
+        [Parameter(Mandatory = true, ParameterSetName = SetValuesParameterSet, ValueFromPipelineByPropertyName = true)]
+        [ValidateNotNullOrEmpty]
+        [ArgumentCompleter(typeof(TableNameArgumentCompleter))]
+        [Alias("LogicalName")]
+        public string Table { get; set; }
+
+        [Parameter(Mandatory = true, ParameterSetName = SetValuesParameterSet, ValueFromPipelineByPropertyName = true)]
+        [ValidateNotNullOrEmpty]
+        public Guid Id { get; set; }
+
+        [Parameter(Mandatory = true, ParameterSetName = SetValuesParameterSet)]
+        [ValidateNotNullOrEmpty]
+        public Hashtable Values { get; set; }
 
         [Parameter(Mandatory = false)]
         [ValidateNotNullOrEmpty]
@@ -42,9 +61,24 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
         public override void Execute()
         {
+            switch (ParameterSetName)
+            {
+                case SetObjectParameterSet:
+                    _rowsToProcess.AddRange(InputObject);
+                    break;
+                case SetValuesParameterSet:
+                    _rowsToProcess.Add(BuildEntityFromValues());
+                    break;
+            }
+        }
+
+        protected override void EndProcessing()
+        {
             var request = new UpdateMultipleRequest()
             {
-                Targets = new EntityCollection(InputObject.ToList())
+                Targets = new EntityCollection(_rowsToProcess) {
+                    EntityName = _rowsToProcess.FirstOrDefault()?.LogicalName ?? Table
+                }
             };
             if (MyInvocation.BoundParameters.ContainsKey(nameof(Behavior)))
             {
@@ -57,13 +91,28 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             }
             else
             {
-                var response = ExecuteOrganizationRequest<UpdateMultipleResponse>(request);
+                var _ = ExecuteOrganizationRequest<UpdateMultipleResponse>(request);
 
-                for (int i = 0; i < InputObject.Length; i++)
-                {
-                    WriteObject(InputObject[i].ToEntityReference());
-                }
+                WriteObject(_rowsToProcess.Select(r=> r.ToEntityReference()), true);
             }
+
+            base.EndProcessing();
+        }
+
+        private Entity BuildEntityFromValues()
+        {
+            var result = new Entity(Table, Id);
+
+            foreach (var attributeName in Values.Keys)
+            {
+                var attributeValue = Values[attributeName];
+                if (attributeValue is PSObject psValue)
+                    result.Attributes.Add((string)attributeName, psValue.ImmediateBaseObject);
+                else
+                    result.Attributes.Add((string)attributeName, attributeValue);
+            }
+
+            return result;
         }
     }
 }

@@ -8,41 +8,30 @@ schema: 2.0.0
 # Set-DataverseChoice
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Update a global choice
 
 ## SYNTAX
 
 ### SetChoiceObject (Default)
 ```
-Set-DataverseChoice -InputObject <OptionSetMetadata> [-MergeLabels]  
-    
-  [<RequestParameters>] [<CommonParameters>]
+Set-DataverseChoice -InputObject <OptionSetMetadata>  [<CommonParameters>]
 ```
 
 ### SetChoice
 ```
 Set-DataverseChoice -Name <String> [-DisplayName <String>] [-Description <String>] [-ExternalName <String>]
- [-MergeLabels]    
-   
- [<RequestParameters>] [<CommonParameters>]
+  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Update a global choice
 
 ## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Description
-{{ Fill Description Description }}
+New description for the choice
 
 ```yaml
 Type: System.String
@@ -57,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -DisplayName
-{{ Fill DisplayName Description }}
+New displayname for the choice
 
 ```yaml
 Type: System.String
@@ -72,7 +61,7 @@ Accept wildcard characters: False
 ```
 
 ### -ExternalName
-{{ Fill ExternalName Description }}
+New external name for the choice
 
 ```yaml
 Type: System.String
@@ -87,7 +76,7 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-{{ Fill InputObject Description }}
+Metadata description the updated choice
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.Metadata.OptionSetMetadata
@@ -101,23 +90,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MergeLabels
-{{ Fill MergeLabels Description }}
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
-{{ Fill Name Description }}
+Logicalname of the choice to update
 
 ```yaml
 Type: System.String
@@ -131,9 +105,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -146,4 +117,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Set-DataverseChoice.md)
+
 

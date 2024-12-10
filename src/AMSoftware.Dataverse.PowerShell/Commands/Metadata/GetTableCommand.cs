@@ -33,7 +33,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         private const string GetTableByEtcParameterSet = "GetTableByEtc";
         private const string GetTablesByFilterParameterSet = "GetTablesByFilter";
 
-        [Parameter(Mandatory = true, ParameterSetName = GetTableByIdParameterSet, ValueFromPipeline = true)]
+        [Parameter(Mandatory = true, ParameterSetName = GetTableByIdParameterSet, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
         [Alias("MetadataId")]
         [ValidateNotNull]
         public Guid Id { get; set; }
@@ -127,9 +127,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                         result = result.Where(e => !excludePattern.IsMatch(e.LogicalName));
                     }
 
-                    if (Custom.IsPresent) result = result.Where(e => e.IsCustomEntity == true);
-                    if (Unmanaged.IsPresent) result = result.Where(e => e.IsManaged == false);
-                    if (Intersects.IsPresent) result = result.Where(e => e.IsIntersect == true);
+                    if (Custom.IsPresent) result = result.Where(e => e.IsCustomEntity == Custom.ToBool());
+                    if (Unmanaged.IsPresent) result = result.Where(e => e.IsManaged == !Unmanaged.ToBool());
+                    if (Intersects.IsPresent) result = result.Where(e => e.IsIntersect == Intersects.ToBool());
 
                     if (MyInvocation.BoundParameters.ContainsKey(nameof(Type)))
                     {

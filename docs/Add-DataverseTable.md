@@ -8,16 +8,14 @@ schema: 2.0.0
 # Add-DataverseTable
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Add new Table to Dataverse
 
 ## SYNTAX
 
 ### AddTableObject (Default)
 ```
 Add-DataverseTable -TableInputObject <EntityMetadata> -ColumnInputObject <StringAttributeMetadata>
-    
-   
- [<RequestParameters>] [<CommonParameters>]
+  [<CommonParameters>]
 ```
 
 ### AddElasticTable
@@ -25,9 +23,7 @@ Add-DataverseTable -TableInputObject <EntityMetadata> -ColumnInputObject <String
 Add-DataverseTable [-Elastic] -Name <String> -DisplayName <String> -PluralName <String> [-Description <String>]
  [-OwnershipType <TableOwnershipType>] [-TrackChanges] -ColumnDisplayName <String>
  [-ColumnDescription <String>] -ColumnName <String> [-ColumnLength <UInt32>]
- [-ColumnRequired <ColumnRequiredLevel>]   
-   
-  [<RequestParameters>] [<CommonParameters>]
+ [-ColumnRequired <ColumnRequiredLevel>]  [<CommonParameters>]
 ```
 
 ### AddVirtualTable
@@ -36,17 +32,14 @@ Add-DataverseTable [-Virtual] -Name <String> -DisplayName <String> -PluralName <
  [-HasAttachments] [-IsActivityParty] -ColumnDisplayName <String> [-ColumnDescription <String>]
  -ColumnName <String> [-ColumnLength <UInt32>] [-ColumnRequired <ColumnRequiredLevel>] -ExternalName <String>
  -ExternalPluralName <String> [-ColumnExternalName <String>] [-DataProviderId <Guid>] [-DataSourceId <Guid>]
-    
-   
- [<RequestParameters>] [<CommonParameters>]
+  [<CommonParameters>]
 ```
 
 ### AddActivityTable
 ```
 Add-DataverseTable [-Activity] -Name <String> -DisplayName <String> -PluralName <String>
- [-Description <String>] [-TrackChanges] [-HideFromMenu]  
-    
-  [<RequestParameters>] [<CommonParameters>]
+ [-Description <String>] [-TrackChanges] [-HideFromMenu] 
+ [<CommonParameters>]
 ```
 
 ### AddStandardTable
@@ -54,27 +47,43 @@ Add-DataverseTable [-Activity] -Name <String> -DisplayName <String> -PluralName 
 Add-DataverseTable -Name <String> -DisplayName <String> -PluralName <String> [-Description <String>]
  [-OwnershipType <TableOwnershipType>] [-HasAttachments] [-IsActivityParty] [-TrackChanges]
  -ColumnDisplayName <String> [-ColumnDescription <String>] -ColumnName <String> [-ColumnLength <UInt32>]
- [-ColumnRequired <ColumnRequiredLevel>]   
-   
-  [<RequestParameters>] [<CommonParameters>]
+ [-ColumnRequired <ColumnRequiredLevel>]  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Add a new Table to Dataverse, including the primary name column
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
+### EXAMPLE 1
+```powershell
+PS C:\> Add-DataverseTable -Name 'ams_testtable' -DisplayName 'Test Table' -PluralName 'Test Tables' -Description 'Test Table Description' -OwnershipType Organization -HasAttachments -IsActivityParty -TrackChanges -ColumnName 'ams_name' -ColumnDisplayName 'Name' -ColumnDescription 'Name Description' -ColumnLength 104 -ColumnRequired Recommended
 ```
 
-{{ Add example description here }}
+### EXAMPLE 2
+```powershell
+PS C:\>  Add-DataverseTable -Name 'ams_testdefault' -DisplayName 'Test Table' -PluralName 'Test Tables' -ColumnName 'ams_name' -ColumnDisplayName 'Name'
+```
+
+### EXAMPLE 3
+```powershell
+PS C:\> Add-DataverseTable -Activity -Name 'ams_testactivity' -DisplayName 'Test Activity' -PluralName 'Test Activities' -Description 'Test Activity Description' -TrackChanges -HideFromMenu
+```
+
+### EXAMPLE 4
+```powershell
+PS C:\> Add-DataverseTable -Elastic -Name 'ams_testelastic' -DisplayName 'Test Elastic' -PluralName 'Test Elastics' -Description 'Test Elastic Description' -OwnershipType User -TrackChanges -ColumnName 'ams_name' -ColumnDisplayName 'Name' -ColumnDescription 'Name Description' -ColumnLength 104 -ColumnRequired Recommended
+```
+
+### EXAMPLE 5
+```powershell
+PS C:\> Add-DataverseTable -Virtual -Name 'ams_testvirtual' -DisplayName 'Test Virtual' -PluralName 'Test Virtuals' -Description 'Test Virtual Description' -HasAttachments -IsActivityParty -ColumnName 'ams_name' -ColumnDisplayName 'Name' -ColumnDescription 'Name Description' -ColumnLength 104 -ColumnRequired Recommended -ExternalName 'testvirtual' -ExternalPluralName 'testvirtuals' -ColumnExternalName 'name'
+```
 
 ## PARAMETERS
 
 ### -Activity
-{{ Fill Activity Description }}
+Add an Activity table
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -89,7 +98,7 @@ Accept wildcard characters: False
 ```
 
 ### -ColumnDescription
-{{ Fill ColumnDescription Description }}
+Description for the primary name column
 
 ```yaml
 Type: System.String
@@ -104,7 +113,7 @@ Accept wildcard characters: False
 ```
 
 ### -ColumnDisplayName
-{{ Fill ColumnDisplayName Description }}
+Displayname for the primary name column
 
 ```yaml
 Type: System.String
@@ -119,7 +128,7 @@ Accept wildcard characters: False
 ```
 
 ### -ColumnExternalName
-{{ Fill ColumnExternalName Description }}
+External name for the primary name column
 
 ```yaml
 Type: System.String
@@ -134,7 +143,7 @@ Accept wildcard characters: False
 ```
 
 ### -ColumnInputObject
-{{ Fill ColumnInputObject Description }}
+String Attribute Metadata for the primary name column
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.Metadata.StringAttributeMetadata
@@ -149,7 +158,7 @@ Accept wildcard characters: False
 ```
 
 ### -ColumnLength
-{{ Fill ColumnLength Description }}
+Length for the primary name column
 
 ```yaml
 Type: System.UInt32
@@ -164,7 +173,7 @@ Accept wildcard characters: False
 ```
 
 ### -ColumnName
-{{ Fill ColumnName Description }}
+Logicalname for the primary name column
 
 ```yaml
 Type: System.String
@@ -179,7 +188,7 @@ Accept wildcard characters: False
 ```
 
 ### -ColumnRequired
-{{ Fill ColumnRequired Description }}
+Requirement level for the primary name column
 
 ```yaml
 Type: AMSoftware.Dataverse.PowerShell.Commands.ColumnRequiredLevel
@@ -195,7 +204,7 @@ Accept wildcard characters: False
 ```
 
 ### -DataProviderId
-{{ Fill DataProviderId Description }}
+The Id that identifies the associated virtual table data provider
 
 ```yaml
 Type: System.Guid
@@ -210,7 +219,7 @@ Accept wildcard characters: False
 ```
 
 ### -DataSourceId
-{{ Fill DataSourceId Description }}
+The Id that identifies the associated virtual table data source
 
 ```yaml
 Type: System.Guid
@@ -225,7 +234,7 @@ Accept wildcard characters: False
 ```
 
 ### -Description
-{{ Fill Description Description }}
+The description for the table
 
 ```yaml
 Type: System.String
@@ -240,7 +249,7 @@ Accept wildcard characters: False
 ```
 
 ### -DisplayName
-{{ Fill DisplayName Description }}
+The displayname for the table
 
 ```yaml
 Type: System.String
@@ -255,7 +264,7 @@ Accept wildcard characters: False
 ```
 
 ### -Elastic
-{{ Fill Elastic Description }}
+Create an eleastic table
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -270,7 +279,7 @@ Accept wildcard characters: False
 ```
 
 ### -ExternalName
-{{ Fill ExternalName Description }}
+The external name for the table
 
 ```yaml
 Type: System.String
@@ -285,7 +294,7 @@ Accept wildcard characters: False
 ```
 
 ### -ExternalPluralName
-{{ Fill ExternalPluralName Description }}
+The external plural name for the table
 
 ```yaml
 Type: System.String
@@ -300,7 +309,7 @@ Accept wildcard characters: False
 ```
 
 ### -HasAttachments
-{{ Fill HasAttachments Description }}
+Can the table have attachments
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -315,7 +324,7 @@ Accept wildcard characters: False
 ```
 
 ### -HideFromMenu
-{{ Fill HideFromMenu Description }}
+Hide the new activity from the activity menu
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -330,7 +339,7 @@ Accept wildcard characters: False
 ```
 
 ### -IsActivityParty
-{{ Fill IsActivityParty Description }}
+Table can be used as party in an activity
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -345,7 +354,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Logicalname for the table
 
 ```yaml
 Type: System.String
@@ -360,7 +369,7 @@ Accept wildcard characters: False
 ```
 
 ### -OwnershipType
-{{ Fill OwnershipType Description }}
+The ownership type for the table
 
 ```yaml
 Type: AMSoftware.Dataverse.PowerShell.Commands.TableOwnershipType
@@ -376,7 +385,7 @@ Accept wildcard characters: False
 ```
 
 ### -PluralName
-{{ Fill PluralName Description }}
+The plural name of the table
 
 ```yaml
 Type: System.String
@@ -391,7 +400,7 @@ Accept wildcard characters: False
 ```
 
 ### -TableInputObject
-{{ Fill TableInputObject Description }}
+The EntityMetadata object describing the table
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.Metadata.EntityMetadata
@@ -406,7 +415,7 @@ Accept wildcard characters: False
 ```
 
 ### -TrackChanges
-{{ Fill TrackChanges Description }}
+Track change is enabled
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -421,7 +430,7 @@ Accept wildcard characters: False
 ```
 
 ### -Virtual
-{{ Fill Virtual Description }}
+Create a virtual table
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -435,9 +444,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -450,4 +456,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Add-DataverseTable.md)
+
 

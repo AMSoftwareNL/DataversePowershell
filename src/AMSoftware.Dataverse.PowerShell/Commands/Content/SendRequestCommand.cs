@@ -16,10 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
-using AMSoftware.Dataverse.PowerShell.DynamicParameters;
 using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Sdk.Messages;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Management.Automation;
@@ -83,7 +80,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             {
                 var response = ExecuteOrganizationRequest<OrganizationResponse>(request);
 
-                WriteObject(response, true);
+                WriteObject(response);
             }
         }
     }

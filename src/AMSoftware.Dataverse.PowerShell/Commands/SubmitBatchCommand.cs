@@ -21,21 +21,40 @@ using System.Linq;
 using System.Management.Automation;
 using Microsoft.Xrm.Sdk;
 using System.Collections.Immutable;
+using Microsoft.Xrm.Sdk.Messages;
+using System.ServiceModel;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands
 {
     [Cmdlet(VerbsLifecycle.Submit, "DataverseBatch")]
-    public sealed class SubmitBatchCommand : CmdletBase
+    public sealed class SubmitBatchCommand : RequestCmdletBase
     {
         [Parameter(Mandatory = true)]
         public Guid BatchId { get; set; }
+
+        [Parameter(Mandatory = false)]
+        public SwitchParameter Transactional { get; set; }
 
         protected override void BeginProcessing()
         {
             base.BeginProcessing();
 
-            var response = Session.Current.Client.ExecuteBatch(BatchId);
+            if (Transactional.ToBool() == false)
+                ExecuteBatch();
+            else
+                ExecuteTransaction();
+        }
 
+        protected override void EndProcessing()
+        {
+            Session.Current.Client.ReleaseBatchInfoById(BatchId);
+
+            base.EndProcessing();
+        }
+
+        private void ExecuteBatch()
+        {
+            var response = Session.Current.Client.ExecuteBatch(BatchId);
             if (response != null)
             {
                 WriteObject(response.Responses.Select(item => new PSObject(
@@ -57,11 +76,41 @@ namespace AMSoftware.Dataverse.PowerShell.Commands
             }
         }
 
-        protected override void EndProcessing()
+        private void ExecuteTransaction()
         {
-            Session.Current.Client.ReleaseBatchInfoById(BatchId);
-            
-            base.EndProcessing();
+            var batch = Session.Current.Client.GetBatchById(BatchId);
+            var requests = batch.BatchItems.Select(b => b.Request).ToList();
+
+            var request = new ExecuteTransactionRequest();
+            request.ReturnResponses = batch.BatchRequestSettings.ReturnResponses;
+            request.Requests = new OrganizationRequestCollection();
+            request.Requests.AddRange(requests);
+
+            try
+            {
+                var response = ExecuteOrganizationRequest<ExecuteTransactionResponse>(request);
+
+                if (response != null)
+                {
+                    WriteObject(response.Responses.Select((item, index) => new PSObject(
+                    new
+                    {
+                        Request = requests[index],
+                        Response = item
+                    })
+                ).ToImmutableList(), true);
+                }
+            }
+            catch (FaultException<OrganizationServiceFault> ex)
+            {
+                int index = ((ExecuteTransactionFault)ex.Detail).FaultedRequestIndex + 1;
+
+                WriteError(new ErrorRecord(
+                   new Exception(ex.Detail.Message),
+                   ErrorCode.FaultedTransactionExecution,
+                   ErrorCategory.InvalidResult,
+                   requests[index]));
+            }
         }
     }
 }

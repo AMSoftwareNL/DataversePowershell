@@ -44,7 +44,7 @@ Connect to a specific Dataverse Environment. This connects the PowerShell sessio
 ## PARAMETERS
 
 ### -ClientId
-The ClientId / AppId of a registered application in Azure Entra ID as context for this module. If non provided the module will uses the Microsoft provided Client ID for development and prototyping purposes.
+The ClientId / AppId of a registered application in Azure Entra ID as context for this module. If not provided the module will uses the Microsoft provided Client ID for development and prototyping purposes.
 
 ```yaml
 Type: System.String
@@ -161,5 +161,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Connect-DataverseEnvironment.md)
 [Connectionstring for XRM Tooling](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/xrm-tooling/use-connection-strings-xrm-tooling-connect)
 [Microsoft.PowerPlatform.Dataverse.Client.ServiceClient](https://learn.microsoft.com/en-us/dotnet/api/microsoft.powerplatform.dataverse.client.serviceclient?view=dataverse-sdk-latest)
+
+
 
 

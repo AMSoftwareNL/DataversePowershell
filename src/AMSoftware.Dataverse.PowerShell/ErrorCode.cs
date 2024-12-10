@@ -31,5 +31,6 @@ namespace AMSoftware.Dataverse.PowerShell
         public const string InvalidBatchId = "DVPS0004";
         public const string FaultedBatchExecution = "DVPS0005";
         public const string FaultedBatchInitialization = "DVPS0006";
+        public const string FaultedTransactionExecution = "DVPS0007";
     }
 }

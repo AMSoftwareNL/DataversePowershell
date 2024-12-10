@@ -29,7 +29,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         private const string AddChoiceObjectParameterSet = "AddChoiceObject";
         private const string AddNewChoiceParameterSet = "AddNewChoice";
 
-        [Parameter(Mandatory = true, ParameterSetName = AddChoiceObjectParameterSet)]
+        [Parameter(Mandatory = true, ValueFromPipeline = true, ParameterSetName = AddChoiceObjectParameterSet)]
         [Alias("Choice", "OptionSet")]
         [ValidateNotNullOrEmpty]
         public OptionSetMetadata InputObject { get; set; }
@@ -93,8 +93,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                 Name = Name,
                 OptionSetType = OptionSetType.Picklist,
                 IsGlobal = true,
+                DisplayName = new Label(DisplayName, Session.Current.LanguageId),
                 Description = Description == null ? null : new Label(Description, Session.Current.LanguageId),
-                ExternalTypeName = ExternalName
+                ExternalTypeName = ExternalName,
             };
             choiceMetadata.Options.AddRange(Options);
 

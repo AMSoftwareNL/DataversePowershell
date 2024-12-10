@@ -21,19 +21,22 @@ Add a Column to a Dataverse Table
 Provision a new language
 
 ### [Add-DataverseRelatedRow](Add-DataverseRelatedRow.md)
+Relate rows in a many-to-many relationship
+
+### [Add-DataverseRelationship](Add-DataverseRelationship.md)
 {{ Fill in the Synopsis }}
 
 ### [Add-DataverseRow](Add-DataverseRow.md)
-{{ Fill in the Synopsis }}
+Add a new row to a table
 
 ### [Add-DataverseRows](Add-DataverseRows.md)
-{{ Fill in the Synopsis }}
+Add new rows to a table
 
 ### [Add-DataverseTable](Add-DataverseTable.md)
-{{ Fill in the Synopsis }}
+Add new Table to Dataverse
 
 ### [Add-DataverseTableKey](Add-DataverseTableKey.md)
-{{ Fill in the Synopsis }}
+Add a table key
 
 ### [Connect-DataverseEnvironment](Connect-DataverseEnvironment.md)
 Connect to a specific Dataverse Environment.
@@ -48,40 +51,40 @@ Connect to a specific Dataverse Environment.
 {{ Fill in the Synopsis }}
 
 ### [Get-DataverseChoice](Get-DataverseChoice.md)
-{{ Fill in the Synopsis }}
+Retrieve the metadata of global choices
 
 ### [Get-DataverseColumn](Get-DataverseColumn.md)
-{{ Fill in the Synopsis }}
+Retrieve table column metadata
 
 ### [Get-DataverseEnvironmentVariableValue](Get-DataverseEnvironmentVariableValue.md)
 {{ Fill in the Synopsis }}
 
 ### [Get-DataverseLanguage](Get-DataverseLanguage.md)
-{{ Fill in the Synopsis }}
+Retrieve languages
 
 ### [Get-DataverseRelationship](Get-DataverseRelationship.md)
-{{ Fill in the Synopsis }}
+Retrieve Relationship Metadata
 
 ### [Get-DataverseRole](Get-DataverseRole.md)
 {{ Fill in the Synopsis }}
 
 ### [Get-DataverseRow](Get-DataverseRow.md)
-{{ Fill in the Synopsis }}
+Get a single Dataverse Row
 
 ### [Get-DataverseRowAccess](Get-DataverseRowAccess.md)
 {{ Fill in the Synopsis }}
 
 ### [Get-DataverseRows](Get-DataverseRows.md)
-{{ Fill in the Synopsis }}
+Get multiple rows from a Dataverse Table
 
 ### [Get-DataverseSPDocumentLocation](Get-DataverseSPDocumentLocation.md)
 {{ Fill in the Synopsis }}
 
 ### [Get-DataverseTable](Get-DataverseTable.md)
-{{ Fill in the Synopsis }}
+Retrieve table metadata
 
 ### [Get-DataverseTableKey](Get-DataverseTableKey.md)
-{{ Fill in the Synopsis }}
+Retrieve table key metadata
 
 ### [Get-DataverseTeam](Get-DataverseTeam.md)
 {{ Fill in the Synopsis }}
@@ -120,64 +123,67 @@ Connect to a specific Dataverse Environment.
 {{ Fill in the Synopsis }}
 
 ### [Remove-DataverseChoice](Remove-DataverseChoice.md)
-{{ Fill in the Synopsis }}
+Remove global choice
 
 ### [Remove-DataverseChoiceOption](Remove-DataverseChoiceOption.md)
-{{ Fill in the Synopsis }}
+Remove an option from a global choice or choice column
 
 ### [Remove-DataverseColumn](Remove-DataverseColumn.md)
-{{ Fill in the Synopsis }}
+Remove a table column
 
 ### [Remove-DataverseLanguage](Remove-DataverseLanguage.md)
-{{ Fill in the Synopsis }}
+Unprovision a Dataverse language
 
 ### [Remove-DataverseRelatedRow](Remove-DataverseRelatedRow.md)
-{{ Fill in the Synopsis }}
+Remove relationship between rows.
 
 ### [Remove-DataverseRelationship](Remove-DataverseRelationship.md)
-{{ Fill in the Synopsis }}
+Remove a Dataverse relationship
 
 ### [Remove-DataverseRow](Remove-DataverseRow.md)
-{{ Fill in the Synopsis }}
+Remove row from a table
+
+### [Remove-DataverseRows](Remove-DataverseRows.md)
+Remove row from a table
 
 ### [Remove-DataverseTable](Remove-DataverseTable.md)
-{{ Fill in the Synopsis }}
+Remove a Dataverse Table
 
 ### [Remove-DataverseTableKey](Remove-DataverseTableKey.md)
-{{ Fill in the Synopsis }}
+Remove key from Table
 
 ### [Request-DataverseBatch](Request-DataverseBatch.md)
-{{ Fill in the Synopsis }}
+Create a new batch to add requests to
 
 ### [Send-DataverseRequest](Send-DataverseRequest.md)
-{{ Fill in the Synopsis }}
+Execute a request
 
 ### [Set-DataverseChoice](Set-DataverseChoice.md)
-{{ Fill in the Synopsis }}
+Update a global choice
 
 ### [Set-DataverseChoiceOption](Set-DataverseChoiceOption.md)
-{{ Fill in the Synopsis }}
+Add or Update an option in a choice
 
 ### [Set-DataverseColumn](Set-DataverseColumn.md)
-{{ Fill in the Synopsis }}
+Update a column
 
 ### [Set-DataverseRelationship](Set-DataverseRelationship.md)
-{{ Fill in the Synopsis }}
+Update a relationship
 
 ### [Set-DataverseRow](Set-DataverseRow.md)
-{{ Fill in the Synopsis }}
+Update row in table
 
 ### [Set-DataverseRowOwner](Set-DataverseRowOwner.md)
 {{ Fill in the Synopsis }}
 
 ### [Set-DataverseRows](Set-DataverseRows.md)
-{{ Fill in the Synopsis }}
+Update rows in table
 
 ### [Set-DataverseTable](Set-DataverseTable.md)
-{{ Fill in the Synopsis }}
+Update a table
 
 ### [Submit-DataverseBatch](Submit-DataverseBatch.md)
-{{ Fill in the Synopsis }}
+Submit and execute a batch of requests
 
 ### [Test-DataverseSolution](Test-DataverseSolution.md)
 {{ Fill in the Synopsis }}

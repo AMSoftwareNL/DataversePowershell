@@ -78,9 +78,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [ValidateNotNullOrEmpty]
         public Guid DataSourceId { get; set; }
 
-        [Parameter(Mandatory = false)]
-        public SwitchParameter MergeLabels { get; set; }
-
         public override void Execute()
         {
             EntityMetadata entityMetadata = null;
@@ -98,7 +95,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             var updateRequest = new UpdateEntityRequest()
             {
                 Entity = entityMetadata,
-                MergeLabels = MergeLabels.ToBool()
+                MergeLabels = true
             };
 
             if (MyInvocation.BoundParameters.ContainsKey(nameof(HasAttachments)))

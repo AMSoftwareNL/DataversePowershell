@@ -33,12 +33,12 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         private const string GetRelationshipForTableParameterSet = "GetRelationshipForTable";
         private const string GetRelationshipByIdParameterSet = "GetRelationshipById";
 
-        [Parameter(Mandatory = true, ParameterSetName = GetRelationshipByIdParameterSet, ValueFromPipeline = true)]
+        [Parameter(Mandatory = true, ParameterSetName = GetRelationshipByIdParameterSet, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
         [Alias("MetadataId")]
         [ValidateNotNull]
         public Guid Id { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = GetRelationshipByNameParameterSet, ValueFromPipeline = true)]
+        [Parameter(Mandatory = true, ParameterSetName = GetRelationshipByNameParameterSet)]
         [ValidateNotNullOrEmpty]
         [Alias("SchemaName")]
         public string Name { get; set; }
@@ -119,14 +119,12 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                     if (MyInvocation.BoundParameters.ContainsKey(nameof(RelatedTable)))
                     {
                         result = result.Where(r =>
-                            r is OneToManyRelationshipMetadata oneToManyRelationship && (
+                            (r is OneToManyRelationshipMetadata oneToManyRelationship && (
                                 oneToManyRelationship.ReferencedEntity.Equals(RelatedTable, StringComparison.OrdinalIgnoreCase) ||
-                                oneToManyRelationship.ReferencingEntity.Equals(RelatedTable, StringComparison.OrdinalIgnoreCase)));
-
-                        result = result.Where(r =>
-                            r is ManyToManyRelationshipMetadata manyToManyRelationship && (
+                                oneToManyRelationship.ReferencingEntity.Equals(RelatedTable, StringComparison.OrdinalIgnoreCase))) ||
+                            (r is ManyToManyRelationshipMetadata manyToManyRelationship && (
                                 manyToManyRelationship.Entity1LogicalName.Equals(RelatedTable, StringComparison.OrdinalIgnoreCase) ||
-                                manyToManyRelationship.Entity2LogicalName.Equals(RelatedTable, StringComparison.OrdinalIgnoreCase)));
+                                manyToManyRelationship.Entity2LogicalName.Equals(RelatedTable, StringComparison.OrdinalIgnoreCase))));
                     }
 
                     if (MyInvocation.BoundParameters.ContainsKey(nameof(Include)))
@@ -141,8 +139,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                         result = result.Where(r => !excludePattern.IsMatch(r.SchemaName));
                     }
 
-                    if (Custom.IsPresent) result = result.Where(r => r.IsCustomRelationship == true);
-                    if (Unmanaged.IsPresent) result = result.Where(r => r.IsManaged == false);
+                    if (Custom.IsPresent) result = result.Where(r => r.IsCustomRelationship == Custom.ToBool());
+                    if (Unmanaged.IsPresent) result = result.Where(r => r.IsManaged == !Unmanaged.ToBool());
 
                     if (MyInvocation.BoundParameters.ContainsKey(nameof(Type)))
                         result = result.Where(r => r.RelationshipType == Type);

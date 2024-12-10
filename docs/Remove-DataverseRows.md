@@ -5,24 +5,45 @@ online version:
 schema: 2.0.0
 ---
 
-# Remove-DataverseTable
+# Remove-DataverseRows
 
 ## SYNOPSIS
-Remove a Dataverse Table
+Remove row from a table
 
 ## SYNTAX
 
 ```
-Remove-DataverseTable -Name <String> [-Force]  [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Remove-DataverseRows -Table <String> -Id <Guid[]> [-Force] [-BatchId <Guid>]
+  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Remove a Dataverse Table
+Remove row from an elastic table using DeleteMultiple
 
 ## EXAMPLES
 
+### Example 1
+
+```powershell
+$inputs | Remove-DataverseRows -Table 'ams_elastic' -Force
+```
+
 ## PARAMETERS
+
+### -BatchId
+{{ Fill BatchId Description }}
+
+```yaml
+Type: System.Guid
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Force
 Remove without confirm
@@ -39,18 +60,33 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Name
-Logicalname of the table to remove
+### -Id
+Id of the row to remove
 
 ```yaml
-Type: System.String
+Type: System.Guid[]
 Parameter Sets: (All)
-Aliases: LogicalName, TableName
+Aliases:
 
 Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -Table
+Logicalname of the table to remove the row from
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases: LogicalName
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
@@ -64,13 +100,14 @@ Aliases: cf
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -WhatIf
-Shows what would happen if the cmdlet runs. The cmdlet is not run.
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -79,7 +116,7 @@ Aliases: wi
 
 Required: False
 Position: Named
-Default value: False
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -90,13 +127,18 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String
+
+### System.Guid[]
+
 ## OUTPUTS
 
 ### System.Object
 ## NOTES
 
+DeleteMultiple is currently in preview and only works on Elastic tables
+
 ## RELATED LINKS
 
-[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Remove-DataverseTable.md)
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Remove-DataverseRows.md)
 
 

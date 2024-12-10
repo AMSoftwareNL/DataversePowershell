@@ -1,15 +1,14 @@
 Install-Module -Name 'platyPS' -Scope CurrentUser -Force
-
-Import-Module '.\src\AMSoftware.Dataverse.PowerShell\bin\debug\AMSoftware.Dataverse.PowerShell.psd1'
+Import-Module '.\src\AMSoftware.Dataverse.PowerShell\bin\debug\AMSoftware.Dataverse.PowerShell.psd1' -Scope Local -Force
 
 if (-not (Test-Path -Path '.\docs\')) {
     New-MarkdownHelp -Module 'AMSoftware.Dataverse.PowerShell' -WithModulePage -AlphabeticParamsOrder -UseFullTypeName -Force -ExcludeDontShow -OutputFolder '.\docs\'
 } 
-
 Update-MarkdownHelpModule '.\docs\' -RefreshModulePage -AlphabeticParamsOrder -UseFullTypeName -UpdateInputOutput -Force -ExcludeDontShow
 
-Copy-Item -Path '.\docs\AMSoftware.Dataverse.PowerShell.md' -Destination '.\docs\index.md' -Force
+Remove-Module 'AMSoftware.Dataverse.PowerShell'
 
+Copy-Item -Path '.\docs\AMSoftware.Dataverse.PowerShell.md' -Destination '.\docs\index.md' -Force
 # Remove common PowerShell Parameters
 Get-ChildItem -Path '.\docs\*.md' -Exclude 'about_*.md' | Foreach-Object {
     $content = Get-Content -Path $_ -Raw

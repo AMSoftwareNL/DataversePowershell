@@ -16,19 +16,18 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using AMSoftware.Dataverse.PowerShell.ArgumentCompleters;
-using AMSoftware.Dataverse.PowerShell.DynamicParameters;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Messages;
 using System;
+using System.Collections.Generic;
 using System.Management.Automation;
 
 namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 {
-    [Cmdlet(VerbsCommon.Add, "DataverseRelatedRow", DefaultParameterSetName = AddSingleRelatedRowParameterSet)]
+    [Cmdlet(VerbsCommon.Add, "DataverseRelatedRow")]
     public sealed class AddRelatedRowCommand : BatchCmdletBase
     {
-        private const string AddSingleRelatedRowParameterSet = "AddSingleRelatedRow";
-        private const string AddCollectionRelatedRowsParameterSet = "AddCollectionRelatedRows";
+        private readonly List<EntityReference> _relatedRows = [];
 
         [Parameter(Mandatory = true)]
         [ValidateNotNullOrEmpty]
@@ -39,20 +38,16 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [ValidateNotNullOrEmpty]
         public Guid TargetRow { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true, ParameterSetName = AddSingleRelatedRowParameterSet)]
+        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
         [Alias("LogicalName")]
         [ValidateNotNullOrEmpty]
         [ArgumentCompleter(typeof(TableNameArgumentCompleter))]
         public string RelatedTable { get; set; }
 
-        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true, ParameterSetName = AddSingleRelatedRowParameterSet)]
+        [Parameter(Mandatory = true, ValueFromPipelineByPropertyName = true)]
         [Alias("Id")]
         [ValidateNotNullOrEmpty]
         public Guid RelatedRow { get; set; }
-
-        [Parameter(Mandatory = true, ParameterSetName = AddCollectionRelatedRowsParameterSet)]
-        [ValidateNotNullOrEmpty]
-        public EntityReference[] Rows { get; set; }
 
         [Parameter(Mandatory = true)]
         [ValidateNotNullOrEmpty]
@@ -60,23 +55,15 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
 
         public override void Execute()
         {
-            EntityReferenceCollection relatedRows = new EntityReferenceCollection();
+            _relatedRows.Add(new EntityReference(RelatedTable, RelatedRow));
+        }
 
-            switch(ParameterSetName)
-            {
-                case AddSingleRelatedRowParameterSet:
-                    relatedRows.Add(new EntityReference(RelatedTable, RelatedRow));
-                    break;
-
-                case AddCollectionRelatedRowsParameterSet:
-                    relatedRows.AddRange(Rows);
-                    break;
-            } 
-
+        protected override void EndProcessing()
+        {
             var request = new AssociateRequest()
             {
                 Target = new EntityReference(TargetTable, TargetRow),
-                RelatedEntities = relatedRows,
+                RelatedEntities = new EntityReferenceCollection(_relatedRows),
                 Relationship = new Relationship(Relationship)
             };
 
@@ -86,8 +73,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
             }
             else
             {
-                var response = ExecuteOrganizationRequest<AssociateResponse>(request);
+                var _ = ExecuteOrganizationRequest<AssociateResponse>(request);
             }
+            base.EndProcessing();
         }
     }
 }

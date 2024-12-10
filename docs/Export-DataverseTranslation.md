@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Export-DataverseTranslation  <String> [-OutputPath] <String>
-  [<RequestParameters>] [<CommonParameters>]
+Export-DataverseTranslation [-SolutionName] <String> [-OutputPath] <String>
+  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -46,8 +46,20 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
+### -SolutionName
+{{ Fill SolutionName Description }}
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases: Name
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -61,4 +73,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Export-DataverseTranslation.md)
+
 

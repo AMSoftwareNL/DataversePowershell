@@ -29,7 +29,7 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
 
         [Parameter(Mandatory = false)]
         [PSDefaultValue(Value = 1)]
-        public DateTimeBehavior DateTimeBehavior { get; set; }
+        public DateTimeBehavior Behavior { get; set; }
 
         [Parameter(Mandatory = false)]
         [PSDefaultValue(Value = ImeMode.Auto)]
@@ -57,8 +57,8 @@ namespace AMSoftware.Dataverse.PowerShell.DynamicParameters
             if (context.MyInvocation.BoundParameters.ContainsKey(nameof(ImeMode)))
                 result.ImeMode = ImeMode;
 
-            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(DateTimeBehavior)))
-                result.DateTimeBehavior = DateTimeBehavior;
+            if (context.MyInvocation.BoundParameters.ContainsKey(nameof(Behavior)))
+                result.DateTimeBehavior = Behavior;
         }
     }
 }

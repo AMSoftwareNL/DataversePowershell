@@ -5,22 +5,14 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-DataverseSPDocumentLocation
+# Invoke-DataverseWorkflow
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
-### GetBySharePointDocumentLocation
 ```
-Get-DataverseSPDocumentLocation -DocumentLocation <Guid> 
- [<CommonParameters>]
-```
-
-### GetByRegardingObject
-```
-Get-DataverseSPDocumentLocation -RegardingObject <Guid> 
+Invoke-DataverseWorkflow [-Row] <Guid> [-Workflow] <Guid> 
  [<CommonParameters>]
 ```
 
@@ -30,7 +22,7 @@ Get-DataverseSPDocumentLocation -RegardingObject <Guid>
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -38,31 +30,31 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -DocumentLocation
-{{ Fill DocumentLocation Description }}
+### -Row
+{{ Fill Row Description }}
 
 ```yaml
 Type: System.Guid
-Parameter Sets: GetBySharePointDocumentLocation
-Aliases:
+Parameter Sets: (All)
+Aliases: Id
 
 Required: True
-Position: Named
+Position: 1
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
-### -RegardingObject
-{{ Fill RegardingObject Description }}
+### -Workflow
+{{ Fill Workflow Description }}
 
 ```yaml
 Type: System.Guid
-Parameter Sets: GetByRegardingObject
-Aliases:
+Parameter Sets: (All)
+Aliases: Process
 
 Required: True
-Position: Named
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -73,14 +65,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS
 
-[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseSPDocumentLocation.md)
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Invoke-DataverseWorkflow.md)
 
 

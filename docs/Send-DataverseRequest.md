@@ -8,36 +8,45 @@ schema: 2.0.0
 # Send-DataverseRequest
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Execute a request
 
 ## SYNTAX
 
 ### Message (Default)
 ```
-Send-DataverseRequest -Name <String> [-Parameters <Hashtable>] [-BatchId <Guid>] 
-    
-   [<RequestParameters>] [<CommonParameters>]
+Send-DataverseRequest -Name <String> [-Parameters <Hashtable>] [-BatchId <Guid>]
+  [<CommonParameters>]
 ```
 
 ### Function
 ```
 Send-DataverseRequest -Name <String> [-Parameters <Hashtable>] -TargetTable <String> -TargetRow <Guid>
- [-BatchId <Guid>]    
-   
- [<RequestParameters>] [<CommonParameters>]
+ [-BatchId <Guid>]  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Execute a request, such as an action, function, or custom API.
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
+### Example 1: Simple request
+
+```powershell
+Send-DataverseRequest -Name 'WhoAmI'
 ```
 
-{{ Add example description here }}
+### Example 2: Request with parameters
+
+```powershell
+Send-DataverseRequest -Name 'CopySystemForm' -Parameters @{SourceId=$randomform.Id}
+```
+
+### Example 3: Request bound to Target
+
+```powershell
+$row = Get-DataverseRows -Table 'account' -Top 1
+$row | Send-DataverseRequest -Name 'GenerateSharedLink' -Parameters @{SharedRights=[Microsoft.Crm.Sdk.Messages.AccessRights]::ReadAccess}
+```
 
 ## PARAMETERS
 
@@ -57,7 +66,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Name of the request to execute
 
 ```yaml
 Type: System.String
@@ -72,7 +81,7 @@ Accept wildcard characters: False
 ```
 
 ### -Parameters
-{{ Fill Parameters Description }}
+Input parameters to provide with the request
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -87,7 +96,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetRow
-{{ Fill TargetRow Description }}
+For bound actions the Id of the table row to invoke the action on
 
 ```yaml
 Type: System.Guid
@@ -102,7 +111,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetTable
-{{ Fill TargetTable Description }}
+For bound actions the logicalname of the table to invoke the action on
 
 ```yaml
 Type: System.String
@@ -115,9 +124,6 @@ Default value: None
 Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -132,4 +138,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Send-DataverseRequest.md)
+
 

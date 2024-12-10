@@ -30,12 +30,12 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         private const string GetChoiceByNameParameterSet = "GetChoiceByName";
         private const string GetChoiceByIdParameterSet = "GetChoiceById";
 
-        [Parameter(Mandatory = true, ParameterSetName = GetChoiceByIdParameterSet, ValueFromPipeline = true)]
+        [Parameter(Mandatory = true, ParameterSetName = GetChoiceByIdParameterSet, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
         [Alias("MetadataId")]
         [ValidateNotNull]
         public Guid Id { get; set; }
 
-        [Parameter(Mandatory = false, ParameterSetName = GetChoiceByNameParameterSet, ValueFromPipeline = true)]
+        [Parameter(Mandatory = false, ParameterSetName = GetChoiceByNameParameterSet)]
         [ValidateNotNullOrEmpty]
         [SupportsWildcards]
         [Alias("Include")]
@@ -88,8 +88,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
                         result = result.Where(o => !excludePattern.IsMatch(o.Name));
                     }
 
-                    if (Custom.IsPresent) result = result.Where(o => o.IsCustomOptionSet == true);
-                    if (Unmanaged.IsPresent) result = result.Where(o => o.IsManaged == false);
+                    if (Custom.IsPresent) result = result.Where(o => o.IsCustomOptionSet == Custom.ToBool());
+                    if (Unmanaged.IsPresent) result = result.Where(o => o.IsManaged == !Unmanaged.ToBool());
 
                     WriteObject(result.OrderBy(o => o.Name).ToList(), true);
 

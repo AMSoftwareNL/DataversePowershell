@@ -8,37 +8,26 @@ schema: 2.0.0
 # Add-DataverseRelatedRow
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Relate rows in a many-to-many relationship
 
 ## SYNTAX
 
-### AddSingleRelatedRow (Default)
 ```
 Add-DataverseRelatedRow -TargetTable <String> -TargetRow <Guid> -RelatedTable <String> -RelatedRow <Guid>
- -Relationship <String> [-BatchId <Guid>]   
-   
-  [<RequestParameters>] [<CommonParameters>]
-```
-
-### AddCollectionRelatedRows
-```
-Add-DataverseRelatedRow -TargetTable <String> -TargetRow <Guid> -Rows <EntityReference[]>
- -Relationship <String> [-BatchId <Guid>]   
-   
-  [<RequestParameters>] [<CommonParameters>]
+ -Relationship <String> [-BatchId <Guid>]  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Relate rows in a many-to-many relationship
 
 ## EXAMPLES
 
 ### Example 1
 ```
-PS C:\> {{ Add example code here }}
+PS C:\> Get-DataverseRows -Table 'contact' | Add-DataverseRelatedRow -TargetTable 'account' -TargetRow '6d7a8eda-4013-4705-813c-3a0ac8eb93ef' -Relationship 'ams_accounts_contacts'
 ```
 
-{{ Add example description here }}
+Use pipeline to add multiple rows at once to the target.
 
 ## PARAMETERS
 
@@ -58,11 +47,11 @@ Accept wildcard characters: False
 ```
 
 ### -RelatedRow
-{{ Fill RelatedRow Description }}
+The Id of the related row to add
 
 ```yaml
 Type: System.Guid
-Parameter Sets: AddSingleRelatedRow
+Parameter Sets: (All)
 Aliases: Id
 
 Required: True
@@ -73,11 +62,11 @@ Accept wildcard characters: False
 ```
 
 ### -RelatedTable
-{{ Fill RelatedTable Description }}
+The Table of the related row to add
 
 ```yaml
 Type: System.String
-Parameter Sets: AddSingleRelatedRow
+Parameter Sets: (All)
 Aliases: LogicalName
 
 Required: True
@@ -88,7 +77,7 @@ Accept wildcard characters: False
 ```
 
 ### -Relationship
-{{ Fill Relationship Description }}
+The schemaname of the many-to-many relationship that applies
 
 ```yaml
 Type: System.String
@@ -102,23 +91,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Rows
-{{ Fill Rows Description }}
-
-```yaml
-Type: Microsoft.Xrm.Sdk.EntityReference[]
-Parameter Sets: AddCollectionRelatedRows
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -TargetRow
-{{ Fill TargetRow Description }}
+The Id of the row to add the related rows to
 
 ```yaml
 Type: System.Guid
@@ -133,7 +107,7 @@ Accept wildcard characters: False
 ```
 
 ### -TargetTable
-{{ Fill TargetTable Description }}
+The Table of the row to add the related rows to
 
 ```yaml
 Type: System.String
@@ -146,9 +120,6 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
-
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
@@ -163,4 +134,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Add-DataverseRelatedRow.md)
+
 

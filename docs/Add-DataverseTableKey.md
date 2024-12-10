@@ -8,33 +8,29 @@ schema: 2.0.0
 # Add-DataverseTableKey
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Add a table key
 
 ## SYNTAX
 
 ```
 Add-DataverseTableKey -Table <String> -Name <String> -DisplayName <String> -Columns <String[]>
-    
-   
- [<RequestParameters>] [<CommonParameters>]
+  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Add a table key
 
 ## EXAMPLES
 
 ### Example 1
+```powershell
+PS C:\> Add-DataverseTableKey -Table 'account' -Name 'ams_accountnumber' -DisplayName 'Accountnumber' -Columns 'accountnumber'
 ```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Columns
-{{ Fill Columns Description }}
+The logicalnames of the column that build the key
 
 ```yaml
 Type: System.String[]
@@ -49,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -DisplayName
-{{ Fill DisplayName Description }}
+Displayname for the table key
 
 ```yaml
 Type: System.String
@@ -64,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Logicalname for the table key
 
 ```yaml
 Type: System.String
@@ -79,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+Logicalname of the table to add the key to
 
 ```yaml
 Type: System.String
@@ -93,9 +89,6 @@ Accept pipeline input: True (ByPropertyName)
 Accept wildcard characters: False
 ```
 
-### RequestParameters
-This cmdlet supports the request parameters: -Solution, -SharedTag, -Partition, -FailOnDuplicateDetection, -BypassSynchronousLogic, and -BypassPowerAutomateFlows. For more information, see about_DataverseRequestParameters.
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -108,4 +101,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Add-DataverseTableKey.md)
+
 

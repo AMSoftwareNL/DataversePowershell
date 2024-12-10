@@ -42,7 +42,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Content
         [Alias("LogicalName")]
         public string Table { get; set; }
 
-        [Parameter(Mandatory = true, ParameterSetName = AddValuesParameterSet)]
+        [Parameter(Mandatory = true, ParameterSetName = AddValuesParameterSet, ValueFromPipeline = true)]
         [ValidateNotNullOrEmpty]
         public Hashtable Values { get; set; }
 

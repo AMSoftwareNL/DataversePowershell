@@ -66,10 +66,8 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [Parameter(Mandatory = false, ParameterSetName = SetColumnByParametersParameterset)]
         public SwitchParameter Auditing { get; set; }
 
-        [Parameter(Mandatory = false)]
-        public SwitchParameter MergeLabels { get; set; }
-
         private ColumnTypeParametersBase _dynamicContext = null;
+
         public object GetDynamicParameters()
         {
             if (ParameterSetName == SetColumnByParametersParameterset)
@@ -115,9 +113,9 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             {
                 EntityName = Table,
                 Attribute = attributeMetadata,
-                MergeLabels = MergeLabels.ToBool()
+                MergeLabels = true
             };
-            var updateResponse = ExecuteOrganizationRequest<UpdateAttributeResponse>(updateRequest);
+            var _ = ExecuteOrganizationRequest<UpdateAttributeResponse>(updateRequest);
 
             var getMetadataRequest = new RetrieveAttributeRequest()
             {

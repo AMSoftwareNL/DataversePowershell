@@ -8,7 +8,7 @@ schema: 2.0.0
 # Request-DataverseBatch
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Create a new batch to add requests to
 
 ## SYNTAX
 
@@ -18,21 +18,15 @@ Request-DataverseBatch [-Name <String>] [-ReturnResults] [-ContinueOnError]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Create a new batch to add requests to
 
 ## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -ContinueOnError
-{{ Fill ContinueOnError Description }}
+When submitting and executing the batch it will continue with the next request on error. 
+If not provided the batch will stop and return on the first error.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -47,7 +41,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Name of the batch for logging purposes
 
 ```yaml
 Type: System.String
@@ -62,7 +56,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReturnResults
-{{ Fill ReturnResults Description }}
+When submitting and executing return results of the requests in the batch.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -88,4 +82,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Request-DataverseBatch.md)
+
 

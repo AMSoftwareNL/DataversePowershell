@@ -50,9 +50,6 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
         [ValidateNotNullOrEmpty]
         public string ExternalName { get; set; }
 
-        [Parameter(Mandatory = false)]
-        public SwitchParameter MergeLabels { get; set; }
-
         public override void Execute()
         {
             OptionSetMetadata choiceMetadata = null;
@@ -70,7 +67,7 @@ namespace AMSoftware.Dataverse.PowerShell.Commands.Metadata
             var updateRequest = new UpdateOptionSetRequest()
             {
                 OptionSet = choiceMetadata,
-                MergeLabels = MergeLabels.ToBool()
+                MergeLabels = true
             };
 
             var updateResponse = ExecuteOrganizationRequest<UpdateOptionSetResponse>(updateRequest);
