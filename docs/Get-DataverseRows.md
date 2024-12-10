@@ -46,7 +46,7 @@ Paging is applied in case of queries. In case of Ids batching is used to improve
 ### Example 1: Retrieve With FetchXml
 
 ```powershell
-[xml]$fetchxml = 
+PS C:\> [xml]$fetchxml = 
 @"
 <fetch>
   <entity name='account'>
@@ -55,27 +55,27 @@ Paging is applied in case of queries. In case of Ids batching is used to improve
 </fetch>
 "@
 
-Get-DataverseRows -FetchXML $fetchxml -Top 50
+PS C:\> Get-DataverseRows -FetchXML $fetchxml -Top 50
 ```
 
 ### Example 2: Retrieve With Attribute Query
 
 ```powershell
-Get-DataverseRows -Table 'account' -Columns 'name' -Sort @{name=[Microsoft.Xrm.Sdk.Query.OrderType]::Ascending} -Query @{name='Account 1'}
+PS C:\> Get-DataverseRows -Table 'account' -Columns 'name' -Sort @{name=[Microsoft.Xrm.Sdk.Query.OrderType]::Ascending} -Query @{name='Account 1'}
 ```
 
 ### Example 3: Retrieve from table
 
 ```powershell
-Get-DataverseRows -Table 'account' -Columns 'name' -Sort @{name=[Microsoft.Xrm.Sdk.Query.OrderType]::Ascending} -Top 50
+PS C:\> Get-DataverseRows -Table 'account' -Columns 'name' -Sort @{name=[Microsoft.Xrm.Sdk.Query.OrderType]::Ascending} -Top 50
 ```
 
 ### Example 4: Retrieve batched
 
 ```powershell
-$ids = Get-DataverseRows -Table 'contact' -Columns 'parentcustomerid' | Select-Object -ExpandProperty 'parentcustomerid' -Unique
+PS C:\> $ids = Get-DataverseRows -Table 'contact' -Columns 'parentcustomerid' | Select-Object -ExpandProperty 'parentcustomerid' -Unique
 
-$ids | Get-DataverseRows -Table 'account' | Format-List
+PS C:\> $ids | Get-DataverseRows -Table 'account' | Format-List
 ```
 
 ## PARAMETERS
@@ -201,6 +201,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online Versions](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseRows.md)
+
+
 
 
 

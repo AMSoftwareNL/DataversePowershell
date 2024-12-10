@@ -26,6 +26,18 @@ Get-DataverseChoice -Id <Guid>  [<CommonParameters>]
 ## DESCRIPTION
 Retrieve the metadata of global choices (OptionSet)
 
+## EXAMPLES
+
+### Example 1
+```powershell
+PS C:\> Get-DataverseChoice -Id '7a8adb0f-67fc-4e32-b7c2-76a57e6b7a97'
+```
+
+### Example 2
+```powershell
+PS C:\> Get-DataverseChoice -Name '*' -Exclude 'a*'
+```
+
 ## PARAMETERS
 
 ### -Custom
@@ -69,7 +81,7 @@ Aliases: MetadataId
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
@@ -84,7 +96,7 @@ Aliases: Include
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: True
 ```
 
@@ -118,3 +130,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseChoice.md)
+
+

@@ -13,11 +13,14 @@ Submit and execute a batch of requests
 ## SYNTAX
 
 ```
-Submit-DataverseBatch -BatchId <Guid>  [<CommonParameters>]
+Submit-DataverseBatch -BatchId <Guid> [-Transactional] 
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Submit and execute a batch of requests
+
+## EXAMPLES
 
 ## PARAMETERS
 
@@ -30,6 +33,21 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Transactional
+{{ Fill Transactional Description }}
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -50,3 +68,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Submit-DataverseBatch.md)
+
+

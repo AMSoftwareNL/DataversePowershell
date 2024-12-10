@@ -12,8 +12,15 @@ Add new rows to a table
 
 ## SYNTAX
 
+### AddObject (Default)
 ```
 Add-DataverseRows -InputObject <Entity[]> [-Upsert] [-BatchId <Guid>] 
+ [<CommonParameters>]
+```
+
+### AddValues
+```
+Add-DataverseRows -Table <String> -Values <Hashtable> [-BatchId <Guid>] 
  [<CommonParameters>]
 ```
 
@@ -25,7 +32,7 @@ Add new rows to a table using CreateMultiple or UpsertMultiple
 ### Example 1: Add rows from InputObject
 
 ```powershell
-1..500 | ForEach-Object { 
+PS C:\> 1..500 | ForEach-Object { 
     $row = [dvrow]::new('account'); 
     $row.name = "Multiple Account $_"; 
     $row 
@@ -35,7 +42,7 @@ Add new rows to a table using CreateMultiple or UpsertMultiple
 ### Example 2: Add rows from Values
 
 ```powershell
-1..500 | ForEach-Object { 
+PS C:\> 1..500 | ForEach-Object { 
     $row = @{ name = "Multiple Account $_" }; 
     $row 
 } | Add-DataverseRows -Table 'account'
@@ -63,7 +70,7 @@ Entity instance containing the row to add. When Upsert make sure the instance co
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.Entity[]
-Parameter Sets: (All)
+Parameter Sets: AddObject
 Aliases: Rows, Entities
 
 Required: True
@@ -73,18 +80,48 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -Table
+Logical name of the table to add the rows to
+
+```yaml
+Type: System.String
+Parameter Sets: AddValues
+Aliases: LogicalName
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Upsert
 Try UpsertMultiple instead of CreateMultiple.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
+Parameter Sets: AddObject
 Aliases:
 
 Required: False
 Position: Named
 Default value: False
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Values
+Column Logical Names and Values (as hashtable) to use for the new rows.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: AddValues
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -102,3 +139,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Add-DataverseRows.md)
+
+

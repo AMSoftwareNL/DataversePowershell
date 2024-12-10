@@ -14,25 +14,27 @@ Update a relationship
 
 ### SetManyToOneRelationship (Default)
 ```
-Set-DataverseRelationship -Relationship <String> [-MenuConfiguration <AssociatedMenuConfiguration>]
- [-Behavior <CascadeConfiguration>] [-MergeLabels]  [<CommonParameters>]
+Set-DataverseRelationship -Name <String> [-MenuConfiguration <AssociatedMenuConfiguration>]
+ [-Behavior <CascadeConfiguration>]  [<CommonParameters>]
 ```
 
 ### SetRelationshipByInputObject
 ```
-Set-DataverseRelationship -InputObject <RelationshipMetadataBase> [-MergeLabels]
-  [<CommonParameters>]
+Set-DataverseRelationship -InputObject <RelationshipMetadataBase> 
+ [<CommonParameters>]
 ```
 
 ### SetManyToManyRelationship
 ```
-Set-DataverseRelationship -Relationship <String> [-MenuConfiguration <AssociatedMenuConfiguration>]
- [-RelatedMenuConfiguration <AssociatedMenuConfiguration>] [-MergeLabels] 
+Set-DataverseRelationship -Name <String> [-MenuConfiguration <AssociatedMenuConfiguration>]
+ [-RelatedMenuConfiguration <AssociatedMenuConfiguration>] 
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Update a relationship
+
+## EXAMPLES
 
 ## PARAMETERS
 
@@ -81,15 +83,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MergeLabels
-Keep other language labels for DisplayName and Description
+### -Name
+{{ Fill Name Description }}
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
+Type: System.String
+Parameter Sets: SetManyToOneRelationship, SetManyToManyRelationship
+Aliases: SchemaName, Relationship
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -105,21 +107,6 @@ Parameter Sets: SetManyToManyRelationship
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Relationship
-Schemaname of the relationship to update
-
-```yaml
-Type: System.String
-Parameter Sets: SetManyToOneRelationship, SetManyToManyRelationship
-Aliases: SchemaName, Name
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -142,3 +129,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Set-DataverseRelationship.md)
+
+

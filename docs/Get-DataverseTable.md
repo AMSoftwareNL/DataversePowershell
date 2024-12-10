@@ -31,6 +31,33 @@ Get-DataverseTable -TypeCode <Int32>  [<CommonParameters>]
 ## DESCRIPTION
 Retrieve table metadata
 
+## EXAMPLES
+
+### Example 1
+```powershell
+PS C:\> Get-DataverseTable -Name 'account'
+```
+
+### Example 2
+```powershell
+PS C:\> $accountTable.MetadataId | Get-DataverseTable 
+```
+
+### Example 3
+```powershell
+PS C:\> Get-DataverseTable -TypeCode 1
+```
+
+### Example 4
+```powershell
+PS C:\> Get-DataverseTable -Name 'account' -Exclude 'contact' -Type Standard 
+```
+
+### Example 5
+```powershell
+PS C:\> Get-DataverseTable -Intersects
+```
+
 ## PARAMETERS
 
 ### -Custom
@@ -74,7 +101,7 @@ Aliases: MetadataId
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
@@ -168,3 +195,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseTable.md)
+
+

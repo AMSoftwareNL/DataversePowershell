@@ -32,26 +32,24 @@ Add a new row to a table using Create or Upsert message.
 ### Example 1: Add row with values
 
 ```powershell
-$values = @{
-  'name' = 'Test Account'
-}
+PS C:\> $values = @{ 'name' = 'Test Account' }
 
-Add-DataverseRow -Table 'account' -Values $values
+PS C:\> Add-DataverseRow -Table 'account' -Values $values
 ```
 
 ### Example 2: Add row with InputObject
 
 ```powershell
-$inputobject = [dvrow]::new('account')
-$inputobject.name = 'Test Account'
+PS C:\> $inputobject = [dvrow]::new('account')
+PS C:\> $inputobject.name = 'Test Account'
 
-$inputobject | Add-DataverseRow
+PS C:\> $inputobject | Add-DataverseRow
 ```
 
 ### Example 3: Upsert row with InputObject
 
 ```powershell
-Add-DataverseRow -Table 'account' -Id $rowid -Values @{ name = 'Account (Updated)' }
+PS C:\> Add-DataverseRow -Table 'account' -Id $rowid -Values @{ name = 'Account (Updated)' }
 ```
 
 ## PARAMETERS
@@ -142,7 +140,7 @@ Aliases:
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -160,3 +158,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Add-DataverseRow.md)
+
+

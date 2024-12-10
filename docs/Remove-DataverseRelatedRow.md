@@ -12,16 +12,8 @@ Remove relationship between rows.
 
 ## SYNTAX
 
-### RemoveSingleRelatedRow (Default)
 ```
 Remove-DataverseRelatedRow -TargetTable <String> -TargetRow <Guid> -RelatedTable <String> -RelatedRow <Guid>
- -Relationship <String> [-Force] [-BatchId <Guid>]  [-WhatIf] [-Confirm]
- [<CommonParameters>]
-```
-
-### RemoveCollectionRelatedRows
-```
-Remove-DataverseRelatedRow -TargetTable <String> -TargetRow <Guid> -Rows <EntityReference[]>
  -Relationship <String> [-Force] [-BatchId <Guid>]  [-WhatIf] [-Confirm]
  [<CommonParameters>]
 ```
@@ -75,7 +67,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Guid
-Parameter Sets: RemoveSingleRelatedRow
+Parameter Sets: (All)
 Aliases: Id
 
 Required: True
@@ -90,7 +82,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: RemoveSingleRelatedRow
+Parameter Sets: (All)
 Aliases: LogicalName
 
 Required: True
@@ -106,21 +98,6 @@ Accept wildcard characters: False
 ```yaml
 Type: System.String
 Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Rows
-{{ Fill Rows Description }}
-
-```yaml
-Type: Microsoft.Xrm.Sdk.EntityReference[]
-Parameter Sets: RemoveCollectionRelatedRows
 Aliases:
 
 Required: True
@@ -205,3 +182,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Remove-DataverseRelatedRow.md)
+
+

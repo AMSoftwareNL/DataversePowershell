@@ -20,6 +20,13 @@ Add-DataverseTableKey -Table <String> -Name <String> -DisplayName <String> -Colu
 ## DESCRIPTION
 Add a table key
 
+## EXAMPLES
+
+### Example 1
+```powershell
+PS C:\> Add-DataverseTableKey -Table 'account' -Name 'ams_accountnumber' -DisplayName 'Accountnumber' -Columns 'accountnumber'
+```
+
 ## PARAMETERS
 
 ### -Columns
@@ -96,3 +103,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Add-DataverseTableKey.md)
+
+

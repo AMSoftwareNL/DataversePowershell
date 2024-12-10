@@ -32,6 +32,23 @@ Get-DataverseRelationship -Name <String>  [<CommonParameters>]
 ## DESCRIPTION
 Retrieve Relationship Metadata
 
+## EXAMPLES
+
+### Example 1
+```powershell
+PS C:\>  Get-DataverseRelationship -Table 'account'
+```
+
+### Example 2
+```powershell
+PS C:\> Get-DataverseRelationship -Name 'ams_account_contact'
+```
+
+### Example 3
+```powershell
+PS C:\>  Get-DataverseRelationship -Table 'account' -RelatedTable 'contact'
+```
+
 ## PARAMETERS
 
 ### -Custom
@@ -75,7 +92,7 @@ Aliases: MetadataId
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
@@ -105,7 +122,7 @@ Aliases: SchemaName
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -185,3 +202,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseRelationship.md)
+
+

@@ -32,13 +32,13 @@ Retrieve a single Dataverse Row
 ### Example 1
 
 ```powershell
-$ids | Get-DataverseRow -Table 'account' -Columns 'name'
+PS C:\> $ids | Get-DataverseRow -Table 'account' -Columns 'name'
 ```
 
 ### Example 2
 
 ```powershell
-Get-DataverseRows -Table 'account' -Id $rowid -Columns 'name'
+PS C:\> Get-DataverseRows -Table 'account' -Id $rowid -Columns 'name'
 ```
 
 ## PARAMETERS
@@ -119,3 +119,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseRow.md)
+
+

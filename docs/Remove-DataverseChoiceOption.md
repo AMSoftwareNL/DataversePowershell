@@ -14,7 +14,7 @@ Remove an option from a global choice or choice column
 
 ### RemoveGlobalChoiceOption (Default)
 ```
-Remove-DataverseChoiceOption -OptionSet <String> -Value <Int32> [-Force] 
+Remove-DataverseChoiceOption -Name <String> -Value <Int32> [-Force] 
  [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
@@ -26,6 +26,8 @@ Remove-DataverseChoiceOption -Table <String> -Column <String> -Value <Int32> [-F
 
 ## DESCRIPTION
 Remove an option from a global choice or choice column
+
+## EXAMPLES
 
 ## PARAMETERS
 
@@ -59,13 +61,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OptionSet
-Logicalname of the choice to remove the option from
+### -Name
+{{ Fill Name Description }}
 
 ```yaml
 Type: System.String
 Parameter Sets: RemoveGlobalChoiceOption
-Aliases: Name, OptionSetLogicalName
+Aliases: OptionSet, OptionSetLogicalName
 
 Required: True
 Position: Named
@@ -148,3 +150,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Remove-DataverseChoiceOption.md)
+
+

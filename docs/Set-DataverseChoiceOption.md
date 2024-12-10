@@ -14,36 +14,22 @@ Add or Update an option in a choice
 
 ### SetGlobalChoiceOption (Default)
 ```
-Set-DataverseChoiceOption -OptionSet <String> [-Value <Int32>] [-Label <String>] [-Description <String>]
- [-ExternalValue <String>] [-Color <String>]  [<CommonParameters>]
+Set-DataverseChoiceOption -Name <String> -Value <Int32> [-Label <String>] [-Description <String>]
+  [<CommonParameters>]
 ```
 
 ### SetAttributeChoiceOption
 ```
-Set-DataverseChoiceOption -Table <String> -Column <String> [-Value <Int32>] [-Label <String>]
- [-Description <String>] [-ExternalValue <String>] [-Color <String>] 
- [<CommonParameters>]
+Set-DataverseChoiceOption -Table <String> -Column <String> -Value <Int32> [-Label <String>]
+ [-Description <String>]  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Update an option in a global or column choice
 
+## EXAMPLES
+
 ## PARAMETERS
-
-### -Color
-The new color for the choice option
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Column
 The logicalname of the choice column to update
@@ -75,21 +61,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ExternalValue
-The new external value for the choice option
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Label
 The new label for the choice option
 
@@ -105,13 +76,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -OptionSet
-The logicalname of the global choice to update
+### -Name
+{{ Fill Name Description }}
 
 ```yaml
 Type: System.String
 Parameter Sets: SetGlobalChoiceOption
-Aliases: Name, OptionSetLogicalName
+Aliases: OptionSet, OptionSetLogicalName
 
 Required: True
 Position: Named
@@ -143,7 +114,7 @@ Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -164,3 +135,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Set-DataverseChoiceOption.md)
+
+

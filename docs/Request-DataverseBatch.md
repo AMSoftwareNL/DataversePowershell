@@ -20,6 +20,8 @@ Request-DataverseBatch [-Name <String>] [-ReturnResults] [-ContinueOnError]
 ## DESCRIPTION
 Create a new batch to add requests to
 
+## EXAMPLES
+
 ## PARAMETERS
 
 ### -ContinueOnError
@@ -82,3 +84,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Request-DataverseBatch.md)
+
+

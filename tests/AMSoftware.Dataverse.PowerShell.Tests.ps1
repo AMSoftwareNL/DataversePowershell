@@ -59,6 +59,10 @@ Describe "AMSoftware.Dataverse.PowerShell" {
 			Import-Module -Name $ManifestPath -Scope Local -Force
 		}
 
+		AfterAll {
+			Remove-Module 'AMSoftware.Dataverse.PowerShell'
+		}
+
 		It 'Cmdlet <_> has external Help' -ForEach $commands {
 			Get-Command -Name $_ | Select-Object -ExpandProperty 'HelpFile' | Should -BeLike 'AMSoftware.Dataverse.PowerShell.*-Help.xml'
 		}
@@ -69,10 +73,6 @@ Describe "AMSoftware.Dataverse.PowerShell" {
 
 			$link | Should -Not -BeNullOrEmpty
 			$link | Should -Be "https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/$_.md"
-		}
-
-		It 'Function <_> has external Help' -ForEach $functions {
-			Get-Command -Name $_ | Select-Object -ExpandProperty 'HelpFile' | Should -BeLike 'AMSoftware.Dataverse.PowerShell.*-Help.xml'
 		}
 
 		It 'Function <_> has online Help' -ForEach $functions {

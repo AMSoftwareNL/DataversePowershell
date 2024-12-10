@@ -20,6 +20,8 @@ Remove-DataverseChoice -Name <String> [-Force]  [-WhatIf] [-Confirm]
 ## DESCRIPTION
 Remove global choice
 
+## EXAMPLES
+
 ## PARAMETERS
 
 ### -Force
@@ -96,3 +98,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Remove-DataverseChoice.md)
+
+

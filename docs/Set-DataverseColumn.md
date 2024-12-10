@@ -14,20 +14,21 @@ Update a column
 
 ### SetColumnByInputObject
 ```
-Set-DataverseColumn -Table <String> -InputObject <AttributeMetadata> [-MergeLabels]
-  [<CommonParameters>]
+Set-DataverseColumn -Table <String> -InputObject <AttributeMetadata> 
+ [<CommonParameters>]
 ```
 
 ### SetColumnByParameters
 ```
 Set-DataverseColumn -Table <String> -Name <String> [-DisplayName <String>] [-Description <String>]
- [-ExternalName <String>] [-Searchable] [-Auditing] [-MergeLabels] 
- [<CommonParameters>]
+ [-ExternalName <String>] [-Searchable] [-Auditing]  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Update a column.
 Additional dynamic parameters are available depending on the type of column. These come available when Table and Name are provided.
+
+## EXAMPLES
 
 ## PARAMETERS
 
@@ -106,21 +107,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -MergeLabels
-Keep other language labels for DisplayName and Description
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
 Logicalname of the column to update
 
@@ -180,3 +166,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Set-DataverseColumn.md)
+
+

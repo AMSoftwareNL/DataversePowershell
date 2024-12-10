@@ -53,6 +53,33 @@ Add-DataverseTable -Name <String> -DisplayName <String> -PluralName <String> [-D
 ## DESCRIPTION
 Add a new Table to Dataverse, including the primary name column
 
+## EXAMPLES
+
+### EXAMPLE 1
+```powershell
+PS C:\> Add-DataverseTable -Name 'ams_testtable' -DisplayName 'Test Table' -PluralName 'Test Tables' -Description 'Test Table Description' -OwnershipType Organization -HasAttachments -IsActivityParty -TrackChanges -ColumnName 'ams_name' -ColumnDisplayName 'Name' -ColumnDescription 'Name Description' -ColumnLength 104 -ColumnRequired Recommended
+```
+
+### EXAMPLE 2
+```powershell
+PS C:\>  Add-DataverseTable -Name 'ams_testdefault' -DisplayName 'Test Table' -PluralName 'Test Tables' -ColumnName 'ams_name' -ColumnDisplayName 'Name'
+```
+
+### EXAMPLE 3
+```powershell
+PS C:\> Add-DataverseTable -Activity -Name 'ams_testactivity' -DisplayName 'Test Activity' -PluralName 'Test Activities' -Description 'Test Activity Description' -TrackChanges -HideFromMenu
+```
+
+### EXAMPLE 4
+```powershell
+PS C:\> Add-DataverseTable -Elastic -Name 'ams_testelastic' -DisplayName 'Test Elastic' -PluralName 'Test Elastics' -Description 'Test Elastic Description' -OwnershipType User -TrackChanges -ColumnName 'ams_name' -ColumnDisplayName 'Name' -ColumnDescription 'Name Description' -ColumnLength 104 -ColumnRequired Recommended
+```
+
+### EXAMPLE 5
+```powershell
+PS C:\> Add-DataverseTable -Virtual -Name 'ams_testvirtual' -DisplayName 'Test Virtual' -PluralName 'Test Virtuals' -Description 'Test Virtual Description' -HasAttachments -IsActivityParty -ColumnName 'ams_name' -ColumnDisplayName 'Name' -ColumnDescription 'Name Description' -ColumnLength 104 -ColumnRequired Recommended -ExternalName 'testvirtual' -ExternalPluralName 'testvirtuals' -ColumnExternalName 'name'
+```
+
 ## PARAMETERS
 
 ### -Activity
@@ -431,3 +458,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Add-DataverseTable.md)
+
+

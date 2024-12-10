@@ -26,6 +26,18 @@ Get-DataverseColumn -Id <Guid>  [<CommonParameters>]
 ## DESCRIPTION
 Retrieve table column metadata
 
+## EXAMPLES
+
+### Example 1
+```powershell
+PS C:/> Get-DataverseColumn -Table 'account' -Name 'accountnumber'
+```
+
+### Example 2
+```powershell
+PS C:/>  Get-DataverseColumn -Table 'account' -Type Lookup
+```
+
 ## PARAMETERS
 
 ### -Exclude
@@ -54,7 +66,7 @@ Aliases: MetadataId
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByValue)
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
@@ -84,7 +96,7 @@ Aliases: LogicalName
 Required: True
 Position: Named
 Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -134,3 +146,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseColumn.md)
+
+

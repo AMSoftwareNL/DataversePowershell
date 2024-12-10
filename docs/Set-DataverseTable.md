@@ -14,20 +14,20 @@ Update a table
 
 ### SetTableObject
 ```
-Set-DataverseTable -InputObject <EntityMetadata> [-MergeLabels] 
- [<CommonParameters>]
+Set-DataverseTable -InputObject <EntityMetadata>  [<CommonParameters>]
 ```
 
 ### SetTable
 ```
 Set-DataverseTable -Name <String> [-DisplayName <String>] [-PluralName <String>] [-Description <String>]
  [-ExternalName <String>] [-ExternalPluralName <String>] [-HasAttachments] [-IsActivityParty] [-TrackChanges]
- [-DataProviderId <Guid>] [-DataSourceId <Guid>] [-MergeLabels] 
- [<CommonParameters>]
+ [-DataProviderId <Guid>] [-DataSourceId <Guid>]  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Update a table
+
+## EXAMPLES
 
 ## PARAMETERS
 
@@ -166,21 +166,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MergeLabels
-Keep other language labels for DisplayName and Description
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
 The logicalname of the table to update
 
@@ -240,3 +225,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Set-DataverseTable.md)
+
+

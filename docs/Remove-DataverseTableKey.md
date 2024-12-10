@@ -20,6 +20,8 @@ Remove-DataverseTableKey -Table <String> -Name <String> [-Force]  [-WhatIf]
 ## DESCRIPTION
 Remove key from Table
 
+## EXAMPLES
+
 ## PARAMETERS
 
 ### -Force
@@ -111,3 +113,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Remove-DataverseTableKey.md)
+
+

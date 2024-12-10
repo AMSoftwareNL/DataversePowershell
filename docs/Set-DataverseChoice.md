@@ -14,18 +14,19 @@ Update a global choice
 
 ### SetChoiceObject (Default)
 ```
-Set-DataverseChoice -InputObject <OptionSetMetadata> [-MergeLabels] 
- [<CommonParameters>]
+Set-DataverseChoice -InputObject <OptionSetMetadata>  [<CommonParameters>]
 ```
 
 ### SetChoice
 ```
 Set-DataverseChoice -Name <String> [-DisplayName <String>] [-Description <String>] [-ExternalName <String>]
- [-MergeLabels]  [<CommonParameters>]
+  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Update a global choice
+
+## EXAMPLES
 
 ## PARAMETERS
 
@@ -89,21 +90,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MergeLabels
-Keep other language labels for DisplayName and Description
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
 Logicalname of the choice to update
 
@@ -133,3 +119,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Set-DataverseChoice.md)
+
+

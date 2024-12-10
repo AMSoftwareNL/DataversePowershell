@@ -19,6 +19,13 @@ Get-DataverseLanguage [-All]  [<CommonParameters>]
 ## DESCRIPTION
 Retrieve languages for Dataverse. Provision or all available.
 
+## EXAMPLES
+
+### Example 1
+```powershell
+PS C:\> Get-DataverseLanguage -All
+```
+
 ## PARAMETERS
 
 ### -All
@@ -50,3 +57,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseLanguage.md)
+
+
