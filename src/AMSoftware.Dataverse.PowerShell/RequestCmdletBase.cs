@@ -17,6 +17,9 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 using Microsoft.Xrm.Sdk;
 using System.Management.Automation;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Xml;
 
 namespace AMSoftware.Dataverse.PowerShell
 {
@@ -49,16 +52,35 @@ namespace AMSoftware.Dataverse.PowerShell
         protected virtual TResponse ExecuteOrganizationRequest<TResponse>(OrganizationRequest request) where TResponse : OrganizationResponse
         {
             UseOptionalParameters(request);
+            LogForDebug(request);
 
             var response = (TResponse)Session.Current.Client.ExecuteOrganizationRequest(
                     request, MyInvocation.MyCommand.Name);
 
-            if (response == null)
+            if (response == null && Session.Current.Client.LastException != null)
             {
                 throw Session.Current.Client.LastException;
             }
 
+            LogForDebug(response);
+
             return response;
+        }
+
+        private void LogForDebug<T>(T graph)
+        {
+            var serializer = new DataContractSerializer(typeof(T));
+            var debugStringBuilder = new StringBuilder();
+
+            using (var xmlWriter = XmlWriter.Create(debugStringBuilder, new XmlWriterSettings()
+            {
+                Indent = true
+            })) {
+                serializer.WriteObject(xmlWriter, graph);
+            }
+
+            WriteDebugWithTimestamp(graph.GetType().Name);
+            WriteDebug(debugStringBuilder.ToString());
         }
 
         private void UseOptionalParameters(OrganizationRequest request)
