@@ -68,7 +68,7 @@ function Export-DataverseWebResource {
     }
 
     process { 
-        $resource = Get-DataverseRow -Table 'webresource' -Id $Id -Columns 'name', 'content', 'contentfileref', 'contentfileref_Name'
+        $resource = Get-DataverseRow -Table 'webresource' -Id $Id -Columns 'name', 'content', 'contentfileref'
 
         # Only keep filename part of the webresource path
         $resourceFilename = $resource.Name
@@ -78,14 +78,13 @@ function Export-DataverseWebResource {
 
         if (-not [string]::IsNullOrWhiteSpace($resource.content)) {
             # Content is in the table
-            Set-Content -LiteralPath $resourceFilepath -Value [System.Convert]::FromBase64String($resource.content) -Force        
+            Set-Content -LiteralPath $resourceFilepath -Value ([System.Convert]::FromBase64String($resource.content)) -AsByteStream -Force
         }
         else {
             # Content is a fileattachment
             Export-DataverseFile -Table 'webresource' -Row $Id -Column 'contentfileref' | `
                 Set-Content -LiteralPath $resourceFilepath -Force
         }
-
         Get-Item -LiteralPath $resourceFilepath
     }
 }
@@ -112,9 +111,8 @@ function Export-DataversePluginAssembly {
 
         if (-not [string]::IsNullOrWhiteSpace($assembly.content)) {
             # Content is in the table
-            Set-Content -LiteralPath $assemblyFilepath -Value [System.Convert]::FromBase64String($assembly.content) -Force        
-
-            Get-Item -LiteralPath $resourceFilepath
+            Set-Content -LiteralPath $assemblyFilepath -Value ([System.Convert]::FromBase64String($assembly.content)) -AsByteStream -Force        
+            Get-Item -LiteralPath $assemblyFilepath
         }
     }
 }
@@ -137,8 +135,13 @@ function Export-DataverseTranslation {
     process {
         $solution = Get-DataverseRows -Table 'solution' -Query @{uniquename = $SolutionName } -Top 1
 
+        $folderPath = Resolve-Path $OutputPath
+        $filePath = Join-Path -Path $folderPath -ChildPath "$($solution.uniquename)_translation.zip"
+
         $result = Send-DataverseRequest -Name 'ExportTranslation' -Parameters @{'SolutionName' = $solution.uniquename }
-        New-Item -Path $OutputPath -Name "$($solution.uniquename)_translation.zip" -ItemType File -Value $result.ExportTranslationFile
+        
+        Set-Content -LiteralPath $filePath -Value $result.ExportTranslationFile -AsByteStream -Force
+        Get-Item -LiteralPath $filePath
     }
 }
 
@@ -200,6 +203,9 @@ function Export-DataverseSolution {
             $filename = "$($solution.uniquename)_$($solution.version.Replace('.','_')).zip"
         }
 
+        $folderPath = Resolve-Path $OutputPath
+        $filePath = Join-Path -Path $folderPath -ChildPath $filename
+
         $asyncResponse = Send-DataverseRequest -Name 'ExportSolutionAsync' -Parameters @{
             SolutionName = $SolutionName;
             Managed      = $AsManaged.ToBool();
@@ -214,7 +220,8 @@ function Export-DataverseSolution {
                 ExportJobId = $asyncResponse.ExportJobId
             }
     
-            New-Item -Path $OutputPath -Name $filename -ItemType File -Value $result.ExportSolutionFile -Force
+            Set-Content -LiteralPath $filePath -Value $result.ExportSolutionFile -AsByteStream -Force
+            Get-Item -LiteralPath $filePath
         }
         else {
             Write-Error -Message $asyncOperation.message

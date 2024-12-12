@@ -30,20 +30,21 @@ function Export-DataverseFile {
     
         [long]$offset = 0
         [long]$blockSizeDownload = 4 * 1024 * 1024
+        [long]$fileSizeInBytes = $initDownloadResponse.FileSizeInBytes
 
         # If chunking is not supported, chunk size will be full size of the file.
         if (-not $initDownloadResponse.IsChunkingSupported) {
-            $blockSizeDownload = $initDownloadResponse.FileSizeInBytes
+            $blockSizeDownload = $fileSizeInBytes
         }
 
         # File size may be smaller than defined block size
         if ($initDownloadResponse.FileSizeInBytes -lt $blockSizeDownload) {
-            $blockSizeDownload = $initDownloadResponse.FileSizeInBytes
+            $blockSizeDownload = $fileSizeInBytes
         }
 
         # Download Chunk until $initDownloadResponse.FileSizeInBytes is reached
-        $remaining = $initDownloadResponse.FileSizeInBytes
-        $filebytes = New-Object -TypeName byte[] -Args $initDownloadResponse.FileSizeInByte
+        $remaining = $fileSizeInBytes
+        $filebytes = New-Object -TypeName byte[] -Args $fileSizeInBytes
 
         while ($remaining -gt 0) {
             $downloadResponse = Send-DataverseRequest -Name 'DownloadBlock' -Parameters @{
@@ -55,8 +56,8 @@ function Export-DataverseFile {
             Write-Progress `
                 -Id 2321484 `
                 -Activity $MyInvocation.MyCommand.Name `
-                -Status "$($initDownloadResponse.FileSizeInByte - $remaining) of $($initDownloadResponse.FileSizeInByte)" `
-                -PercentComplete (($initDownloadResponse.FileSizeInByte - $remaining) / $initDownloadResponse.FileSizeInByte) * 100
+                -Status "$($fileSizeInBytes - $remaining) of $fileSizeInBytes" `
+                -PercentComplete ((($fileSizeInBytes - $remaining) / $fileSizeInBytes) * 100)
 
             [System.Buffer]::BlockCopy($downloadResponse.Data, 0, $filebytes, $offset, [System.Buffer]::ByteLength($downloadResponse.Data))
 
@@ -102,7 +103,7 @@ function Import-DataverseFile {
         $blockSize = 4 * 1024 * 1024
         $buffer = New-Object -TypeName byte[] -Args $blockSize
         $bytesRead = 0
-        $blockIds = @()
+        $blockIds = New-Object -TypeName System.Collections.ArrayList
 
         try {
             $uploadFileStream = $File.OpenRead()
@@ -110,11 +111,11 @@ function Import-DataverseFile {
             # While there is unread data from the file
             while (($bytesRead = $uploadFileStream.Read($buffer, 0, $buffer.Length)) -gt 0) {
                 if ($bytesRead -lt $buffer.Length) {
-                    [System.Array]::Resize($buffer, $bytesRead)
+                    [Array]::Resize([ref]$buffer, $bytesRead)
                 }
 
                 $blockId = [System.Convert]::ToBase64String([guid]::NewGuid().ToByteArray())
-                $blockIds.Add($blockId);
+                $blockIds.Add($blockId) | Out-Null
 
                 Send-DataverseRequest -Name 'UploadBlock' -Parameters @{
                     BlockData             = $buffer;
@@ -125,7 +126,7 @@ function Import-DataverseFile {
 
             # Commit the upload
             $commitUploadResponse = Send-DataverseRequest -Name 'CommitFileBlocksUpload' -Parameters @{
-                BlockList             = $blockIds.ToArray();
+                BlockList             = $blockIds.ToArray([string]);
                 FileContinuationToken = $initUploadResponse.FileContinuationToken;
                 FileName              = $File.Name;
                 MimeType              = 'application/octet-stream';
