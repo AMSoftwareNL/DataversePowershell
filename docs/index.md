@@ -24,7 +24,7 @@ Provision a new language
 Relate rows in a many-to-many relationship
 
 ### [Add-DataverseRelationship](Add-DataverseRelationship.md)
-{{ Fill in the Synopsis }}
+Add relationship to Table
 
 ### [Add-DataverseRow](Add-DataverseRow.md)
 Add a new row to a table
@@ -41,7 +41,13 @@ Add a table key
 ### [Connect-DataverseEnvironment](Connect-DataverseEnvironment.md)
 Connect to a specific Dataverse Environment.
 
+### [Export-DataverseFile](Export-DataverseFile.md)
+{{ Fill in the Synopsis }}
+
 ### [Export-DataversePluginAssembly](Export-DataversePluginAssembly.md)
+{{ Fill in the Synopsis }}
+
+### [Export-DataverseSolution](Export-DataverseSolution.md)
 {{ Fill in the Synopsis }}
 
 ### [Export-DataverseTranslation](Export-DataverseTranslation.md)
@@ -92,10 +98,13 @@ Retrieve table key metadata
 ### [Get-DataverseUser](Get-DataverseUser.md)
 {{ Fill in the Synopsis }}
 
-### [Import-DataverseTranslation](Import-DataverseTranslation.md)
+### [Import-DataverseFile](Import-DataverseFile.md)
 {{ Fill in the Synopsis }}
 
-### [Import-DataverseWebResource](Import-DataverseWebResource.md)
+### [Import-DataverseSolution](Import-DataverseSolution.md)
+{{ Fill in the Synopsis }}
+
+### [Import-DataverseTranslation](Import-DataverseTranslation.md)
 {{ Fill in the Synopsis }}
 
 ### [Invoke-DataverseWorkflow](Invoke-DataverseWorkflow.md)
@@ -184,12 +193,6 @@ Update a table
 
 ### [Submit-DataverseBatch](Submit-DataverseBatch.md)
 Submit and execute a batch of requests
-
-### [Test-DataverseSolution](Test-DataverseSolution.md)
-{{ Fill in the Synopsis }}
-
-### [Test-DataverseSolutionComponent](Test-DataverseSolutionComponent.md)
-{{ Fill in the Synopsis }}
 
 ### [Unregister-DataverseDataProvider](Unregister-DataverseDataProvider.md)
 {{ Fill in the Synopsis }}

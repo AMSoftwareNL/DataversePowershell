@@ -1,5 +1,5 @@
 ---
-external help file: AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml
+external help file: AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
 Module Name: AMSoftware.Dataverse.PowerShell
 online version:
 schema: 2.0.0
@@ -51,6 +51,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### System.Object
@@ -59,5 +60,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Import-DataverseTranslation.md)
+
+
 
 

@@ -26,13 +26,14 @@ function Add-DataverseLanguage {
     )
 
     process {
-        Send-DataverseRequest -Name 'ProvisionLanguage' -Parameters @{Language = $Locale }
+        Send-DataverseRequest -Name 'ProvisionLanguage' -Parameters @{Language = $Locale } | Out-Null
     }
 }
 
 # .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml
 function Get-DataverseLanguage {
     [CmdletBinding()]
+    [OutputType([System.Globalization.CultureInfo])]
     param (
         [Parameter()]
         [switch]$All
@@ -43,7 +44,6 @@ function Get-DataverseLanguage {
         if ($All) {
             $response = Send-DataverseRequest -Name 'RetrieveAvailableLanguages'
             $languageIds = $response.LocaleIds
-
         }
         else {
             $response = Send-DataverseRequest -Name 'RetrieveProvisionedLanguages'
@@ -76,47 +76,7 @@ function Remove-DataverseLanguage {
         }
 
         if ($PSCmdlet.ShouldProcess("Deprovision Language ($Locale)", $DataverseClient.ConnectedOrgFriendlyName)) {
-            Send-DataverseRequest -Name 'DeprovisionLanguage' -Parameters @{Language = $Locale }
-        }
-    }
-}
-
-# .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml
-function Export-DataverseTranslation {
-    [CmdletBinding()]
-    param (
-        [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
-        [ValidateNotNull()]
-        [Alias('Name')]
-        [string]$SolutionName,
-
-        [Parameter(Mandatory = $true)]
-        [ValidateNotNullOrEmpty()]
-        [string]$OutputPath
-    )
-
-    process {
-
-        $result = Send-DataverseRequest -Name 'ExportTranslation' -Parameters @{'SolutionName' = $SolutionName }
-
-        New-Item -Path $OutputPath -Name "$($SolutionName).zip" -ItemType File -Value $result.ExportTranslationFile
-    }
-}
-
-# .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml
-function Import-DataverseTranslation {
-    [CmdletBinding()]
-    param (
-        [Parameter(Mandatory = $true)]
-        [Alias('PSPath')]
-        [ValidateNotNullOrEmpty()]
-        [string]$LiteralPath
-    )
-
-    process {
-        Send-DataverseRequest -Name 'ImportTranslation' -Parameters @{
-            'TranslationFile' = Get-Content -LiteralPath $LiteralPath -Raw
-            'ImportJobId'     = [guid]::Newguid()
+            Send-DataverseRequest -Name 'DeprovisionLanguage' -Parameters @{Language = $Locale } | Out-Null
         }
     }
 }
@@ -124,6 +84,7 @@ function Import-DataverseTranslation {
 # .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml
 function Get-DataverseEnvironmentVariableValue {
     [CmdletBinding()]
+    [OutputType([string])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('EnvironmentVariable')]
@@ -132,13 +93,14 @@ function Get-DataverseEnvironmentVariableValue {
     )
 
     process {
-        Send-DataverseRequest -Name 'RetrieveEnvironmentVariableValue' -Parameters @{ 'DefinitionSchemaName' = $Name }
+        Send-DataverseRequest -Name 'RetrieveEnvironmentVariableValue' -Parameters @{ 'DefinitionSchemaName' = $Name } | Select-Object -ExpandProperty 'Value'
     }
 }
 
 # .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml
 function Get-DataverseSPDocumentLocation {
     [CmdletBinding()]
+    [OutputType([Microsoft.Crm.Sdk.Messages.RetrieveAbsoluteAndSiteCollectionUrlResponse])]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = 'GetBySharePointDocumentLocation')]
         [ValidateNotNullOrEmpty()]
@@ -150,14 +112,12 @@ function Get-DataverseSPDocumentLocation {
     )
 
     process {
-
         switch ($PSCmdlet.ParameterSetName) {
             'GetBySharePointDocumentLocation' {
                 Send-DataverseRequest -Name 'RetrieveAbsoluteAndSiteCollectionUrl' -TargetTable 'sharepointdocumentlocation' -TargetRow $DocumentLocation
             }
             'GetByRegardingObject' {
                 $documentlocations = Get-DataverseRows -Table 'sharepointdocumentlocation' -Query @{'regardingobjectid' = $RegardingObject }
-
                 $documentlocations | ForEach-Object {
                     Send-DataverseRequest -Name 'RetrieveAbsoluteAndSiteCollectionUrl' -TargetTable 'sharepointdocumentlocation' -TargetRow $_.Id
                 }
@@ -170,6 +130,7 @@ function Get-DataverseSPDocumentLocation {
 # .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml
 function Invoke-DataverseWorkflow {
     [CmdletBinding()]
+    [OutputType([guid])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('Id')]
@@ -186,6 +147,6 @@ function Invoke-DataverseWorkflow {
         Send-DataverseRequest -Name 'ExecuteWorkflow' -Parameters @{
             'EntityId' =  $Row;
             'WorkflowId' = $Workflow
-        }
+        } | Select-Object -ExpandProperty 'Id'
     }
 }

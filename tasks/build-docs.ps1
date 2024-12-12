@@ -1,9 +1,5 @@
-Install-Module -Name 'platyPS' -Scope CurrentUser -Force
-Import-Module '.\src\AMSoftware.Dataverse.PowerShell\bin\debug\AMSoftware.Dataverse.PowerShell.psd1' -Scope Local -Force
+Import-Module '.\src\AMSoftware.Dataverse.PowerShell\bin\debug\AMSoftware.Dataverse.PowerShell.psd1' -Force
 
-if (-not (Test-Path -Path '.\docs\')) {
-    New-MarkdownHelp -Module 'AMSoftware.Dataverse.PowerShell' -WithModulePage -AlphabeticParamsOrder -UseFullTypeName -Force -ExcludeDontShow -OutputFolder '.\docs\'
-} 
 Update-MarkdownHelpModule '.\docs\' -RefreshModulePage -AlphabeticParamsOrder -UseFullTypeName -UpdateInputOutput -Force -ExcludeDontShow
 
 Remove-Module 'AMSoftware.Dataverse.PowerShell'

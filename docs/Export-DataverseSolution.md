@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Export-DataverseTranslation
+# Export-DataverseSolution
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Export-DataverseTranslation [-SolutionName] <String> [-OutputPath] <String>
+Export-DataverseSolution [-SolutionName] <String> [-OutputPath] <String> [-AsManaged]
   [<CommonParameters>]
 ```
 
@@ -23,13 +23,28 @@ Export-DataverseTranslation [-SolutionName] <String> [-OutputPath] <String>
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
 {{ Add example description here }}
 
 ## PARAMETERS
+
+### -AsManaged
+{{ Fill AsManaged Description }}
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -OutputPath
 {{ Fill OutputPath Description }}
@@ -75,9 +90,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
-
-[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Export-DataverseTranslation.md)
-
-
-
 

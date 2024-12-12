@@ -5,15 +5,21 @@ online version:
 schema: 2.0.0
 ---
 
-# Export-DataverseTranslation
+# Update-DataverseSolution
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
 
 ## SYNTAX
 
+### UpgradeFromHold
 ```
-Export-DataverseTranslation [-SolutionName] <String> [-OutputPath] <String>
+Update-DataverseSolution -SolutionName <String>  [<CommonParameters>]
+```
+
+### UpgradeFromStaged
+```
+Update-DataverseSolution -Stage <Guid> [-PublishWorkflows] [-ComponentParameters <EntityCollection>]
   [<CommonParameters>]
 ```
 
@@ -23,7 +29,7 @@ Export-DataverseTranslation [-SolutionName] <String> [-OutputPath] <String>
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -31,16 +37,31 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -OutputPath
-{{ Fill OutputPath Description }}
+### -ComponentParameters
+{{ Fill ComponentParameters Description }}
 
 ```yaml
-Type: System.String
-Parameter Sets: (All)
+Type: EntityCollection
+Parameter Sets: UpgradeFromStaged
 Aliases:
 
-Required: True
-Position: 1
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PublishWorkflows
+{{ Fill PublishWorkflows Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: UpgradeFromStaged
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -50,14 +71,29 @@ Accept wildcard characters: False
 {{ Fill SolutionName Description }}
 
 ```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases: Name
+Type: String
+Parameter Sets: UpgradeFromHold
+Aliases: UniqueName
 
 Required: True
-Position: 0
+Position: Named
 Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Stage
+{{ Fill Stage Description }}
+
+```yaml
+Type: Guid
+Parameter Sets: UpgradeFromStaged
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -66,18 +102,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
+### None
 
 ## OUTPUTS
 
-### System.IO.FileInfo
+### System.Guid
 
 ## NOTES
 
 ## RELATED LINKS
-
-[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Export-DataverseTranslation.md)
-
-
-
 

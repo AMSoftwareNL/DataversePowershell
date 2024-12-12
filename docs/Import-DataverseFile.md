@@ -1,11 +1,11 @@
 ---
-external help file: AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
+external help file: AMSoftware.Dataverse.PowerShell-help.xml
 Module Name: AMSoftware.Dataverse.PowerShell
 online version:
 schema: 2.0.0
 ---
 
-# Export-DataverseTranslation
+# Import-DataverseFile
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Export-DataverseTranslation [-SolutionName] <String> [-OutputPath] <String>
+Import-DataverseFile [-Table] <String> [-Row] <Guid> [-Column] <String> [-File] <FileInfo>
   [<CommonParameters>]
 ```
 
@@ -23,7 +23,7 @@ Export-DataverseTranslation [-SolutionName] <String> [-OutputPath] <String>
 ## EXAMPLES
 
 ### Example 1
-```
+```powershell
 PS C:\> {{ Add example code here }}
 ```
 
@@ -31,13 +31,43 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -OutputPath
-{{ Fill OutputPath Description }}
+### -Column
+{{ Fill Column Description }}
 
 ```yaml
 Type: System.String
 Parameter Sets: (All)
 Aliases:
+
+Required: True
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -File
+{{ Fill File Description }}
+
+```yaml
+Type: System.IO.FileInfo
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Row
+{{ Fill Row Description }}
+
+```yaml
+Type: System.Guid
+Parameter Sets: (All)
+Aliases: Id
 
 Required: True
 Position: 1
@@ -46,18 +76,18 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SolutionName
-{{ Fill SolutionName Description }}
+### -Table
+{{ Fill Table Description }}
 
 ```yaml
 Type: System.String
 Parameter Sets: (All)
-Aliases: Name
+Aliases:
 
 Required: True
 Position: 0
 Default value: None
-Accept pipeline input: True (ByPropertyName, ByValue)
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -66,18 +96,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
+### None
 
 ## OUTPUTS
 
-### System.IO.FileInfo
+### System.Guid
 
 ## NOTES
 
 ## RELATED LINKS
-
-[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Export-DataverseTranslation.md)
-
-
-
 

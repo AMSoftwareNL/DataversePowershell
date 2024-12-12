@@ -1,0 +1,115 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Module: Build",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/src/",
+				"--no-incremental"
+			],
+			"problemMatcher": "$msCompile",
+			"group":{
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Module: Release",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/src/",
+				"--no-incremental",
+				"--configuration Release"
+			],
+			"problemMatcher": "$msCompile",
+			"group": "build"
+		},
+		{
+			"label": "Docs: Build",
+			"type": "shell",
+			"command": "./tasks/build-docs.ps1",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"group": "build",
+			"dependsOn": "Module: Build"
+		},
+		{
+			"label": "Docs: External Help",
+			"type": "shell",
+			"command": "./tasks/build-externalhelp.ps1",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"group": "build",
+			"dependsOn": "Module: Release"
+		},
+		{
+			"label": "Distribute",
+			"type": "shell",
+			"command": "./tasks/build-dist.ps1",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"group": "build",
+			"dependsOn": [
+				"Module: Release",
+				"Docs: External Help"
+			]
+		},
+		{
+			"label": "Test: Module",
+			"type": "shell",
+			"command": "./tasks/test-module.ps1",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"group": "test",
+			"dependsOn": [
+				"Distribute"
+			]
+		},
+		{
+			"label": "Test: E2E",
+			"type": "shell",
+			"command": "./tasks/test-e2e.ps1",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"group": "test",
+			"dependsOn": [
+				"Distribute"
+			]
+		}
+	]
+}
