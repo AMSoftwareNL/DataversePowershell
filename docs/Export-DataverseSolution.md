@@ -8,7 +8,7 @@ schema: 2.0.0
 # Export-DataverseSolution
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Export a solution
 
 ## SYNTAX
 
@@ -18,21 +18,14 @@ Export-DataverseSolution [-SolutionName] <String> [-OutputPath] <String> [-AsMan
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Export a solution
 
 ## EXAMPLES
-
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -AsManaged
-{{ Fill AsManaged Description }}
+Export the solution as managed
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -47,7 +40,7 @@ Accept wildcard characters: False
 ```
 
 ### -OutputPath
-{{ Fill OutputPath Description }}
+The folder path where to place the exported solution. The filename is determined from the solution.
 
 ```yaml
 Type: System.String
@@ -62,7 +55,7 @@ Accept wildcard characters: False
 ```
 
 ### -SolutionName
-{{ Fill SolutionName Description }}
+The uniquename of the solution to export
 
 ```yaml
 Type: System.String
@@ -91,3 +84,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Export-DataverseSolution.md)

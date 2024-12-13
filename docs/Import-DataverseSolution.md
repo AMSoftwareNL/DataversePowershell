@@ -8,7 +8,7 @@ schema: 2.0.0
 # Import-DataverseSolution
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Import a Dataverse Solution
 
 ## SYNTAX
 
@@ -31,21 +31,20 @@ Import-DataverseSolution -LiteralPath <String> [-Upgrade] [-Overwrite] [-Publish
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Import a Dataverse Solution. Supports the following:
+
+- Import a new solution
+- Import a solution as holding (deprecated) for later upgrade using Update-DataverseSolution
+- Import a solution as staged for later upgrade using Update-DataverseSolution
+- Import and Upgrade a solution using the improved Stage and Upgrade process
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -ComponentParameters
-{{ Fill ComponentParameters Description }}
+The list of entities to overwrite values from the solution. Used for Environment Variables and Connection References.
 
 ```yaml
 Type: Microsoft.Xrm.Sdk.EntityCollection
@@ -60,7 +59,7 @@ Accept wildcard characters: False
 ```
 
 ### -Hold
-{{ Fill Hold Description }}
+Import the solution as a holding solution for later upgrade
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -75,7 +74,7 @@ Accept wildcard characters: False
 ```
 
 ### -LiteralPath
-{{ Fill LiteralPath Description }}
+Full path to the solution file to import
 
 ```yaml
 Type: System.String
@@ -90,7 +89,7 @@ Accept wildcard characters: False
 ```
 
 ### -Overwrite
-{{ Fill Overwrite Description }}
+Overwrite existing unmnaged customizations
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -105,7 +104,7 @@ Accept wildcard characters: False
 ```
 
 ### -PublishWorkflows
-{{ Fill PublishWorkflows Description }}
+Processes (workflows) included in the solution should be activated after they are imported.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -120,7 +119,7 @@ Accept wildcard characters: False
 ```
 
 ### -Stage
-{{ Fill Stage Description }}
+Import the solution as Staged for later Upgrade
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -135,7 +134,7 @@ Accept wildcard characters: False
 ```
 
 ### -Upgrade
-{{ Fill Upgrade Description }}
+Import the solution with stage and upgrade using the improved process
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -164,5 +163,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
+When Stage is used the Function returns StageSolutionResults. This Ouput contains the StageId which is needed to Upgrade using Update-DataverseSolution.
+
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Import-DataverseSolution.md)
+
+[Update-DataverseSolution](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Update-DataverseSolution.md)
+
+[Solution staging, with asynchronous import and export](https://learn.microsoft.com/power-platform/alm/solution-async)
 

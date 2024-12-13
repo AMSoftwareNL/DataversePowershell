@@ -2,7 +2,7 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Module: Build",
+			"label": "Build Debug",
 			"command": "dotnet",
 			"type": "process",
 			"args": [
@@ -17,20 +17,21 @@
 			}
 		},
 		{
-			"label": "Module: Release",
+			"label": "Build Release",
 			"command": "dotnet",
 			"type": "process",
 			"args": [
 				"build",
 				"${workspaceFolder}/src/",
 				"--no-incremental",
-				"--configuration Release"
+				"-c",
+				"Release"
 			],
-			"problemMatcher": "$msCompile",
-			"group": "build"
+			"group": "build",
+			"hide": true
 		},
 		{
-			"label": "Docs: Build",
+			"label": "Build Docs",
 			"type": "shell",
 			"command": "./tasks/build-docs.ps1",
 			"presentation": {
@@ -42,10 +43,10 @@
 				"clear": false
 			},
 			"group": "build",
-			"dependsOn": "Module: Build"
+			"dependsOn": "Build Debug"
 		},
 		{
-			"label": "Docs: External Help",
+			"label": "Build Help",
 			"type": "shell",
 			"command": "./tasks/build-externalhelp.ps1",
 			"presentation": {
@@ -57,7 +58,8 @@
 				"clear": false
 			},
 			"group": "build",
-			"dependsOn": "Module: Release"
+			"dependsOn": "Build Release",
+			"hide": true
 		},
 		{
 			"label": "Distribute",
@@ -73,8 +75,25 @@
 			},
 			"group": "build",
 			"dependsOn": [
-				"Module: Release",
-				"Docs: External Help"
+				"Build Release",
+				"Build Help"
+			]
+		},
+		{
+			"label": "Publish",
+			"type": "shell",
+			"command": "./tasks/publish.ps1",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"group": "build",
+			"dependsOn": [
+				"Distribute"
 			]
 		},
 		{

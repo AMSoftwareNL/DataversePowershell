@@ -19,7 +19,7 @@ function Wait-AsyncOperation {
         [guid]$AsyncOperationId,
         [string]$ProgressActivity
     )
-    
+
     $progressActivityId = [System.Random]::new().Next()
 
     # Wait for asyncjob to complete (success or fail)
@@ -55,7 +55,7 @@ function Wait-AsyncOperation {
 function Export-DataverseWebResource {
     [CmdletBinding()]
     [OutputType([System.IO.FileInfo])]
-    param ( 
+    param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [guid]$Id,
 
@@ -67,7 +67,7 @@ function Export-DataverseWebResource {
         $resolvedPath = Resolve-Path -Path $OutputPath
     }
 
-    process { 
+    process {
         $resource = Get-DataverseRow -Table 'webresource' -Id $Id -Columns 'name', 'content', 'contentfileref'
 
         # Only keep filename part of the webresource path
@@ -93,7 +93,7 @@ function Export-DataverseWebResource {
 function Export-DataversePluginAssembly {
     [CmdletBinding()]
     [OutputType([System.IO.FileInfo])]
-    param ( 
+    param (
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)]
         [guid]$Id,
 
@@ -105,13 +105,13 @@ function Export-DataversePluginAssembly {
         $resolvedPath = Resolve-Path -Path $OutputPath
     }
 
-    process { 
+    process {
         $assembly = Get-DataverseRow -Table 'pluginassembly' -Id $Id -Columns 'name', 'path', 'content'
         $assemblyFilepath = Join-Path -Path $resolvedPath -ChildPath $assembly.path
 
         if (-not [string]::IsNullOrWhiteSpace($assembly.content)) {
             # Content is in the table
-            Set-Content -LiteralPath $assemblyFilepath -Value ([System.Convert]::FromBase64String($assembly.content)) -AsByteStream -Force        
+            Set-Content -LiteralPath $assemblyFilepath -Value ([System.Convert]::FromBase64String($assembly.content)) -AsByteStream -Force
             Get-Item -LiteralPath $assemblyFilepath
         }
     }
@@ -139,7 +139,7 @@ function Export-DataverseTranslation {
         $filePath = Join-Path -Path $folderPath -ChildPath "$($solution.uniquename)_translation.zip"
 
         $result = Send-DataverseRequest -Name 'ExportTranslation' -Parameters @{'SolutionName' = $solution.uniquename }
-        
+
         Set-Content -LiteralPath $filePath -Value $result.ExportTranslationFile -AsByteStream -Force
         Get-Item -LiteralPath $filePath
     }
@@ -219,7 +219,7 @@ function Export-DataverseSolution {
             $result = Send-DataverseRequest -Name 'DownloadSolutionExportData' -Parameters @{
                 ExportJobId = $asyncResponse.ExportJobId
             }
-    
+
             Set-Content -LiteralPath $filePath -Value $result.ExportSolutionFile -AsByteStream -Force
             Get-Item -LiteralPath $filePath
         }
@@ -231,6 +231,7 @@ function Export-DataverseSolution {
 
 # .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
 function Import-DataverseSolution {
+    [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', '')]
     [CmdletBinding(DefaultParameterSetName = 'ImportSolution')]
     [OutputType([guid])]
     [OutputType([Microsoft.Xrm.Sdk.StageSolutionResults])]
@@ -309,7 +310,7 @@ function Import-DataverseSolution {
                 }
                 else {
                     Write-Error -Message $asyncOperation.message
-                }            
+                }
             }
         }
     }
@@ -317,6 +318,7 @@ function Import-DataverseSolution {
 
 # .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
 function Update-DataverseSolution {
+    [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding()]
     [OutputType([guid])]
     param (
@@ -375,7 +377,7 @@ function Update-DataverseSolution {
                 }
                 else {
                     Write-Error -Message $asyncOperation.message
-                }            
+                }
             }
         }
     }
@@ -384,7 +386,7 @@ function Update-DataverseSolution {
 # .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
 function Publish-DataverseComponent {
     [CmdletBinding(DefaultParameterSetName = 'PublishAll')]
-    param ( 
+    param (
         [Parameter(Mandatory = $true, ParameterSetName = 'PublishComponent')]
         [ValidateSet('Table', 'Choice', 'WebResource')]
         [string]$Type,
@@ -394,7 +396,7 @@ function Publish-DataverseComponent {
         [string]$ComponentId
     )
 
-    begin { 
+    begin {
         $ids = @()
     }
 

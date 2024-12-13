@@ -8,7 +8,7 @@ schema: 2.0.0
 # Export-DataverseFile
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Export the content of a File or Image column
 
 ## SYNTAX
 
@@ -18,21 +18,16 @@ Export-DataverseFile [-Table] <String> [-Row] <Guid> [-Column] <String>
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Export the content of a File or Image column. 
+In case of an Image Column this only works when Full Image is enabled, as this stores the full image in File Storage.
+For Image Columns the thumbnail is stored as content in the Field.
 
 ## EXAMPLES
-
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Column
-{{ Fill Column Description }}
+The LogicalName of the File or Image Column
 
 ```yaml
 Type: System.String
@@ -47,7 +42,7 @@ Accept wildcard characters: False
 ```
 
 ### -Row
-{{ Fill Row Description }}
+The Id of the Row to get the File or Image for
 
 ```yaml
 Type: System.Guid
@@ -62,7 +57,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+The LogicalName of the Table to get the File or Image for
 
 ```yaml
 Type: System.String
@@ -91,5 +86,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
+The Function returns the content as a Byte[] which can be saved to disk using Set-Content
+
 ## RELATED LINKS
+
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Export-DataverseFile.md)
+
 

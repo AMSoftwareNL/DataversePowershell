@@ -2,9 +2,6 @@
 if (Test-Path '.\dist\') {
     Remove-Item -Path '.\dist\' -Force -Recurse
 }
-if (Test-Path '.\externalhelp\') {
-    Remove-Item -Path '.\externalhelp\' -Force -Recurse
-}
 
 # Copy Build Output
 New-Item -Path '.\dist\AMSoftware.Dataverse.PowerShell\' -ItemType Directory

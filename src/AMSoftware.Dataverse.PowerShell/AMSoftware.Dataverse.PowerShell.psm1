@@ -17,7 +17,7 @@ function Export-DataverseFile {
         [Parameter(Mandatory = $true)]
         [string]$Column
     )
-    
+
     process {
         # Initialize the download
         $initDownloadResponse = Send-DataverseRequest `
@@ -25,9 +25,9 @@ function Export-DataverseFile {
             -TargetTable $Table `
             -TargetRow $Row `
             -Parameters @{
-            FileAttributeName = $Column; 
+            FileAttributeName = $Column;
         }
-    
+
         [long]$offset = 0
         [long]$blockSizeDownload = 4 * 1024 * 1024
         [long]$fileSizeInBytes = $initDownloadResponse.FileSizeInBytes

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Import-DataverseFile
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Import a local File to an Image or File Column
 
 ## SYNTAX
 
@@ -18,21 +18,15 @@ Import-DataverseFile [-Table] <String> [-Row] <Guid> [-Column] <String> [-File] 
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Import a local file to an Image or File Column
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Column
-{{ Fill Column Description }}
+LogicalName of the Image or File Column
 
 ```yaml
 Type: System.String
@@ -47,7 +41,7 @@ Accept wildcard characters: False
 ```
 
 ### -File
-{{ Fill File Description }}
+The FileInfo of the File to import. Output from Get-Item or Get-ChildItem.
 
 ```yaml
 Type: System.IO.FileInfo
@@ -62,7 +56,7 @@ Accept wildcard characters: False
 ```
 
 ### -Row
-{{ Fill Row Description }}
+The Id of the Row to import the content to
 
 ```yaml
 Type: System.Guid
@@ -77,7 +71,7 @@ Accept wildcard characters: False
 ```
 
 ### -Table
-{{ Fill Table Description }}
+The Table to import the content to
 
 ```yaml
 Type: System.String
@@ -106,3 +100,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## RELATED LINKS
 
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Import-DataverseFile.md)
