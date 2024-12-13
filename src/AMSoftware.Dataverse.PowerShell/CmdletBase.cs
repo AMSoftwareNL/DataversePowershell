@@ -44,14 +44,7 @@ namespace AMSoftware.Dataverse.PowerShell
                 WriteVerboseWithTimestamp(string.Format("{0} begin processing with ParameterSet '{1}'.", GetType().Name, ParameterSetName));
             }
 
-            MSALIdentityLogger.Instance.AddContext((entry) =>
-            {
-                LogMessages.Enqueue(entry);
-            });
-            ServiceClientLogger.Instance.AddContext((entry) =>
-            {
-                LogMessages.Enqueue(entry);
-            });
+            SetupLogIntercept();
 
             base.BeginProcessing();
         }
@@ -83,14 +76,30 @@ namespace AMSoftware.Dataverse.PowerShell
 
         protected override void EndProcessing()
         {
-            MSALIdentityLogger.Instance.RemoveContext();
-            ServiceClientLogger.Instance.RemoveContext();
-
+            TeardownLogIntercept();
             FlushLogMessages();
 
             WriteVerboseWithTimestamp(string.Format("{0} end processing.", GetType().Name));
 
             base.EndProcessing();
+        }
+
+        private void SetupLogIntercept()
+        {
+            MSALIdentityLogger.Instance.AddContext((entry) =>
+            {
+                LogMessages.Enqueue(entry);
+            });
+            ServiceClientLogger.Instance.AddContext((entry) =>
+            {
+                LogMessages.Enqueue(entry);
+            });
+        }
+
+        private static void TeardownLogIntercept()
+        {
+            MSALIdentityLogger.Instance.RemoveContext();
+            ServiceClientLogger.Instance.RemoveContext();
         }
 
         private void FlushLogMessages()
