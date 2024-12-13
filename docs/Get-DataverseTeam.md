@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DataverseTeam
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Retrieve Teams
 
 ## SYNTAX
 
@@ -24,21 +24,15 @@ Get-DataverseTeam -Id <Guid>  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieve Teams
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Administrator
-{{ Fill Administrator Description }}
+Id of the systemuser who is the administrator for the Team
 
 ```yaml
 Type: System.Guid
@@ -53,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -BusinessUnit
-{{ Fill BusinessUnit Description }}
+ID of the Business Unit to retrieve Teams for
 
 ```yaml
 Type: System.Guid
@@ -68,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -Exclude
-{{ Fill Exclude Description }}
+Teams to exclude from the result. Supports wildcards.
 
 ```yaml
 Type: System.String
@@ -83,7 +77,7 @@ Accept wildcard characters: True
 ```
 
 ### -Id
-{{ Fill Id Description }}
+Id of the specific Team to retrieve
 
 ```yaml
 Type: System.Guid
@@ -98,7 +92,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Name of the Team to retrieve. Supports Wildcards.
 
 ```yaml
 Type: System.String
@@ -113,7 +107,7 @@ Accept wildcard characters: True
 ```
 
 ### -TeamType
-{{ Fill TeamType Description }}
+The type of Team to retrieve
 
 ```yaml
 Type: TeamType
@@ -142,5 +136,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseTeam.md)
+
 
 

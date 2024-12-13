@@ -1,84 +1,85 @@
 ---
-external help file: AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml
+external help file: AMSoftware.Dataverse.PowerShell-help.xml
 Module Name: AMSoftware.Dataverse.PowerShell
 online version:
 schema: 2.0.0
 ---
 
-# Remove-DataverseLanguage
+# Import-DataverseFile
 
 ## SYNOPSIS
-Deprovision a Dataverse language
+Import a local File to an Image or File Column
 
 ## SYNTAX
 
 ```
-Remove-DataverseLanguage [-Locale] <Int32> [-Force]  [-WhatIf] [-Confirm]
- [<CommonParameters>]
+Import-DataverseFile [-Table] <String> [-Row] <Guid> [-Column] <String> [-File] <FileInfo>
+  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Deprovision a Dataverse language
+Import a local file to an Image or File Column
 
 ## EXAMPLES
 
+
 ## PARAMETERS
 
-### -Force
-Deprovision without confirm
+### -Column
+LogicalName of the Image or File Column
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: Named
+Required: True
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Locale
-ID of the Locale (LCID) of the language to deprovision
+### -File
+The FileInfo of the File to import. Output from Get-Item or Get-ChildItem.
 
 ```yaml
-Type: System.Int32
+Type: System.IO.FileInfo
 Parameter Sets: (All)
-Aliases: Language, LCID
+Aliases:
+
+Required: True
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Row
+The Id of the Row to import the content to
+
+```yaml
+Type: System.Guid
+Parameter Sets: (All)
+Aliases: Id
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Table
+The Table to import the content to
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
 
 Required: True
 Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -WhatIf
-Shows what would happen if the cmdlet runs. The cmdlet is not run.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: wi
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -90,14 +91,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
-### System.Object
+### System.Guid
+
 ## NOTES
 
 ## RELATED LINKS
 
-[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Remove-DataverseLanguage.md)
 
-
-
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Import-DataverseFile.md)

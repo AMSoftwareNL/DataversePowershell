@@ -1,5 +1,5 @@
 ---
-external help file: AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml
+external help file: AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
 Module Name: AMSoftware.Dataverse.PowerShell
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Import-DataverseTranslation
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Import customization translations
 
 ## SYNTAX
 
@@ -17,21 +17,14 @@ Import-DataverseTranslation [-LiteralPath] <String>  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Import translations for customizations. The path must point to the compressed translations file (ZIP) to import.
 
 ## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -LiteralPath
-{{ Fill LiteralPath Description }}
+Path to the translations file to import
 
 ```yaml
 Type: System.String
@@ -51,6 +44,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### System.Object
@@ -59,5 +53,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Import-DataverseTranslation.md)
+
+
+
 
 

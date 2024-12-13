@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DataverseUser
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Get available users in Dataverse
 
 ## SYNTAX
 
@@ -24,21 +24,14 @@ Get-DataverseUser -Id <Guid>  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get available users in Dataverse based on domainname, name, or emailaddress.
 
 ## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Application
-{{ Fill Application Description }}
+Include Application Users in the result
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -53,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Disabled
-{{ Fill Disabled Description }}
+Include Disabled Users in the result
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -68,7 +61,7 @@ Accept wildcard characters: False
 ```
 
 ### -Exclude
-{{ Fill Exclude Description }}
+Users to exclude from the result
 
 ```yaml
 Type: System.String
@@ -83,7 +76,7 @@ Accept wildcard characters: True
 ```
 
 ### -Id
-{{ Fill Id Description }}
+Id of the specific User to retrieve
 
 ```yaml
 Type: System.Guid
@@ -98,7 +91,7 @@ Accept wildcard characters: False
 ```
 
 ### -Licensed
-{{ Fill Licensed Description }}
+Only return licensed users
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -113,7 +106,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Name of the user to retrieve. Supports wildcards.
 
 ```yaml
 Type: System.String
@@ -141,5 +134,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseUser.md)
+
 
 

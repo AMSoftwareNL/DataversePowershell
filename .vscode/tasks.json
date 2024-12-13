@@ -1,0 +1,134 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build Debug",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/src/",
+				"--no-incremental"
+			],
+			"problemMatcher": "$msCompile",
+			"group":{
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Build Release",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/src/",
+				"--no-incremental",
+				"-c",
+				"Release"
+			],
+			"group": "build",
+			"hide": true
+		},
+		{
+			"label": "Build Docs",
+			"type": "shell",
+			"command": "./tasks/build-docs.ps1",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"group": "build",
+			"dependsOn": "Build Debug"
+		},
+		{
+			"label": "Build Help",
+			"type": "shell",
+			"command": "./tasks/build-externalhelp.ps1",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"group": "build",
+			"dependsOn": "Build Release",
+			"hide": true
+		},
+		{
+			"label": "Distribute",
+			"type": "shell",
+			"command": "./tasks/build-dist.ps1",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"group": "build",
+			"dependsOn": [
+				"Build Release",
+				"Build Help"
+			]
+		},
+		{
+			"label": "Publish",
+			"type": "shell",
+			"command": "./tasks/publish.ps1",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"group": "build",
+			"dependsOn": [
+				"Distribute"
+			]
+		},
+		{
+			"label": "Test: Module",
+			"type": "shell",
+			"command": "./tasks/test-module.ps1",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"group": "test",
+			"dependsOn": [
+				"Distribute"
+			]
+		},
+		{
+			"label": "Test: E2E",
+			"type": "shell",
+			"command": "./tasks/test-e2e.ps1",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "new",
+				"showReuseMessage": true,
+				"clear": false
+			},
+			"group": "test",
+			"dependsOn": [
+				"Distribute"
+			]
+		}
+	]
+}

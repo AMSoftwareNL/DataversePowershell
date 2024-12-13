@@ -71,22 +71,12 @@
         'Invoke-DataverseWorkflow',
         'Export-DataverseWebResource',
         'Export-DataversePluginAssembly',
-        'Import-DataverseWebResource',
         'Publish-DataverseComponent',
-        'Register-DataverseDataProvider',
-        'Register-DataversePlugin',
-        'Register-DataversePluginStep',
-        'Register-DataversePluginStepImage',
-        'Register-DataverseServiceEndpoint',
-        'Register-DataverseWebhook',
-        'Test-DataverseSolution',
-        'Test-DataverseSolutionComponent',
-        'Unregister-DataverseDataProvider',
-        'Unregister-DataversePlugin',
-        'Unregister-DataversePluginAssembly',
-        'Unregister-DataversePluginStep',
-        'Unregister-DataversePluginStepImage',
-        'Unregister-DataverseServiceEndpoint'
+        'Export-DataverseFile',
+        'Import-DataverseFile',
+        'Export-DataverseSolution',
+        'Import-DataverseSolution',
+        'Update-DataverseSolution'
     )
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.

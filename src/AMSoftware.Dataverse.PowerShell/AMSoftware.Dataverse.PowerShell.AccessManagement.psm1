@@ -18,6 +18,7 @@
 # .EXTERNALHELP AMSoftware.Dataverse.PowerShell.AccessManagement.psm1-help.xml
 function Get-DataverseUser {
     [CmdletBinding(DefaultParameterSetName = 'GetAllUsers')]
+    [OutputType([Microsoft.Xrm.Sdk.Entity])]
     param(
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'GetUserById')]
         [ValidateNotNullOrEmpty()]
@@ -45,7 +46,6 @@ function Get-DataverseUser {
     )
 
     process {
-
         switch ($PSCmdlet.ParameterSetName) {
             'GetAllUsers' {
                 $nameFilterAttributes = @('fullname', 'domainname', 'internalemailaddress')
@@ -92,6 +92,7 @@ function Get-DataverseUser {
                 else {
                     $mainConditions += '<condition attribute="applicationid" operator="null" value="" />'
                 }
+
                 if ($Disabled) {
                     $mainConditions += '<condition attribute="isdisabled" operator="eq" value="1" />'
                 }
@@ -135,6 +136,7 @@ enum RoleInheritance {
 # .EXTERNALHELP AMSoftware.Dataverse.PowerShell.AccessManagement.psm1-help.xml
 function Get-DataverseRole {
     [CmdletBinding(DefaultParameterSetName = 'GetAllRoles')]
+    [OutputType([Microsoft.Xrm.Sdk.Entity])]
     param(
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'GetRoleById')]
         [ValidateNotNullOrEmpty()]
@@ -225,6 +227,7 @@ enum TeamType {
 # .EXTERNALHELP AMSoftware.Dataverse.PowerShell.AccessManagement.psm1-help.xml
 function Get-DataverseTeam {
     [CmdletBinding(DefaultParameterSetName = 'GetAllTeams')]
+    [OutputType([Microsoft.Xrm.Sdk.Entity])]
     param(
         [Parameter(Mandatory = $true, ValueFromPipeline = $true, ParameterSetName = 'GetTeamById')]
         [ValidateNotNullOrEmpty()]
@@ -323,6 +326,7 @@ function Get-DataverseTeam {
 # .EXTERNALHELP AMSoftware.Dataverse.PowerShell.AccessManagement.psm1-help.xml
 function Get-DataverseRowAccess {
     [CmdletBinding()]
+    [OutputType([Microsoft.Crm.Sdk.Messages.RetrieveSharedPrincipalsAndAccessResponse])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('LogicalName', 'EntityLogicalName', 'Entity')]
@@ -342,6 +346,7 @@ function Get-DataverseRowAccess {
 # .EXTERNALHELP AMSoftware.Dataverse.PowerShell.AccessManagement.psm1-help.xml
 function Set-DataverseRowOwner {
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Low')]
+    [OutputType([Microsoft.Crm.Sdk.Messages.AssignResponse])]
     param (
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
         [Alias('LogicalName', 'EntityLogicalName', 'Entity')]
@@ -358,6 +363,7 @@ function Set-DataverseRowOwner {
         [ValidateNotNull()]
         [Microsoft.Xrm.Sdk.EntityReference]$Owner,
 
+        [Parameter()]
         [switch]$Force
     )
 

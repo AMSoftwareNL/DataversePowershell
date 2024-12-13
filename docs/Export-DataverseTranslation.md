@@ -1,5 +1,5 @@
 ---
-external help file: AMSoftware.Dataverse.PowerShell.Administration.psm1-help.xml
+external help file: AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
 Module Name: AMSoftware.Dataverse.PowerShell
 online version:
 schema: 2.0.0
@@ -8,7 +8,7 @@ schema: 2.0.0
 # Export-DataverseTranslation
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Export the translations for customizations
 
 ## SYNTAX
 
@@ -18,21 +18,14 @@ Export-DataverseTranslation [-SolutionName] <String> [-OutputPath] <String>
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Export the translations for customizations
 
 ## EXAMPLES
-
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -OutputPath
-{{ Fill OutputPath Description }}
+The folder path for the exported translations. The filename is determined from the solution.
 
 ```yaml
 Type: System.String
@@ -47,7 +40,7 @@ Accept wildcard characters: False
 ```
 
 ### -SolutionName
-{{ Fill SolutionName Description }}
+Uniquename of the solution to export the translations for
 
 ```yaml
 Type: System.String
@@ -67,13 +60,18 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### System.String
+
 ## OUTPUTS
 
-### System.Object
+### System.IO.FileInfo
+
 ## NOTES
 
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Export-DataverseTranslation.md)
+
+
+
 
 
