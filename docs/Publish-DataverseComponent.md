@@ -8,7 +8,7 @@ schema: 2.0.0
 # Publish-DataverseComponent
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Publish Customizations
 
 ## SYNTAX
 
@@ -24,21 +24,16 @@ Publish-DataverseComponent -Type <String> -ComponentId <String>
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Publish customizations. Publishish all customization, or a specific component.
+
+If the Component is provided through the pipeline, all components are collected and published as a single action.
 
 ## EXAMPLES
-
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -ComponentId
-{{ Fill ComponentId Description }}
+The ID of the component to publish. For a Table this is the LogicalName, for a Choice this is the Name, and for a WebResource this is the ID.
 
 ```yaml
 Type: System.String
@@ -53,7 +48,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-{{ Fill Type Description }}
+The type of Component to publish. This can be a Table, Global Choice, or WebResource.
 
 ```yaml
 Type: System.String
@@ -83,6 +78,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Publish-DataverseComponent.md)
+
 
 
 

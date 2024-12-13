@@ -8,7 +8,7 @@ schema: 2.0.0
 # Export-DataversePluginAssembly
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Export a Plugin Assembly to a file
 
 ## SYNTAX
 
@@ -18,21 +18,15 @@ Export-DataversePluginAssembly [-Id] <Guid> [-OutputPath] <String>
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Export a Plugin Assembly to a file
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Id
-{{ Fill Id Description }}
+Id of the specific Plugin Assembly to export
 
 ```yaml
 Type: System.Guid
@@ -47,7 +41,7 @@ Accept wildcard characters: False
 ```
 
 ### -OutputPath
-{{ Fill OutputPath Description }}
+Folder path for the exported assembly. Filename is determined from the Plugin Assembly name.
 
 ```yaml
 Type: System.String
@@ -77,6 +71,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Export-DataversePluginAssembly.md)
+
 
 
 

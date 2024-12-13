@@ -8,6 +8,7 @@ schema: 2.0.0
 # Invoke-DataverseWorkflow
 
 ## SYNOPSIS
+Start a workflow (classic) on a specific record.
 
 ## SYNTAX
 
@@ -17,21 +18,15 @@ Invoke-DataverseWorkflow [-Row] <Guid> [-Workflow] <Guid>
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Start a workflow (classic) on a specific record. The workflow has to support manual start. The Table is infered from the workflow definition.
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Row
-{{ Fill Row Description }}
+Id of the Row as input for the Workflow
 
 ```yaml
 Type: System.Guid
@@ -46,7 +41,7 @@ Accept wildcard characters: False
 ```
 
 ### -Workflow
-{{ Fill Workflow Description }}
+The ID of the workflow to run
 
 ```yaml
 Type: System.Guid
@@ -67,10 +62,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.Guid
 ## NOTES
 
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Invoke-DataverseWorkflow.md)
+
 
 

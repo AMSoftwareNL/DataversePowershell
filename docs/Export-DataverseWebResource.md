@@ -8,7 +8,7 @@ schema: 2.0.0
 # Export-DataverseWebResource
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Export the content of a WebResource
 
 ## SYNTAX
 
@@ -18,21 +18,14 @@ Export-DataverseWebResource [-Id] <Guid> [-OutputPath] <String>
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Export the content of a WebResource to a file.
 
 ## EXAMPLES
-
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Id
-{{ Fill Id Description }}
+Id of the WebResource to export
 
 ```yaml
 Type: System.Guid
@@ -47,7 +40,7 @@ Accept wildcard characters: False
 ```
 
 ### -OutputPath
-{{ Fill OutputPath Description }}
+Path of the folder to export the WebResource to. The Filename for the exported WebResource is set from the name of the WebResource. 
 
 ```yaml
 Type: System.String
@@ -74,9 +67,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
+The name of the WebResource determines the name of the export file. In case the webresource name contains invalid path characters these are replaced by '-'. The URL folder structure of the webresource is not maintained on export, but included in the filename.
+
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Export-DataverseWebResource.md)
+
 
 
 

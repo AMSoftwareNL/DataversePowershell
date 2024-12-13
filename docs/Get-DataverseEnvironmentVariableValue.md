@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DataverseEnvironmentVariableValue
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Retrieve the used value of an Environment Variable
 
 ## SYNTAX
 
@@ -18,21 +18,15 @@ Get-DataverseEnvironmentVariableValue [-Name] <String>
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieve the used value of an Environment Variable. This can be the default or the current value.
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Name
-{{ Fill Name Description }}
+Name of the Environment Variable to retrieve the value for
 
 ```yaml
 Type: System.String
@@ -60,5 +54,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseEnvironmentVariableValue.md)
+
 
 

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Update-DataverseSolution
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Upgrade a staged or holding solution
 
 ## SYNTAX
 
@@ -24,24 +24,17 @@ Update-DataverseSolution -Stage <Guid> [-PublishWorkflows] [-ComponentParameters
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Upgrade a solution from staged or holding, as a result from an Import-DataverseSolution.
 
 ## EXAMPLES
-
-### Example 1
-```powershell
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -ComponentParameters
-{{ Fill ComponentParameters Description }}
+The list of entities to overwrite values from the solution. Used for Environment Variables and Connection References.
 
 ```yaml
-Type: EntityCollection
+Type: Microsoft.Xrm.Sdk.EntityCollection
 Parameter Sets: UpgradeFromStaged
 Aliases:
 
@@ -53,10 +46,10 @@ Accept wildcard characters: False
 ```
 
 ### -PublishWorkflows
-{{ Fill PublishWorkflows Description }}
+Processes (workflows) included in the solution should be activated after they are imported.
 
 ```yaml
-Type: SwitchParameter
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: UpgradeFromStaged
 Aliases:
 
@@ -68,10 +61,10 @@ Accept wildcard characters: False
 ```
 
 ### -SolutionName
-{{ Fill SolutionName Description }}
+The uniquename of the solution to upgrade from holding
 
 ```yaml
-Type: String
+Type: System.String
 Parameter Sets: UpgradeFromHold
 Aliases: UniqueName
 
@@ -83,10 +76,10 @@ Accept wildcard characters: False
 ```
 
 ### -Stage
-{{ Fill Stage Description }}
+The StageId of the solution to Upgrade as the result from a staged solution through Import-DataverseSolution.
 
 ```yaml
-Type: Guid
+Type: System.Guid
 Parameter Sets: UpgradeFromStaged
 Aliases:
 
@@ -111,4 +104,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## NOTES
 
 ## RELATED LINKS
+
+[Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Update-DataverseSolution.md)
+
+[Import-DataverseSolution](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Import-DataverseSolution.md)
+
+[Solution staging, with asynchronous import and export](https://learn.microsoft.com/power-platform/alm/solution-async)
 

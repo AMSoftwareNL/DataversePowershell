@@ -8,7 +8,7 @@ schema: 2.0.0
 # Remove-DataverseLanguage
 
 ## SYNOPSIS
-Unprovision a Dataverse language
+Deprovision a Dataverse language
 
 ## SYNTAX
 
@@ -18,14 +18,14 @@ Remove-DataverseLanguage [-Locale] <Int32> [-Force]  [-WhatIf] [-Confirm]
 ```
 
 ## DESCRIPTION
-Unprovision a Dataverse language
+Deprovision a Dataverse language
 
 ## EXAMPLES
 
 ## PARAMETERS
 
 ### -Force
-Unprovision without confirm
+Deprovision without confirm
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -40,7 +40,7 @@ Accept wildcard characters: False
 ```
 
 ### -Locale
-ID of the Locale (LCID) of the language to unprovision
+ID of the Locale (LCID) of the language to deprovision
 
 ```yaml
 Type: System.Int32
@@ -98,5 +98,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Remove-DataverseLanguage.md)
+
 
 

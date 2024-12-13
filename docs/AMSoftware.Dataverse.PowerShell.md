@@ -113,24 +113,6 @@ Retrieve table key metadata
 ### [Publish-DataverseComponent](Publish-DataverseComponent.md)
 {{ Fill in the Synopsis }}
 
-### [Register-DataverseDataProvider](Register-DataverseDataProvider.md)
-{{ Fill in the Synopsis }}
-
-### [Register-DataversePlugin](Register-DataversePlugin.md)
-{{ Fill in the Synopsis }}
-
-### [Register-DataversePluginStep](Register-DataversePluginStep.md)
-{{ Fill in the Synopsis }}
-
-### [Register-DataversePluginStepImage](Register-DataversePluginStepImage.md)
-{{ Fill in the Synopsis }}
-
-### [Register-DataverseServiceEndpoint](Register-DataverseServiceEndpoint.md)
-{{ Fill in the Synopsis }}
-
-### [Register-DataverseWebhook](Register-DataverseWebhook.md)
-{{ Fill in the Synopsis }}
-
 ### [Remove-DataverseChoice](Remove-DataverseChoice.md)
 Remove global choice
 
@@ -194,22 +176,7 @@ Update a table
 ### [Submit-DataverseBatch](Submit-DataverseBatch.md)
 Submit and execute a batch of requests
 
-### [Unregister-DataverseDataProvider](Unregister-DataverseDataProvider.md)
-{{ Fill in the Synopsis }}
-
-### [Unregister-DataversePlugin](Unregister-DataversePlugin.md)
-{{ Fill in the Synopsis }}
-
-### [Unregister-DataversePluginAssembly](Unregister-DataversePluginAssembly.md)
-{{ Fill in the Synopsis }}
-
-### [Unregister-DataversePluginStep](Unregister-DataversePluginStep.md)
-{{ Fill in the Synopsis }}
-
-### [Unregister-DataversePluginStepImage](Unregister-DataversePluginStepImage.md)
-{{ Fill in the Synopsis }}
-
-### [Unregister-DataverseServiceEndpoint](Unregister-DataverseServiceEndpoint.md)
+### [Update-DataverseSolution](Update-DataverseSolution.md)
 {{ Fill in the Synopsis }}
 
 ### [Use-DataverseLanguage](Use-DataverseLanguage.md)

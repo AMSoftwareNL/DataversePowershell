@@ -207,8 +207,8 @@ function Export-DataverseSolution {
         $filePath = Join-Path -Path $folderPath -ChildPath $filename
 
         $asyncResponse = Send-DataverseRequest -Name 'ExportSolutionAsync' -Parameters @{
-            SolutionName = $SolutionName;
-            Managed      = $AsManaged.ToBool();
+            SolutionName = $SolutionName
+            Managed      = $AsManaged.ToBool()
         }
 
         $asyncOperation = Wait-AsyncOperation `
@@ -267,17 +267,17 @@ function Import-DataverseSolution {
         switch ($PSCmdlet.ParameterSetName) {
             'ImportAsStaged' {
                 $stageResponse = Send-DataverseRequest -Name 'StageSolution' -Parameters @{
-                    CustomizationFile = (Get-Content -LiteralPath $solutionPath -Raw);
+                    CustomizationFile = (Get-Content -LiteralPath $solutionPath -Raw)
                 }
 
                 Write-Output $stageResponse.StageSolutionResults
             }
             'ImportAsUpgrade' {
                 $asyncResponse = Send-DataverseRequest -Name 'StageAndUpgradeAsync' -Parameters @{
-                    CustomizationFile                = (Get-Content -LiteralPath $solutionPath -Raw);
-                    OverwriteUnmanagedCustomizations = $Overwrite.ToBool();
-                    PublishWorkflows                 = $PublishWorkflows.ToBool();
-                    ComponentParameters              = $ComponentParameters;
+                    CustomizationFile                = (Get-Content -LiteralPath $solutionPath -Raw)
+                    OverwriteUnmanagedCustomizations = $Overwrite.ToBool()
+                    PublishWorkflows                 = $PublishWorkflows.ToBool()
+                    ComponentParameters              = $ComponentParameters
                 }
 
                 $asyncOperation = Wait-AsyncOperation `
@@ -293,11 +293,11 @@ function Import-DataverseSolution {
             }
             Default {
                 $asyncResponse = Send-DataverseRequest -Name 'ImportSolutionAsync' -Parameters @{
-                    CustomizationFile                = (Get-Content -LiteralPath $solutionPath -Raw);
-                    HoldingSolution                  = $Hold.ToBool();
-                    OverwriteUnmanagedCustomizations = $Overwrite.ToBool();
-                    PublishWorkflows                 = $PublishWorkflows.ToBool();
-                    ComponentParameters              = $ComponentParameters;
+                    CustomizationFile                = (Get-Content -LiteralPath $solutionPath -Raw)
+                    HoldingSolution                  = $Hold.ToBool()
+                    OverwriteUnmanagedCustomizations = $Overwrite.ToBool()
+                    PublishWorkflows                 = $PublishWorkflows.ToBool()
+                    ComponentParameters              = $ComponentParameters
                 }
 
                 $asyncOperation = Wait-AsyncOperation `
@@ -341,7 +341,7 @@ function Update-DataverseSolution {
                 $solution = Get-DataverseRows -Table 'solution' -Query @{uniquename = $SolutionName } -Top 1
 
                 $asyncResponse = Send-DataverseRequest -Name 'DeleteAndPromoteAsync' -Parameters @{
-                    UniqueName = $solution.uniquename;
+                    UniqueName = $solution.uniquename
                 }
 
                 $asyncOperation = Wait-AsyncOperation `
@@ -360,10 +360,10 @@ function Update-DataverseSolution {
                     -Property @{ StageSolutionUploadId = $Stage }
 
                 $asyncResponse = Send-DataverseRequest -Name 'ImportSolutionAsync' -Parameters @{
-                    SolutionParameters               = $solutionParameters;
-                    OverwriteUnmanagedCustomizations = $Overwrite.ToBool();
-                    PublishWorkflows                 = $PublishWorkflows.ToBool();
-                    ComponentParameters              = $ComponentParameters;
+                    SolutionParameters               = $solutionParameters
+                    OverwriteUnmanagedCustomizations = $Overwrite.ToBool()
+                    PublishWorkflows                 = $PublishWorkflows.ToBool()
+                    ComponentParameters              = $ComponentParameters
                 }
 
                 $asyncOperation = Wait-AsyncOperation `
@@ -413,7 +413,7 @@ function Publish-DataverseComponent {
 
                 $asyncOperation = Wait-AsyncOperation `
                     -AsyncOperationId $asyncResponse.AsyncOperationId `
-                    -ProgressActivity "Publish Customizations"
+                    -ProgressActivity 'Publish Customizations'
 
                 if ($asyncOperation.statuscode -eq 30) {
                 }
@@ -446,88 +446,4 @@ function Publish-DataverseComponent {
             }
         }
     }
-}
-
-# .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
-function Register-DataverseDataProvider {
-    [CmdletBinding()]
-    param ( )
-    begin { throw [System.NotImplementedException]::new() }
-}
-
-# .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
-function Register-DataversePlugin {
-    [CmdletBinding()]
-    param ( )
-    begin { throw [System.NotImplementedException]::new() }
-}
-
-# .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
-function Register-DataversePluginStep {
-    [CmdletBinding()]
-    param ( )
-    begin { throw [System.NotImplementedException]::new() }
-}
-
-# .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
-function Register-DataversePluginStepImage {
-    [CmdletBinding()]
-    param ( )
-    begin { throw [System.NotImplementedException]::new() }
-}
-
-# .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
-function Register-DataverseServiceEndpoint {
-    [CmdletBinding()]
-    param ( )
-    begin { throw [System.NotImplementedException]::new() }
-}
-
-# .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
-function Register-DataverseWebhook {
-    [CmdletBinding()]
-    param ( )
-    begin { throw [System.NotImplementedException]::new() }
-}
-
-# .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
-function Unregister-DataverseDataProvider {
-    [CmdletBinding()]
-    param ( )
-    begin { throw [System.NotImplementedException]::new() }
-}
-
-# .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
-function Unregister-DataversePlugin {
-    [CmdletBinding()]
-    param ( )
-    begin { throw [System.NotImplementedException]::new() }
-}
-
-# .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
-function Unregister-DataversePluginAssembly {
-    [CmdletBinding()]
-    param ( )
-    begin { throw [System.NotImplementedException]::new() }
-}
-
-# .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
-function Unregister-DataversePluginStep {
-    [CmdletBinding()]
-    param ( )
-    begin { throw [System.NotImplementedException]::new() }
-}
-
-# .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
-function Unregister-DataversePluginStepImage {
-    [CmdletBinding()]
-    param ( )
-    begin { throw [System.NotImplementedException]::new() }
-}
-
-# .EXTERNALHELP AMSoftware.Dataverse.PowerShell.Development.psm1-help.xml
-function Unregister-DataverseServiceEndpoint {
-    [CmdletBinding()]
-    param ( )
-    begin { throw [System.NotImplementedException]::new() }
 }

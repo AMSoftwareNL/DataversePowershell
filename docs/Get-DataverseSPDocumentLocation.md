@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-DataverseSPDocumentLocation
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Retrieve to SharePoint Document Location URL for a Row
 
 ## SYNTAX
 
@@ -25,21 +25,15 @@ Get-DataverseSPDocumentLocation -RegardingObject <Guid>
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieve to SharePoint Document Location for a Row or Document Location.
 
 ## EXAMPLES
 
-### Example 1
-```
-PS C:\> {{ Add example code here }}
-```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -DocumentLocation
-{{ Fill DocumentLocation Description }}
+Id of the specific Document Location to get the URL information for
 
 ```yaml
 Type: System.Guid
@@ -54,7 +48,7 @@ Accept wildcard characters: False
 ```
 
 ### -RegardingObject
-{{ Fill RegardingObject Description }}
+Id of the specific Row to get the URL information for
 
 ```yaml
 Type: System.Guid
@@ -82,5 +76,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## RELATED LINKS
 
 [Online](https://github.com/AMSoftwareNL/DataversePowershell/blob/main/docs/Get-DataverseSPDocumentLocation.md)
+
 
 
